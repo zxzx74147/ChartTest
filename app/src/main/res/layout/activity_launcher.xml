@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+
+        <import type="com.zxzx74147.devlib.modules.busstation.ProfileBusStation"/>
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_gap_200"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/icon" />
+
+        <TextView
+            android:id="@+id/launcher_app"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_gap_200"
+            android:text="@string/app_name"
+            android:textColor="@color/text_red"
+            android:textSize="@dimen/default_size_44"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <Button
+            android:id="@+id/login_phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_gap_140"
+            android:layout_marginEnd="@dimen/default_gap_21"
+            android:onClick="@{()->ProfileBusStation.startLogin(context)}"
+            android:layout_marginStart="@dimen/default_gap_40"
+            android:background="@drawable/rect_round_stroke_red"
+            android:text="@string/login_phone"
+            android:textColor="@color/text_red"
+            android:textSize="@dimen/default_size_34"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <FrameLayout
+            android:id="@+id/login_wechat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/default_gap_40"
+            android:layout_marginStart="@dimen/default_gap_21"
+            android:background="@drawable/rect_round_red"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/login_phone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline">
+
+            <Button
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:drawableLeft="@drawable/weixin_white"
+                android:drawablePadding="@dimen/default_gap_10"
+                android:text="@string/login_wechat_2"
+                android:textColor="@color/white"
+                android:textSize="@dimen/default_size_34" />
+
+        </FrameLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
+

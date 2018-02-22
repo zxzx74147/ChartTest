@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.zxzx74147.devlib.data.UserData" />
+
+        <import type="com.zxzx74147.devlib.modules.busstation.StockBusStation" />
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:background="@drawable/bg"
+        android:layout_height="match_parent">
+
+        <fragment
+            android:id="@+id/good_fragment"
+            android:name="com.zxzx74147.live.fragments.LiveListFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/goodList"
+            app:layout_constraintTop_toBottomOf="@+id/head" />
+
+
+        <LinearLayout
+            android:id="@+id/root_fragment"
+            android:orientation="horizontal"
+            android:background="@null"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <include
+            android:id="@+id/head"
+            layout="@layout/layout_live_head"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_gap_132"
+            app:user='@{user}' />
+
+
+        <com.zxzx74147.stock.widget.GoodListWidget
+            android:id="@+id/goodList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/default_gap_16"
+            android:background="@color/tran"
+            android:layout_marginBottom="@dimen/default_gap_16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+</layout>
+

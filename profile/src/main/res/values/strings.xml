@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">profile</string>
+    <string name="regist_vcode">验证码快捷登录</string>
+    <string name="regist_remind">点击开始代表您已阅读并同意</string>
+    <string name="regist_protocol">「用户服务协议」</string>
+    <string name="login_wechat">使用微信登录</string>
+    <string name="login_phone">手机号登录</string>
+    <string name="login_wechat_2">微信登录</string>
+    <string name="login_vcode">点此获取</string>
+    <string name="vcode_countdown">%ds后重新获取</string>
+</resources>

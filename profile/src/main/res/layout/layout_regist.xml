@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/default_gap_48"
+        android:paddingRight="@dimen/default_gap_48"
+        android:paddingTop="@dimen/default_gap_96">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/regist_vcode"
+                android:textSize="@dimen/default_size_40"
+                android:textStyle="bold" />
+
+            <Button
+                android:layout_width="@dimen/default_gap_24"
+                android:layout_height="@dimen/default_gap_24"
+                android:background="@drawable/icon_close" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_gap_90"
+            android:background="@drawable/rect_round_grey"
+            android:orientation="vertical"
+            android:padding="@dimen/default_gap_24">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/phone_number"
+                android:textColor="@color/text_light_grey"
+                android:textSize="@dimen/default_size_32" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/phone_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/tran"
+                    android:inputType="phone"
+                    android:textColor="@color/text_black"
+                    android:textCursorDrawable="@color/text_black"
+                    android:textSize="@dimen/default_size_40" />
+
+                <Button
+                    android:id="@+id/enter_delete"
+                    android:layout_width="@dimen/default_gap_40"
+                    android:layout_height="@dimen/default_gap_40"
+                    android:background="@drawable/enter_delete" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_gap_24"
+            android:background="@drawable/rect_round_grey"
+            android:orientation="vertical"
+            android:padding="@dimen/default_gap_24">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/tran"
+                android:text="@string/vcode"
+                android:textColor="@color/text_light_grey"
+                android:textSize="@dimen/default_size_32" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/vcode"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/tran"
+                    android:inputType="number"
+                    android:textColor="@color/text_black"
+                    android:textCursorDrawable="@color/text_black"
+                    android:textSize="@dimen/default_size_40" />
+
+                <TextView
+                    android:id="@+id/vcode_remind"
+                    android:text="@string/login_vcode"
+                    android:textSize="@dimen/default_size_26"
+                    android:textColor="@color/text_light_grey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_gap_26"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/regist_remind"
+                android:textColor="@color/text_light_grey"
+                android:textSize="@dimen/default_size_26" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/regist_protocol"
+                android:textColor="@color/text_blue"
+                android:textSize="@dimen/default_size_26" />
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_gap_44"
+            android:background="@drawable/rect_round_red"
+            android:text="@string/start"
+            android:id="@+id/start"
+            android:textColor="@color/white"
+            android:textSize="@dimen/default_size_34" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/default_gap_46"
+            android:drawableLeft="@drawable/weixin_green"
+            android:drawablePadding="@dimen/default_gap_10"
+            android:text="@string/login_wechat"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/default_size_30" />
+
+    </LinearLayout>
+</layout>

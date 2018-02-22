@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="white">#FFFFFF</color>
+    <color name="red">#EC384C</color>
+    <color name="tran">#00000000</color>
+    <color name="text_black">#2C2C2C</color>
+    <color name="text_blue">#323EFF</color>
+
+    <color name="text_white">@color/white</color>
+    <color name="text_red">@color/red</color>
+    <color name="text_light_grey">#AAAAAA</color>
+    <color name="text_dark_grey">#6B6B6B</color>
+    <color name="text_grey">#A2A4B2</color>
+    <color name="com_dark_gold">#C49676</color>
+    <color name="bg_white">@color/white</color>
+
+    <color name="btn_red">@color/red</color>
+
+
+    <color name="bg_grey">#F4F4F4</color>
+</resources>

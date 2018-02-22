@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="price"
+            type="com.zxzx74147.stock.data.Price" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_grey"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/default_gap_44">
+
+            <TextView
+                android:id="@+id/current_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@{String.valueOf(price.curPrice)}"
+                android:textColor="@color/stock_up"
+                android:textSize="@dimen/default_size_72" />
+
+            <TextView
+                android:id="@+id/up_down_abs"
+                android:layout_marginLeft="@dimen/default_gap_24"
+                android:layout_alignTop="@+id/current_price"
+                android:layout_toRightOf="@+id/current_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(price.curPrice-price.open)}"
+                android:textColor="@color/stock_up"
+                android:textSize="@dimen/default_size_26" />
+
+            <TextView
+
+                android:layout_alignLeft="@+id/up_down_abs"
+                android:layout_alignBottom="@+id/current_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{@string/format_02((float)(price.curPrice)-(float)(price.open)/(float)price.open)}'
+                android:textColor="@color/stock_up"
+                android:textSize="@dimen/default_size_26" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>

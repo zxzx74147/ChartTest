@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="stock_red">#EC384C</color>
+    <color name="stock_green">#00C074</color>
+    <color name="stock_up">@color/stock_red</color>
+    <color name="stock_down">@color/stock_green</color>
+</resources>

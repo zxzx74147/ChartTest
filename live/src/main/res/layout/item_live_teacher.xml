@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.zxzx74147.live.data.Teacher" />
+
+        <import type="android.view.View" />
+
+        <import type="com.zxzx74147.devlib.image.ImageLoader" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <com.zxzx74147.devlib.widget.ZXImageView
+            android:layout_width="@dimen/default_gap_160"
+            android:layout_height="@dimen/default_gap_160"
+            app:imageUrl="@{data.portraitUrl}"
+            app:riv_corner_radius="@dimen/default_gap_80" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_gap_20"
+            android:text="@{data.name}"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/default_size_34" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_gap_10"
+            android:padding="@dimen/default_gap_6"
+            android:background="@drawable/rect_round_stroke_grey"
+            android:text='@{data.tags==null? "": (data.tags.size()>0? data.tags.get(0).name:"")}'
+            android:textColor="@color/text_dark_grey"
+            android:textSize="@dimen/default_size_24"
+            android:visibility='@{data.tags==null? View.INVISIBLE: (data.tags.size()>0? View.VISIBLE:View.INVISIBLE)}' />
+
+    </LinearLayout>
+</layout>

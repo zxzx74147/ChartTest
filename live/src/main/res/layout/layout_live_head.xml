@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.zxzx74147.devlib.data.UserData" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/tran"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/default_gap_64"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/bg_my_money"
+            android:drawablePadding="@dimen/default_gap_12"
+            android:drawableRight="@drawable/home_icon_arrow"
+            android:paddingLeft="@dimen/default_gap_40"
+            android:layout_marginRight="@dimen/default_gap_44"
+            android:paddingRight="@dimen/default_gap_40"
+            android:text='@{@string/format_02(user.total)}'
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/default_size_40" />
+
+
+    </RelativeLayout>
+</layout>
