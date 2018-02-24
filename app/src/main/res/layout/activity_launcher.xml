@@ -5,13 +5,14 @@
     <data>
 
 
-        <import type="com.zxzx74147.devlib.modules.busstation.ProfileBusStation"/>
+        <import type="com.zxzx74147.devlib.modules.busstation.ProfileBusStation" />
     </data>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/logo"
@@ -49,9 +50,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_gap_140"
             android:layout_marginEnd="@dimen/default_gap_21"
-            android:onClick="@{()->ProfileBusStation.startLogin(context)}"
             android:layout_marginStart="@dimen/default_gap_40"
             android:background="@drawable/rect_round_stroke_red"
+            android:onClick="@{()->ProfileBusStation.startLogin(context)}"
             android:text="@string/login_phone"
             android:textColor="@color/text_red"
             android:textSize="@dimen/default_size_34"

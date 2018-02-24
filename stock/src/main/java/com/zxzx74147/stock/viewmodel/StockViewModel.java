@@ -14,9 +14,7 @@ import java.util.List;
 
 public class StockViewModel extends BaseViewModel{
 
-    public KLineLiveData mKLineData = null;
-
-
+    private KLineLiveData mKLineData = new KLineLiveData();
     public KLineLiveData getKLineData(){
        return mKLineData;
     }

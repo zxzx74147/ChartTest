@@ -7,6 +7,7 @@ import com.zxzx74147.devlib.base.BaseActivity;
 import com.zxzx74147.devlib.data.IntentData;
 import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
 import com.zxzx74147.stock.R;
+import com.zxzx74147.stock.data.GoodType;
 import com.zxzx74147.stock.databinding.ActivityStockBinding;
 
 public class StockActivity extends BaseActivity {
@@ -19,6 +20,11 @@ public class StockActivity extends BaseActivity {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_stock);
 //        IntentData<GoodItem> item = ZXActivityJumpHelper.getIntentData(getIntent());
 //        mBinding.stockView.setGood(item.data);
+
+        GoodType mGoodType = new GoodType();
+        mGoodType.goodsType = "AG";
+        mBinding.stockView.setGood(mGoodType);
+
 
     }
 }

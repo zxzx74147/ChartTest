@@ -6,4 +6,23 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="my_position">我的持仓</string>
+
+    <string name="stock_k_1m">分时</string>
+    <string name="stock_k_5m">5分</string>
+    <string name="stock_k_15m">15分</string>
+    <string name="stock_k_30m">30分</string>
+    <string name="stock_k_1h">1小时</string>
+    <string name="stock_k_1d">日线</string>
+    <string name="stock_by_increase">买涨</string>
+    <string name="stock_by_decrease">买跌</string>
+    <string name="stock_by_without">挂单</string>
+
+    <array name="stock_k">
+        <item>@string/stock_k_1m</item>
+        <item>@string/stock_k_5m</item>
+        <item>@string/stock_k_15m</item>
+        <item>@string/stock_k_30m</item>
+        <item>@string/stock_k_1h</item>
+        <item>@string/stock_k_1d</item>
+    </array>
 </resources>

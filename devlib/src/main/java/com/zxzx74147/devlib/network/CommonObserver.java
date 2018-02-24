@@ -9,8 +9,6 @@ import com.zxzx74147.devlib.data.UniApiData;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
-import static com.zxzx74147.devlib.data.UniApiData.createError;
-
 /**
  * Created by zhengxin on 2018/2/12.
  */
@@ -41,7 +39,7 @@ public class CommonObserver<T> implements Observer<T> {
     @Override
     public void onError(Throwable e) {
         ErrorData error = new ErrorData();
-        T uniData = (T) UniApiData.createError(error);
+        T uniData = (T) UniApiData.createError(error,UniApiData.class);
         mData.setValue(uniData);
     }
 }

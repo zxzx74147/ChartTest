@@ -1,26 +1,22 @@
 package com.zxzx74147.stock.widget;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.devlib.widget.CommonRecyclerViewAdapter;
 import com.zxzx74147.devlib.widget.SpaceItemDecoration;
 import com.zxzx74147.stock.R;
-import com.zxzx74147.stock.data.GoodListData;
 import com.zxzx74147.stock.data.GoodType;
+import com.zxzx74147.stock.databinding.ItemMyPositionBinding;
 import com.zxzx74147.stock.databinding.WidgetGoodListBinding;
 import com.zxzx74147.stock.viewmodel.GoodViewModel;
 
@@ -33,6 +29,7 @@ import java.util.List;
 
 public class GoodListWidget extends RelativeLayout {
     private WidgetGoodListBinding mBinding = null;
+    private ItemMyPositionBinding mMyPositionBinding = null;
     private GoodViewModel mModel = null;
     private CommonCallback<GoodType> mCallback = null;
 
@@ -41,12 +38,10 @@ public class GoodListWidget extends RelativeLayout {
 
     public GoodListWidget(Context context) {
         this(context, null);
-        init();
     }
 
     public GoodListWidget(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
-        init();
     }
 
     public GoodListWidget(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -59,28 +54,32 @@ public class GoodListWidget extends RelativeLayout {
         mBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.widget_good_list, this, true);
         mAdapter = new CommonRecyclerViewAdapter<>(mData);
         mAdapter.setMultiTypeDelegate(new CommonMultiTypeDelegate());
+
         mBinding.list.setAdapter(mAdapter);
         LinearLayoutManager lm = new LinearLayoutManager(getContext());
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.default_gap_15);
-        mBinding.list.addItemDecoration(new SpaceItemDecoration(spacingInPixels,0));
+        mBinding.list.addItemDecoration(new SpaceItemDecoration(spacingInPixels, 0));
         lm.setOrientation(LinearLayoutManager.HORIZONTAL);
         mBinding.list.setLayoutManager(lm);
+
+
+        mMyPositionBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.item_my_position, mBinding.list, false);
+        mAdapter.addHeaderView(mMyPositionBinding.getRoot(), 0, LinearLayout.HORIZONTAL);
         mAdapter.loadMoreComplete();
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             GoodType goodType = (GoodType) adapter.getItem(position);
-            if(mCallback!=null){
+            if (mCallback != null) {
                 mCallback.callback(goodType);
             }
         });
     }
 
-    public void setCallback(CommonCallback<GoodType> callback){
+    public void setCallback(CommonCallback<GoodType> callback) {
         mCallback = callback;
     }
 
     private void init() {
         initView();
-
 
         mModel = ViewModelProviders.of(ViewUtil.getFragmentActivity(this)).get(GoodViewModel.class);
         mModel.getGoodLiveData().observe(ViewUtil.getFragmentActivity(this), goodListData -> {

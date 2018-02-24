@@ -8,6 +8,8 @@ import com.zxzx74147.charttest.databinding.ActivityLauncherBinding;
 import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.modules.busstation.MainBusStation;
 import com.zxzx74147.devlib.utils.AnimationUtil;
+import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
+import com.zxzx74147.stock.activity.StockActivity;
 
 import java.util.concurrent.TimeUnit;
 
@@ -24,7 +26,7 @@ public class LauncherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_launcher);
 
-        Observable.just("").delay(1, TimeUnit.SECONDS).subscribeOn(Schedulers.io())
+        Observable.just("").delay(100, TimeUnit.MILLISECONDS).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(s -> {
             if (AccountManager.sharedInstance().isLogin()) {
                 openMain();
@@ -42,7 +44,8 @@ public class LauncherActivity extends AppCompatActivity {
     }
 
     private void openMain() {
-        MainBusStation.startMain(this);
-        finish();
+//        MainBusStation.startMain(this);
+//        finish();
+        ZXActivityJumpHelper.startActivity(LauncherActivity.this, StockActivity.class);
     }
 }

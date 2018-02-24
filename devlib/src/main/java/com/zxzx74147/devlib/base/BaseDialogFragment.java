@@ -2,6 +2,7 @@ package com.zxzx74147.devlib.base;
 
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialogFragment;
@@ -352,4 +353,6 @@ public class BaseDialogFragment extends BottomSheetDialogFragment implements ISu
     public <T extends ISupportFragment> T findChildFragment(Class<T> fragmentClass) {
         return SupportHelper.findFragment(getChildFragmentManager(), fragmentClass);
     }
+
+
 }

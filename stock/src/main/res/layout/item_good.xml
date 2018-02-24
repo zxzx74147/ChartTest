@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="@dimen/default_gap_250"
         android:layout_height="@dimen/default_gap_140"
-        android:background="@drawable/rect_round_white"
+        android:background='@{data.mIsSelect? @drawable/rect_round_gold:@drawable/rect_round_white}'
         android:gravity="center"
         android:orientation="vertical">
 

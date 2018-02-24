@@ -21,10 +21,26 @@ public class UniApiData implements Serializable {
 //        return uniData;
 //    }
 
-    public static UniApiData createError(ErrorData error){
-        UniApiData uniData = new UniApiData();
-        uniData.error = error;
-        return uniData;
+    public static<T extends UniApiData> T createError(ErrorData error,Class<T> mClass){
+        try {
+            T result = mClass.newInstance();
+            result.error = error;
+            return result;
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static<T extends UniApiData> T createError(Throwable t,Class<T> mClass){
+        try {
+            T result = mClass.newInstance();
+            result.error = ErrorData.createError(t);
+            return result;
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

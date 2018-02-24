@@ -7,6 +7,7 @@
     <string name="vcode">验证码</string>
     <string name="start">开始</string>
     <string name="format_02">%.2f</string>
+    <string name="format_bracket">(%s)</string>
     <string name="stock_up">▲</string>
     <string name="stock_down">▼</string>
 </resources>

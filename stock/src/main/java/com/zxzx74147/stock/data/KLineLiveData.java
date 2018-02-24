@@ -2,7 +2,7 @@ package com.zxzx74147.stock.data;
 
 import android.arch.lifecycle.LiveData;
 
-import com.zxzx74147.devlib.data.ErrorData;
+import com.zxzx74147.devlib.data.UniApiData;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.stock.storage.StockStorage;
@@ -20,64 +20,84 @@ import io.reactivex.disposables.Disposable;
 
 public class KLineLiveData extends LiveData<KLineData> {
 
-//    private GoodItem mGood = null;
-//    private static final int PERIOD = 1000 * 5;
-//    private Timer mTimer = null;
-//
-//    public KLineLiveData(GoodItem good) {
-//        mGood = good;
-//    }
-//
-//    public void setGood(GoodItem good) {
-//        mGood = good;
-//
-//        mTimerTask.run();
-//    }
-//
-//    private StockStorage mStockStorage = RetrofitClient.getStockClient().create(StockStorage.class);
-//
-//    @Override
-//    protected void onActive() {
-//        mTimer = new Timer();
-//        mTimer.schedule(mTimerTask, 0, PERIOD);
-//    }
-//
-//    private TimerTask mTimerTask = new TimerTask() {
-//        @Override
-//        public void run() {
-//            if (mGood == null) {
-//                return;
-//            }
-//            Observable<KLineData> kLineCall = mStockStorage.getKLine(mGood.TypeCode, 1);
-//            NetworkApi.ApiSubscribe(kLineCall, new Observer<KLineData>() {
-//                @Override
-//                public void onSubscribe(Disposable d) {
-//
-//                }
-//
-//                @Override
-//                public void onNext(KLineData kline) {
-//                    setValue(kline);
-//                }
-//
-//                @Override
-//                public void onError(Throwable e) {
-//                    ErrorData error = new ErrorData();
-//                    KLineData uniData = new KLineData();
-//                    uniData.error = error;
-//                    setValue(uniData);
-//                }
-//
-//                @Override
-//                public void onComplete() {
-//
-//                }
-//            });
-//        }
-//    };
-//
-//    @Override
-//    protected void onInactive() {
-//        mTimer.cancel();
-//    }
+    private GoodType mGood = null;
+    private int mType = 1;
+    private static final int PERIOD = 1000 * 5;
+    private Timer mTimer = null;
+    private Disposable mDisposable = null;
+
+    public KLineLiveData() {
+    }
+
+    public void setGood(GoodType good) {
+        mGood = good;
+        doRefresh();
+    }
+
+    public void setKType(int type) {
+        mType = type;
+        doRefresh();
+    }
+
+    private StockStorage mStockStorage = RetrofitClient.getStockClient().create(StockStorage.class);
+
+    @Override
+    protected void onActive() {
+        if (mTimer != null) {
+            mTimer.cancel();
+            mTimer = null;
+        }
+        mTimer = new Timer();
+        mTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                doRefresh();
+            }
+        }, 0, PERIOD);
+
+    }
+
+    @Override
+    protected void onInactive() {
+        mTimer.cancel();
+    }
+
+    private void doRefresh() {
+
+        if (mGood == null || mType == 0) {
+            return;
+        }
+        if(mDisposable!=null){
+            mDisposable.dispose();
+        }
+        Observable<KLineData> kLineCall = mStockStorage.getKLine(mGood.goodsType, mType);
+
+        NetworkApi.ApiSubscribe(kLineCall, new Observer<KLineData>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                mDisposable = d;
+            }
+
+            @Override
+            public void onNext(KLineData kline) {
+                setValue(kline);
+                mDisposable = null;
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                setValue(UniApiData.createError(e, KLineData.class));
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+
+    }
+
+    ;
+
+
 }

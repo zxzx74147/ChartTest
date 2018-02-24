@@ -13,4 +13,6 @@ public class GoodType implements Serializable
     public Price price;
     private final static long serialVersionUID = -3100535611730018923L;
 
+    public boolean mIsSelect = false;
+
 }

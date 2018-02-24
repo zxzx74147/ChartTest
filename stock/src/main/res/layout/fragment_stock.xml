@@ -5,18 +5,27 @@
 
     </data>
 
+    <!--<android.support.v4.widget.NestedScrollView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:background="@color/red"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/bg_grey"
+        android:orientation="vertical">
+
         <com.zxzx74147.stock.widget.GoodListWidget
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_gap_16" />
 
         <com.zxzx74147.stock.widget.StockWidget
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_gap_16" />
+
 
     </LinearLayout>
+    <!--</android.support.v4.widget.NestedScrollView>-->
 </layout>

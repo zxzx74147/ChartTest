@@ -4,6 +4,7 @@ package com.zxzx74147.devlib.network;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
@@ -12,18 +13,36 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class NetworkApi {
-    public static void ApiSubscribe(Observable observable, Observer observer) {
+    public static<T> void ApiSubscribe(Observable<T> observable, Observer<T> observer) {
         observable.subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
     }
 
-    public static<T> void ApiSubscribe(Observable observable, Consumer observer) {
+    public static<T> void ApiSubscribe(Observable<T> observable, Consumer<T> observer) {
         observable.subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
+                .subscribe(new Observer<T>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(T o) {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
 

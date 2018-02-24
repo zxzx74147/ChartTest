@@ -26,24 +26,24 @@ import java.util.ArrayList;
  * Created by zhengxin on 2018/2/13.
  */
 
-public class KlineView extends LinearLayout {
+public class RealTimeView extends LinearLayout {
 
     WidgetKlineBinding mBinding = null;
 
     private DataParse mDataParse;
 
 
-    public KlineView(Context context) {
+    public RealTimeView(Context context) {
         super(context);
         init();
     }
 
-    public KlineView(Context context, AttributeSet attrs) {
+    public RealTimeView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public KlineView(Context context, AttributeSet attrs, int defStyle) {
+    public RealTimeView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init();
     }

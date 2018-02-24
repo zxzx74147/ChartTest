@@ -19,5 +19,4 @@ public interface GoodStorage {
     @GET("/prices/realtime/getlist")
     Observable<PriceListData> getRealTime(@Query("goodsType") String goodsType);
 
-
 }

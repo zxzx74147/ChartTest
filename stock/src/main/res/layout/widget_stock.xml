@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,15 +9,18 @@
             type="com.zxzx74147.stock.data.Price" />
     </data>
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg_grey"
-        android:orientation="vertical">
+        android:background="@color/bg_grey">
 
         <RelativeLayout
+            android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
+
             android:orientation="horizontal"
             android:padding="@dimen/default_gap_44">
 
@@ -31,25 +35,128 @@
 
             <TextView
                 android:id="@+id/up_down_abs"
-                android:layout_marginLeft="@dimen/default_gap_24"
-                android:layout_alignTop="@+id/current_price"
-                android:layout_toRightOf="@+id/current_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/current_price"
+                android:layout_marginLeft="@dimen/default_gap_24"
+                android:layout_toRightOf="@+id/current_price"
                 android:text="@{String.valueOf(price.curPrice-price.open)}"
                 android:textColor="@color/stock_up"
                 android:textSize="@dimen/default_size_26" />
 
             <TextView
 
-                android:layout_alignLeft="@+id/up_down_abs"
-                android:layout_alignBottom="@+id/current_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/current_price"
+                android:layout_alignLeft="@+id/up_down_abs"
                 android:text='@{@string/format_02((float)(price.curPrice)-(float)(price.open)/(float)price.open)}'
                 android:textColor="@color/stock_up"
                 android:textSize="@dimen/default_size_26" />
         </RelativeLayout>
 
-    </LinearLayout>
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout"
+            style="@style/Stock1TabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_gap_16"
+            android:background="@color/white"
+            android:singleLine="true"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+
+            <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/stock_k_1m" />
+
+            <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/stock_k_5m" />
+
+            <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/stock_k_15m" />
+
+            <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/stock_k_30m" />
+
+            <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/stock_k_1h" />
+
+            <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/stock_k_1d" />
+        </android.support.design.widget.TabLayout>
+
+        <FrameLayout
+            android:id="@+id/chart"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="750:556"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/bottom"
+            app:layout_constraintTop_toBottomOf="@+id/tabLayout">
+
+            <com.zxzx74147.stock.widget.KlineView
+                android:id="@+id/klineview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </FrameLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="@dimen/default_gap_100"
+            android:id="@+id/bottom"
+
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+            
+            <Button
+                android:layout_width="0dip"
+                android:background="@color/stock_up"
+                android:layout_weight="27"
+                android:textSize="@dimen/default_size_34"
+                android:textColor="@color/white"
+                android:text="@string/stock_by_increase"
+                android:textStyle="bold"
+                android:layout_height="match_parent" />
+
+            <Button
+                android:layout_width="0dip"
+                android:textStyle="bold"
+                android:background="@color/stock_down"
+                android:layout_weight="27"
+                android:textSize="@dimen/default_size_34"
+                android:textColor="@color/white"
+                android:text="@string/stock_by_decrease"
+                android:layout_height="match_parent" />
+
+            <Button
+                android:layout_width="0dip"
+                android:textStyle="bold"
+                android:background="@color/text_black"
+                android:textSize="@dimen/default_size_34"
+                android:textColor="@color/white"
+                android:layout_weight="21"
+                android:text="@string/stock_by_without"
+                android:layout_height="match_parent" />
+
+
+        </LinearLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
 </layout>

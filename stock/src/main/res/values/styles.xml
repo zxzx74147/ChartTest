@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Stock1TabTextLayout" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
+        <item name="android:textSize">@dimen/default_size_30</item>
+        <item name="android:textColor">@color/text_dark_grey</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="Stock1TabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@color/tran</item>
+        <item name="tabMode">scrollable</item>
+        <item name="tabIndicatorHeight">0px</item>
+        <item name="tabPaddingStart">@dimen/default_gap_32</item>
+        <item name="tabPaddingEnd">@dimen/default_gap_32</item>
+        <item name="tabBackground">@color/tran</item>
+        <item name="tabSelectedTextColor">@color/text_black</item>
+        <item name="tabTextAppearance">@style/Stock1TabTextLayout</item>
+    </style>
+
+
+
+
+</resources>
