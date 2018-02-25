@@ -15,6 +15,8 @@ import com.github.mikephil.charting.data.CombinedData;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.renderer.CombinedChartRenderer;
+import com.jakewharton.rxbinding2.widget.RxRadioGroup;
 import com.zxzx74147.stock.R;
 import com.zxzx74147.stock.databinding.WidgetKlineBinding;
 import com.zxzx74147.stock.indicator.DataParse;
@@ -27,6 +29,7 @@ import java.util.ArrayList;
  */
 
 public class KlineView extends LinearLayout {
+    private static final String TAG = KlineView.class.getSimpleName();
 
     WidgetKlineBinding mBinding = null;
 
@@ -52,65 +55,48 @@ public class KlineView extends LinearLayout {
         mBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.widget_kline, this, true);
         ChartUtil.setChart(mBinding.kline);
         ChartUtil.setChart(mBinding.kline2);
+        XAxis xAxis = mBinding.kline2.getXAxis();
+        xAxis.setDrawLabels(false);
+
         initChartListener();
+
+        RxRadioGroup.checkedChanges(mBinding.klineSelect).subscribe((Integer checkId) -> {
+            refresh();
+        });
+
+        RxRadioGroup.checkedChanges(mBinding.indicatorSelect).subscribe((Integer checkId) -> {
+            refresh();
+        });
     }
 
     public void setData(DataParse dataParse) {
         mDataParse = dataParse;
-        {
-            CombinedData combinedData = new CombinedData();
-            CandleDataSet set = new CandleDataSet(dataParse.getCandleEntries(), "");
-            ChartUtil.setCandDataleSet(set);
-            CandleData candleData = new CandleData(set);
-            combinedData.setData(candleData);
+        refresh();
+    }
 
-            XAxis xAxis = mBinding.kline.getXAxis();
-
-            xAxis.setValueFormatter(ChartUtil.getAxisValueFormatter1m(dataParse.getCandleEntries()));
-
-
-            ArrayList<ILineDataSet> sets = new ArrayList<>();
-            LineDataSet lineMA5 = new LineDataSet(dataParse.getMa5DataL(), "ma5");
-            LineDataSet lineMA10 = new LineDataSet(dataParse.getMa10DataL(), "ma10");
-            LineDataSet lineMA20 = new LineDataSet(dataParse.getMa20DataL(), "ma20");
-            ChartUtil.setLineDataleSet(lineMA5, getResources().getColor(R.color.stock_kline_ma5));
-            ChartUtil.setLineDataleSet(lineMA10, getResources().getColor(R.color.stock_kline_ma10));
-            ChartUtil.setLineDataleSet(lineMA20, getResources().getColor(R.color.stock_kline_ma20));
-            sets.add(lineMA5);
-            sets.add(lineMA10);
-            sets.add(lineMA20);
-
-            LineData lineData = new LineData(sets);
-            combinedData.setData(lineData);
-            mBinding.kline.setData(combinedData);
-            mBinding.kline.invalidate();
-
-
+    private void refresh() {
+        if(mDataParse==null){
+            return;
         }
         {
-            CombinedData combinedData = new CombinedData();
-
-            XAxis xAxis = mBinding.kline2.getXAxis();
-            xAxis.setDrawLabels(false);
-            xAxis.setValueFormatter(ChartUtil.getAxisValueFormatter1m(dataParse.getCandleEntries()));
-
-            BarDataSet set = new BarDataSet(dataParse.getMacdData(), "");
-            ChartUtil.setBarDataSet(set);
-            BarData barData = new BarData(set);
-            combinedData.setData(barData);
-
-
-            ArrayList<ILineDataSet> sets = new ArrayList<>();
-            LineDataSet lineDea = new LineDataSet(dataParse.getDeaData(), "dea");
-            LineDataSet lineDif = new LineDataSet(dataParse.getDeaData(), "dif");
-            ChartUtil.setLineDataleSet(lineDea, getResources().getColor(R.color.stock_kline_dea));
-            ChartUtil.setLineDataleSet(lineDif, getResources().getColor(R.color.stock_kline_dif));
-            sets.add(lineDea);
-            sets.add(lineDif);
-            LineData lineData = new LineData(sets);
-            combinedData.setData(lineData);
-            mBinding.kline2.setData(combinedData);
-            mBinding.kline2.invalidate();
+            int checkId = mBinding.indicatorSelect.getCheckedRadioButtonId();
+            if (checkId == R.id.btn_macd) {
+                setMacd();
+            } else if (checkId == R.id.btn_kdj) {
+                setKDJ();
+            } else if (checkId == R.id.btn_rsi) {
+                setRSI();
+            }
+        }
+        {
+            int checkId = mBinding.klineSelect.getCheckedRadioButtonId();
+            if (checkId == R.id.btn_sma) {
+                setSMA();
+            } else if (checkId == R.id.btn_ema) {
+                setEMA();
+            } else if (checkId == R.id.btn_boll) {
+                setBOLL();
+            }
         }
     }
 
@@ -124,7 +110,136 @@ public class KlineView extends LinearLayout {
 //        mChartVolume.setOnTouchListener(new ChartInfoViewHandler(mChartVolume));
     }
 
-    private void setMacd() {
+    private void setKData(CombinedData combinedData) {
+        CandleDataSet set = new CandleDataSet(mDataParse.getCandleEntries(), "");
+        ChartUtil.setCandDataleSet(set);
+        CandleData candleData = new CandleData(set);
+        combinedData.setData(candleData);
 
+        XAxis xAxis = mBinding.kline.getXAxis();
+        xAxis.setValueFormatter(ChartUtil.getAxisValueFormatter1m(mDataParse.getCandleEntries()));
+    }
+
+    private void setSMA() {
+        CombinedData combinedData = new CombinedData();
+        setKData(combinedData);
+        ArrayList<ILineDataSet> sets = new ArrayList<>();
+        LineDataSet lineMA5 = new LineDataSet(mDataParse.getMa5DataL(), "ma5");
+        LineDataSet lineMA10 = new LineDataSet(mDataParse.getMa10DataL(), "ma10");
+        LineDataSet lineMA20 = new LineDataSet(mDataParse.getMa20DataL(), "ma20");
+        ChartUtil.setLineDataleSet(lineMA5, getResources().getColor(R.color.stock_kline_ma5));
+        ChartUtil.setLineDataleSet(lineMA10, getResources().getColor(R.color.stock_kline_ma10));
+        ChartUtil.setLineDataleSet(lineMA20, getResources().getColor(R.color.stock_kline_ma20));
+        sets.add(lineMA5);
+        sets.add(lineMA10);
+        sets.add(lineMA20);
+
+        LineData lineData = new LineData(sets);
+        combinedData.setData(lineData);
+        mBinding.kline.setData(combinedData);
+        mBinding.kline.invalidate();
+    }
+
+    private void setEMA() {
+        CombinedData combinedData = new CombinedData();
+        setKData(combinedData);
+        ArrayList<ILineDataSet> sets = new ArrayList<>();
+        LineDataSet lineMA5 = new LineDataSet(mDataParse.getExpmaData5(), "ema5");
+        LineDataSet lineMA10 = new LineDataSet(mDataParse.getExpmaData10(), "ema10");
+        LineDataSet lineMA20 = new LineDataSet(mDataParse.getExpmaData20(), "ema20");
+        ChartUtil.setLineDataleSet(lineMA5, getResources().getColor(R.color.stock_kline_ma5));
+        ChartUtil.setLineDataleSet(lineMA10, getResources().getColor(R.color.stock_kline_ma10));
+        ChartUtil.setLineDataleSet(lineMA20, getResources().getColor(R.color.stock_kline_ma20));
+        sets.add(lineMA5);
+        sets.add(lineMA10);
+        sets.add(lineMA20);
+
+        LineData lineData = new LineData(sets);
+        combinedData.setData(lineData);
+        mBinding.kline.setData(combinedData);
+        mBinding.kline.invalidate();
+    }
+
+    private void setBOLL() {
+        CombinedData combinedData = new CombinedData();
+        setKData(combinedData);
+        ArrayList<ILineDataSet> sets = new ArrayList<>();
+        LineDataSet bollD = new LineDataSet(mDataParse.getBollDataDN(), "boll_d");
+        LineDataSet bollU = new LineDataSet(mDataParse.getBollDataUP(), "boll_u");
+        LineDataSet bollM = new LineDataSet(mDataParse.getBollDataMB(), "boll_m");
+        ChartUtil.setLineDataleSet(bollD, getResources().getColor(R.color.stock_kline_ma5));
+        ChartUtil.setLineDataleSet(bollU, getResources().getColor(R.color.stock_kline_ma10));
+        ChartUtil.setLineDataleSet(bollM, getResources().getColor(R.color.stock_kline_ma20));
+        sets.add(bollD);
+        sets.add(bollU);
+        sets.add(bollM);
+
+        LineData lineData = new LineData(sets);
+        combinedData.setData(lineData);
+        mBinding.kline.setData(combinedData);
+        mBinding.kline.invalidate();
+    }
+
+    private void setMacd() {
+        CombinedData combinedData = new CombinedData();
+
+        BarDataSet set = new BarDataSet(mDataParse.getMacdData(), "");
+        ChartUtil.setBarDataSet(set);
+        BarData barData = new BarData(set);
+        combinedData.setData(barData);
+
+        ArrayList<ILineDataSet> sets = new ArrayList<>();
+        LineDataSet lineDea = new LineDataSet(mDataParse.getDeaData(), "dea");
+        LineDataSet lineDif = new LineDataSet(mDataParse.getDeaData(), "dif");
+        ChartUtil.setLineDataleSet(lineDea, getResources().getColor(R.color.stock_kline_dea));
+        ChartUtil.setLineDataleSet(lineDif, getResources().getColor(R.color.stock_kline_dif));
+        sets.add(lineDea);
+        sets.add(lineDif);
+        LineData lineData = new LineData(sets);
+        combinedData.setData(lineData);
+        mBinding.kline2.setData(combinedData);
+        mBinding.kline2.invalidate();
+    }
+
+    private void setKDJ() {
+        CombinedData combinedData = new CombinedData();
+
+
+        ArrayList<ILineDataSet> sets = new ArrayList<>();
+        LineDataSet lineK = new LineDataSet(mDataParse.getkData(), "k");
+        LineDataSet lineD = new LineDataSet(mDataParse.getdData(), "d");
+        LineDataSet lineJ = new LineDataSet(mDataParse.getjData(), "j");
+        ChartUtil.setLineDataleSet(lineK, getResources().getColor(R.color.stock_kline_dea));
+        ChartUtil.setLineDataleSet(lineD, getResources().getColor(R.color.stock_kline_ma5));
+        ChartUtil.setLineDataleSet(lineJ, getResources().getColor(R.color.stock_kline_dif));
+        sets.add(lineK);
+        sets.add(lineD);
+        sets.add(lineJ);
+        LineData lineData = new LineData(sets);
+        combinedData.setData(lineData);
+        ((CombinedChartRenderer)mBinding.kline2.getRenderer()).getSubRenderers().clear();
+        mBinding.kline2.setData(combinedData);
+        mBinding.kline2.invalidate();
+    }
+
+    private void setRSI() {
+        CombinedData combinedData = new CombinedData();
+
+
+        ArrayList<ILineDataSet> sets = new ArrayList<>();
+        LineDataSet lineK = new LineDataSet(mDataParse.getRsiData6(), "rsi6");
+        LineDataSet lineD = new LineDataSet(mDataParse.getRsiData12(), "rsi12");
+        LineDataSet lineJ = new LineDataSet(mDataParse.getRsiData24(), "rsi21");
+        ChartUtil.setLineDataleSet(lineK, getResources().getColor(R.color.stock_kline_dea));
+        ChartUtil.setLineDataleSet(lineD, getResources().getColor(R.color.stock_kline_ma5));
+        ChartUtil.setLineDataleSet(lineJ, getResources().getColor(R.color.stock_kline_dif));
+        sets.add(lineK);
+        sets.add(lineD);
+        sets.add(lineJ);
+        LineData lineData = new LineData(sets);
+        combinedData.setData(lineData);
+        ((CombinedChartRenderer)mBinding.kline2.getRenderer()).getSubRenderers().clear();
+        mBinding.kline2.setData(combinedData);
+        mBinding.kline2.invalidate();
     }
 }

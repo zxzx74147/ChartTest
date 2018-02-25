@@ -15,6 +15,7 @@ import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.devlib.widget.CommonRecyclerViewAdapter;
 import com.zxzx74147.devlib.widget.SpaceItemDecoration;
 import com.zxzx74147.stock.R;
+import com.zxzx74147.stock.data.Good;
 import com.zxzx74147.stock.data.GoodType;
 import com.zxzx74147.stock.databinding.ItemMyPositionBinding;
 import com.zxzx74147.stock.databinding.WidgetGoodListBinding;
@@ -32,6 +33,7 @@ public class GoodListWidget extends RelativeLayout {
     private ItemMyPositionBinding mMyPositionBinding = null;
     private GoodViewModel mModel = null;
     private CommonCallback<GoodType> mCallback = null;
+    private GoodType mGoodType = null;
 
     private List<GoodType> mData = new LinkedList<>();
     private CommonRecyclerViewAdapter<GoodType> mAdapter = null;
@@ -78,6 +80,26 @@ public class GoodListWidget extends RelativeLayout {
         mCallback = callback;
     }
 
+    public void setGood(GoodType good){
+        mGoodType = good;
+        refreshData();
+    }
+
+    public void refreshData(){
+
+        if(mGoodType!=null&&mGoodType.goodsTypeName!=null){
+            for(GoodType item:mData){
+                if(mGoodType.goodsTypeName.equals(item.goodsTypeName)){
+                    item.mIsSelect = true;
+                }else{
+                    item.mIsSelect= false;
+                }
+            }
+        }
+        mAdapter.notifyDataSetChanged();
+    }
+
+
     private void init() {
         initView();
 
@@ -92,7 +114,7 @@ public class GoodListWidget extends RelativeLayout {
                 return;
             }
             mData.addAll(goodListData.goodsList.goodType);
-            mAdapter.notifyDataSetChanged();
+            refreshData();
 
         });
     }

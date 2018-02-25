@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.design.widget.BottomSheetBehavior;
-import android.view.WindowManager;
 
 import com.zxzx74147.charttest.databinding.ActivityMainBinding;
 import com.zxzx74147.devlib.base.BaseActivity;
@@ -31,7 +29,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private CommonCallback<GoodType> mCallback = item -> {
-        StockFragment fragment = new StockFragment();
+        StockFragment fragment = StockFragment.newInstance(item);
 
 
         fragment.show(getSupportFragmentManager(),fragment.getTag());

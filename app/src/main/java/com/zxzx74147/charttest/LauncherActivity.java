@@ -44,8 +44,8 @@ public class LauncherActivity extends AppCompatActivity {
     }
 
     private void openMain() {
-//        MainBusStation.startMain(this);
-//        finish();
-        ZXActivityJumpHelper.startActivity(LauncherActivity.this, StockActivity.class);
+        MainBusStation.startMain(this);
+        finish();
+//        ZXActivityJumpHelper.startActivity(LauncherActivity.this, StockActivity.class);
     }
 }

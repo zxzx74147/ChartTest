@@ -30,7 +30,11 @@ public class NetworkApi {
 
                     @Override
                     public void onNext(T o) {
-
+                        try {
+                            observer.accept(o);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
 
                     @Override

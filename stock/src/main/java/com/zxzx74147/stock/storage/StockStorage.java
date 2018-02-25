@@ -14,7 +14,7 @@ public interface StockStorage {
 
 
     @GET("/prices/kchart/getlist")
-    Observable<KLineData> getKLine(@Query("goodsType") String goodsType, @Query("chartType") int chartType);
+    Observable<KLineData> getKLine(@Query("goodsType") String goodsType, @Query("chartType") String chartType);
 
     @GET("/prices/timeline/getlist")
     Observable<KLineData> getLiveLine(@Query("goodsType") String goodsType);

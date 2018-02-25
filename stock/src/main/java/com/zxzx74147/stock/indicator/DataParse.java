@@ -20,7 +20,7 @@ public class DataParse {
     private ArrayList<MinutesBean> datas = new ArrayList<>();
     private ArrayList<KLineBean> kDatas = new ArrayList<>();
     private ArrayList<String> xVals = new ArrayList<>();//X轴数据
-//    private ArrayList<BarEntry> barEntries = new ArrayList<>();//成交量数据
+    //    private ArrayList<BarEntry> barEntries = new ArrayList<>();//成交量数据
     private ArrayList<CandleEntry> candleEntries = new ArrayList<>();//K线数据
 
     private ArrayList<Entry> ma5DataL = new ArrayList<>();
@@ -114,10 +114,11 @@ public class DataParse {
         }
     }
 
-    public void clear(){
+    public void clear() {
         kDatas.clear();
         xVals.clear();
     }
+
     /**
      * 将jsonobject转换为K线数据
      *
@@ -145,8 +146,8 @@ public class DataParse {
         kDatas.addAll(kLineBeans);
         initAll();
     }
-    
-    public void initAll(){
+
+    public void initAll() {
         initLineDatas(getKLineDatas());
         initKLineMA(getKLineDatas());
         initMACD(getKLineDatas());
@@ -167,7 +168,7 @@ public class DataParse {
         for (int i = 0, j = 0; i < datas.size(); i++, j++) {
             xVals.add(datas.get(i).date + "");
 //            barEntries.add(new BarEntry(i, datas.get(i).high, datas.get(i).low, datas.get(i).open, datas.get(i).close, datas.get(i).vol));
-            candleEntries.add(new CandleEntry(i, datas.get(i).high, datas.get(i).low, datas.get(i).open, datas.get(i).close,datas.get(i)));
+            candleEntries.add(new CandleEntry(i, datas.get(i).high, datas.get(i).low, datas.get(i).open, datas.get(i).close, datas.get(i)));
         }
     }
 
@@ -190,14 +191,14 @@ public class DataParse {
         KMAEntity kmaEntity20 = new KMAEntity(datas, 20);
         KMAEntity kmaEntity30 = new KMAEntity(datas, 30);
         for (int i = 0; i < kmaEntity5.getMAs().size(); i++) {
-            if(i>=5)
-                ma5DataL.add(new Entry(i,kmaEntity5.getMAs().get(i)));
-            if(i>=10)
-                ma10DataL.add(new Entry(i,kmaEntity10.getMAs().get(i)));
-            if(i>=20)
-                ma20DataL.add(new Entry(i,kmaEntity20.getMAs().get(i)));
-            if(i>=30)
-                ma30DataL.add(new Entry(i,kmaEntity30.getMAs().get(i)));
+            if (i >= 5)
+                ma5DataL.add(new Entry(i, kmaEntity5.getMAs().get(i)));
+            if (i >= 10)
+                ma10DataL.add(new Entry(i, kmaEntity10.getMAs().get(i)));
+            if (i >= 20)
+                ma20DataL.add(new Entry(i, kmaEntity20.getMAs().get(i)));
+            if (i >= 30)
+                ma30DataL.add(new Entry(i, kmaEntity30.getMAs().get(i)));
         }
 
     }
@@ -221,10 +222,10 @@ public class DataParse {
         VMAEntity vmaEntity20 = new VMAEntity(datas, 20);
         VMAEntity vmaEntity30 = new VMAEntity(datas, 30);
         for (int i = 0; i < vmaEntity5.getMAs().size(); i++) {
-            ma5DataV.add(new Entry(i,vmaEntity5.getMAs().get(i)));
-            ma10DataV.add(new Entry(i,vmaEntity10.getMAs().get(i)));
-            ma20DataV.add(new Entry(i,vmaEntity20.getMAs().get(i)));
-            ma30DataV.add(new Entry(i,vmaEntity30.getMAs().get(i)));
+            ma5DataV.add(new Entry(i, vmaEntity5.getMAs().get(i)));
+            ma10DataV.add(new Entry(i, vmaEntity10.getMAs().get(i)));
+            ma20DataV.add(new Entry(i, vmaEntity20.getMAs().get(i)));
+            ma30DataV.add(new Entry(i, vmaEntity30.getMAs().get(i)));
         }
 
     }
@@ -241,9 +242,9 @@ public class DataParse {
         deaData = new ArrayList<>();
         difData = new ArrayList<>();
         for (int i = 0; i < macdEntity.getMACD().size(); i++) {
-            macdData.add(new BarEntry(i,macdEntity.getMACD().get(i), datas.get(i)));
-            deaData.add(new Entry(i,macdEntity.getDEA().get(i), datas.get(i)));
-            difData.add(new Entry(i,macdEntity.getDIF().get(i), datas.get(i)));
+            macdData.add(new BarEntry(i, macdEntity.getMACD().get(i), datas.get(i)));
+            deaData.add(new Entry(i, macdEntity.getDEA().get(i), datas.get(i)));
+            difData.add(new Entry(i, macdEntity.getDIF().get(i), datas.get(i)));
         }
     }
 
@@ -261,9 +262,9 @@ public class DataParse {
         jData = new ArrayList<>();
         for (int i = 0; i < kdjEntity.getD().size(); i++) {
             barDatasKDJ.add(new BarEntry(0, i));
-            kData.add(new Entry(i,kdjEntity.getK().get(i), datas.get(i)));
-            dData.add(new Entry(i,kdjEntity.getD().get(i), datas.get(i)));
-            jData.add(new Entry(i,kdjEntity.getJ().get(i), datas.get(i)));
+            kData.add(new Entry(i, kdjEntity.getK().get(i), datas.get(i)));
+            dData.add(new Entry(i, kdjEntity.getD().get(i), datas.get(i)));
+            jData.add(new Entry(i, kdjEntity.getJ().get(i), datas.get(i)));
         }
     }
 
@@ -283,9 +284,9 @@ public class DataParse {
         wrData89 = new ArrayList<>();
         for (int i = 0; i < wrEntity13.getWRs().size(); i++) {
             barDatasWR.add(new BarEntry(0, i));
-            wrData13.add(new Entry(i,wrEntity13.getWRs().get(i), datas.get(i)));
-            wrData34.add(new Entry(i,wrEntity34.getWRs().get(i), datas.get(i)));
-            wrData89.add(new Entry(i,wrEntity89.getWRs().get(i), datas.get(i)));
+            wrData13.add(new Entry(i, wrEntity13.getWRs().get(i), datas.get(i)));
+            wrData34.add(new Entry(i, wrEntity34.getWRs().get(i), datas.get(i)));
+            wrData89.add(new Entry(i, wrEntity89.getWRs().get(i), datas.get(i)));
         }
     }
 
@@ -305,9 +306,9 @@ public class DataParse {
         rsiData24 = new ArrayList<>();
         for (int i = 0; i < rsiEntity6.getRSIs().size(); i++) {
             barDatasRSI.add(new BarEntry(0, i));
-            rsiData6.add(new Entry(i,rsiEntity6.getRSIs().get(i), datas.get(i)));
-            rsiData12.add(new Entry(i,rsiEntity12.getRSIs().get(i), datas.get(i)));
-            rsiData24.add(new Entry(i,rsiEntity24.getRSIs().get(i), datas.get(i)));
+            rsiData6.add(new Entry(i, rsiEntity6.getRSIs().get(i), datas.get(i)));
+            rsiData12.add(new Entry(i, rsiEntity12.getRSIs().get(i), datas.get(i)));
+            rsiData24.add(new Entry(i, rsiEntity24.getRSIs().get(i), datas.get(i)));
         }
     }
 
@@ -323,12 +324,15 @@ public class DataParse {
         bollDataUP = new ArrayList<>();
         bollDataMB = new ArrayList<>();
         bollDataDN = new ArrayList<>();
-        for (int i = 0; i < bollEntity.getUPs().size(); i++) {
+        for (int i = 20 - 1; i < bollEntity.getUPs().size(); i++) {
             barDatasBOLL.add(new BarEntry(0, i));
-            bollDataUP.add(new Entry(i,bollEntity.getUPs().get(i), datas.get(i)));
-            bollDataMB.add(new Entry(i,bollEntity.getMBs().get(i), datas.get(i)));
-            bollDataDN.add(new Entry(i,bollEntity.getDNs().get(i), datas.get(i)));
+            bollDataUP.add(new Entry(i, bollEntity.getUPs().get(i), datas.get(i)));
+
+            bollDataMB.add(new Entry(i, bollEntity.getMBs().get(i), datas.get(i)));
+
+            bollDataDN.add(new Entry(i, bollEntity.getDNs().get(i), datas.get(i)));
         }
+
     }
 
     /**
@@ -349,10 +353,10 @@ public class DataParse {
         expmaData60 = new ArrayList<>();
         for (int i = 0; i < expmaEntity5.getEXPMAs().size(); i++) {
             barDatasEXPMA.add(new BarEntry(0, i));
-            expmaData5.add(new Entry(i,expmaEntity5.getEXPMAs().get(i), datas.get(i)));
-            expmaData10.add(new Entry(i,expmaEntity10.getEXPMAs().get(i), datas.get(i)));
-            expmaData20.add(new Entry(i,expmaEntity20.getEXPMAs().get(i), datas.get(i)));
-            expmaData60.add(new Entry(i,expmaEntity60.getEXPMAs().get(i), datas.get(i)));
+            expmaData5.add(new Entry(i, expmaEntity5.getEXPMAs().get(i), datas.get(i)));
+            expmaData10.add(new Entry(i, expmaEntity10.getEXPMAs().get(i), datas.get(i)));
+            expmaData20.add(new Entry(i, expmaEntity20.getEXPMAs().get(i), datas.get(i)));
+            expmaData60.add(new Entry(i, expmaEntity60.getEXPMAs().get(i), datas.get(i)));
         }
     }
 
@@ -371,10 +375,10 @@ public class DataParse {
         dmiDataADXR = new ArrayList<>();
         for (int i = 0; i < dmiEntity.getDI1s().size(); i++) {
             barDatasDMI.add(new BarEntry(0, i));
-            dmiDataDI1.add(new Entry(i,dmiEntity.getDI1s().get(i), datas.get(i)));
-            dmiDataDI2.add(new Entry(i,dmiEntity.getDI2s().get(i), datas.get(i)));
-            dmiDataADX.add(new Entry(i,dmiEntity.getADXs().get(i), datas.get(i)));
-            dmiDataADXR.add(new Entry(i,dmiEntity.getADXRs().get(i), datas.get(i)));
+            dmiDataDI1.add(new Entry(i, dmiEntity.getDI1s().get(i), datas.get(i)));
+            dmiDataDI2.add(new Entry(i, dmiEntity.getDI2s().get(i), datas.get(i)));
+            dmiDataADX.add(new Entry(i, dmiEntity.getADXs().get(i), datas.get(i)));
+            dmiDataADXR.add(new Entry(i, dmiEntity.getADXRs().get(i), datas.get(i)));
         }
     }
 

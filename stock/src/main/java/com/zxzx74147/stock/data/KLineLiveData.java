@@ -1,6 +1,7 @@
 package com.zxzx74147.stock.data;
 
 import android.arch.lifecycle.LiveData;
+import android.text.TextUtils;
 
 import com.zxzx74147.devlib.data.UniApiData;
 import com.zxzx74147.devlib.network.NetworkApi;
@@ -21,7 +22,7 @@ import io.reactivex.disposables.Disposable;
 public class KLineLiveData extends LiveData<KLineData> {
 
     private GoodType mGood = null;
-    private int mType = 1;
+    private String mType = "";
     private static final int PERIOD = 1000 * 5;
     private Timer mTimer = null;
     private Disposable mDisposable = null;
@@ -34,7 +35,7 @@ public class KLineLiveData extends LiveData<KLineData> {
         doRefresh();
     }
 
-    public void setKType(int type) {
+    public void setKType(String type) {
         mType = type;
         doRefresh();
     }
@@ -64,7 +65,7 @@ public class KLineLiveData extends LiveData<KLineData> {
 
     private void doRefresh() {
 
-        if (mGood == null || mType == 0) {
+        if (mGood == null || TextUtils.isEmpty(mType)) {
             return;
         }
         if(mDisposable!=null){

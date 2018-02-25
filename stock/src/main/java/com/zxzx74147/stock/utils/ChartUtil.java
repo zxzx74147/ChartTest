@@ -122,6 +122,7 @@ public class ChartUtil {
         axisRKline.setDrawAxisLine(false);
         axisRKline.setDrawZeroLine(false);
         axisRKline.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
+        axisRKline.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
         axisRKline.setDrawLabels(true);
         axisRKline.setGridColor(DevLib.getApp().getResources().getColor(R.color.stock_grid));
         axisRKline.setGridLineWidth(1f);

@@ -10,7 +10,7 @@
 
         <variable
             name="dataParse"
-            type="com.zxzx74147.stock.indicator.DataParse"/>
+            type="com.zxzx74147.stock.indicator.DataParse" />
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -32,10 +32,117 @@
             android:id="@+id/kline2"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="750:91"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/kline" />
+
+        <FrameLayout
+            android:id="@+id/select"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="750:71"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/kline2">
+
+            <RadioGroup
+                android:id="@+id/kline_select"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/btn_sma"
+                    style="@style/radiobutton_stock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:checked="true"
+                    android:text="@string/stock_SMA" />
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:background="@color/stock_grid" />
+
+                <RadioButton
+                    android:id="@+id/btn_ema"
+                    style="@style/radiobutton_stock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:button="@null"
+                    android:text="@string/stock_EMA" />
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:background="@color/stock_grid" />
+
+                <RadioButton
+                    android:id="@+id/btn_boll"
+                    style="@style/radiobutton_stock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:button="@null"
+                    android:text="@string/stock_BOLL" />
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:background="@color/stock_grid" />
+            </RadioGroup>
+
+
+            <RadioGroup
+                android:id="@+id/indicator_select"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="@dimen/default_gap_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/stock_grid" />
+
+                <RadioButton
+                    android:id="@+id/btn_macd"
+                    style="@style/radiobutton_stock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:checked="true"
+                    android:text="@string/stock_MACD" />
+
+                <View
+                    android:layout_width="@dimen/default_gap_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/stock_grid" />
+
+                <RadioButton
+                    android:id="@+id/btn_kdj"
+                    style="@style/radiobutton_stock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:button="@null"
+                    android:text="@string/stock_KDJ" />
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:background="@color/stock_grid" />
+
+                <RadioButton
+                    android:id="@+id/btn_rsi"
+                    style="@style/radiobutton_stock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:button="@null"
+                    android:text="@string/stock_RSI" />
+
+
+            </RadioGroup>
+
+        </FrameLayout>
 
 
     </android.support.constraint.ConstraintLayout>

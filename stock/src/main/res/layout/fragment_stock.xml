@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="good"
+            type="com.zxzx74147.stock.data.GoodType"/>
 
     </data>
 
@@ -16,14 +20,57 @@
         android:orientation="vertical">
 
         <com.zxzx74147.stock.widget.GoodListWidget
+
             android:layout_width="match_parent"
+            android:id="@+id/good_list"
             android:layout_height="wrap_content"
+            app:good="@{good}"
             android:layout_marginTop="@dimen/default_gap_16" />
 
         <com.zxzx74147.stock.widget.StockWidget
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:good="@{good}"
             android:layout_marginTop="@dimen/default_gap_16" />
+
+        <LinearLayout
+            android:id="@+id/bottom"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_gap_100"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="27"
+                android:background="@color/stock_up"
+                android:text="@string/stock_by_increase"
+                android:textColor="@color/white"
+                android:textSize="@dimen/default_size_34"
+                android:textStyle="bold" />
+
+            <Button
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="27"
+                android:background="@color/stock_down"
+                android:text="@string/stock_by_decrease"
+                android:textColor="@color/white"
+                android:textSize="@dimen/default_size_34"
+                android:textStyle="bold" />
+
+            <Button
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="21"
+                android:background="@color/text_black"
+                android:text="@string/stock_by_without"
+                android:textColor="@color/white"
+                android:textSize="@dimen/default_size_34"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
 
 
     </LinearLayout>

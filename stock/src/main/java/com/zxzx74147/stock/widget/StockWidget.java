@@ -3,15 +3,13 @@ package com.zxzx74147.stock.widget;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.view.ContextThemeWrapper;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 
 import com.github.mikephil.charting.data.CandleData;
+import com.jakewharton.rxbinding2.support.design.widget.RxTabLayout;
 import com.zxzx74147.devlib.json.JsonHelper;
 import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.stock.R;
@@ -45,20 +43,36 @@ public class StockWidget extends FrameLayout {
         init();
     }
 
-    public void setGood(GoodType good){
+    public void setGood(GoodType good) {
         mModel.getKLineData().setGood(good);
-        mModel.getKLineData().setKType(1);
+        mModel.getKLineData().setKType(getResources().getString(R.string.stock_k_1m_s));
+        try {
+            RxTabLayout.select(mBinding.tabLayout).accept(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
+    public void initView() {
+
+    }
 
     private void init() {
         mBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.widget_stock, this, true);
-
+        initView();
         mModel = ViewModelProviders.of(ViewUtil.getFragmentActivity(StockWidget.this)).get(StockViewModel.class);
 
-        mModel.getKLineData().observe(((FragmentActivity) getContext()), stockData->{
-            if(stockData.hasError()){
+//        RxTabLayout.selectionEvents(mBinding.tabLayout).subscribe(tab->{
+//            String item = tab.tab().getTag().toString();
+//            mModel.getKLineData().setKType(item);
+//        });
+        RxTabLayout.selections(mBinding.tabLayout).subscribe(tab -> {
+            mModel.getKLineData().setKType(String.valueOf(tab.getPosition()));
+        });
+
+        mModel.getKLineData().observe(ViewUtil.getFragmentActivity(StockWidget.this), stockData -> {
+            if (stockData.hasError()) {
                 return;
             }
             Log.i(TAG, JsonHelper.toJson(stockData));

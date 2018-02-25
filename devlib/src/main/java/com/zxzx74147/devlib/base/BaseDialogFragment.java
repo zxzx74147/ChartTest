@@ -3,12 +3,19 @@ package com.zxzx74147.devlib.base;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.CallSuper;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 
 import com.zxzx74147.devlib.R;
@@ -26,6 +33,7 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
 public class BaseDialogFragment extends BottomSheetDialogFragment implements ISupportFragment {
     final SupportFragmentDelegate mDelegate = new SupportFragmentDelegate(this);
     protected FragmentActivity _mActivity;
+    protected BottomSheetBehavior mBehavior;
 
     @Override
     public SupportFragmentDelegate getSupportDelegate() {
@@ -353,6 +361,46 @@ public class BaseDialogFragment extends BottomSheetDialogFragment implements ISu
     public <T extends ISupportFragment> T findChildFragment(Class<T> fragmentClass) {
         return SupportHelper.findFragment(getChildFragmentManager(), fragmentClass);
     }
+
+    @Override
+    public void onStart()
+    {
+        super.onStart();
+        //默认全屏展开
+//        if(mBehavior!=null) {
+//            mBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+//
+//        }
+    }
+
+
+    @CallSuper
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        getDialog().setOnShowListener(dialog -> {
+            BottomSheetDialog d = (BottomSheetDialog) dialog;
+            View bottomSheetInternal = d.findViewById(android.support.design.R.id.design_bottom_sheet);
+            mBehavior =  BottomSheetBehavior.from(bottomSheetInternal);
+            mBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            mBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+                @Override
+                public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                    if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                        mBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                    }
+                }
+
+                @Override
+                public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+                }
+            });
+        });
+        return null;
+    }
+
+
+
+
 
 
 }

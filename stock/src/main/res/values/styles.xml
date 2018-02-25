@@ -17,7 +17,13 @@
         <item name="tabTextAppearance">@style/Stock1TabTextLayout</item>
     </style>
 
-
+    <style name="radiobutton_stock">
+        <item name="android:button">@null</item>
+        <item name="android:paddingLeft">@dimen/default_gap_19</item>
+        <item name="android:paddingRight">@dimen/default_gap_19</item>
+        <item name="android:textColor">@color/text_black_grey</item>
+        <item name="android:textSize">@dimen/default_size_24</item>
+    </style>
 
 
 </resources>
