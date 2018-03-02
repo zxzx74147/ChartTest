@@ -3,7 +3,6 @@
     android:shape="rectangle">
 
     <corners android:radius="@dimen/default_gap_6" />
-    <stroke android:color="@color/btn_red"
-        android:width="1px"/>
+    <stroke android:width="1px" android:color="@color/btn_red" />
 
 </shape>

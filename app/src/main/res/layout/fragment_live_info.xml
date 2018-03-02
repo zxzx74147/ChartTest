@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.zxzx74147.devlib.data.UserData" />
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/info_head"
+            layout="@layout/layout_live_head"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_gap_64"
+            app:user="@{user}" />
+
+        <!--<com.zxzx74147.stock.widget.GoodListWidget-->
+            <!--android:id="@+id/goodList"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:paddingTop="@dimen/default_gap_16"-->
+            <!--android:background="@color/tran"-->
+            <!--android:layout_marginBottom="@dimen/default_gap_16"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent" />-->
+    </android.support.constraint.ConstraintLayout>
+</layout>

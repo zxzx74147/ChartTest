@@ -1,34 +1,19 @@
 package com.zxzx74147.live.fragments;
 
 import android.app.Activity;
-import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.zxzx74147.devlib.base.BaseFragment;
-import com.zxzx74147.devlib.network.NetworkApi;
-import com.zxzx74147.devlib.network.RetrofitClient;
-import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
-import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
-import com.zxzx74147.devlib.widget.CommonRecyclerViewAdapter;
-import com.zxzx74147.devlib.widget.SpaceItemDecoration;
 import com.zxzx74147.live.R;
-import com.zxzx74147.live.data.HomeData;
 import com.zxzx74147.live.data.Live;
 import com.zxzx74147.live.databinding.FragmentLiveBinding;
-import com.zxzx74147.live.databinding.FragmentLiveListBinding;
-import com.zxzx74147.live.stroage.LiveStorage;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import io.reactivex.functions.Consumer;
 import tv.danmaku.ijk.media.player.IjkMediaPlayer;
 
 /**
@@ -39,6 +24,7 @@ public class LiveFragment extends BaseFragment {
 
     private FragmentLiveBinding mBinding = null;
     private Live mLive = null;
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -64,12 +50,12 @@ public class LiveFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_live,container,false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_live, container, false);
         return mBinding.getRoot();
     }
 
     @Override
-    public void onLazyInitView(@Nullable Bundle savedInstanceState){
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         if (getArguments() != null) {
             mLive = (Live) getArguments().getSerializable(ZXActivityJumpHelper.INTENT_DATA);
             initData();

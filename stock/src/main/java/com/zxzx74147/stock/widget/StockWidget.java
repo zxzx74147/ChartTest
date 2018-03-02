@@ -1,6 +1,7 @@
 package com.zxzx74147.stock.widget;
 
-import android.arch.lifecycle.ViewModelProviders;
+import android.arch.lifecycle.LifecycleOwner;
+import android.arch.lifecycle.ViewModelProvider;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.util.AttributeSet;
@@ -8,26 +9,28 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 
-import com.github.mikephil.charting.data.CandleData;
 import com.jakewharton.rxbinding2.support.design.widget.RxTabLayout;
+import com.zxzx74147.devlib.interfaces.IViewModelHolder;
 import com.zxzx74147.devlib.json.JsonHelper;
-import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.stock.R;
 import com.zxzx74147.stock.data.GoodType;
+import com.zxzx74147.stock.data.Price;
 import com.zxzx74147.stock.databinding.WidgetStockBinding;
 import com.zxzx74147.stock.indicator.DataParse;
+import com.zxzx74147.stock.viewmodel.PriceViewModel;
 import com.zxzx74147.stock.viewmodel.StockViewModel;
+
 
 /**
  * Created by zhengxin on 2018/2/8.
  */
 
-public class StockWidget extends FrameLayout {
+public class StockWidget extends FrameLayout implements IViewModelHolder {
     private static final String TAG = StockWidget.class.getSimpleName();
 
     private WidgetStockBinding mBinding = null;
-    private StockViewModel mModel = null;
-    private CandleData mCandleData = null;
+    private StockViewModel mStockViewModel = null;
+    private PriceViewModel mPriceViewModel = null;
     private DataParse mDataParse = new DataParse();
 
     public StockWidget(Context context) {
@@ -44,8 +47,8 @@ public class StockWidget extends FrameLayout {
     }
 
     public void setGood(GoodType good) {
-        mModel.getKLineData().setGood(good);
-        mModel.getKLineData().setKType(getResources().getString(R.string.stock_k_1m_s));
+        mStockViewModel.getKLineData().setGood(good);
+        mPriceViewModel.getReadTimeLiveData().setGood(good);
         try {
             RxTabLayout.select(mBinding.tabLayout).accept(1);
         } catch (Exception e) {
@@ -61,17 +64,23 @@ public class StockWidget extends FrameLayout {
     private void init() {
         mBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.widget_stock, this, true);
         initView();
-        mModel = ViewModelProviders.of(ViewUtil.getFragmentActivity(StockWidget.this)).get(StockViewModel.class);
-
-//        RxTabLayout.selectionEvents(mBinding.tabLayout).subscribe(tab->{
-//            String item = tab.tab().getTag().toString();
-//            mModel.getKLineData().setKType(item);
-//        });
         RxTabLayout.selections(mBinding.tabLayout).subscribe(tab -> {
-            mModel.getKLineData().setKType(String.valueOf(tab.getPosition()));
+            if (mStockViewModel != null) {
+                mStockViewModel.getKLineData().setKType(String.valueOf(tab.getPosition()));
+            }
         });
+    }
 
-        mModel.getKLineData().observe(ViewUtil.getFragmentActivity(StockWidget.this), stockData -> {
+
+    @Override
+    public void setProvider(ViewModelProvider provider) {
+        mStockViewModel = provider.get(StockViewModel.class);
+        mPriceViewModel = provider.get(PriceViewModel.class);
+    }
+
+    @Override
+    public void setLifeCircle(LifecycleOwner owner) {
+        mStockViewModel.getKLineData().observe(owner, stockData -> {
             if (stockData.hasError()) {
                 return;
             }
@@ -82,7 +91,12 @@ public class StockWidget extends FrameLayout {
 
         });
 
+        mPriceViewModel.getReadTimeLiveData().observe(owner, realtime -> {
+            if (realtime.hasError()) {
+                return;
+            }
+            Price price = realtime.priceRealtimeList.priceRealtime.get(0);
+            mBinding.setPrice(price);
+        });
     }
-
-
 }

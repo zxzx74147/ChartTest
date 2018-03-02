@@ -8,20 +8,24 @@ import android.view.View;
  * Created by zhengxin on 2018/2/21.
  */
 
-public class SpaceItemDecoration extends RecyclerView.ItemDecoration{
+public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
 
     private int spaceX;
     private int spaceY;
 
-    public SpaceItemDecoration(int spaceX,int spaceY) {
+    public SpaceItemDecoration(int spaceX, int spaceY) {
         this.spaceX = spaceX;
         this.spaceY = spaceY;
     }
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-        outRect.left = spaceX ;
-        outRect.top = spaceY;
+        outRect.right = spaceX;
+        outRect.bottom = spaceY;
+        if (parent.getChildLayoutPosition(view) == 0) {
+            outRect.left = spaceX;
+            outRect.top = spaceY;
+        }
 //        if(parent.getChildLayoutPosition(view) != 0) {
 ////            outRect.left = spaceX / 2;
 ////            outRect.right = spaceX / 2;

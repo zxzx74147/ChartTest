@@ -6,6 +6,7 @@
         <variable
             name="good"
             type="com.zxzx74147.stock.data.GoodType"/>
+        <import type="com.zxzx74147.devlib.modules.busstation.StockBusStation"/>
 
     </data>
 
@@ -31,6 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:good="@{good}"
+            android:id="@+id/stock"
             android:layout_marginTop="@dimen/default_gap_16" />
 
         <LinearLayout
@@ -41,6 +43,7 @@
 
             <Button
                 android:layout_width="0dip"
+                android:onClick="@{()->StockBusStation.startStockTrade(context,good,0)}"
                 android:layout_height="match_parent"
                 android:layout_weight="27"
                 android:background="@color/stock_up"
@@ -57,6 +60,7 @@
                 android:text="@string/stock_by_decrease"
                 android:textColor="@color/white"
                 android:textSize="@dimen/default_size_34"
+                android:onClick="@{()->StockBusStation.startStockTrade(context,good,1)}"
                 android:textStyle="bold" />
 
             <Button
@@ -64,6 +68,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="21"
                 android:background="@color/text_black"
+
                 android:text="@string/stock_by_without"
                 android:textColor="@color/white"
                 android:textSize="@dimen/default_size_34"

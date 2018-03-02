@@ -22,6 +22,9 @@ public class AccountManager {
     }
 
     public void saveUser(UserData user) {
+        if(user==null){
+            return;
+        }
         mUser = user;
         KVStore.put(KEY, user);
     }
@@ -41,7 +44,14 @@ public class AccountManager {
         return mUser.uId;
     }
 
+    public void logout(){
+        KVStore.put(KEY,null);
+    }
+
+
     public UserData getUser() {
         return mUser;
     }
+
+
 }

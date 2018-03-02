@@ -21,8 +21,41 @@
         <item name="android:button">@null</item>
         <item name="android:paddingLeft">@dimen/default_gap_19</item>
         <item name="android:paddingRight">@dimen/default_gap_19</item>
-        <item name="android:textColor">@color/text_black_grey</item>
+        <item name="android:textColor">@color/text_grey_grey</item>
         <item name="android:textSize">@dimen/default_size_24</item>
+    </style>
+
+    <style name="TradeTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@color/tran</item>
+        <item name="tabMode">scrollable</item>
+        <item name="tabIndicatorHeight">0px</item>
+        <item name="tabPaddingStart">@dimen/default_gap_32</item>
+        <item name="tabPaddingEnd">@dimen/default_gap_32</item>
+        <item name="tabBackground">@color/tran</item>
+        <item name="tabSelectedTextColor">@color/text_red</item>
+        <item name="tabTextAppearance">@style/TradeTabTextLayout</item>
+    </style>
+
+    <style name="TradeTabTextLayout" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
+        <item name="android:textSize">@dimen/default_size_30</item>
+        <item name="android:textColor">@color/text_dark_grey</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="PositionTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@color/tran</item>
+        <item name="tabMode">scrollable</item>
+        <item name="tabIndicatorHeight">0px</item>
+        <item name="tabPaddingEnd">@dimen/default_gap_32</item>
+        <item name="tabBackground">@color/tran</item>
+        <item name="tabSelectedTextColor">#222222</item>
+        <item name="tabTextAppearance">@style/PositionTabTextLayout</item>
+    </style>
+
+    <style name="PositionTabTextLayout" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
+        <item name="android:textSize">@dimen/default_size_30</item>
+        <item name="android:textColor">@color/text_black</item>
+        <item name="android:singleLine">true</item>
     </style>
 
 

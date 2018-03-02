@@ -19,4 +19,7 @@
 
 
     <color name="bg_grey">#F4F4F4</color>
+    <color name="div_default">#E4E4E4</color>
+    <color name="green">#1AAC18</color>
+    <color name="text_gold">#C49676</color>
 </resources>

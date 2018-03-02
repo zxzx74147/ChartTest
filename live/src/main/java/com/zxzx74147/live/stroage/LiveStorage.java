@@ -2,6 +2,8 @@ package com.zxzx74147.live.stroage;
 
 import com.zxzx74147.devlib.data.UniApiData;
 import com.zxzx74147.live.data.HomeData;
+import com.zxzx74147.live.data.LiveMsgListData;
+import com.zxzx74147.live.data.TeacherLiveListData;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -31,7 +33,17 @@ public interface LiveStorage {
 
     //TODO
     @GET("/live/msg/getlist")
-    Observable<UniApiData> msgList(@Query("liveId") long liveId,@Query("lastMId") long lastMId);
+    Observable<LiveMsgListData> msgList(@Query("liveId") long liveId, @Query("lastMId") long lastMId);
+
+
+    @GET("/live/teacher/livelist")
+    Observable<TeacherLiveListData> teacherLiveList(@Query("teacherId") int teacherId);
+
+    @GET("/live/teacher/hate")
+    Observable<UniApiData> teacherHate(@Query("teacherId") int teacherId);
+
+    @GET("/live/teacher/love")
+    Observable<UniApiData> teacherLove(@Query("teacherId") int teacherId);
 
 
 

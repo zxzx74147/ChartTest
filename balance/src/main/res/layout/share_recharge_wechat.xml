@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.zxzx74147.balance.data.PayNewData" />
+
+        <variable
+            name="amount"
+            type="Integer" />
+
+
+    </data>
+
+    <AbsoluteLayout
+        android:layout_width="@dimen/default_gap_512"
+        android:layout_height="@dimen/default_gap_918"
+        android:background="@drawable/wechat_save">
+
+
+        <FrameLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_y="@dimen/default_gap_295"
+            android:gravity="bottom"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|bottom"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/yuan_sign"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/default_size_22" />
+
+                <TextView
+                    android:id="@+id/amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{String.valueOf(amount)}'
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/default_size_70" />
+            </LinearLayout>
+        </FrameLayout>
+
+
+        <ImageView
+            android:id="@+id/qr_code"
+            android:layout_width="@dimen/default_gap_260"
+            android:layout_height="@dimen/default_gap_260"
+            android:layout_x="@dimen/default_gap_126"
+            android:layout_y="@dimen/default_gap_390" />
+
+    </AbsoluteLayout>
+</layout>

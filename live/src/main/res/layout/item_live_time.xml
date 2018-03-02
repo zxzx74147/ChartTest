@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.zxzx74147.live.data.TeacherLive" />
+
+        <import type="com.zxzx74147.devlib.utils.TimeUtil"/>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:text='@{TimeUtil.getHHMMTime(data.startTime)+@string/plus+TimeUtil.getHHMMTime(data.endTime)}'
+            android:layout_weight="1" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:imageAnim='@{data.status == 1? @drawable/live_state:null}'/>
+    </LinearLayout>
+</layout>

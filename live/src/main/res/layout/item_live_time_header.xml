@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.zxzx74147.live.data.TeacherLive" />
+
+        <import type="com.zxzx74147.devlib.utils.TimeUtil"/>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@drawable/live_notice"
+            android:layout_marginRight="@dimen/default_gap_10"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="0dip"
+            android:textSize="@dimen/default_size_24"
+            android:drawablePadding="@dimen/default_gap_10"
+            android:layout_height="wrap_content"
+            android:text="@string/live_time_header"
+            android:layout_weight="1" />
+
+
+    </LinearLayout>
+</layout>

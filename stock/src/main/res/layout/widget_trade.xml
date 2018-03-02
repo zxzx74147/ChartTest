@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+
+        <variable
+            name="goodType"
+            type="com.zxzx74147.stock.data.GoodType" />
+
+        <variable
+            name="good"
+            type="com.zxzx74147.stock.data.Good" />
+
+        <variable
+            name="user"
+            type="com.zxzx74147.devlib.data.UserData" />
+
+        <variable
+            name="byType"
+            type="Integer" />
+
+        <variable
+            name="total"
+            type="Float" />
+
+        <import type="com.zxzx74147.stock.widget.TradeWidget" />
+
+        <import type="com.zxzx74147.devlib.modules.busstation.BalanceBusStation" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_gap_15"
+            android:background="@color/white"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/default_gap_44">
+
+                    <LinearLayout
+                        android:id="@+id/by_up"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/select_rect_grey_red_left"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:padding="@dimen/default_gap_15">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/buy_up"
+                            android:textColor="@color/text_black_white"
+                            android:textSize="@dimen/default_size_34" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/default_gap_12"
+                            android:text="@string/buy_up"
+                            android:textColor="@color/text_grey_white"
+                            android:textSize="@dimen/default_size_24" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/by_down"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/select_rect_grey_green_right"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:padding="@dimen/default_gap_15">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/buy_down"
+                            android:textColor="@color/text_black_white"
+                            android:textSize="@dimen/default_size_34" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/default_gap_12"
+                            android:text="@string/buy_down"
+                            android:textColor="@color/text_grey_white"
+                            android:textSize="@dimen/default_size_24" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_gap_50"
+                    android:gravity="center_vertical|left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/default_gap_44"
+                        android:text="@string/buy_type"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/default_size_30" />
+
+                    <android.support.design.widget.TabLayout
+                        android:id="@+id/list_type"
+                        style="@style/TradeTabLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/default_gap_80"
+                        android:layout_marginLeft="@dimen/default_gap_22"
+                        android:background="@drawable/rect_round_stroke_bg_grey"
+                        android:text="@string/buy_down"
+                        android:textColor="@color/text_grey_white"
+                        android:textSize="@dimen/default_size_24" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_gap_32"
+                    android:gravity="center_vertical|left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/default_gap_44"
+                        android:text="@string/buy_amount"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/default_size_30" />
+
+                    <android.support.design.widget.TabLayout
+                        android:id="@+id/list_amount"
+                        style="@style/TradeTabLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/default_gap_80"
+                        android:layout_marginLeft="@dimen/default_gap_22"
+                        android:background="@drawable/rect_round_stroke_bg_grey"
+                        android:text="@string/buy_down"
+                        android:textColor="@color/text_grey_white"
+                        android:textSize="@dimen/default_size_24" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/buy_remind"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/default_gap_125"
+                    android:textSize="@dimen/default_size_26"
+                    android:textColor="@color/text_light_grey"
+                    android:text='@{@string/format_trade_amount(good.weight,good.profitPerUnit,good.costBack)}'
+                    android:layout_marginRight="@dimen/default_gap_44"
+                    android:layout_marginTop="@dimen/default_gap_24" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/default_gap_125"
+                    android:layout_marginRight="@dimen/default_gap_44"
+                    android:layout_marginTop="@dimen/default_gap_45">
+
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@drawable/radio_checked"
+                        android:gravity="center_vertical"
+                        android:text='@{@string/format_left(user.balance)}'
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/default_size_26" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="@{()->BalanceBusStation.startRecharge(context)}"
+                        android:paddingLeft="@dimen/default_gap_10"
+                        android:paddingRight="@dimen/default_gap_10"
+                        android:text="@string/recharge"
+                        android:textColor="@color/text_blue"
+                        android:textSize="@dimen/default_size_26" />
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/default_gap_16"
+                    android:layout_marginTop="@dimen/default_gap_50"
+                    android:background="@color/bg_grey" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/default_gap_212"
+                    android:paddingLeft="@dimen/default_gap_44"
+                    android:paddingRight="@dimen/default_gap_44">
+
+                    <LinearLayout
+
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="left|center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/buy_stop"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/default_size_30" />
+
+                        <TextView
+                            android:id="@+id/buy_stop_value"
+                            android:layout_width="@dimen/default_gap_132"
+                            android:layout_height="@dimen/default_gap_56"
+                            android:layout_marginTop="@dimen/default_gap_24"
+                            android:background="@drawable/rect_round_gold_stroke"
+                            android:drawableRight="@drawable/home_quotes_fall_grey"
+                            android:gravity="left|center_vertical"
+                            android:paddingLeft="@dimen/default_gap_10"
+                            android:paddingRight="@dimen/default_gap_10"
+                            android:text="@string/none"
+                            android:textColor="@color/text_dark_grey"
+                            android:textSize="@dimen/default_size_26" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="left|center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/buy_limit"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/default_size_30" />
+
+                        <TextView
+                            android:id="@+id/buy_limit_value"
+                            android:layout_width="@dimen/default_gap_132"
+                            android:layout_height="@dimen/default_gap_56"
+                            android:layout_marginTop="@dimen/default_gap_24"
+                            android:background="@drawable/rect_round_gold_stroke"
+                            android:drawableRight="@drawable/home_quotes_fall_grey"
+                            android:gravity="left|center_vertical"
+                            android:paddingLeft="@dimen/default_gap_10"
+                            android:paddingRight="@dimen/default_gap_10"
+                            android:text="@string/none"
+                            android:textColor="@color/text_dark_grey"
+                            android:textSize="@dimen/default_size_26" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="left|center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/buy_defer"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/default_size_30" />
+
+                        <!--android:text="@{string/format_defer(good.deferredFee)}"-->
+                        <TextView
+                            android:layout_width="@dimen/default_gap_132"
+                            android:layout_height="@dimen/default_gap_56"
+                            android:layout_marginTop="@dimen/default_gap_24"
+                            android:gravity="left|center_vertical"
+                            android:text='@{@string/format_defer(good.deferredFee)}'
+                            android:textColor="@color/text_dark_grey"
+                            android:textSize="@dimen/default_size_26" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="left|center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/buy_fee"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/default_size_30" />
+                        <!--android:text="@{string/format_defer(good.openChargeFee)}"-->
+                        <TextView
+                            android:layout_width="@dimen/default_gap_132"
+                            android:layout_height="@dimen/default_gap_56"
+                            android:layout_marginTop="@dimen/default_gap_24"
+                            android:text='@{@string/format_cost(good.openChargeFee)}'
+                            android:gravity="left|center_vertical"
+                            android:textColor="@color/text_dark_grey"
+                            android:textSize="@dimen/default_size_26" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_gap_100"
+            android:background="@color/bg_grey"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_gap_44"
+                android:text="@string/total"
+                android:textColor="@color/text_dark_grey" />
+
+            <TextView
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_gap_10"
+                android:layout_weight="1"
+                android:text="@{@string/format_02(total)}"
+                android:textColor='@{byType==TradeWidget.BUY_TYPE_UP? @color/text_red:@color/green}' />
+
+            <Button
+                android:id="@+id/do_it"
+                android:layout_width="@dimen/default_gap_250"
+                android:layout_height="match_parent"
+                android:background='@{byType==TradeWidget.BUY_TYPE_UP? @color/stock_up:@color/stock_down}'
+                android:text="@string/buy_stock"
+                android:textColor="@color/white"
+                android:textSize="@dimen/default_size_34" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</layout>

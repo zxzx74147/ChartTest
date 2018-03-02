@@ -27,12 +27,13 @@ public class Good implements Serializable
     public String name;
     public String goodsType;
     public String weight;
-    public double amountPerLot;
-    public double profitPerUnit;
-    public double depositFee;
-    public double openChargeFee;
-    public double closeChargeFee;
-    public double deferredFee;
+    public float amountPerLot;
+    public float profitPerUnit;
+    public float depositFee;
+    public float openChargeFee;
+    public float closeChargeFee;
+    public float deferredFee;
+    public float costBack    ;      //多少点可以回本
     public int maxLot;
     public int minLot;
     public int category;

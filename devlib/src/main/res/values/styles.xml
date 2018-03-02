@@ -7,4 +7,14 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
+
+    <style name="label_grey">
+        <item name="android:textSize">@dimen/default_size_26</item>
+        <item name="android:textColor">@color/text_dark_grey</item>
+    </style>
+
+    <style name="content_black">
+        <item name="android:textSize">@dimen/default_size_30</item>
+        <item name="android:textColor">@color/text_black</item>
+    </style>
 </resources>

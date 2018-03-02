@@ -4,6 +4,9 @@ android {
     compileSdkVersion 27
 
 
+    dataBinding {
+        enabled = true
+    }
 
     defaultConfig {
         minSdkVersion 19

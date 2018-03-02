@@ -34,13 +34,12 @@ public class KVStore {
                     } catch (SnappydbException e) {
                         e.printStackTrace();
                     }
-                    return null;
+                    return "";
                 }).subscribeOn(AndroidSchedulers.mainThread()).subscribe(a->{});
 
     }
 
     public static void put(String key, Object value) {
-
         FlowableJust.just(value).subscribeOn(Schedulers.io())
                 .map(s -> {
                     try {
@@ -48,7 +47,7 @@ public class KVStore {
                     } catch (SnappydbException e) {
                         e.printStackTrace();
                     }
-                    return null;
+                    return "";
                 }).subscribeOn(AndroidSchedulers.mainThread()).subscribe(a->{});
     }
 

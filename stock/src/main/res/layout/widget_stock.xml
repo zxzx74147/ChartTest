@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@{String.valueOf(price.curPrice)}"
-                android:textColor="@color/stock_up"
+                android:textColor='@{(price.curPrice-price.open)>0? @color/stock_up:@color/stock_down}'
                 android:textSize="@dimen/default_size_72" />
 
             <TextView
@@ -41,7 +41,7 @@
                 android:layout_marginLeft="@dimen/default_gap_24"
                 android:layout_toRightOf="@+id/current_price"
                 android:text="@{String.valueOf(price.curPrice-price.open)}"
-                android:textColor="@color/stock_up"
+                android:textColor='@{(price.curPrice-price.open)>0? @color/stock_up:@color/stock_down}'
                 android:textSize="@dimen/default_size_26" />
 
             <TextView
@@ -50,8 +50,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/current_price"
                 android:layout_alignLeft="@+id/up_down_abs"
-                android:text='@{@string/format_02((float)(price.curPrice)-(float)(price.open)/(float)price.open)}'
-                android:textColor="@color/stock_up"
+                android:text='@{@string/format_sign_02(((float)(price.curPrice)-(float)(price.open))*100/(float)price.open)}'
+                android:textColor='@{(price.curPrice-price.open)>0? @color/stock_up:@color/stock_down}'
                 android:textSize="@dimen/default_size_26" />
         </RelativeLayout>
 

@@ -34,6 +34,7 @@
     <string name="stock_MACD">MACD</string>
     <string name="stock_KDJ">KDJ</string>
     <string name="stock_RSI">RSI</string>
+    <string name="trade_open_position">建仓</string>
 
     <array name="stock_k">
         <item>@string/stock_k_1m</item>
@@ -43,4 +44,25 @@
         <item>@string/stock_k_1h</item>
         <item>@string/stock_k_1d</item>
     </array>
+
+    <string name="format_trade_">6</string>
+    <string name="buy_up">买涨</string>
+    <string name="buy_down">买跌</string>
+    <string name="buy_type">类型</string>
+    <string name="buy_amount">数量</string>
+    <string name="buy_stop">止损</string>
+    <string name="buy_limit">止盈</string>
+    <string name="buy_defer">过夜费</string>
+    <string name="buy_fee">手续费</string>
+    <string name="none">无</string>
+    <string name="format_cost">%.1f元</string>
+    <string name="format_defer">%.1f元/天</string>
+    <string name="format_trade_amount">共%s，涨1个点可赚%.2f元，%.1f点回本</string>
+    <string name="total">总价（元）</string>
+    <string name="buy_stock">下单</string>
+    <string name="trade_succ">恭喜您建仓成功</string>
+    <string name="position_view">查看持仓</string>
+    <string name="continu_trade">继续交易</string>
+    <string name="format_my_position">我的持仓(%d)</string>
+    <string name="format_my_machposition">我的挂单(%d)</string>
 </resources>

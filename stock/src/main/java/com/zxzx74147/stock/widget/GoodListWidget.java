@@ -1,7 +1,9 @@
 package com.zxzx74147.stock.widget;
 
-import android.arch.lifecycle.ViewModelProviders;
+import android.arch.lifecycle.LifecycleOwner;
+import android.arch.lifecycle.ViewModelProvider;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.AttributeSet;
@@ -10,16 +12,15 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.zxzx74147.devlib.callback.CommonCallback;
-import com.zxzx74147.devlib.utils.ViewUtil;
+import com.zxzx74147.devlib.interfaces.IViewModelHolder;
+import com.zxzx74147.devlib.modules.account.UserViewModel;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.devlib.widget.CommonRecyclerViewAdapter;
 import com.zxzx74147.devlib.widget.SpaceItemDecoration;
 import com.zxzx74147.stock.R;
-import com.zxzx74147.stock.data.Good;
 import com.zxzx74147.stock.data.GoodType;
 import com.zxzx74147.stock.databinding.ItemMyPositionBinding;
 import com.zxzx74147.stock.databinding.WidgetGoodListBinding;
-import com.zxzx74147.stock.viewmodel.GoodViewModel;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -28,12 +29,13 @@ import java.util.List;
  * Created by zhengxin on 2018/2/8.
  */
 
-public class GoodListWidget extends RelativeLayout {
+public class GoodListWidget extends RelativeLayout implements IViewModelHolder {
     private WidgetGoodListBinding mBinding = null;
     private ItemMyPositionBinding mMyPositionBinding = null;
-    private GoodViewModel mModel = null;
+    private UserViewModel mModel = null;
     private CommonCallback<GoodType> mCallback = null;
     private GoodType mGoodType = null;
+    private boolean mNeedMyPosition;
 
     private List<GoodType> mData = new LinkedList<>();
     private CommonRecyclerViewAdapter<GoodType> mAdapter = null;
@@ -48,6 +50,10 @@ public class GoodListWidget extends RelativeLayout {
 
     public GoodListWidget(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        final TypedArray a = context.obtainStyledAttributes(
+                attrs, R.styleable.GoodListWidget, defStyleAttr, 0);
+        mNeedMyPosition = a.getBoolean(R.styleable.GoodListWidget_need_my_position, true);
+        a.recycle();
         init();
     }
 
@@ -64,9 +70,10 @@ public class GoodListWidget extends RelativeLayout {
         lm.setOrientation(LinearLayoutManager.HORIZONTAL);
         mBinding.list.setLayoutManager(lm);
 
-
-        mMyPositionBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.item_my_position, mBinding.list, false);
-        mAdapter.addHeaderView(mMyPositionBinding.getRoot(), 0, LinearLayout.HORIZONTAL);
+        if(mNeedMyPosition) {
+            mMyPositionBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.item_my_position, mBinding.list, false);
+            mAdapter.addHeaderView(mMyPositionBinding.getRoot(), 0, LinearLayout.HORIZONTAL);
+        }
         mAdapter.loadMoreComplete();
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             GoodType goodType = (GoodType) adapter.getItem(position);
@@ -103,21 +110,31 @@ public class GoodListWidget extends RelativeLayout {
     private void init() {
         initView();
 
-        mModel = ViewModelProviders.of(ViewUtil.getFragmentActivity(this)).get(GoodViewModel.class);
-        mModel.getGoodLiveData().observe(ViewUtil.getFragmentActivity(this), goodListData -> {
-            if (goodListData.hasError()) {
+
+
+    }
+
+
+
+    @Override
+    public void setProvider(ViewModelProvider provider) {
+        mModel = provider.get(UserViewModel.class);
+    }
+
+    @Override
+    public void setLifeCircle(LifecycleOwner owner) {
+        mModel.getUserUniLiveData().observe(owner, userUniData -> {
+            if (userUniData.hasError()) {
                 return;
             }
 
             mData.clear();
-            if (goodListData.goodsList == null) {
+            if (userUniData.goodsTypeList == null) {
                 return;
             }
-            mData.addAll(goodListData.goodsList.goodType);
+            mData.addAll(userUniData.goodsTypeList.goodType);
             refreshData();
 
         });
     }
-
-
 }

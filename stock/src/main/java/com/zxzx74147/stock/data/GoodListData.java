@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 public class GoodListData extends UniApiData implements Serializable {
 
-    public GoodsList goodsList;
+    public GoodsList goodsTypeList;
     private final static long serialVersionUID = 210130532128277192L;
 
 }

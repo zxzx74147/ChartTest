@@ -19,6 +19,8 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 
 import com.zxzx74147.devlib.R;
+import com.zxzx74147.devlib.data.IntentData;
+import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
 
 import me.yokeyword.fragmentation.ExtraTransaction;
 import me.yokeyword.fragmentation.ISupportFragment;
@@ -34,6 +36,9 @@ public class BaseDialogFragment extends BottomSheetDialogFragment implements ISu
     final SupportFragmentDelegate mDelegate = new SupportFragmentDelegate(this);
     protected FragmentActivity _mActivity;
     protected BottomSheetBehavior mBehavior;
+
+
+
 
     @Override
     public SupportFragmentDelegate getSupportDelegate() {

@@ -35,8 +35,17 @@ public interface AccountStorage {
     @GET("/user/account/getvcode")
     Observable<UniApiData> accountGetVCode(@Query("phone") String phone);
 
-    @GET("/user/account/login?deviceOs=Android")
+    @GET("/user/account/login")
     Observable<UserUniData> acctountLogin(@Query("phone") String phone, @Query("vcode") String vcode, @Query("deviceId") String deviceId, @Query("version") String version);
+
+
+    @GET("/user/trades/password")
+    Observable<UserUniData> tradePassword(@Query("passwd") String passwd);
+
+    @GET("user/trades/login")
+    Observable<UserUniData> tradeLogin(@Query("passwd") String passwd);
+
+
 
 
 

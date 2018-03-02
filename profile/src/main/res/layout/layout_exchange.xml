@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.zxzx74147.devlib.data.UserData" />
+        <import type="com.zxzx74147.devlib.modules.busstation.BalanceBusStation"/>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/rect_round_white"
+        android:paddingBottom="@dimen/default_gap_38"
+        android:paddingLeft="@dimen/default_gap_27"
+        android:paddingRight="@dimen/default_gap_27"
+        android:paddingTop="@dimen/default_gap_38">
+
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/logo"
+            android:drawablePadding="@dimen/default_gap_19"
+            android:gravity="center"
+            android:text="@string/exchange1"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/default_size_30"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/label_grey"
+            android:layout_marginTop="@dimen/default_gap_38"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/asset_total"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/content_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{@string/format_02(user.total)}'
+            app:layout_constraintStart_toStartOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <TextView
+            android:id="@+id/textView4"
+            style="@style/label_grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/asset_total"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+        <TextView
+            android:id="@+id/textView5"
+            style="@style/content_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{@string/format_02(user.balance)}'
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <TextView
+            android:id="@+id/textView6"
+            style="@style/label_grey"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/default_gap_34"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/default_gap_20"
+            android:drawableRight="@drawable/more"
+            android:text="@string/asset_hold"
+            app:layout_constraintStart_toStartOf="@+id/textView3"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        <TextView
+            android:id="@+id/textView7"
+            style="@style/content_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{@string/format_02(user.total-user.balance)}'
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView6"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+
+        <TextView
+            android:id="@+id/textView8"
+            style="@style/label_grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/default_gap_55"
+            android:drawableRight="@drawable/more"
+            android:text="@string/asset_coupon"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/textView6" />
+
+        <TextView
+            android:id="@+id/textView9"
+            style="@style/content_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/coupons"
+            android:text='@{@string/format_02(user.coupon)}'
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="@dimen/default_gap_36"
+            android:background="@drawable/rect_round_stroke_red"
+            android:text="@string/withdraw"
+            android:textColor="@color/red"
+            android:textSize="@dimen/default_size_34"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->BalanceBusStation.startRecharge(context)}"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/rect_round_red"
+            android:text="@string/recharge"
+            android:textColor="@color/white"
+            android:textSize="@dimen/default_size_34"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/button"
+            app:layout_constraintTop_toTopOf="@+id/button" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_marginTop="@dimen/default_gap_38"
+            android:layout_width="wrap_content"
+            style="@style/label_grey"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/more"
+            android:text="@string/trading_record"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/button"
+            app:layout_constraintTop_toBottomOf="@+id/button" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            style="@style/label_grey"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/more"
+            android:text="@string/withdraw_record"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="@dimen/default_gap_38"
+            app:layout_constraintStart_toStartOf="@+id/button2"
+            app:layout_constraintTop_toBottomOf="@+id/button2" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">balance</string>
+    <string name="recharge_remind">资金存入交易所账户，受政府监控，安全无风险\n<![CDATA[ 新手充值50元送<font color="#EC384C">18元代金券</font>]]></string>
+    <string name="recharge_select_method">选择支付方式</string>
+
+    <string name="recharge_wechat">微信支付</string>
+    <string name="recharge_alipay">支付宝</string>
+    <string name="recharge_unipay">银联支付</string>
+
+    <string name="recharge_wechat_remind">仅支持微信4.2及以上版本</string>
+    <string name="recharge_alipay_remind">正在维护升级</string>
+    <string name="recharge_unipay_remind">跳转到银联官方页面</string>
+    <string name="go_recharge">去充值</string>
+    <string name="recharge_wechat_qr">使用微信扫码支付</string>
+    <string name="recharge_alipay_qr">使用支付宝扫码支付</string>
+    <string name="yuan_sign">￥</string>
+    <string name="how_to">如何操作？</string>
+    <string name="recharge_wechat_remind_1">截图保存二维码到相册</string>
+    <string name="recharge_wechat_remind_2">打开微信 → 打开扫一扫 → 点击右上角相册 → 选择保存的二维码</string>
+    <string name="recharge_alipay_remind_2">打开支付宝 → 打开扫一扫 → 点击右上角相册 → 选择保存的二维码</string>
+    <string name="save_to_gallery">保存收款码到相册</string>
+    <string name="recharge_succ">充值成功</string>
+    <string name="go_balance">查看资金</string>
+    <string name="recharge_fail">充值失败</string>
+    <string name="contact_service">联系客服</string>
+    <string name="i_know">知道了</string>
+    <string name="recharge_fail_remind">充值失败，请联系客服。给您造成的不便，敬请谅解</string>
+
+    <!--<item name="recharge_wechat_drawable">@drawable/pay_weixin</item>-->
+    <!--<item name="recharge_wechat_drawable">@drawable/pay_zhifubao</item>-->
+    <!--<item name="recharge_wechat_drawable">@drawable/pay_up</item>-->
 </resources>

@@ -14,6 +14,7 @@ public class GoodViewModel extends BaseViewModel {
 
     private GoodListLiveData mGoodLiveData = new GoodListLiveData(null);
 
+
     public LiveData<GoodListData> getGoodLiveData() {
         return mGoodLiveData;
     }

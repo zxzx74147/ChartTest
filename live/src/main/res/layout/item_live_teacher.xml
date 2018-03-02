@@ -11,6 +11,7 @@
         <import type="android.view.View" />
 
         <import type="com.zxzx74147.devlib.image.ImageLoader" />
+        <import type="com.zxzx74147.devlib.modules.busstation.LiveBusStation"/>
 
     </data>
 
@@ -25,6 +26,7 @@
             android:layout_width="@dimen/default_gap_160"
             android:layout_height="@dimen/default_gap_160"
             app:imageUrl="@{data.portraitUrl}"
+            android:onClick='@{()->LiveBusStation.startTeacherProfile(context,data)}'
             app:riv_corner_radius="@dimen/default_gap_80" />
 
         <TextView

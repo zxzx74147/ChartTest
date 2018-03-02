@@ -6,8 +6,18 @@
     <string name="phone_number">手机号</string>
     <string name="vcode">验证码</string>
     <string name="start">开始</string>
-    <string name="format_02">%.2f</string>
+    <string name="format_symbol">%+d</string>
+    <string name="format_sign_02">%+.2f%%</string>
     <string name="format_bracket">(%s)</string>
+    <string name="format_02">%.2f</string>
+    <string name="format_02_per">%.2f%</string>
+    <string name="yuan">元</string>
+    <string name="format_left">余额%.2f元</string>
     <string name="stock_up">▲</string>
     <string name="stock_down">▼</string>
+    <string name="withdraw">提现</string>
+    <string name="plus">+</string>
+    <string name="recharge">充值</string>
+    <string name="umeng">5a9668fba40fa3717e00025a</string>
+    <string name="cancel">取消</string>
 </resources>

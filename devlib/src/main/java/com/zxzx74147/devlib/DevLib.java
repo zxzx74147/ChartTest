@@ -11,7 +11,6 @@ import com.zxzx74147.devlib.utils.DisplayUtil;
 import com.zxzx74147.devlib.utils.SharedPreferenceHelper;
 
 import me.yokeyword.fragmentation.Fragmentation;
-import me.yokeyword.fragmentation.helper.ExceptionHandler;
 
 /**
  * Created by zhengxin on 2018/2/6.
@@ -33,6 +32,7 @@ public class DevLib {
         initStetho();
         initSharedPreference();
         initOthers();
+        initUmeng();
     }
 
     public static Application getApp() {
@@ -41,7 +41,7 @@ public class DevLib {
 
     private static void initFragmentation() {
         Fragmentation.builder()
-                .stackViewMode(Fragmentation.BUBBLE)
+                .stackViewMode(Fragmentation.NONE)
                 .debug(BuildConfig.DEBUG)
                 .handleException(e -> e.printStackTrace())
                 .install();
@@ -66,5 +66,9 @@ public class DevLib {
         DisplayUtil.init(mApplication);
         KVStore.init(mApplication);
         ImageLoader.init(mApplication);
+    }
+
+    private static void initUmeng(){
+//        UMConfigure.init(mApplication, UMConfigure.DEVICE_TYPE_PHONE, mApplication.getResources().getString(R.string.umeng));
     }
 }

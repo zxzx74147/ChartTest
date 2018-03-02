@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">live</string>
 
+
+
+
+
+    <string name="format_live_num">%d人在线</string>
+
     <string name="N_A">N/A</string>
     <string name="VideoView_error_text_invalid_progressive_playback">Invalid progressive playback</string>
     <string name="VideoView_error_text_unknown">Unknown</string>
@@ -28,4 +34,6 @@
     <string name="seek_load_cost">seek_load_cost</string>
     <string name="tcp_speed">tcp_speed</string>
     <string name="bit_rate">bit_rate</string>
+    <string name="teacher_detail">名师介绍</string>
+    <string name="live_time_header">TA的直播预告</string>
 </resources>

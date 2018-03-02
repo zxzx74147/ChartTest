@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.zxzx74147.devlib.modules.busstation.BalanceBusStation"/>
+
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/default_gap_40"
+        android:layout_marginTop="@dimen/default_gap_80"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textSize="@dimen/default_size_40"
+            android:textColor="@color/text_black"
+            android:text="@string/trade_succ"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/default_gap_120"
+            android:layout_height="@dimen/default_gap_88">
+            <Button
+                android:layout_width="0dip"
+                android:text="@string/position_view"
+                android:textColor="@color/text_gold"
+                android:onClick="@{()->BalanceBusStation.startRecharge(context)}"
+                android:layout_weight="1"
+                android:background="@drawable/rect_round_gold_stroke"
+                android:layout_height="match_parent" />
+
+            <Button
+                android:id="@+id/close"
+                android:layout_width="0dip"
+                android:text="@string/continu_trade"
+                android:textColor="@color/white"
+                android:layout_marginLeft="@dimen/default_gap_42"
+                android:background="@drawable/rect_round_gold"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.zxzx74147.live.data.Msg" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rect_round_white_big_corner"
+        android:gravity="center"
+        android:paddingTop="@dimen/default_gap_52"
+        android:paddingBottom="@dimen/default_gap_44"
+        android:orientation="vertical">
+
+
+    </LinearLayout>
+</layout>

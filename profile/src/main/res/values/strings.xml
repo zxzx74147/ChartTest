@@ -8,4 +8,34 @@
     <string name="login_wechat_2">微信登录</string>
     <string name="login_vcode">点此获取</string>
     <string name="vcode_countdown">%ds后重新获取</string>
+    <string name="profile_motify_remind">查看并编辑个人资料</string>
+    <string name="exchange1">中金所</string>
+    <string name="asset_total">总资产(元)</string>
+    <string name="asset_hold">持仓资产(元)</string>
+    <string name="asset_coupon">代金券</string>
+    <string name="trading_record">交易记录</string>
+    <string name="withdraw_record">充值交易记录</string>
+
+    <string name="online_service">在线客服</string>
+    <string name="fresh_classroom">新手学堂</string>
+    <string name="message_center">消息中心</string>
+    <string name="about_us">关于我们</string>
+    <string name="set_password">设置交易专用密码</string>
+    <string name="set_password_remind">交易专用密码，资金更安全</string>
+    <string name="ok">确定</string>
+
+
+    <string name="hint_set_password">设置6-12位登录密码</string>
+
+    <string name="hint_set_password_repeat">请重复以上密码</string>
+    <string name="zhongjin_login">中金所交易登录</string>
+    <string name="zhongjin_login_remind">为保证账号安全，登录交易6小时后需重新登录</string>
+    <string name="foget_pass">忘记密码？</string>
+
+    <array name="profile_list">
+        <item>@string/online_service</item>
+        <item>@string/fresh_classroom</item>
+        <item>@string/message_center</item>
+        <item>@string/about_us</item>
+    </array>
 </resources>

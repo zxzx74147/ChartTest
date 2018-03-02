@@ -4,8 +4,10 @@ import android.app.Application;
 
 import com.zxzx74147.devlib.data.MessageEvent;
 import com.zxzx74147.devlib.modules.busstation.StockBusStation;
+import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.stock.data.GoodType;
+import com.zxzx74147.stock.fragment.TradeFragment;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -36,6 +38,9 @@ public class ModuleStock {
 //            IntentData<GoodItem> intentData = new IntentData<>();
 //            intentData.data = (GoodItem) event.data;
 //            ZXActivityJumpHelper.startActivity(event.context, StockActivity.class, intentData);
+        }else if (event.id == StockBusStation.BUS_ID_STOCK_TRADE) {
+            TradeFragment fragment = TradeFragment.newInstance((GoodType) event.data,event.type);
+            fragment.show((ViewUtil.getFragmentActivity(event.context)).getSupportFragmentManager(), fragment.getTag());
         }
     }
 

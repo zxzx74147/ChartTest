@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zxzx74147.charttest">
 
+
+
     <application
         android:name=".ZXApplication"
         android:allowBackup="true"
@@ -15,6 +17,10 @@
             android:name="api_version">
 
         </meta-data>
+
+        <meta-data android:value="5a9668fba40fa3717e00025a" android:name="UMENG_APPKEY"/>
+        <meta-data android:value="main" android:name="UMENG_CHANNEL"/>
+
         <activity android:name=".MainActivity"
             android:launchMode="singleInstance">
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.zxzx74147.balance.data.RechargeAmount" />
+
+    </data>
+
+
+    <RadioButton
+        android:text='@{String.valueOf(data.amount)+@string/yuan}'
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_gap_88"
+        android:button="@null"
+        android:gravity="center"
+        android:checked="@{data.mIsSelect}"
+        android:textSize="@dimen/default_size_34"
+        android:background="@drawable/select_rect_gold_red"
+        android:textColor="@color/text_gold_white" />
+
+</layout>

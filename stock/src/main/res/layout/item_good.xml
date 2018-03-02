@@ -46,7 +46,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/default_gap_26"
-                    android:text="@{String.valueOf(data.price.upDown)}"
+                    android:text="@{@string/format_symbol(data.price.upDown)}"
                     android:textColor='@{data.mIsSelect? @color/white:(data.price.upDown>0? @color/stock_up:@color/stock_down)}'
                     android:textSize="@dimen/default_size_26" />
             </LinearLayout>

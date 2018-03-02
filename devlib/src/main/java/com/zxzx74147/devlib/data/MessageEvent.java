@@ -11,6 +11,7 @@ public class MessageEvent<T> {
     public Context context;
     public int requestCode;
     public T data;
+    public int type;
 
     public MessageEvent(int id){
         this.id = id;

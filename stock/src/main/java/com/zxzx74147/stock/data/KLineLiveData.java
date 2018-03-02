@@ -60,6 +60,9 @@ public class KLineLiveData extends LiveData<KLineData> {
 
     @Override
     protected void onInactive() {
+        if(mDisposable!=null){
+            mDisposable.dispose();
+        }
         mTimer.cancel();
     }
 
@@ -88,17 +91,18 @@ public class KLineLiveData extends LiveData<KLineData> {
             @Override
             public void onError(Throwable e) {
                 setValue(UniApiData.createError(e, KLineData.class));
+                mDisposable = null;
             }
 
             @Override
             public void onComplete() {
-
+                mDisposable = null;
             }
         });
 
     }
 
-    ;
+
 
 
 }

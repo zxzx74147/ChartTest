@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.zxzx74147.devlib.modules.busstation.BalanceBusStation"/>
+
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/default_gap_40"
+        android:layout_marginTop="@dimen/default_gap_80"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textSize="@dimen/default_size_40"
+            android:textColor="@color/text_black"
+            android:text="@string/zhongjin_login"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textSize="@dimen/default_size_26"
+            android:textColor="@color/text_light_grey"
+            android:text="@string/zhongjin_login_remind"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/default_gap_80"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_gap_96"
+                android:background="@drawable/rect_round_grey"
+                android:ems="10"
+                android:gravity="center_vertical"
+                android:hint="@string/hint_set_password"
+                android:inputType="numberPassword"
+                android:paddingLeft="@dimen/default_gap_24"
+                android:paddingRight="@dimen/default_gap_24"
+                android:textColorHint="@color/text_light_grey"
+                android:textSize="@dimen/default_size_30" />
+
+            <CheckBox
+                android:id="@+id/check_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/selector_password_show"
+                android:paddingLeft="@dimen/default_gap_15"
+                android:paddingRight="@dimen/default_gap_15"
+                android:text=""
+                android:layout_alignBottom="@id/password"
+                android:layout_alignRight="@id/password"
+                android:layout_alignTop="@id/password"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/foget_pass"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/default_size_30"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/default_gap_234"
+            android:layout_height="@dimen/default_gap_88">
+            <Button
+                android:layout_width="0dip"
+                android:id="@+id/cancel"
+                android:text="@string/cancel"
+                android:textColor="@color/text_gold"
+                android:onClick="@{()->BalanceBusStation.startRecharge(context)}"
+                android:layout_weight="1"
+                android:background="@drawable/rect_round_gold_stroke"
+                android:layout_height="match_parent" />
+
+            <Button
+                android:id="@+id/ok"
+                android:layout_width="0dip"
+                android:text="@string/ok"
+                android:textColor="@color/white"
+                android:layout_marginLeft="@dimen/default_gap_42"
+                android:background="@drawable/rect_round_gold"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

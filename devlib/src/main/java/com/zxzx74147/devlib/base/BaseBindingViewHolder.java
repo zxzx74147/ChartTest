@@ -14,6 +14,10 @@ public class BaseBindingViewHolder extends BaseViewHolder {
     public ViewDataBinding mBinding = null;
     public BaseBindingViewHolder(View view) {
         super(view);
-        mBinding = DataBindingUtil.bind(view);
+        try {
+            mBinding = DataBindingUtil.bind(view);
+        }catch (Exception e){
+
+        }
     }
 }
