@@ -17,4 +17,11 @@
         <item name="android:textSize">@dimen/default_size_30</item>
         <item name="android:textColor">@color/text_black</item>
     </style>
+
+
+    <style name="CircularProgress" parent="Theme.AppCompat.Light">
+        <!--<item name="colorBackground">@color/progress_bg</item>-->
+        <!--<item name="android:background">@color/progress_bg</item>-->
+        <item name="colorAccent">@color/red</item>
+    </style>
 </resources>

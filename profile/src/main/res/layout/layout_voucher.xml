@@ -5,11 +5,7 @@
 
     <data>
 
-        <variable
-            name="user"
-            type="com.zxzx74147.devlib.data.UserData" />
-        <import type="com.zxzx74147.devlib.modules.busstation.BalanceBusStation"/>
-        <import type="com.zxzx74147.devlib.modules.busstation.StockBusStation"/>
+
 
     </data>
 

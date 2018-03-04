@@ -14,6 +14,7 @@
     <string name="format_02_sign">%+.2f</string>
     <string name="format_02_per">%.2f%</string>
     <string name="yuan">元</string>
+    <string name="yuan_sign">￥</string>
     <string name="format_yuan">%.2f元</string>
     <string name="format_yuan_sign">%+.2f元</string>
     <string name="format_left">余额%.2f元</string>
@@ -29,4 +30,5 @@
     <string name="no_data">暂无记录</string>
     <string name="get_vcode">点此获取</string>
     <string name="vcode_countdown">%ds后重新获取</string>
+    <string name="loading">加载中...</string>
 </resources>

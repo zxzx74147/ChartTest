@@ -21,6 +21,6 @@ public class BankCard implements Serializable {
         if(TextUtils.isEmpty(cardNo)||cardNo.length()<4){
             return "*";
         }
-        return "*"+cardNo.substring(cardNo.length()-4,cardNo.length()-1);
+        return "*"+cardNo.substring(cardNo.length()-4,cardNo.length());
     }
 }

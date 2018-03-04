@@ -13,7 +13,7 @@
     <string name="go_recharge">去充值</string>
     <string name="recharge_wechat_qr">使用微信扫码支付</string>
     <string name="recharge_alipay_qr">使用支付宝扫码支付</string>
-    <string name="yuan_sign">￥</string>
+
     <string name="how_to">如何操作？</string>
     <string name="recharge_wechat_remind_1">截图保存二维码到相册</string>
     <string name="recharge_wechat_remind_2">打开微信 → 打开扫一扫 → 点击右上角相册 → 选择保存的二维码</string>

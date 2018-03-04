@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="content"
+            type="String" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="@dimen/default_gap_260"
+        android:layout_height="@dimen/default_gap_260"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ProgressBar
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="@dimen/default_gap_112"
+            android:layout_height="@dimen/default_gap_112"
+            android:theme="@style/CircularProgress" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_gap_34"
+            android:text="@string/loading"
+            android:textColor="@color/text_dark_grey"
+            android:textSize="@dimen/default_size_26" />
+
+    </LinearLayout>
+</layout>
