@@ -13,6 +13,7 @@ public class UserData implements Serializable {
     public String portraitUrl;      //头像（新注册用户 可能为空）
     public float total;       //账户总余额
     public float balance;         //账户现金余额
+    public float grossProfit;//总盈亏
     public float coupon;          //账户红包余额
     public String couponDeadline;      //红包有效期
     public int hasTradePasswd;     //是否有交易密码

@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.content.Context;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
+import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -51,6 +52,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
         view.setGood(good);
     }
 
+
     @BindingAdapter({"user"})
     public static void setUser(TradeWidget view, UserData user) {
         view.setUser(user);
@@ -69,6 +71,8 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
         super(context, attrs, defStyleAttr);
         init();
     }
+
+
 
 
     private void initView() {
@@ -174,7 +178,9 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                 if (machPositionData.failed != null) {
                     if(machPositionData.failed.errno== Fail.FAIL_PASS_OUT_OF_TIME){
                         ProfileBusStation.startTradeLogin(getContext());
+                        return;
                     }
+                    ToastUtil.showToast(getContext(),machPositionData.failed.title);
                     return;
                 }
                 ToastUtil.showToast(getContext(), machPositionData.error.usermsg);

@@ -7,6 +7,13 @@ import java.io.Serializable;
  */
 
 public class IntentData<T extends Serializable> implements Serializable {
+    public IntentData(){
+
+    }
+
+    public IntentData(T data){
+        this.data = data;
+    }
     public int type = 0;
     public T data = null;
 }

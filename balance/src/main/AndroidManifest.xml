@@ -1,2 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.zxzx74147.balance" />
+    package="com.zxzx74147.balance">
+
+    <application>
+        <activity android:name=".activity.DepositListActivity" />
+        <activity android:name=".activity.BankListActivity"/>
+        <activity android:name=".activity.WithdrawActivity"/>
+    </application>
+
+</manifest>

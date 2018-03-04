@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="bankCard"
+            type="com.zxzx74147.balance.data.BankCard"/>
+
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/default_gap_40"
+        android:layout_marginTop="@dimen/default_gap_80"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textSize="@dimen/default_size_40"
+            android:textColor="@color/text_black"
+            android:text="@string/bind_confirm_title"
+            android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/default_gap_40"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="@dimen/default_size_26"
+            android:textColor="@color/text_black"
+            android:text="@{bankCard.name}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:textSize="@dimen/default_size_26"
+            android:textColor="@color/text_black"
+            android:text='@{"("+bankCard.bank+")"}'
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/default_size_54"
+            android:text="@{bankCard.cardNo}"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/default_gap_120"
+            android:layout_height="@dimen/default_gap_88">
+            <Button
+                android:layout_width="0dip"
+                android:text="@string/back_to_modify"
+                android:textColor="@color/text_gold"
+                android:id="@+id/cancel"
+                android:layout_weight="1"
+                android:background="@drawable/rect_round_gold_stroke"
+                android:layout_height="match_parent" />
+
+            <Button
+                android:id="@+id/ok"
+                android:layout_width="0dip"
+                android:text="@string/confirm_done"
+                android:textColor="@color/white"
+                android:layout_marginLeft="@dimen/default_gap_42"
+                android:background="@drawable/rect_round_gold"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

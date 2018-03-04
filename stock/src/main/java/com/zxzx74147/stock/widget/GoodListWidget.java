@@ -127,6 +127,9 @@ public class GoodListWidget extends RelativeLayout implements IViewModelHolder {
             if (userUniData.hasError()) {
                 return;
             }
+            if(mMyPositionBinding!=null) {
+                mMyPositionBinding.setUserUni(userUniData);
+            }
 
             mData.clear();
             if (userUniData.goodsTypeList == null) {

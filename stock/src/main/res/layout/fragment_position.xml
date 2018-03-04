@@ -27,16 +27,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{@string/format_my_position(userUniData.positionList.num)}" />
-
-            <android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{@string/format_my_machposition(1)}" />
-
         </android.support.design.widget.TabLayout>
 
         <ImageButton
@@ -49,6 +39,10 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tabLayout2" />
 
+        <com.zxzx74147.devlib.widget.CommonRecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </android.support.constraint.ConstraintLayout>
     <!--</android.support.v4.widget.NestedScrollView>-->

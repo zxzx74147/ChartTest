@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="dialogItem"
+            type="com.zxzx74147.devlib.data.DialogItem" />
+
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_gap_80"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="@dimen/default_gap_40">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{dialogItem.title}"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/default_size_40" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{dialogItem.content}"
+            android:textColor="@color/text_dark_grey"
+            android:layout_marginTop="@dimen/default_gap_44"
+            android:textSize="@dimen/default_size_34" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_gap_88"
+            android:layout_marginTop="@dimen/default_gap_60">
+
+            <Button
+                android:id="@+id/cancel"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/rect_round_gold_stroke"
+                android:text="@{dialogItem.cancel}"
+                android:textColor="@color/text_gold" />
+
+            <Button
+                android:id="@+id/ok"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/default_gap_42"
+                android:layout_weight="1"
+                android:background="@drawable/rect_round_gold"
+                android:text="@{dialogItem.ok}"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

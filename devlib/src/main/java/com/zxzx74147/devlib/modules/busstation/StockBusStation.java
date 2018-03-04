@@ -14,18 +14,19 @@ import org.greenrobot.eventbus.EventBus;
 
 public class StockBusStation {
 
-    public static final int BUS_ID_STOCK = BusIDGen.genBusID("BUS_ID_STOCK");
+    public static final int BUS_ID_STOCK_VIEW = BusIDGen.genBusID("BUS_ID_STOCK_VIEW");
 
     public static final int BUS_ID_STOCK_TRADE = BusIDGen.genBusID("BUS_ID_STOCK_TRADE");
-    public static final int BUS_ID_VIEW_STOKE = BusIDGen.genBusID("BUS_ID_VIEW_STOKE");
+    public static final int BUS_ID_VIEW_POSITION = BusIDGen.genBusID("BUS_ID_VIEW_POSITION");
+    public static final int BUS_ID_VIEW_TRADE = BusIDGen.genBusID("BUS_ID_VIEW_TRADE");
 
 
     private StockBusStation() {
 
     }
 
-    public static void startStock(Context context, String type) {
-        MessageEvent<String > event = new MessageEvent<>(BUS_ID_STOCK, context, type);
+    public static void startStock(Context context, GoodType type) {
+        MessageEvent<GoodType > event = new MessageEvent<>(BUS_ID_STOCK_VIEW, context, type);
         EventBus.getDefault().post(event);
     }
 
@@ -41,7 +42,12 @@ public class StockBusStation {
     }
 
     public static void viewPosition(Context context) {
-        MessageEvent event = new MessageEvent<>(BUS_ID_VIEW_STOKE, context);
+        MessageEvent event = new MessageEvent<>(BUS_ID_VIEW_POSITION, context);
+        EventBus.getDefault().post(event);
+    }
+
+    public static void viewTrade(Context context) {
+        MessageEvent event = new MessageEvent<>(BUS_ID_VIEW_TRADE, context);
         EventBus.getDefault().post(event);
     }
 

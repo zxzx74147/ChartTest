@@ -1,8 +1,14 @@
+
 package com.zxzx74147.devlib.data;
 
-/**
- * Created by zhengxin on 2018/2/28.
- */
+import java.io.Serializable;
 
-public class SysInitData extends UniApiData {
+public class SysInitData extends  UniApiData implements Serializable
+{
+
+    public Upgrade upgrade;
+    public Swich swich;
+    public DepositItemList depositItemList;
+    private final static long serialVersionUID = -8986992867358733458L;
+
 }

@@ -112,8 +112,6 @@ public class LiveListFragment extends BaseFragment {
                 if(homeData.liveList!=null) {
                     mData.clear();
                     mData.addAll(homeData.liveList.live);
-                    mData.addAll(homeData.liveList.live);
-                    mData.addAll(homeData.liveList.live);
                     mAdapter.notifyDataSetChanged();
                 }
             }

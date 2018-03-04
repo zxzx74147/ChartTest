@@ -9,6 +9,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.zxzx74147.devlib.callback.CommonCallback;
+import com.zxzx74147.devlib.data.IntentData;
+import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
+
 import me.yokeyword.fragmentation.SupportActivity;
 
 /**
@@ -17,11 +21,13 @@ import me.yokeyword.fragmentation.SupportActivity;
 
 public class BaseActivity extends SupportActivity {
     private static final String TAG = BaseActivity.class.getSimpleName();
+    protected CommonCallback mCallback = null;
     MyObserver myObserver = null;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         myObserver =new MyObserver(this,getLifecycle());
+        mCallback = ZXActivityJumpHelper.getCallBack();
     }
 
     public class MyObserver implements LifecycleObserver {

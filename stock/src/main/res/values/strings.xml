@@ -58,11 +58,41 @@
     <string name="format_cost">%.1f元</string>
     <string name="format_defer">%.1f元/天</string>
     <string name="format_trade_amount">共%s，涨1个点可赚%.2f元，%.1f点回本</string>
-    <string name="total">总价（元）</string>
+    <string name="total">总价(元)</string>
+    <string name="total_asset">总资产(元)</string>
+    <string name="left_asset">可用余额(元)</string>
     <string name="buy_stock">下单</string>
     <string name="trade_succ">恭喜您建仓成功</string>
     <string name="position_view">查看持仓</string>
     <string name="continu_trade">继续交易</string>
     <string name="format_my_position">我的持仓(%d)</string>
     <string name="format_my_machposition">我的挂单(%d)</string>
+    <string name="format_lot">%d手</string>
+    <string name="profit_and_loss">盈亏</string>
+    <string name="format_buy_price">建仓价：%d</string>
+    <string name="format_buy_open_charge">手续费: %.1f元</string>
+    <string name="format_buy_deferred_free">过夜费: 用券不过夜</string>
+    <string name="format_buy_deferred">过夜费: %.1f元</string>
+    <string name="format_float_num">浮动点: 上升%.1f点</string>
+    <string name="format_limit">止盈点: %.1f点</string>
+    <string name="format_limit_none">止盈点: 无</string>
+    <string name="format_stop">止损点: %.1f点</string>
+    <string name="format_stop_none">止损点: 无</string>
+    <string name="close_position">平仓</string>
+    <string name="modify">修改</string>
+    <string name="trade_his">交易记录</string>
+
+    <string name="buy_price">建仓价：</string>
+    <string name="close_price">平仓价：</string>
+    <string name="float_num">浮动点：</string>
+    <string name="limit_point">止盈点：</string>
+    <string name="stop_point">止损点：</string>
+    <string name="open_time">建仓时间：</string>
+    <string name="close_time">平仓时间：</string>
+    <string name="open_cost">建仓成本：</string>
+    <string name="close_type">平仓类型：</string>
+    <string name="open_charge">手续费：</string>
+    <string name="deffer_charge">过夜费：</string>
+    <string name="buy_method">购买方式：</string>
+
 </resources>

@@ -19,8 +19,10 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 
 import com.zxzx74147.devlib.R;
+import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.devlib.data.IntentData;
 import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
+import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
 
 import me.yokeyword.fragmentation.ExtraTransaction;
 import me.yokeyword.fragmentation.ISupportFragment;
@@ -36,6 +38,7 @@ public class BaseDialogFragment extends BottomSheetDialogFragment implements ISu
     final SupportFragmentDelegate mDelegate = new SupportFragmentDelegate(this);
     protected FragmentActivity _mActivity;
     protected BottomSheetBehavior mBehavior;
+    protected CommonCallback mCallback = null;
 
 
 
@@ -64,6 +67,7 @@ public class BaseDialogFragment extends BottomSheetDialogFragment implements ISu
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mCallback = ZXFragmentJumpHelper.getCallBack();
         mDelegate.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NORMAL, R.style.MyDialog);
     }

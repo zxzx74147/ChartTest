@@ -58,5 +58,12 @@
         <item name="android:singleLine">true</item>
     </style>
 
+    <style name="trade_item">
+        <item name="android:textColor">@color/text_dark_grey</item>
+        <item name="android:textSize">@dimen/default_size_26</item>
+    </style>
+
+    <style name="buy_method">购买点</style>
+
 
 </resources>

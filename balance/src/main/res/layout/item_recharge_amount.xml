@@ -5,13 +5,13 @@
 
         <variable
             name="data"
-            type="com.zxzx74147.balance.data.RechargeAmount" />
+            type="com.zxzx74147.devlib.data.DepositItem" />
 
     </data>
 
 
     <RadioButton
-        android:text='@{String.valueOf(data.amount)+@string/yuan}'
+        android:text='@{data.amountName}'
         android:layout_width="match_parent"
         android:layout_height="@dimen/default_gap_88"
         android:button="@null"

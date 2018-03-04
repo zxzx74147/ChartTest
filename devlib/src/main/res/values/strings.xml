@@ -10,8 +10,12 @@
     <string name="format_sign_02">%+.2f%%</string>
     <string name="format_bracket">(%s)</string>
     <string name="format_02">%.2f</string>
+    <string name="format_01_sign">%+.1f</string>
+    <string name="format_02_sign">%+.2f</string>
     <string name="format_02_per">%.2f%</string>
     <string name="yuan">元</string>
+    <string name="format_yuan">%.2f元</string>
+    <string name="format_yuan_sign">%+.2f元</string>
     <string name="format_left">余额%.2f元</string>
     <string name="stock_up">▲</string>
     <string name="stock_down">▼</string>
@@ -20,4 +24,9 @@
     <string name="recharge">充值</string>
     <string name="umeng">5a9668fba40fa3717e00025a</string>
     <string name="cancel">取消</string>
+    <string name="buy_method_money">账户余额</string>
+    <string name="buy_method_red">红包支付</string>
+    <string name="no_data">暂无记录</string>
+    <string name="get_vcode">点此获取</string>
+    <string name="vcode_countdown">%ds后重新获取</string>
 </resources>

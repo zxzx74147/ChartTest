@@ -3,6 +3,8 @@ package com.zxzx74147.balance;
 import android.app.Application;
 import android.view.View;
 
+import com.zxzx74147.balance.activity.DepositListActivity;
+import com.zxzx74147.balance.activity.WithdrawActivity;
 import com.zxzx74147.balance.data.RechargeAmount;
 import com.zxzx74147.balance.fragment.RechargeFragment;
 import com.zxzx74147.devlib.data.MessageEvent;
@@ -40,6 +42,10 @@ public class ModuleBalance {
     public void onMessageEvent(MessageEvent event) {
         if(event.id== BalanceBusStation.BUS_ID_BALANCE_RECHARGE){
             ZXFragmentJumpHelper.startFragment(ViewUtil.getFragmentActivity(event.context),RechargeFragment.class,null);
+        }else if(event.id== BalanceBusStation.BUS_ID_BALANCE_DEPOSIT_LIST){
+           ZXActivityJumpHelper.startActivity(event.context, DepositListActivity.class,null);
+        }else if(event.id== BalanceBusStation.BUS_ID_BALANCE_WITHDRAW){
+            ZXActivityJumpHelper.startActivity(event.context, WithdrawActivity.class,null);
         }
     }
 

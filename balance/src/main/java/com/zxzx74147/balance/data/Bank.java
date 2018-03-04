@@ -9,4 +9,5 @@ import java.io.Serializable;
 public class Bank implements Serializable {
     public String name;     //银行名称
     public String url;     //银行图片 url
+
 }

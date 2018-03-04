@@ -7,7 +7,7 @@
     <string name="login_phone">手机号登录</string>
     <string name="login_wechat_2">微信登录</string>
     <string name="login_vcode">点此获取</string>
-    <string name="vcode_countdown">%ds后重新获取</string>
+
     <string name="profile_motify_remind">查看并编辑个人资料</string>
     <string name="exchange1">中金所</string>
     <string name="asset_total">总资产(元)</string>

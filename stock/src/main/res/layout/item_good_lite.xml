@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.zxzx74147.stock.data.GoodType" />
+
+        <import type="com.zxzx74147.stock.data.Price" />
+
+        <import type="com.zxzx74147.devlib.modules.busstation.StockBusStation" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background='@{data.price.curPrice>=data.price.open? @drawable/rect_round_red:@drawable/rect_round_green}'
+        android:gravity="center"
+        android:paddingLeft="@dimen/default_gap_10"
+        android:paddingRight="@dimen/default_gap_10"
+        android:onClick="@{()->StockBusStation.startStock(context,data)}"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableRight="@{data.price.curPrice>=data.price.open? @drawable/home_quotes_rise_white:@drawable/home_quotes_fall_white}"
+            android:text="@{String.valueOf(data.price)}"
+            android:drawablePadding="@dimen/default_gap_5"
+            android:textColor="@color/white"
+            android:textSize="@dimen/default_size_26" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/format_symbol(data.price.curPrice-data.price.open)}"
+            android:layout_marginLeft="@dimen/default_gap_15"
+            android:textColor="@color/white"
+            android:textSize="@dimen/default_size_26" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{@string/format_sign_02(((float)(data.price.curPrice)-(float)(data.price.open))*100/(float)data.price.open)}'
+            android:layout_marginLeft="@dimen/default_gap_15"
+            android:textColor="@color/white"
+            android:textSize="@dimen/default_size_26" />
+
+
+    </LinearLayout>
+</layout>

@@ -1,6 +1,7 @@
 package com.zxzx74147.profile.storage;
 
 
+import com.zxzx74147.devlib.data.SysInitData;
 import com.zxzx74147.devlib.data.UniApiData;
 import com.zxzx74147.devlib.data.UpPicData;
 import com.zxzx74147.devlib.data.Upgrade;
@@ -21,7 +22,7 @@ import retrofit2.http.Query;
 
 public interface SysStorage {
     @GET("/sys/init?deviceOs=Android")
-    Observable<Upgrade> sysInit(@Query("channel") String channel, @Query("deviceId") String deviceId, @Query("deviceToken") String deviceToken, @Query("deviceType") String deviceType, @Query("version") String version);
+    Observable<SysInitData> sysInit(@Query("channel") String channel, @Query("deviceId") String deviceId, @Query("deviceToken") String deviceToken, @Query("deviceType") String deviceType, @Query("version") String version);
 
     @Multipart
     @POST("/sys/uppic")
