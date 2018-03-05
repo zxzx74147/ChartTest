@@ -1,7 +1,6 @@
 package com.zxzx74147.stock.activity;
 
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
@@ -10,14 +9,15 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.zxzx74147.devlib.BR;
 import com.zxzx74147.devlib.base.BaseActivity;
 import com.zxzx74147.devlib.base.BaseBindingViewHolder;
-import com.zxzx74147.devlib.network.NetworkApi;
+import com.zxzx74147.devlib.data.BaseListData;
+import com.zxzx74147.devlib.interfaces.CommonListRequestCallback;
 import com.zxzx74147.devlib.network.RetrofitClient;
+import com.zxzx74147.devlib.utils.RecyclerViewUtil;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.devlib.widget.CommonRecyclerViewAdapter;
 import com.zxzx74147.stock.R;
 import com.zxzx74147.stock.data.Position;
 import com.zxzx74147.stock.data.PositionListData;
-import com.zxzx74147.stock.databinding.ActivityStockBinding;
 import com.zxzx74147.stock.databinding.ActivityTradeBinding;
 import com.zxzx74147.stock.databinding.ItemTradeBinding;
 import com.zxzx74147.stock.storage.TradesStorage;
@@ -25,7 +25,7 @@ import com.zxzx74147.stock.storage.TradesStorage;
 import java.util.LinkedList;
 import java.util.List;
 
-import io.reactivex.functions.Consumer;
+import io.reactivex.Observable;
 
 public class TradeListActivity extends BaseActivity {
 
@@ -34,6 +34,7 @@ public class TradeListActivity extends BaseActivity {
 
     private List<Position> mData = new LinkedList<>();
     private CommonRecyclerViewAdapter<Position> mAdapter = null;
+//    private PositionList mLatestPositon = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,8 @@ public class TradeListActivity extends BaseActivity {
 
         CommonMultiTypeDelegate delegate = new CommonMultiTypeDelegate();
         delegate.registViewType(Position.class, R.layout.item_trade);
+//        CommonNoItemBinding mNoDatabinding = DataBindingUtil.inflate()
+
         mAdapter = new CommonRecyclerViewAdapter<Position>(mData){
             @Override
             protected void convert(BaseBindingViewHolder helper, Position item) {
@@ -60,27 +63,82 @@ public class TradeListActivity extends BaseActivity {
                     }
 
                 });
-//                itemCommonBindin
             }
         };
         mAdapter.setMultiTypeDelegate(delegate);
         mBinding.list.setLayoutManager(new LinearLayoutManager(this));
         mBinding.list.setAdapter(mAdapter);
-        refresh();
-
+        initView();
     }
 
-    private void refresh() {
-        NetworkApi.ApiSubscribe(mTradeStorage.positionGetHisList(0), positionListData -> {
-            if (positionListData.hasError()) {
-                return;
+    private void initView(){
+        RecyclerViewUtil.setupRecyclerView(mBinding.refreshLayout, mBinding.list, mAdapter, new CommonListRequestCallback<Position>() {
+            @Override
+            public Observable<PositionListData> getObserverble(BaseListData listdata) {
+                if(listdata==null){
+                    return mTradeStorage.positionGetHisList(0);
+                }else
+                {
+                    return mTradeStorage.positionGetHisList(listdata.nextPage);
+                }
             }
-            if (positionListData.positionList == null) {
-                return;
-            }
-            mData.clear();
-            mData.addAll(positionListData.positionList.position);
-            mAdapter.notifyDataSetChanged();
         });
+//        mBinding.refreshLayout.setOnRefreshListener(new RecyclerRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                refresh();
+//            }
+//        });
+//
+//        mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+//            @Override
+//            public void onLoadMoreRequested() {
+//                loadMore();
+//            }
+//        },mBinding.list);
+//        mAdapter.isUpFetchEnable();
+
     }
+
+//    private void refresh() {
+//        NetworkApi.ApiSubscribe(mTradeStorage.positionGetHisList(0), positionListData -> {
+//            mBinding.refreshLayout.setRefreshing(false);
+//            if (positionListData.hasError()) {
+//                ToastUtil.showToast(TradeListActivity.this,positionListData.error.usermsg);
+//                return;
+//            }
+////            mAdapter.setEmptyView(R.string.no_trade);
+//            if (positionListData.positionList == null) {
+//                return;
+//            }
+//            mData.clear();
+//            mData.addAll(positionListData.positionList.position);
+//            mAdapter.notifyDataSetChanged();
+//
+//            RecyclerViewUtil.dealLoadMore(mAdapter,positionListData.positionList);
+//        });
+//    }
+//
+//    private void loadMore() {
+//        if(mLatestPositon==null){
+//            return;
+//        }
+//        NetworkApi.ApiSubscribe(mTradeStorage.positionGetHisList(mLatestPositon.nextPage), positionListData -> {
+//            mBinding.refreshLayout.setRefreshing(false);
+//            if (positionListData.hasError()) {
+//                ToastUtil.showToast(TradeListActivity.this,positionListData.error.usermsg);
+//                return;
+//            }
+////            mAdapter.setEmptyView(R.string.no_trade);
+//            if (positionListData.positionList == null) {
+//                return;
+//            }
+//            mData.addAll(positionListData.positionList.position);
+//            mAdapter.notifyDataSetChanged();
+//            RecyclerViewUtil.dealLoadMore(mAdapter,positionListData.positionList);
+//
+//        });
+//    }
+
+
 }

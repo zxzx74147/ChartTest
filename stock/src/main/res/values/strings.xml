@@ -53,6 +53,7 @@
     <string name="buy_stop">止损</string>
     <string name="buy_limit">止盈</string>
     <string name="buy_defer">过夜费</string>
+    <string name="buy_defer_check">是否过夜</string>
     <string name="buy_fee">手续费</string>
     <string name="none">无</string>
     <string name="format_cost">%.1f元</string>
@@ -69,21 +70,25 @@
     <string name="format_my_machposition">我的挂单(%d)</string>
     <string name="format_lot">%d手</string>
     <string name="profit_and_loss">盈亏</string>
-    <string name="format_buy_price">建仓价：%d</string>
+    <string name="profit_and_loss_yuan">盈亏(元)</string>
+    <string name="format_buy_price">建仓价：%.2f</string>
     <string name="format_buy_open_charge">手续费: %.1f元</string>
     <string name="format_buy_deferred_free">过夜费: 用券不过夜</string>
     <string name="format_buy_deferred">过夜费: %.1f元</string>
     <string name="format_float_num">浮动点: 上升%.1f点</string>
-    <string name="format_limit">止盈点: %.1f点</string>
+    <string name="format_limit">止盈点: %.0f点</string>
     <string name="format_limit_none">止盈点: 无</string>
-    <string name="format_stop">止损点: %.1f点</string>
+    <string name="format_stop">止损点: %.0f点</string>
     <string name="format_stop_none">止损点: 无</string>
+    <string name="format_point">%.0f点</string>
     <string name="close_position">平仓</string>
     <string name="modify">修改</string>
     <string name="trade_his">交易记录</string>
 
     <string name="buy_price">建仓价：</string>
     <string name="close_price">平仓价：</string>
+    <string name="buy_price_yuan">建仓价(元)：</string>
+    <string name="close_price_yuan">平仓价(元)：</string>
     <string name="float_num">浮动点：</string>
     <string name="limit_point">止盈点：</string>
     <string name="stop_point">止损点：</string>
@@ -94,5 +99,10 @@
     <string name="open_charge">手续费：</string>
     <string name="deffer_charge">过夜费：</string>
     <string name="buy_method">购买方式：</string>
+    <string name="no_trade">暂无交易记录</string>
+    <string name="my_machposition">我的挂单</string>
+    <string name="position_modify">修改持仓</string>
+    <string name="succ">成功</string>
+    <string name="position_close_verify">确定平仓吗？</string>
 
 </resources>

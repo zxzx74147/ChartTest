@@ -8,6 +8,10 @@
         <variable
             name="user"
             type="com.zxzx74147.devlib.data.UserData" />
+
+        <variable
+            name="userUni"
+            type="com.zxzx74147.profile.data.UserUniData" />
         <import type="com.zxzx74147.devlib.modules.busstation.BalanceBusStation"/>
         <import type="com.zxzx74147.devlib.modules.busstation.StockBusStation"/>
 
@@ -70,7 +74,7 @@
             style="@style/label_grey"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/asset_total"
+            android:text="@string/asset_balance"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="@+id/textView2" />
 
@@ -89,8 +93,9 @@
             android:layout_width="wrap_content"
             android:layout_marginTop="@dimen/default_gap_34"
             android:layout_height="wrap_content"
+            android:onClick="@{()->StockBusStation.viewPosition(context)}"
             android:drawablePadding="@dimen/default_gap_20"
-            android:drawableRight="@drawable/more"
+            android:drawableRight="@drawable/more1"
             android:text="@string/asset_hold"
             app:layout_constraintStart_toStartOf="@+id/textView3"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
@@ -100,7 +105,7 @@
             style="@style/content_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text='@{@string/format_02(user.total-user.balance)}'
+            android:text='@{@string/format_02(userUni.positionList.openCost)}'
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView6"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -112,7 +117,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawablePadding="@dimen/default_gap_55"
-            android:drawableRight="@drawable/more"
+            android:drawableRight="@drawable/more1"
             android:text="@string/asset_coupon"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="@+id/textView6" />
@@ -166,7 +171,7 @@
             android:onClick="@{()->StockBusStation.viewTrade(context)}"
             style="@style/label_grey"
             android:layout_height="wrap_content"
-            android:drawableRight="@drawable/more"
+            android:drawableRight="@drawable/more1"
             android:text="@string/trading_record"
 
             app:layout_constraintLeft_toLeftOf="parent"
@@ -179,7 +184,7 @@
             style="@style/label_grey"
             android:onClick="@{()->BalanceBusStation.startDepositList(context)}"
             android:layout_height="wrap_content"
-            android:drawableRight="@drawable/more"
+            android:drawableRight="@drawable/more1"
             android:text="@string/withdraw_record"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginTop="@dimen/default_gap_38"

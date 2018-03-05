@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.content.Context;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
-import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -14,13 +13,20 @@ import android.widget.LinearLayout;
 import com.jakewharton.rxbinding2.support.design.widget.RxTabLayout;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.zxzx74147.devlib.callback.CommonCallback;
+import com.zxzx74147.devlib.data.DialogItem;
+import com.zxzx74147.devlib.data.IntentData;
 import com.zxzx74147.devlib.data.UserData;
+import com.zxzx74147.devlib.data.WheelSelectorData;
+import com.zxzx74147.devlib.fragment.CommonFragmentDialog;
+import com.zxzx74147.devlib.fragment.CommonWheelSelectorDialog;
 import com.zxzx74147.devlib.interfaces.IViewModelHolder;
 import com.zxzx74147.devlib.modules.busstation.ProfileBusStation;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
+import com.zxzx74147.devlib.utils.FormatUtil;
 import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.devlib.utils.ViewUtil;
+import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
 import com.zxzx74147.stock.R;
 import com.zxzx74147.stock.data.Fail;
 import com.zxzx74147.stock.data.Good;
@@ -30,7 +36,6 @@ import com.zxzx74147.stock.databinding.WidgetTradeBinding;
 import com.zxzx74147.stock.storage.TradesStorage;
 
 import io.reactivex.Observable;
-import io.reactivex.functions.Consumer;
 
 /**
  * Created by zhengxin on 2018/2/8.
@@ -46,6 +51,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
     private int mAmount = 1;
     private int mButType = BUY_TYPE_UP;
     private TradesStorage mTradeStorage = RetrofitClient.getClient().create(TradesStorage.class);
+
 
     @BindingAdapter({"good"})
     public static void setGood(TradeWidget view, GoodType good) {
@@ -110,6 +116,40 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             submitTrade();
         });
 
+        RxView.clicks(mBinding.buyStopValue).subscribe(a -> {
+            int offset = FormatUtil.getPureNum(mBinding.buyStopValue.getText().toString());
+            WheelSelectorData data = new WheelSelectorData();
+            data.items = FormatUtil.POINT_LIST;
+            data.offset = offset;
+            CommonWheelSelectorDialog dialog = CommonWheelSelectorDialog.newInstance(new IntentData<>(data));
+            ZXFragmentJumpHelper.startFragment(getContext(), dialog, new CommonCallback() {
+                @Override
+                public void callback(Object item) {
+                    if(item==null){
+                        return;
+                    }
+                    mBinding.buyStopValue.setText(data.items.get((Integer) item));
+                }
+            });
+        });
+
+        RxView.clicks(mBinding.buyLimitValue).subscribe(a -> {
+            int offset = FormatUtil.getPureNum(mBinding.buyLimitValue.getText().toString());
+            WheelSelectorData data = new WheelSelectorData();
+            data.items = FormatUtil.POINT_LIST;
+            data.offset = offset;
+            CommonWheelSelectorDialog dialog = CommonWheelSelectorDialog.newInstance(new IntentData<>(data));
+            ZXFragmentJumpHelper.startFragment(getContext(), dialog, new CommonCallback() {
+                @Override
+                public void callback(Object item) {
+                    if(item==null){
+                        return;
+                    }
+                    mBinding.buyLimitValue.setText(data.items.get((Integer) item));
+                }
+            });
+        });
+
 
     }
 
@@ -171,7 +211,11 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
         if (mSelectGood == null) {
             return;
         }
-        Observable<PositionData> observable = mTradeStorage.positionOpen(mSelectGood.goodsId, mButType, mAmount, null, null, null, null, 1);
+        int stop = FormatUtil.getPureNum(mBinding.buyStopValue.getText().toString());
+        int limit = FormatUtil.getPureNum(mBinding.buyLimitValue.getText().toString());
+        String stopStr = stop==0? "":String.valueOf(stop/100f);
+        String limitStr = limit==0? "":String.valueOf(limit/100f);
+        Observable<PositionData> observable = mTradeStorage.positionOpen(mSelectGood.goodsId, mButType, mAmount, null, limitStr, stopStr, null, 1);
 
         NetworkApi.ApiSubscribe(observable, machPositionData -> {
             if (machPositionData.hasError()) {
@@ -180,7 +224,17 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                         ProfileBusStation.startTradeLogin(getContext());
                         return;
                     }
-                    ToastUtil.showToast(getContext(),machPositionData.failed.title);
+                    DialogItem dialogItem = new DialogItem();
+                    dialogItem.title = machPositionData.failed.title;
+                    dialogItem.content = machPositionData.failed.advice;
+                    CommonFragmentDialog fragmentDialog = CommonFragmentDialog.newInstance(new IntentData<>(dialogItem));
+                    ZXFragmentJumpHelper.startFragment(getContext(), fragmentDialog, new CommonCallback() {
+                        @Override
+                        public void callback(Object item) {
+                            //TODO
+
+                        }
+                    });
                     return;
                 }
                 ToastUtil.showToast(getContext(), machPositionData.error.usermsg);

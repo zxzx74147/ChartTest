@@ -21,11 +21,22 @@
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabLayout2"
+            style="@style/TitleTabLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
+            <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/my_position" />
+
+            <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/my_machposition" />
 
         </android.support.design.widget.TabLayout>
 
@@ -41,6 +52,9 @@
 
         <com.zxzx74147.devlib.widget.CommonRecyclerView
             android:id="@+id/list"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tabLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

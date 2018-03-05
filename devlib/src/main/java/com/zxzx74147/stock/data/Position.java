@@ -13,7 +13,6 @@ public class Position implements Serializable {
     public static final int BUY_UP = 1;
     public static final int BUY_DOWN = 2;
 
-
     public long positionId;//仓位ID
     public String goodsId;//商品代码
     public String goodsType;//商品类型代码

@@ -13,7 +13,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class NetworkApi {
-    public static<T> void ApiSubscribe(Observable<T> observable, Observer<T> observer) {
+    public static<T> void ApiSubscribe(Observable<? extends T> observable, Observer<T> observer) {
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
@@ -27,6 +27,7 @@ public class NetworkApi {
                     public void onSubscribe(Disposable d) {
 
                     }
+
 
                     @Override
                     public void onNext(T o) {

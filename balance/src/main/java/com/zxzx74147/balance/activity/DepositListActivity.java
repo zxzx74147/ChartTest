@@ -9,19 +9,25 @@ import android.view.View;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.zxzx74147.balance.R;
 import com.zxzx74147.balance.data.Deposit;
+import com.zxzx74147.balance.data.DepositListData;
 import com.zxzx74147.balance.databinding.ActivityDepositListBinding;
 import com.zxzx74147.balance.storage.DepositStorage;
 import com.zxzx74147.devlib.BR;
 import com.zxzx74147.devlib.base.BaseActivity;
 import com.zxzx74147.devlib.base.BaseBindingViewHolder;
+import com.zxzx74147.devlib.data.BaseListData;
+import com.zxzx74147.devlib.interfaces.CommonListRequestCallback;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
+import com.zxzx74147.devlib.utils.RecyclerViewUtil;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.devlib.widget.CommonRecyclerViewAdapter;
 import com.zxzx74147.stock.data.Position;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import io.reactivex.Observable;
 
 /**
  * Created by zhengxin on 2018/3/4.
@@ -50,20 +56,23 @@ public class DepositListActivity extends BaseActivity {
         mAdapter.setMultiTypeDelegate(delegate);
         mBinding.list.setLayoutManager(new LinearLayoutManager(this));
         mBinding.list.setAdapter(mAdapter);
-        refresh();
+        initView();
+
     }
 
-    private void refresh() {
-        NetworkApi.ApiSubscribe(mDepositStorage.depositList(0), depositListData -> {
-            if (depositListData.hasError()) {
-                return;
+    private void initView(){
+        RecyclerViewUtil.setupRecyclerView(mBinding.refreshLayout, mBinding.list, mAdapter, new CommonListRequestCallback<Deposit>() {
+            @Override
+            public Observable<DepositListData> getObserverble(BaseListData listdata) {
+                if(listdata==null){
+                    return mDepositStorage.depositList(0);
+                }else
+                {
+                    return mDepositStorage.depositList(listdata.nextPage);
+                }
             }
-            if (depositListData.depositList == null) {
-                return;
-            }
-            mData.clear();
-            mData.addAll(depositListData.depositList.deposit);
-            mAdapter.notifyDataSetChanged();
         });
     }
+
+
 }

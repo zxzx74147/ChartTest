@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.zxzx74147.stock.data.Position" />
+
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_gap_80"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="@dimen/default_gap_40">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/position_modify"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/default_size_40" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_gap_212"
+            android:paddingLeft="@dimen/default_gap_44"
+            android:paddingRight="@dimen/default_gap_24">
+
+            <LinearLayout
+
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left|center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/buy_stop"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/default_size_30" />
+
+                <TextView
+                    android:id="@+id/buy_stop_value"
+                    android:layout_width="@dimen/default_gap_132"
+                    android:layout_height="@dimen/default_gap_56"
+                    android:layout_marginTop="@dimen/default_gap_24"
+                    android:background="@drawable/rect_round_gold_stroke"
+                    android:drawableRight="@drawable/home_quotes_fall_grey"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="@dimen/default_gap_10"
+                    android:paddingRight="@dimen/default_gap_10"
+                    android:text="@{data.stop==0? @string/none:@string/format_point(data.stop*100)}"
+                    android:textColor="@color/text_dark_grey"
+                    android:textSize="@dimen/default_size_26" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left|center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/buy_limit"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/default_size_30" />
+
+                <TextView
+                    android:id="@+id/buy_limit_value"
+                    android:layout_width="@dimen/default_gap_132"
+                    android:layout_height="@dimen/default_gap_56"
+                    android:layout_marginTop="@dimen/default_gap_24"
+                    android:background="@drawable/rect_round_gold_stroke"
+                    android:drawableRight="@drawable/home_quotes_fall_grey"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="@dimen/default_gap_10"
+                    android:paddingRight="@dimen/default_gap_10"
+                    android:text="@{data.limit==0? @string/none:@string/format_point(data.limit*100)}"
+                    android:textColor="@color/text_dark_grey"
+                    android:textSize="@dimen/default_size_26" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left|center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/buy_defer_check"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/default_size_30" />
+
+                <!--android:text="@{string/format_defer(good.deferredFee)}"-->
+                <CheckBox
+                    android:layout_width="@dimen/default_gap_132"
+                    android:id="@+id/check_deffer"
+                    android:checked="@{data.isDeferred==1? true:false}"
+                    android:layout_height="@dimen/default_gap_56"
+                    android:layout_marginTop="@dimen/default_gap_24"
+                    android:button="@drawable/select_switch_button"
+                    android:gravity="left|center_vertical"
+                    android:textColor="@color/text_dark_grey"
+                    android:textSize="@dimen/default_size_26" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_gap_88"
+            android:layout_marginTop="@dimen/default_gap_60">
+
+            <Button
+                android:id="@+id/cancel"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/rect_round_gold_stroke"
+                android:text="@string/cancel"
+                android:textColor="@color/text_gold" />
+
+            <Button
+                android:id="@+id/ok"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/default_gap_42"
+                android:layout_weight="1"
+                android:background="@drawable/rect_round_gold"
+                android:text="@string/ok"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

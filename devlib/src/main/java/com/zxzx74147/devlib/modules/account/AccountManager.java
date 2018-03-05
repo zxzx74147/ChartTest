@@ -2,6 +2,7 @@ package com.zxzx74147.devlib.modules.account;
 
 import com.zxzx74147.devlib.data.UserData;
 import com.zxzx74147.devlib.kvstore.KVStore;
+import com.zxzx74147.profile.data.UserUniData;
 
 /**
  * Created by zhengxin on 2018/2/21.
@@ -52,6 +53,8 @@ public class AccountManager {
     public UserData getUser() {
         return mUser;
     }
+
+
 
 
 }

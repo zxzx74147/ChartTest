@@ -36,18 +36,23 @@
             android:background="@null"
             android:scaleType="centerInside"
             app:layout_constraintBottom_toBottomOf="@+id/title"
-            app:layout_constraintEnd_toStartOf="@+id/list"
+            app:layout_constraintEnd_toStartOf="@+id/refresh_layout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/title"
             app:srcCompat="@drawable/icon_back" />
 
-        <com.zxzx74147.devlib.widget.CommonRecyclerView
-            android:id="@+id/list"
+        <com.dinuscxj.refresh.RecyclerRefreshLayout
+            android:id="@+id/refresh_layout"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title"/>
+            app:layout_constraintTop_toBottomOf="@+id/title">
+        <com.zxzx74147.devlib.widget.CommonRecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        </com.dinuscxj.refresh.RecyclerRefreshLayout>
     </android.support.constraint.ConstraintLayout>
 </layout>

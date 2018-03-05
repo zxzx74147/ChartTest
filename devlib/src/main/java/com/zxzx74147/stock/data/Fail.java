@@ -15,5 +15,6 @@ public class Fail implements Serializable {
     public static final int FAIL_PASS_NOT_IN_TIME = 6;
     public int errno;   //1:交易密码未设置，2:交易密码过期，3:余额不足 4:代金券不足，5:账户存在风险，6:休市中
     public String title;     //
-    public String advise;     //
+    public String advice;     //
+    public String errmsg;
 }

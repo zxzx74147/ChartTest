@@ -64,6 +64,7 @@ public class LiveListFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_live_list, container, false);
         initView();
         return mBinding.getRoot();

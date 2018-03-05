@@ -5,6 +5,7 @@ import android.content.Context;
 import com.zxzx74147.devlib.data.MessageEvent;
 import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.stock.data.GoodType;
+import com.zxzx74147.stock.data.Position;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -19,6 +20,8 @@ public class StockBusStation {
     public static final int BUS_ID_STOCK_TRADE = BusIDGen.genBusID("BUS_ID_STOCK_TRADE");
     public static final int BUS_ID_VIEW_POSITION = BusIDGen.genBusID("BUS_ID_VIEW_POSITION");
     public static final int BUS_ID_VIEW_TRADE = BusIDGen.genBusID("BUS_ID_VIEW_TRADE");
+    public static final int BUS_ID_POSITION_MODIFY = BusIDGen.genBusID("BUS_ID_POSITION_MODIFY");
+    public static final int BUS_ID_POSITION_CLOSE = BusIDGen.genBusID("BUS_ID_POSITION_CLOSE");
 
 
     private StockBusStation() {
@@ -48,6 +51,18 @@ public class StockBusStation {
 
     public static void viewTrade(Context context) {
         MessageEvent event = new MessageEvent<>(BUS_ID_VIEW_TRADE, context);
+        EventBus.getDefault().post(event);
+    }
+
+    public static void modifyPosition(Context context, Position position) {
+        MessageEvent event = new MessageEvent<>(BUS_ID_POSITION_MODIFY, context);
+        event.data = position;
+        EventBus.getDefault().post(event);
+    }
+
+    public static void closePosition(Context context, Position position) {
+        MessageEvent event = new MessageEvent<>(BUS_ID_POSITION_CLOSE, context);
+        event.data = position;
         EventBus.getDefault().post(event);
     }
 

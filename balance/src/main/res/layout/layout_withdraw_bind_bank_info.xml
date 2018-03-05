@@ -106,7 +106,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_gap_32"
             android:background="@drawable/rect_round_grey"
-            android:drawableRight="@drawable/more"
+            android:drawableRight="@drawable/more1"
             android:hint="@string/hint_card_bank"
             android:inputType="number"
             android:padding="@dimen/default_size_24"

@@ -8,8 +8,8 @@
         <variable
             name="data"
             type="com.zxzx74147.stock.data.Position" />
-
         <import type="com.zxzx74147.stock.data.Position" />
+        <import type="com.zxzx74147.devlib.utils.TimeUtil"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -74,12 +74,13 @@
             app:layout_constraintBottom_toBottomOf="@id/buy_type"
             app:layout_constraintEnd_toStartOf="@+id/imageButton" />
 
+            <!--android:text="@{data.closeTime}"-->
         <TextView
             android:id="@+id/textView17"
             android:layout_width="wrap_content"
             android:layout_marginTop="@dimen/default_gap_24"
             android:layout_height="wrap_content"
-            android:text="@{data.closeTime}"
+            android:text="@{TimeUtil.reformatDefaultTime(data.closeTime,@string/format_YYYYMMDD_HHMM)}"
             android:textColor="@color/text_light_grey"
             android:textSize="@dimen/default_size_26"
             app:layout_constraintLeft_toLeftOf="@id/buy_type"
@@ -291,7 +292,7 @@
                 style="@style/trade_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{data.positionTime}"
+                android:text="@{TimeUtil.reformatDefaultTime(data.positionTime,@string/format_MMDD_HHMM)}"
                 app:layout_constraintStart_toEndOf="@+id/textView28"
                 app:layout_constraintTop_toTopOf="@+id/textView28" />
 
@@ -300,7 +301,7 @@
                 style="@style/trade_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{data.closeTime}"
+                android:text="@{TimeUtil.reformatDefaultTime(data.closeTime,@string/format_MMDD_HHMM)}"
                 app:layout_constraintStart_toEndOf="@+id/textView29"
                 app:layout_constraintTop_toTopOf="@+id/textView29" />
 

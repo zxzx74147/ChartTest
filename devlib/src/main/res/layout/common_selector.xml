@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="content"
+            type="String" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/default_gap_40"
+        android:paddingRight="@dimen/default_gap_40">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_gap_80">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/cancel"
+                android:id="@+id/cancel"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/default_size_40" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ok"
+                android:textColor="@color/text_black"
+                android:layout_centerVertical="true"
+                android:text="@string/ok"
+                android:layout_alignParentRight="true"
+                android:textSize="@dimen/default_size_40" />
+        </RelativeLayout>
+
+        <cn.qqtheme.framework.widget.WheelView
+            android:id="@+id/wheel"
+            android:layout_width="@dimen/default_gap_400"
+            android:layout_height="@dimen/default_gap_350" />
+    </LinearLayout>
+</layout>

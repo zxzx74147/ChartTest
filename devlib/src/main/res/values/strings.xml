@@ -14,6 +14,7 @@
     <string name="format_02_sign">%+.2f</string>
     <string name="format_02_per">%.2f%</string>
     <string name="yuan">元</string>
+    <string name="none">无</string>
     <string name="yuan_sign">￥</string>
     <string name="format_yuan">%.2f元</string>
     <string name="format_yuan_sign">%+.2f元</string>
@@ -25,10 +26,14 @@
     <string name="recharge">充值</string>
     <string name="umeng">5a9668fba40fa3717e00025a</string>
     <string name="cancel">取消</string>
+    <string name="ok">确定</string>
     <string name="buy_method_money">账户余额</string>
     <string name="buy_method_red">红包支付</string>
     <string name="no_data">暂无记录</string>
     <string name="get_vcode">点此获取</string>
     <string name="vcode_countdown">%ds后重新获取</string>
     <string name="loading">加载中...</string>
+    <string name="format_input">yyyy-MM-dd\'T\'HH:mm:ss</string>
+    <string name="format_MMDD_HHMM">MM/dd HH:mm</string>
+    <string name="format_YYYYMMDD_HHMM">YYYY/MM/dd HH:mm</string>
 </resources>

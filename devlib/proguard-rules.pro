@@ -2,7 +2,7 @@
 # You can control the set of applied configuration files using the
 # proguardFiles setting in build.gradle.
 #
-# For more details, see
+# For more1 details, see
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
 # If your project uses WebView with JS, uncomment the following
@@ -46,3 +46,8 @@
 -keepclassmembers  class **$** extends com.chad.library.adapter.base.BaseViewHolder {
      <init>(...);
 }
+
+-keepattributes InnerClasses,Signature
+-keepattributes *Annotation*
+
+-keep class cn.qqtheme.framework.entity.** { *;}

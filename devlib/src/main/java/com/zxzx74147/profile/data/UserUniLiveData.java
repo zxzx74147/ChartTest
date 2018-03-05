@@ -51,7 +51,7 @@ public class UserUniLiveData extends LiveData<UserUniData> {
         mTimer = null;
     }
 
-    private void doRefresh() {
+    public void doRefresh() {
 
         if (!AccountManager.sharedInstance().isLogin()) {
             return;

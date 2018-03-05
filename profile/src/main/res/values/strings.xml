@@ -11,6 +11,7 @@
     <string name="profile_motify_remind">查看并编辑个人资料</string>
     <string name="exchange1">中金所</string>
     <string name="asset_total">总资产(元)</string>
+    <string name="asset_balance">可用余额(元)</string>
     <string name="asset_hold">持仓资产(元)</string>
     <string name="asset_coupon">代金券</string>
     <string name="trading_record">交易记录</string>

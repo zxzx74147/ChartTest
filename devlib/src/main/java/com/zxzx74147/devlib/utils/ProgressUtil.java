@@ -14,6 +14,6 @@ import com.zxzx74147.devlib.base.BaseFragment;
 
 public class ProgressUtil {
     public static void showProgress(BaseFragment fragment){
-//        fragment.
+
     }
 }

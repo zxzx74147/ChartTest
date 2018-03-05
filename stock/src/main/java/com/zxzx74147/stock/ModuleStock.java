@@ -2,6 +2,7 @@ package com.zxzx74147.stock;
 
 import android.app.Application;
 
+import com.zxzx74147.devlib.data.IntentData;
 import com.zxzx74147.devlib.data.MessageEvent;
 import com.zxzx74147.devlib.modules.busstation.StockBusStation;
 import com.zxzx74147.devlib.utils.ViewUtil;
@@ -10,7 +11,9 @@ import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.stock.activity.TradeListActivity;
 import com.zxzx74147.stock.data.GoodType;
 import com.zxzx74147.stock.data.Position;
+import com.zxzx74147.stock.fragment.PositionCloseFragment;
 import com.zxzx74147.stock.fragment.PositionFragment;
+import com.zxzx74147.stock.fragment.PositionModifyFragment;
 import com.zxzx74147.stock.fragment.StockFragment;
 import com.zxzx74147.stock.fragment.TradeFragment;
 
@@ -40,9 +43,6 @@ public class ModuleStock {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(MessageEvent event) {
         if (event.id == StockBusStation.BUS_ID_STOCK_VIEW) {
-//            IntentData<GoodItem> intentData = new IntentData<>();
-//            intentData.data = (GoodItem) event.data;
-//            ZXActivityJumpHelper.startActivity(event.context, StockActivity.class, intentData);
             StockFragment fragment = StockFragment.newInstance((GoodType) event.data);
             fragment.show(ViewUtil.getFragmentActivity(event.context).getSupportFragmentManager(),fragment.getTag());
         }else if (event.id == StockBusStation.BUS_ID_STOCK_TRADE) {
@@ -55,6 +55,15 @@ public class ModuleStock {
         }
         else if (event.id == StockBusStation.BUS_ID_VIEW_TRADE) {
             ZXActivityJumpHelper.startActivity(event.context, TradeListActivity.class);
+        }
+        else if (event.id == StockBusStation.BUS_ID_POSITION_MODIFY) {
+            PositionModifyFragment fragment = PositionModifyFragment.newInstance(new IntentData<>((Position) event.data));
+            fragment.show((ViewUtil.getFragmentActivity(event.context)).getSupportFragmentManager(), fragment.getTag());
+        }
+
+        else if (event.id == StockBusStation.BUS_ID_POSITION_CLOSE) {
+            PositionCloseFragment fragment = PositionCloseFragment.newInstance(new IntentData<>((Position) event.data));
+            fragment.show((ViewUtil.getFragmentActivity(event.context)).getSupportFragmentManager(), fragment.getTag());
         }
     }
 

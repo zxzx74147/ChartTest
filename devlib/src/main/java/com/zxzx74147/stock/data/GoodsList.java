@@ -1,14 +1,19 @@
 
 package com.zxzx74147.stock.data;
 
+import com.zxzx74147.devlib.data.BaseListData;
+
 import java.io.Serializable;
 import java.util.List;
 
-public class GoodsList implements Serializable
+public class GoodsList extends BaseListData implements Serializable
 {
 
-    public int num;
     public List<GoodType> goodType = null;
     private final static long serialVersionUID = -803843101521150948L;
 
+    @Override
+    public List getListItems() {
+        return goodType;
+    }
 }

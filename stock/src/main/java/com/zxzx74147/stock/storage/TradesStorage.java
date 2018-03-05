@@ -40,7 +40,7 @@ public interface TradesStorage {
 
 
     @GET("/trades/position/close")
-    Observable<PositionData> positionClose(@Query("positionId") long positionId);
+    Observable<PositionData> positionClose(@Query("positionId") long positionId,@Query("price") float price);
 
     @GET("/trades/position/open")
     Observable<PositionData> positionOpen(@Query("goodsId") String goodsId, @Query("buySell")
@@ -50,7 +50,7 @@ public interface TradesStorage {
 
     @GET("/trades/position/modify")
     Observable<MachPositionData> positionModify(@Query("positionId") long positionId, @Query("limit")
-            float buySell, @Query("limit") float limit, @Query("deferred") int deferred);
+            String limit, @Query("stop") String stop, @Query("deferred") int deferred);
 
 
     @GET("/trades/position/getlist")

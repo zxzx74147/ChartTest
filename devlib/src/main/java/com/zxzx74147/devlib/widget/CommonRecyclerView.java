@@ -23,7 +23,7 @@ public class CommonRecyclerView extends RecyclerView{
     }
 
     private void init() {
-
+        getItemAnimator().setChangeDuration(0);
 
     }
 }

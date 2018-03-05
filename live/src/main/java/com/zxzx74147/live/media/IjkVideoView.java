@@ -702,7 +702,7 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
                 return;
             }
 
-            // after we return from this we can't use the surface any more
+            // after we return from this we can't use the surface any more1
             mSurfaceHolder = null;
             // REMOVED: if (mMediaController != null) mMediaController.hide();
             // REMOVED: release(true);

@@ -8,7 +8,9 @@
         <variable
             name="user"
             type="com.zxzx74147.devlib.data.UserData" />
-
+        <variable
+            name="userUni"
+            type="com.zxzx74147.profile.data.UserUniData" />
 
 
     </data>
@@ -61,6 +63,7 @@
         <include
             android:id="@+id/exchange"
             layout="@layout/layout_exchange"
+            app:userUni="@{userUni}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
