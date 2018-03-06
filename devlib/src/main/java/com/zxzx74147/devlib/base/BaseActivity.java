@@ -22,12 +22,14 @@ import me.yokeyword.fragmentation.SupportActivity;
 public class BaseActivity extends SupportActivity {
     private static final String TAG = BaseActivity.class.getSimpleName();
     protected CommonCallback mCallback = null;
+    protected IntentData mIntentData = null;
     MyObserver myObserver = null;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         myObserver =new MyObserver(this,getLifecycle());
         mCallback = ZXActivityJumpHelper.getCallBack();
+        mIntentData = (IntentData) getIntent().getSerializableExtra(ZXActivityJumpHelper.INTENT_DATA);
     }
 
     public class MyObserver implements LifecycleObserver {

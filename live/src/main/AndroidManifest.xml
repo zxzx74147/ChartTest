@@ -3,4 +3,8 @@
     package="com.zxzx74147.live"> <!-- To access Google+ APIs: -->
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <application>
+        <activity android:name=".activity.FeedReplyActivity"></activity>
+    </application>
+
 </manifest>

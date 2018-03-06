@@ -1363,6 +1363,7 @@
 <dimen name="default_gap_999">503dp</dimen>
 <dimen name="default_gap_1000">503dp</dimen>
 
+    <dimen name="default_title">@dimen/default_gap_100</dimen>
     <!-- 通用 -->
     <dimen name="common_gradetext_padding_top">3dp</dimen>
     <!-- end of 通用 -->

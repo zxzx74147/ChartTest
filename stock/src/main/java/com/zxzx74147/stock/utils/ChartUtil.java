@@ -1,6 +1,5 @@
 package com.zxzx74147.stock.utils;
 
-import android.graphics.Color;
 import android.graphics.Paint;
 
 import com.github.mikephil.charting.charts.CombinedChart;
@@ -35,13 +34,15 @@ public class ChartUtil {
     public static <T extends Entry> IAxisValueFormatter getAxisValueFormatter1m(List<T> data) {
         IAxisValueFormatter formatter = (value, axis) -> {
             int index = (int) value;
-            KLineBean entry = (KLineBean) data.get(index).getData();
-            Date temp = null;
-            try {
-                temp = (TIME_PARSER.parse(entry.date));
-                return TIME_HHMM.format(temp);
-            } catch (ParseException e) {
-                e.printStackTrace();
+            if (index < data.size()) {
+                KLineBean entry = (KLineBean) data.get(index).getData();
+                Date temp = null;
+                try {
+                    temp = (TIME_PARSER.parse(entry.date));
+                    return TIME_HHMM.format(temp);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
             return "";
 

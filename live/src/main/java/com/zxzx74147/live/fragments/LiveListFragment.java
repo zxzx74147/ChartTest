@@ -3,13 +3,11 @@ package com.zxzx74147.live.fragments;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.zxzx74147.devlib.base.BaseActivity;
 import com.zxzx74147.devlib.base.BaseFragment;
 import com.zxzx74147.devlib.network.NetworkApi;
@@ -83,13 +81,13 @@ public class LiveListFragment extends BaseFragment {
 
     }
 
-    private void initView(){
+    private void initView() {
         mAdapter = new CommonRecyclerViewAdapter<>(mData);
         mAdapter.setMultiTypeDelegate(new CommonMultiTypeDelegate());
         mBinding.list.setAdapter(mAdapter);
         mBinding.list.setLayoutManager(new LinearLayoutManager(getActivity()));
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.default_gap_24);
-        mBinding.list.addItemDecoration(new SpaceItemDecoration(0,spacingInPixels));
+        mBinding.list.addItemDecoration(new SpaceItemDecoration(0, spacingInPixels));
         mAdapter.loadMoreComplete();
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             Live live = (Live) adapter.getItem(position);
@@ -97,20 +95,20 @@ public class LiveListFragment extends BaseFragment {
         });
     }
 
-    private void startLive(Live live){
+    private void startLive(Live live) {
         BaseFragment fragment = LiveFragment.newInstance(live);
-        ((BaseActivity) getActivity()).loadRootFragment(R.id.root_fragment,fragment,true,false);
+        ((BaseActivity) getActivity()).loadRootFragment(R.id.root_fragment, fragment, true, false);
     }
 
     private void initData() {
-        NetworkApi.ApiSubscribe(mStorage.roomGetList(),new Consumer<HomeData>() {
+        NetworkApi.ApiSubscribe(mStorage.roomGetList(), new Consumer<HomeData>() {
             @Override
             public void accept(HomeData homeData) throws Exception {
                 if (homeData.hasError()) {
-                    ToastUtil.showToast(getContext(),homeData.error.usermsg);
+                    ToastUtil.showToast(getContext(), homeData.error.usermsg);
                     return;
                 }
-                if(homeData.liveList!=null) {
+                if (homeData.liveList != null) {
                     mData.clear();
                     mData.addAll(homeData.liveList.live);
                     mAdapter.notifyDataSetChanged();

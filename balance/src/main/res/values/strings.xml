@@ -25,7 +25,9 @@
     <string name="contact_service">联系客服</string>
     <string name="i_know">知道了</string>
     <string name="recharge_fail_remind">充值失败，请联系客服。给您造成的不便，敬请谅解</string>
-    <string name="deposit_his">充值提现记录</string>
+    <string name="deposit_withdraw_his">充值提现记录</string>
+    <string name="deposit_his">充值记录</string>
+    <string name="withdraw_his">提现记录</string>
     <string name="withdraw_title_yuan">提现金额（元）</string>
     <string name="withdraw_amount">提现金额</string>
     <string name="withdraw_max">可提现(元)</string>

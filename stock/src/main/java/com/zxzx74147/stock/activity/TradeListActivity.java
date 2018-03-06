@@ -15,6 +15,7 @@ import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.devlib.utils.RecyclerViewUtil;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.devlib.widget.CommonRecyclerViewAdapter;
+import com.zxzx74147.devlib.widget.RecycleViewDivider;
 import com.zxzx74147.stock.R;
 import com.zxzx74147.stock.data.Position;
 import com.zxzx74147.stock.data.PositionListData;
@@ -68,6 +69,8 @@ public class TradeListActivity extends BaseActivity {
         mAdapter.setMultiTypeDelegate(delegate);
         mBinding.list.setLayoutManager(new LinearLayoutManager(this));
         mBinding.list.setAdapter(mAdapter);
+        mBinding.list.addItemDecoration(new RecycleViewDivider(
+                this, LinearLayoutManager.VERTICAL, getResources().getDimensionPixelOffset(R.dimen.default_gap_1), getResources().getColor(R.color.div_default)));
         initView();
     }
 

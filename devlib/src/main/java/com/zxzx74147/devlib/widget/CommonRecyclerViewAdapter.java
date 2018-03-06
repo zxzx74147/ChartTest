@@ -3,6 +3,7 @@ package com.zxzx74147.devlib.widget;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
+import android.support.annotation.IntRange;
 import android.view.LayoutInflater;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -35,5 +36,11 @@ public class CommonRecyclerViewAdapter<T> extends BaseQuickAdapter<T, BaseBindin
             binding.setContent(context.getResources().getString(content));
         }
         setEmptyView(binding.getRoot());
+    }
+
+    public void remove(T  item) {
+        if(mData.remove(item)){
+            notifyDataSetChanged();
+        }
     }
 }

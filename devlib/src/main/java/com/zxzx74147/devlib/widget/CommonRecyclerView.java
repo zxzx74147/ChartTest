@@ -26,4 +26,13 @@ public class CommonRecyclerView extends RecyclerView{
         getItemAnimator().setChangeDuration(0);
 
     }
+
+    public void scrollToButtom(){
+        if(getAdapter()==null){
+            return;
+        }
+
+        int count = getAdapter().getItemCount();
+        smoothScrollToPosition(count);
+    }
 }

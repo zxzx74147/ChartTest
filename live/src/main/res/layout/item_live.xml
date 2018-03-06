@@ -7,6 +7,7 @@
         <variable
             name="data"
             type="com.zxzx74147.live.data.Live" />
+        <import type="android.view.View"/>
 
     </data>
 
@@ -46,6 +47,7 @@
                 layout="@layout/item_live_teacher"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
+                android:visibility="@{data.teacherList==null? View.GONE:(data.teacherList.teacher.size>1? View.VISIBLE:View.GONE)}"
                 android:layout_weight="1"
                 bind:data='@{data.teacherList==null? null:(data.teacherList.teacher.size>1? data.teacherList.teacher.get(1):null)}' />
 

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.zxzx74147.live.data.Text" />
+
+        <import type="com.zxzx74147.devlib.utils.TimeUtil" />
+
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/default_gap_60"
+        android:paddingLeft="@dimen/default_gap_44"
+        android:paddingRight="@dimen/default_gap_40">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_gap_60"
+            android:orientation="horizontal">
+
+            <com.zxzx74147.devlib.widget.ZXImageView
+                android:layout_width="@dimen/default_gap_64"
+                android:layout_height="@dimen/default_gap_64"
+                app:imageUrl="@{data.teacher.portraitUrl}"
+                app:riv_corner_radius="@dimen/default_gap_100" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_gap_16"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{data.teacher.name}"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/default_size_26" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{TimeUtil.parserIntTime(data.createTime,@string/format_HHMM)}"
+                    android:textColor="@color/text_light_grey"
+                    android:textSize="@dimen/default_size_24" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_gap_24"
+            android:text="@{data.content}"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/default_size_30" />
+
+
+        <com.zxzx74147.devlib.widget.ZXImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/default_gap_20"
+            android:scaleType="centerCrop"
+            android:visibility="@{TextUtils.isEmpty(data.picUrl)? View.GONE:View.VISIBLE}"
+            app:aspectRatioHeight="9"
+            app:aspectRatioWidth="16"
+            app:imageUrl="@{data.picUrl}" />
+
+       
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:gravity="bottom"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/default_size_40"
+                android:text="@string/comment"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/default_size_26"
+                android:text='@{"("+String.valueOf(data.replyNum)+")"}'
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="@color/text_grey"
+                android:textSize="@dimen/default_size_26"
+                android:text="@string/write_comment"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</layout>

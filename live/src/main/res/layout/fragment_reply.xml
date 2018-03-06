@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="live"
+            type="com.zxzx74147.live.data.Live" />
+
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <include
+
+            android:id="@+id/title"
+            layout="@layout/common_title"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/default_gap_100"
+            android:layout_marginEnd="8dp"
+            app:title="@{@string/text_detail}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <com.dinuscxj.refresh.RecyclerRefreshLayout
+            android:id="@+id/refresh_layout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/reply_eidt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title">
+
+            <com.zxzx74147.devlib.widget.CommonRecyclerView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.dinuscxj.refresh.RecyclerRefreshLayout>
+
+
+        <EditText
+            android:id="@+id/reply_eidt"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_gap_44"
+            android:layout_marginEnd="@dimen/default_gap_44"
+            android:layout_marginStart="@dimen/default_gap_44"
+            android:background="@drawable/rect_round_stroke_grey"
+            android:hint="@string/reply_remind"
+            android:imeOptions="actionSend"
+            android:padding="@dimen/default_gap_29"
+            android:singleLine="true"
+            android:textColor="@color/text_black"
+            android:textColorHint="@color/text_light_grey"
+            android:textSize="@dimen/default_size_30"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+</layout>
+

@@ -3,6 +3,7 @@ package com.zxzx74147.devlib.image;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
@@ -20,10 +21,16 @@ public class ImageLoader {
     }
 
     public static void loadImage(ImageView imageView,String url){
+        if(TextUtils.isEmpty(url)){
+            return;
+        }
         Picasso.with(imageView.getContext()).load(url).fit().centerCrop().into(imageView);
     }
 
     public static void loadImage(String url){
+        if(TextUtils.isEmpty(url)){
+            return;
+        }
         Picasso.with(DevLib.getApp()).load(url).into(new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {

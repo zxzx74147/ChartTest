@@ -84,7 +84,7 @@ public class StockWidget extends FrameLayout implements IViewModelHolder {
             if (stockData.hasError()) {
                 return;
             }
-            Log.i(TAG, JsonHelper.toJson(stockData));
+//            Log.i(TAG, JsonHelper.toJson(stockData));
             mDataParse.clear();
             mDataParse.parseKLine(stockData.PriceKChartList.priceKChart);
             mBinding.klineview.setData(mDataParse);

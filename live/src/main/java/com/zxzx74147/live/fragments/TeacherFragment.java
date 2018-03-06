@@ -66,7 +66,7 @@ public class TeacherFragment extends BaseDialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        super.onCreateView(inflater,container,savedInstanceState);
+        super.onCreateView(inflater, container, savedInstanceState);
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_teacher, container, false);
         mAdapter = new CommonRecyclerViewAdapter<>(mData);
         CommonMultiTypeDelegate temp = new CommonMultiTypeDelegate();
@@ -74,7 +74,7 @@ public class TeacherFragment extends BaseDialogFragment {
         mBinding.list.setAdapter(mAdapter);
         LinearLayoutManager lm = new LinearLayoutManager(getContext());
         mBinding.list.setLayoutManager(lm);
-        ViewDataBinding mHeader = DataBindingUtil.inflate(inflater,R.layout.item_live_time_header,null,false);
+        ViewDataBinding mHeader = DataBindingUtil.inflate(inflater, R.layout.item_live_time_header, null, false);
         mAdapter.addHeaderView(mHeader.getRoot());
         RxView.clicks(mBinding.close).subscribe(o -> {
             this.dismiss();

@@ -2,9 +2,6 @@
     <string name="app_name">live</string>
 
 
-
-
-
     <string name="format_live_num">%d人在线</string>
 
     <string name="N_A">N/A</string>
@@ -36,4 +33,9 @@
     <string name="bit_rate">bit_rate</string>
     <string name="teacher_detail">名师介绍</string>
     <string name="live_time_header">TA的直播预告</string>
+    <string name="comment">评论</string>
+    <string name="write_comment">写评论</string>
+    <string name="reply_remind">正面回馈和建设性的回复很重要</string>
+    <string name="text_detail">观点详情</string>
+    <string name="delete">删除</string>
 </resources>

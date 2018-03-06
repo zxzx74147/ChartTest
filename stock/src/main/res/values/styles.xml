@@ -65,22 +65,7 @@
 
     <style name="buy_method">购买点</style>
 
-    <style name="TitleTabLayout" parent="Widget.Design.TabLayout">
-        <item name="tabIndicatorColor">@color/red</item>
-        <item name="tabMode">scrollable</item>
-        <item name="tabIndicatorHeight">@dimen/default_gap_4</item>
-        <item name="tabPaddingStart">@dimen/default_gap_32</item>
-        <item name="tabPaddingEnd">@dimen/default_gap_32</item>
-        <item name="tabBackground">@color/tran</item>
-        <item name="tabSelectedTextColor">@color/text_black</item>
-        <item name="tabTextAppearance">@style/TitleTabTextLayout</item>
-    </style>
 
-    <style name="TitleTabTextLayout" parent="Widget.Design.TabLayout">
-        <item name="android:textSize">@dimen/default_size_30</item>
-        <item name="android:textColor">@color/text_black</item>
-        <item name="android:singleLine">true</item>
-    </style>
 
 
 </resources>

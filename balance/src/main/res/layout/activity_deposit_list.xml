@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_gap_27"
             android:layout_marginTop="@dimen/default_gap_27"
-            android:text="@string/deposit_his"
+            android:text="@string/deposit_withdraw_his"
             android:textColor="@color/text_black"
             android:textSize="@dimen/default_size_34"
             app:layout_constraintEnd_toEndOf="parent"
@@ -42,6 +42,27 @@
             app:layout_constraintTop_toTopOf="@+id/title"
             app:srcCompat="@drawable/icon_back" />
 
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout2"
+            style="@style/TitleTabLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title">
+
+            <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/deposit_his" />
+
+            <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/withdraw_his" />
+
+        </android.support.design.widget.TabLayout>
+
         <com.dinuscxj.refresh.RecyclerRefreshLayout
             android:id="@+id/refresh_layout"
             android:layout_width="0dp"
@@ -49,7 +70,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title">
+            app:layout_constraintTop_toBottomOf="@+id/tabLayout2">
 
             <com.zxzx74147.devlib.widget.CommonRecyclerView
                 android:id="@+id/list"

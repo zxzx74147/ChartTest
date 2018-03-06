@@ -22,6 +22,13 @@ public class RecyclerViewUtil {
         final Disposable[] refreshDisposable = {null};
         final Disposable[] loadMoreDisposable = {null};
         final BaseListData[] lastData = {null};
+//        mRecyclerView.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                mRecyclerView.setAdapter(adapter);
+//            }
+//        });
+        mRecyclerView.setAdapter(adapter);
         if (mRecyclerRefreshLayout != null) {
             RecyclerRefreshLayout.OnRefreshListener listener = () -> {
                 NetworkApi.ApiSubscribe(callback.getObserverble(null), new Observer<Object>() {
@@ -134,6 +141,9 @@ public class RecyclerViewUtil {
 
 
     }
+
+
+
 
 
 }

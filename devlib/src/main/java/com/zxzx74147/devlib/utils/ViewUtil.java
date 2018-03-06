@@ -9,11 +9,14 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v7.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxCompoundButton;
 import com.zxzx74147.devlib.callback.CommonCallback;
+import com.zxzx74147.live.data.Text;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -143,6 +146,13 @@ public class ViewUtil {
                 dfsView(((ViewGroup) root).getChildAt(i), callback);
             }
         }
+    }
+
+    public static void hideSoftPad(TextView text){
+        InputMethodManager imm = (InputMethodManager) text.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+//隐藏软键盘 //
+        imm.hideSoftInputFromWindow(text.getWindowToken(), 0);
+
     }
 
 
