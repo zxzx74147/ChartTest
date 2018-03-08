@@ -37,5 +37,6 @@
     <string name="format_MMDD_HHMM">MM/dd HH:mm</string>
     <string name="format_YYYYMMDD_HHMM">YYYY/MM/dd HH:mm</string>
     <string name="format_HHMM">HH:mm</string>
+    <string name="format_YYYYMMDD">YYYY-MM-dd</string>
     <string name="just_now">刚刚</string>
 </resources>

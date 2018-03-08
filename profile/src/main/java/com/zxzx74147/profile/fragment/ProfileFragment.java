@@ -14,6 +14,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.zxzx74147.devlib.base.BaseDialogFragment;
 import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.modules.account.UserViewModel;
+import com.zxzx74147.devlib.modules.busstation.ProfileBusStation;
 import com.zxzx74147.devlib.modules.sys.SysInitManager;
 import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.utils.WebviewUtil;
@@ -89,7 +90,7 @@ public class ProfileFragment extends BaseDialogFragment {
                         WebviewUtil.showWebActivity(getActivity(), SysInitManager.sharedInstance().getSysInitData().config.userGuideUrl);
                         break;
                     case 2:
-                        WebviewUtil.showWebActivity(getActivity(), SysInitManager.sharedInstance().getSysInitData().config.userProtocolUrl);
+                        ProfileBusStation.startMessageCenter(getActivity());
                         break;
                     case 3:
                         break;

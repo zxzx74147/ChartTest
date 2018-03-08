@@ -22,8 +22,8 @@ import io.reactivex.disposables.Disposable;
 public class KLineLiveData extends LiveData<KLineData> {
 
     private GoodType mGood = null;
-    private String mType = "";
-    private static final int PERIOD = 1000 * 5;
+    private int mType = -1;
+    private static final int PERIOD = 1000 * 60;
     private Timer mTimer = null;
     private Disposable mDisposable = null;
 
@@ -35,7 +35,7 @@ public class KLineLiveData extends LiveData<KLineData> {
         doRefresh();
     }
 
-    public void setKType(String type) {
+    public void setKType(int type) {
         mType = type;
         doRefresh();
     }
@@ -68,37 +68,69 @@ public class KLineLiveData extends LiveData<KLineData> {
 
     private void doRefresh() {
 
-        if (mGood == null || TextUtils.isEmpty(mType)) {
+        if (mGood == null || mType<0) {
             return;
         }
         if(mDisposable!=null){
             mDisposable.dispose();
         }
-        Observable<KLineData> kLineCall = mStockStorage.getKLine(mGood.goodsType, mType);
+        if(mType>0) {
+            Observable<KLineData> kLineCall = mStockStorage.getKLine(mGood.goodsType, mType);
 
-        NetworkApi.ApiSubscribe(kLineCall, new Observer<KLineData>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-                mDisposable = d;
-            }
+            NetworkApi.ApiSubscribe(kLineCall, new Observer<KLineData>() {
+                @Override
+                public void onSubscribe(Disposable d) {
+                    mDisposable = d;
+                }
 
-            @Override
-            public void onNext(KLineData kline) {
-                setValue(kline);
-                mDisposable = null;
-            }
+                @Override
+                public void onNext(KLineData kline) {
+                    kline.mType = mType;
+                    setValue(kline);
+                    mDisposable = null;
+                }
 
-            @Override
-            public void onError(Throwable e) {
-                setValue(UniApiData.createError(e, KLineData.class));
-                mDisposable = null;
-            }
+                @Override
+                public void onError(Throwable e) {
+                    setValue(UniApiData.createError(e, KLineData.class));
+                    mDisposable = null;
+                }
 
-            @Override
-            public void onComplete() {
-                mDisposable = null;
-            }
-        });
+                @Override
+                public void onComplete() {
+                    mDisposable = null;
+                }
+            });
+        }else {
+
+            Observable<KLineData> krealTimeCall = mStockStorage.getLiveLine(mGood.goodsType);
+            NetworkApi.ApiSubscribe(krealTimeCall, new Observer<KLineData>() {
+                @Override
+                public void onSubscribe(Disposable d) {
+                    mDisposable = d;
+                }
+
+                @Override
+                public void onNext(KLineData kline) {
+                    kline.mIsRealtime = true;
+                    kline.mType = mType;
+                    setValue(kline);
+
+                    mDisposable = null;
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    setValue(UniApiData.createError(e, KLineData.class));
+                    mDisposable = null;
+                }
+
+                @Override
+                public void onComplete() {
+                    mDisposable = null;
+                }
+            });
+        }
 
     }
 

@@ -7,6 +7,8 @@
             name="dialogItem"
             type="com.zxzx74147.devlib.data.DialogItem" />
 
+        <import type="android.view.View"/>
+        <import type="android.text.TextUtils"/>
     </data>
 
 
@@ -29,6 +31,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="@{TextUtils.isEmpty(dialogItem.content)? View.GONE:View.VISIBLE}"
             android:text="@{dialogItem.content}"
             android:textColor="@color/text_dark_grey"
             android:layout_marginTop="@dimen/default_gap_44"

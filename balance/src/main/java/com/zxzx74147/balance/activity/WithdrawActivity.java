@@ -220,6 +220,7 @@ public class WithdrawActivity extends BaseActivity {
             ZXFragmentJumpHelper.startFragment(WithdrawActivity.this, dialog, new CommonCallback() {
                 @Override
                 public void callback(Object item) {
+
                     initData();
                     return;
                 }

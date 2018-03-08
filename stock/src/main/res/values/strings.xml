@@ -104,5 +104,6 @@
     <string name="position_modify">修改持仓</string>
     <string name="succ">成功</string>
     <string name="position_close_verify">确定平仓吗？</string>
+    <string name="position_open_succ">恭喜您建仓成功</string>
 
 </resources>

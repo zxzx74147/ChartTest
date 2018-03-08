@@ -66,7 +66,7 @@ public class StockWidget extends FrameLayout implements IViewModelHolder {
         initView();
         RxTabLayout.selections(mBinding.tabLayout).subscribe(tab -> {
             if (mStockViewModel != null) {
-                mStockViewModel.getKLineData().setKType(String.valueOf(tab.getPosition()));
+                mStockViewModel.getKLineData().setKType(tab.getPosition());
             }
         });
     }
@@ -84,10 +84,15 @@ public class StockWidget extends FrameLayout implements IViewModelHolder {
             if (stockData.hasError()) {
                 return;
             }
-//            Log.i(TAG, JsonHelper.toJson(stockData));
             mDataParse.clear();
-            mDataParse.parseKLine(stockData.PriceKChartList.priceKChart);
-            mBinding.klineview.setData(mDataParse);
+            if(stockData.mIsRealtime){
+                mDataParse.parseRealTime(stockData.PriceKChartList.priceKChart);
+                mBinding.klineview.setRealTime(mDataParse);
+            }else{
+                mDataParse.parseKLine(stockData.PriceKChartList.priceKChart);
+                mBinding.klineview.setData(mDataParse);
+            }
+
 
         });
 

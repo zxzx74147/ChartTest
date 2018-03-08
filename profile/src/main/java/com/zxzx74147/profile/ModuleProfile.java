@@ -6,7 +6,11 @@ import com.zxzx74147.devlib.data.MessageEvent;
 import com.zxzx74147.devlib.modules.busstation.ProfileBusStation;
 import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
 import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
+import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
+import com.zxzx74147.devlib.widget.CommonRecyclerViewAdapter;
 import com.zxzx74147.profile.activity.LoginPhoneActivity;
+import com.zxzx74147.profile.activity.MessageCenterActivity;
+import com.zxzx74147.profile.data.Message;
 import com.zxzx74147.profile.fragment.PasswordInputFragment;
 import com.zxzx74147.profile.fragment.PasswordSetFragment;
 import com.zxzx74147.profile.fragment.ProfileFragment;
@@ -44,10 +48,13 @@ public class ModuleProfile {
             ZXFragmentJumpHelper.startFragment(event.context, PasswordSetFragment.class,null);
         }else if (event.id == ProfileBusStation.BUS_ID_PROFILE_TRADE_LOGIN) {
             ZXFragmentJumpHelper.startFragment(event.context, PasswordInputFragment.class,null);
+        }else if (event.id == ProfileBusStation.BUS_ID_PROFILE_MESSAGE_CENTER) {
+            ZXActivityJumpHelper.startActivity(event.context, MessageCenterActivity.class,null);
         }
     }
 
     static {
+        CommonMultiTypeDelegate.registDefaultViewType(Message.class,R.layout.item_message);
     }
 
 }

@@ -2,8 +2,10 @@ package com.zxzx74147.stock.widget;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.graphics.DashPathEffect;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import com.github.mikephil.charting.components.XAxis;
@@ -54,6 +56,7 @@ public class KlineView extends LinearLayout {
     private void init() {
         mBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.widget_kline, this, true);
         ChartUtil.setChart(mBinding.kline);
+        ChartUtil.setRealTimeChart(mBinding.klineRealtime);
         ChartUtil.setChart(mBinding.kline2);
         XAxis xAxis = mBinding.kline2.getXAxis();
         xAxis.setDrawLabels(false);
@@ -70,12 +73,41 @@ public class KlineView extends LinearLayout {
     }
 
     public void setData(DataParse dataParse) {
+        boolean needRefresh = false;
+        if(mDataParse==null||mDataParse.mType!=dataParse.mType){
+            needRefresh = true;
+        }
         mDataParse = dataParse;
         refresh();
+        mBinding.klineRealtime.setVisibility(View.GONE);
+        mBinding.klineOther.setVisibility(VISIBLE);
+        if(needRefresh){
+            ChartUtil.fitData(mBinding.kline);
+            ChartUtil.fitData(mBinding.kline2);
+        }
     }
 
+    public void setRealTime(DataParse dataParse) {
+        boolean needRefresh = false;
+        if(mDataParse==null||mDataParse.mType!=dataParse.mType){
+            needRefresh = true;
+        }
+        mDataParse = dataParse;
+        refreshReadTime();
+        mBinding.klineRealtime.setVisibility(View.VISIBLE);
+        mBinding.klineOther.setVisibility(INVISIBLE);
+        if(needRefresh){
+            ChartUtil.fitData(mBinding.klineRealtime);
+        }
+    }
+
+    private void refreshReadTime() {
+        setReadTime();
+    }
+
+
     private void refresh() {
-        if(mDataParse==null){
+        if (mDataParse == null) {
             return;
         }
         {
@@ -217,14 +249,13 @@ public class KlineView extends LinearLayout {
         sets.add(lineJ);
         LineData lineData = new LineData(sets);
         combinedData.setData(lineData);
-        ((CombinedChartRenderer)mBinding.kline2.getRenderer()).getSubRenderers().clear();
+        ((CombinedChartRenderer) mBinding.kline2.getRenderer()).getSubRenderers().clear();
         mBinding.kline2.setData(combinedData);
         mBinding.kline2.invalidate();
     }
 
     private void setRSI() {
         CombinedData combinedData = new CombinedData();
-
 
         ArrayList<ILineDataSet> sets = new ArrayList<>();
         LineDataSet lineK = new LineDataSet(mDataParse.getRsiData6(), "rsi6");
@@ -238,8 +269,29 @@ public class KlineView extends LinearLayout {
         sets.add(lineJ);
         LineData lineData = new LineData(sets);
         combinedData.setData(lineData);
-        ((CombinedChartRenderer)mBinding.kline2.getRenderer()).getSubRenderers().clear();
+        ((CombinedChartRenderer) mBinding.kline2.getRenderer()).getSubRenderers().clear();
         mBinding.kline2.setData(combinedData);
         mBinding.kline2.invalidate();
+
+    }
+
+
+    private void setReadTime() {
+        CombinedData combinedData = new CombinedData();
+        ArrayList<ILineDataSet> sets = new ArrayList<>();
+        LineDataSet lineK = new LineDataSet(mDataParse.getReadTime(), "realtime");
+        ChartUtil.setupRealTimeY(mBinding.klineRealtime,mDataParse.getReadTime());
+        ChartUtil.setLineDataleSet(lineK, getResources().getColor(R.color.stock_kline_realtime));
+        sets.add(lineK);
+        lineK.setDrawFilled(true);
+        lineK.setFillDrawable(getResources().getDrawable(R.drawable.fade_black));
+        lineK.setFormLineWidth(1f);
+        lineK.setFormLineDashEffect(new DashPathEffect(new float[]{10f, 5f}, 0f));
+        lineK.setFormSize(15.f);
+        LineData lineData = new LineData(sets);
+        combinedData.setData(lineData);
+        ((CombinedChartRenderer) mBinding.klineRealtime.getRenderer()).getSubRenderers().clear();
+        mBinding.klineRealtime.setData(combinedData);
+        mBinding.klineRealtime.invalidate();
     }
 }

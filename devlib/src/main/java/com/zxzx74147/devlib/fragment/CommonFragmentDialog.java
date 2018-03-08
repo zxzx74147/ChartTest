@@ -48,16 +48,20 @@ public class CommonFragmentDialog extends BaseDialogFragment {
 //
         RxView.clicks(mBinding.cancel).subscribe(o->{
             dismiss();
+            if(mCallback!=null){
+                mCallback.callback(null);
+            }else{
+                Log.e(TAG, "NO CALLBACK !"+JsonHelper.toJson(card));
+            }
         });
 //
         RxView.clicks(mBinding.ok).subscribe(o->{
+            dismiss();
             if(mCallback!=null){
-
                 mCallback.callback(mBinding.getDialogItem().obj);
             }else{
                 Log.e(TAG, "NO CALLBACK !"+JsonHelper.toJson(card));
             }
-            dismiss();
         });
 
     }

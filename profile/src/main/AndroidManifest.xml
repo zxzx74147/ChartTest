@@ -5,6 +5,8 @@
     <application>
         <activity android:name=".ProfileActivity" />
         <activity android:name=".activity.LoginPhoneActivity"></activity>
+        <activity android:name=".activity.MessageCenterActivity"></activity>
+        <activity android:name=".activity.MessageActivity"></activity>
     </application>
 
 </manifest>

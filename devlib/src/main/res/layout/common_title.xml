@@ -12,35 +12,45 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/default_gap_100"
-        android:background="@color/tran"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_height="@dimen/default_gap_100">
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:src="@drawable/icon_back"
-            android:background="@null"
-            android:paddingLeft="@dimen/default_gap_44"
-            android:paddingRight="@dimen/default_gap_10"
-            android:layout_height="match_parent" />
-        <TextView
-            android:layout_width="0dp"
-            android:text="@{title}"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:id="@+id/title_view"
-            android:textSize="@dimen/default_size_34"
-            android:textColor="@color/text_black"
-            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/tran"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <!--android:src="@drawable/icon_back"-->
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:background="@null"
-            android:paddingRight="@dimen/default_gap_44"
-            android:paddingLeft="@dimen/default_gap_10"
-            android:layout_height="match_parent" />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:paddingLeft="@dimen/default_gap_44"
+                android:paddingRight="@dimen/default_gap_10"
+                android:src="@drawable/icon_back" />
 
+            <TextView
+                android:id="@+id/title_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@{title}"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/default_size_34" />
+
+            <!--android:src="@drawable/icon_back"-->
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:paddingLeft="@dimen/default_gap_10"
+                android:paddingRight="@dimen/default_gap_44" />
+
+        </LinearLayout>
+        <View
+            android:background="@color/div_default"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
     </LinearLayout>
 </layout>

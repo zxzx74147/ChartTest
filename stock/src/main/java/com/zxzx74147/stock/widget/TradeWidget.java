@@ -21,6 +21,7 @@ import com.zxzx74147.devlib.fragment.CommonFragmentDialog;
 import com.zxzx74147.devlib.fragment.CommonWheelSelectorDialog;
 import com.zxzx74147.devlib.interfaces.IViewModelHolder;
 import com.zxzx74147.devlib.modules.busstation.ProfileBusStation;
+import com.zxzx74147.devlib.modules.busstation.StockBusStation;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.devlib.utils.FormatUtil;
@@ -240,6 +241,24 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                 ToastUtil.showToast(getContext(), machPositionData.error.usermsg);
                 return;
             }
+            DialogItem dialogItem = new DialogItem();
+            dialogItem.title = getResources().getString(R.string.position_open_succ);
+            dialogItem.content = null;
+            dialogItem.cancel =  getResources().getString(R.string.position_view);
+            dialogItem.cancel =  getResources().getString(R.string.continu_trade);
+            CommonFragmentDialog fragmentDialog = CommonFragmentDialog.newInstance(new IntentData<>(dialogItem));
+            ZXFragmentJumpHelper.startFragment(getContext(), fragmentDialog, new CommonCallback() {
+                @Override
+                public void callback(Object item) {
+                    //TODO
+                    if(item==null){
+                        StockBusStation.viewPosition(getContext());
+                    }else{
+                        ;
+                    }
+
+                }
+            });
 
         });
     }

@@ -11,12 +11,14 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Created by loro on 2017/2/8.
  */
 public class DataParse {
+    public int mType = 0;
     private ArrayList<MinutesBean> datas = new ArrayList<>();
     private ArrayList<KLineBean> kDatas = new ArrayList<>();
     private ArrayList<String> xVals = new ArrayList<>();//X轴数据
@@ -68,6 +70,7 @@ public class DataParse {
     private List<Entry> dmiDataDI2 = new ArrayList<>();
     private List<Entry> dmiDataADX = new ArrayList<>();
     private List<Entry> dmiDataADXR = new ArrayList<>();
+    private ArrayList<Entry> realTime = new ArrayList<>();
 
     private float baseValue;
     private float permaxmin;
@@ -125,19 +128,12 @@ public class DataParse {
      * @param src
      */
     public void parseKLine(List<PriceKChart> src) {
-        ArrayList<KLineBean> kLineBeans = new ArrayList<>();
+        LinkedList<KLineBean> kLineBeans = new LinkedList<>();
         if (src != null) {
             int count = src.size();
             for (int i = 0; i < count; i++) {
                 KLineBean kLineData = new KLineBean(src.get(i));
-//                kLineData.date = dayData.optString(0);
-//                kLineData.open = (float) dayData.optDouble(1);
-//                kLineData.close = (float) dayData.optDouble(2);
-//                kLineData.high = (float) dayData.optDouble(3);
-//                kLineData.low = (float) dayData.optDouble(4);
-//                kLineData.vol = (float) dayData.optDouble(5);
-
-                kLineBeans.add(kLineData);
+                kLineBeans.addFirst(kLineData);
 
                 volmax = Math.max(kLineData.vol, volmax);
                 xValuesLabel.put(i, kLineData.date);
@@ -145,6 +141,22 @@ public class DataParse {
         }
         kDatas.addAll(kLineBeans);
         initAll();
+    }
+
+    public List<Entry> getReadTime(){
+        return realTime;
+    }
+
+    public void parseRealTime(List<PriceKChart> src) {
+        realTime.clear();
+        if (src != null) {
+            int count = src.size();
+            for (int i = 0; i < count; i++) {
+                KLineBean kLineData = new KLineBean(src.get(i));
+                realTime.add(new Entry(i, kLineData.close,kLineData));
+                xValuesLabel.put(i, kLineData.date);
+            }
+        }
     }
 
     public void initAll() {
