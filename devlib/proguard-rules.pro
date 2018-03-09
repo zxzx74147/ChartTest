@@ -51,3 +51,7 @@
 -keepattributes *Annotation*
 
 -keep class cn.qqtheme.framework.entity.** { *;}
+
+-dontwarn com.yalantis.ucrop**
+-keep class com.yalantis.ucrop** { *; }
+-keep interface com.yalantis.ucrop** { *; }

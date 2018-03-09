@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding2.view.RxView;
@@ -153,6 +155,31 @@ public class ViewUtil {
 //隐藏软键盘 //
         imm.hideSoftInputFromWindow(text.getWindowToken(), 0);
 
+    }
+
+    public static void locateEditCursor(EditText editText){
+        editText.setSelection(editText.getText().length());
+    }
+
+    public static void changeTabs(View tabLayout,String text) {
+        if(tabLayout==null){
+            return;
+        }
+        ViewGroup vg = (ViewGroup) tabLayout;
+        int tabsCount = vg.getChildCount();
+        for (int j = 0; j < tabsCount; j++) {
+            if(!(vg.getChildAt(j) instanceof ViewGroup)){
+                continue;
+            }
+            ViewGroup vgTab = (ViewGroup) vg.getChildAt(j);
+            int tabChildsCount = vgTab.getChildCount();
+            for (int i = 0; i < tabChildsCount; i++) {
+                View tabViewChild = vgTab.getChildAt(i);
+                if (tabViewChild instanceof TextView) {
+                    ((TextView) tabViewChild).setText(text);
+                }
+            }
+        }
     }
 
 

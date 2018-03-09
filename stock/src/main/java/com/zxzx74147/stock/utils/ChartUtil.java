@@ -351,9 +351,11 @@ public class ChartUtil {
         float maxScale = chart.getXAxis().mAxisRange / maxXRange;
         float scale = (minScale+maxScale)/2;
         chart.getViewPortHandler();
+
         ViewPortHandler mViewPortHandler=chart.getViewPortHandler();
         mViewPortHandler.setMinMaxScaleX(minScale, maxScale);
-        mViewPortHandler.setZoom(scale,0);
+        mViewPortHandler.getMatrixTouch().setScale(scale,1);
+
     }
 
     public static void fitData(CombinedChart chart){
@@ -362,5 +364,6 @@ public class ChartUtil {
 
         setVisibleXRange(chart,60,10);
         chart.moveViewToX(chart.getCombinedData().getEntryCount());
+
     }
 }

@@ -13,6 +13,7 @@ public class DialogItem implements Serializable
     public String content;
     public String cancel = DevLib.getApp().getResources().getString(R.string.cancel);
     public String ok= DevLib.getApp().getResources().getString(R.string.ok);
+    public String[] items;
     public Object obj;
 
 }

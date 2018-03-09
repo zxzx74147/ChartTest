@@ -7,6 +7,7 @@
             name="good"
             type="com.zxzx74147.stock.data.GoodType"/>
         <import type="com.zxzx74147.devlib.modules.busstation.StockBusStation"/>
+        <import type="com.zxzx74147.stock.fragment.TradeFragment"/>
 
     </data>
 
@@ -43,7 +44,7 @@
 
             <Button
                 android:layout_width="0dip"
-                android:onClick="@{()->StockBusStation.startStockTrade(context,good,0)}"
+                android:onClick="@{()->StockBusStation.startStockTrade(context,good,TradeFragment.TYPE_POSITION_BUY_UP)}"
                 android:layout_height="match_parent"
                 android:layout_weight="27"
                 android:background="@color/stock_up"
@@ -60,7 +61,7 @@
                 android:text="@string/stock_by_decrease"
                 android:textColor="@color/white"
                 android:textSize="@dimen/default_size_34"
-                android:onClick="@{()->StockBusStation.startStockTrade(context,good,1)}"
+                android:onClick="@{()->StockBusStation.startStockTrade(context,good,TradeFragment.TYPE_POSITION_BUY_DOWN)}"
                 android:textStyle="bold" />
 
             <Button
@@ -70,6 +71,7 @@
                 android:background="@color/text_black"
 
                 android:text="@string/stock_by_without"
+                android:onClick="@{()->StockBusStation.startStockTrade(context,good,TradeFragment.TYPE_MACH_POSITION_BUY_UP)}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/default_size_34"
                 android:textStyle="bold" />

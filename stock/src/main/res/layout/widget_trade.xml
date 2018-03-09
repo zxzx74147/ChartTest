@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -17,32 +18,35 @@
             type="com.zxzx74147.devlib.data.UserData" />
 
         <variable
-            name="byType"
-            type="Integer" />
+            name="type"
+            type="Integer"/>
 
         <variable
             name="total"
             type="Float" />
 
-        <import type="com.zxzx74147.stock.widget.TradeWidget" />
+        <import type="com.zxzx74147.stock.fragment.TradeFragment" />
+        <import type="android.view.View" />
 
         <import type="com.zxzx74147.devlib.modules.busstation.BalanceBusStation" />
     </data>
 
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <android.support.v4.widget.NestedScrollView
             android:id="@+id/nestedScrollView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/default_gap_800"
             android:layout_marginTop="@dimen/default_gap_15"
             android:background="@color/white"
-            android:fillViewport="true">
+            android:fillViewport="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -111,6 +115,58 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/error"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_gap_20"
+                    android:gravity="top|left"
+                    android:orientation="horizontal"
+                    android:visibility='@{type==TradeFragment.TYPE_MACH_POSITION_BUY_DOWN||type==TradeFragment.TYPE_MACH_POSITION_BUY_UP? View.VISIBLE:View.GONE}'>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/default_gap_44"
+                        android:layout_marginTop="@dimen/default_gap_23"
+                        android:text="@string/mach_price"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/default_size_30" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/default_gap_22"
+                        android:layout_marginRight="@dimen/default_gap_44"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/price"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/default_gap_80"
+                            android:background="@drawable/rect_round_grey"
+                            android:hint="@string/mach_price_remind"
+                            android:inputType="number"
+                            android:paddingLeft="@dimen/default_gap_24"
+                            android:paddingRight="@dimen/default_gap_24"
+                            android:textColor="@color/text_black"
+                            android:textColorHint="@color/text_light_grey"
+                            android:textSize="@dimen/default_size_30" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/default_gap_24"
+                            android:drawablePadding="@dimen/default_gap_10"
+                            android:drawableRight="@drawable/icon_explanation"
+                            android:gravity="center_vertical"
+                            android:text="@string/mach_price_mistake_remind"
+                            android:textColor="@color/text_light_grey" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/default_gap_50"
@@ -169,11 +225,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/default_gap_125"
-                    android:textSize="@dimen/default_size_26"
-                    android:textColor="@color/text_light_grey"
-                    android:text='@{@string/format_trade_amount(good.weight,good.profitPerUnit,good.costBack)}'
                     android:layout_marginRight="@dimen/default_gap_44"
-                    android:layout_marginTop="@dimen/default_gap_24" />
+                    android:layout_marginTop="@dimen/default_gap_24"
+                    android:text='@{@string/format_trade_amount(good.weight,good.profitPerUnit,good.costBack)}'
+                    android:textColor="@color/text_light_grey"
+                    android:textSize="@dimen/default_size_26" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -327,8 +383,8 @@
                             android:layout_width="@dimen/default_gap_132"
                             android:layout_height="@dimen/default_gap_56"
                             android:layout_marginTop="@dimen/default_gap_24"
-                            android:text='@{@string/format_cost(good.openChargeFee)}'
                             android:gravity="left|center_vertical"
+                            android:text='@{@string/format_cost(good.openChargeFee)}'
                             android:textColor="@color/text_dark_grey"
                             android:textSize="@dimen/default_size_26" />
 
@@ -338,10 +394,14 @@
         </android.support.v4.widget.NestedScrollView>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/linearLayout"
+            android:layout_width="0dp"
             android:layout_height="@dimen/default_gap_100"
             android:background="@color/bg_grey"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nestedScrollView">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -356,19 +416,19 @@
                 android:layout_marginLeft="@dimen/default_gap_10"
                 android:layout_weight="1"
                 android:text="@{@string/format_02(total)}"
-                android:textColor='@{byType==TradeWidget.BUY_TYPE_UP? @color/text_red:@color/green}' />
+                android:textColor='@{@color/text_red}' />
 
             <Button
                 android:id="@+id/do_it"
                 android:layout_width="@dimen/default_gap_250"
                 android:layout_height="match_parent"
-                android:background='@{byType==TradeWidget.BUY_TYPE_UP? @color/stock_up:@color/stock_down}'
+                android:background='@{type==TradeFragment.TYPE_MACH_POSITION_BUY_UP||type==TradeFragment.TYPE_POSITION_BUY_UP? @color/stock_up:@color/stock_down}'
                 android:text="@string/buy_stock"
                 android:textColor="@color/white"
                 android:textSize="@dimen/default_size_34" />
         </LinearLayout>
 
 
-    </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 
 </layout>

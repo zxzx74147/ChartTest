@@ -105,5 +105,19 @@
     <string name="succ">成功</string>
     <string name="position_close_verify">确定平仓吗？</string>
     <string name="position_open_succ">恭喜您建仓成功</string>
+    <string name="machposition_open_succ">恭喜您挂单成功</string>
+    <string name="mach_price">挂单价</string>
+    <string name="format_mach_error">（允许%d点误差）</string>
+    <string name="format_mach_price">成本: %.1f元</string>
+    <string name="format_amount">数量: %s</string>
+    <string name="valid_time">有效期</string>
 
+
+
+    <string name="mach_price_remind">请输入挂单价</string>
+    <string name="mach_price_mistake_remind">允许成交价于挂单价上下100点的误差</string>
+    <string name="undo">撤销</string>
+    <string name="mach_remind">1. 挂单后不会冻结建仓所需资金或代金券，请确保挂单触发时账户内有足够的资金余额和代金券用于建仓；\n\n 2. 同一品种在同一价格上只能挂一单；\n\n 3. 挂单的有效期为3个交易日，例如周二挂单，则周四休市后挂单自动失效。</string>
+    <string name="expanc">展开</string>
+    <string name="pack_up">收起</string>
 </resources>

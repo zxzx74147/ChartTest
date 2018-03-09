@@ -52,7 +52,7 @@ public class TimeUtil {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return null;
+        return "";
 
     }
 

@@ -2,8 +2,10 @@ package com.zxzx74147.profile;
 
 import android.app.Application;
 
+import com.zxzx74147.devlib.data.IntentData;
 import com.zxzx74147.devlib.data.MessageEvent;
 import com.zxzx74147.devlib.modules.busstation.ProfileBusStation;
+import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
 import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
@@ -13,6 +15,7 @@ import com.zxzx74147.profile.activity.MessageCenterActivity;
 import com.zxzx74147.profile.data.Message;
 import com.zxzx74147.profile.fragment.PasswordInputFragment;
 import com.zxzx74147.profile.fragment.PasswordSetFragment;
+import com.zxzx74147.profile.fragment.ProfileEditFragment;
 import com.zxzx74147.profile.fragment.ProfileFragment;
 
 import org.greenrobot.eventbus.EventBus;
@@ -50,6 +53,9 @@ public class ModuleProfile {
             ZXFragmentJumpHelper.startFragment(event.context, PasswordInputFragment.class,null);
         }else if (event.id == ProfileBusStation.BUS_ID_PROFILE_MESSAGE_CENTER) {
             ZXActivityJumpHelper.startActivity(event.context, MessageCenterActivity.class,null);
+        }else if (event.id == ProfileBusStation.BUS_ID_PROFILE_MOTIFY) {
+            ProfileEditFragment fragment = ProfileEditFragment.newInstance();
+            fragment.show((ViewUtil.getFragmentActivity(event.context)).getSupportFragmentManager(), fragment.getTag());
         }
     }
 

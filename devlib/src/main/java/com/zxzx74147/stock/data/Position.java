@@ -33,6 +33,7 @@ public class Position implements Serializable {
     public int closeType;//平仓类型 1:普通平仓; 2:自动平仓; 3:爆仓平仓; 4:收盘平仓; 5:强制平仓
     public int isDeferred;//是否过夜
     public float deferred;//累计过夜费
+    public int isVoucher;
 
     public String getCloseTypeStr() {
         switch (closeType) {

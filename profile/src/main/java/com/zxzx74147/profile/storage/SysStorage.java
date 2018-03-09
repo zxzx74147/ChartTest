@@ -26,7 +26,7 @@ public interface SysStorage {
 
     @Multipart
     @POST("/sys/uppic")
-    Observable<UpPicData> uploadPic(MultipartBody.Part file);
+    Observable<UpPicData> uploadPic(@Part MultipartBody.Part file);
 
     @GET("/sys/resume")
     Observable<UniApiData> resume();

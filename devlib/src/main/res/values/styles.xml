@@ -41,4 +41,9 @@
         <item name="android:textColor">@color/text_black</item>
         <item name="android:singleLine">true</item>
     </style>
+
+    <style name="dialogWindowAnim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_up</item>
+        <item name="android:windowExitAnimation">@anim/dialog_down</item>
+    </style>
 </resources>

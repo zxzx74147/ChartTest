@@ -10,6 +10,7 @@ import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.stock.activity.TradeListActivity;
 import com.zxzx74147.stock.data.GoodType;
+import com.zxzx74147.stock.data.MachPosition;
 import com.zxzx74147.stock.data.Position;
 import com.zxzx74147.stock.fragment.PositionCloseFragment;
 import com.zxzx74147.stock.fragment.PositionFragment;
@@ -50,7 +51,7 @@ public class ModuleStock {
             fragment.show((ViewUtil.getFragmentActivity(event.context)).getSupportFragmentManager(), fragment.getTag());
         }
         else if (event.id == StockBusStation.BUS_ID_VIEW_POSITION) {
-            PositionFragment fragment = PositionFragment.newInstance();
+            PositionFragment fragment = PositionFragment.newInstance(new IntentData(event.type));
             fragment.show((ViewUtil.getFragmentActivity(event.context)).getSupportFragmentManager(), fragment.getTag());
         }
         else if (event.id == StockBusStation.BUS_ID_VIEW_TRADE) {
@@ -65,11 +66,21 @@ public class ModuleStock {
             PositionCloseFragment fragment = PositionCloseFragment.newInstance(new IntentData<>((Position) event.data));
             fragment.show((ViewUtil.getFragmentActivity(event.context)).getSupportFragmentManager(), fragment.getTag());
         }
+        else if (event.id == StockBusStation.BUS_ID_MACH_POSITION_MODIFY) {
+//            PositionCloseFragment fragment = PositionModifyFragment.newInstance(new IntentData<>((Position) event.data));
+//            fragment.show((ViewUtil.getFragmentActivity(event.context)).getSupportFragmentManager(), fragment.getTag());
+        }
+        else if (event.id == StockBusStation.BUS_ID_MACH_POSITION_CLOSE) {
+//            PositionCloseFragment fragment = PositionModifyFragment.newInstance(new IntentData<>((Position) event.data));
+//            fragment.show((ViewUtil.getFragmentActivity(event.context)).getSupportFragmentManager(), fragment.getTag());
+        }
+
     }
 
     static {
         CommonMultiTypeDelegate.registDefaultViewType(GoodType.class, R.layout.item_good);
         CommonMultiTypeDelegate.registDefaultViewType(Position.class, R.layout.item_position);
+        CommonMultiTypeDelegate.registDefaultViewType(MachPosition.class, R.layout.item_machposition);
     }
 
 }

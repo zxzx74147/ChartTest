@@ -48,7 +48,6 @@ public class ProfileFragment extends BaseDialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         mBinding = DataBindingUtil.inflate(inflater, R.layout.layout_profile, container, false);
-        mBinding.setUser(AccountManager.sharedInstance().getUser());
         mUserModelView = ViewModelProviders.of(getActivity()).get(UserViewModel.class);
 
         initView();
@@ -64,9 +63,18 @@ public class ProfileFragment extends BaseDialogFragment {
                 if(userUniData.hasError()){
                     return;
                 }
+
                 mBinding.setUserUni(userUniData);
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(mUserModelView!=null) {
+            mUserModelView.getUserUniLiveData().doRefresh();
+        }
     }
 
     private void initView(){

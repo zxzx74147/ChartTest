@@ -32,6 +32,12 @@
     <string name="zhongjin_login">中金所交易登录</string>
     <string name="zhongjin_login_remind">为保证账号安全，登录交易6小时后需重新登录</string>
     <string name="foget_pass">忘记密码？</string>
+    <string name="profile_edit">编辑资料</string>
+    <string name="nickname">昵称</string>
+    <string name="logout_current">退出当前账号</string>
+    <string name="select">选择</string>
+    <string name="take_photo">拍照</string>
+    <string name="gallery">相册</string>
 
     <array name="profile_list">
         <item>@string/online_service</item>

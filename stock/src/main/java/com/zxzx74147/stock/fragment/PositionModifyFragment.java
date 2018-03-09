@@ -34,9 +34,11 @@ import com.zxzx74147.stock.data.GoodType;
 import com.zxzx74147.stock.data.MachPosition;
 import com.zxzx74147.stock.data.MachPositionData;
 import com.zxzx74147.stock.data.Position;
+import com.zxzx74147.stock.data.PositionData;
 import com.zxzx74147.stock.databinding.FragmentPositionBinding;
 import com.zxzx74147.stock.databinding.FragmentPositionModifyBinding;
 import com.zxzx74147.stock.storage.TradesStorage;
+import com.zxzx74147.stock.util.FailDealUtil;
 
 import java.util.LinkedList;
 
@@ -134,10 +136,13 @@ public class PositionModifyFragment extends BaseDialogFragment {
         int limit = FormatUtil.getPureNum(mBinding.buyLimitValue.getText().toString());
         String stopStr = stop==0? "":String.valueOf(stop/100f);
         String limitStr = limit==0? "":String.valueOf(limit/100f);
-        NetworkApi.ApiSubscribe(mTradeStorage.positionModify(mBinding.getData().positionId, limitStr, stopStr, mBinding.checkDeffer.isChecked() ? 1 : 0), new Consumer<MachPositionData>() {
+        NetworkApi.ApiSubscribe(mTradeStorage.positionModify(mBinding.getData().positionId, limitStr, stopStr, mBinding.checkDeffer.isChecked() ? 1 : 0), new Consumer<PositionData>() {
             @Override
-            public void accept(MachPositionData machPositionData) throws Exception {
+            public void accept(PositionData machPositionData) throws Exception {
                 if(machPositionData.hasError()){
+                    if(FailDealUtil.dealFail(getActivity(),machPositionData.failed)){
+                        return;
+                    }
                     ToastUtil.showToast(getActivity(),machPositionData.error.usermsg);
                     return;
                 }

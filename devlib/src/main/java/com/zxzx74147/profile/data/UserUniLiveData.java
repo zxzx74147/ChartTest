@@ -1,6 +1,7 @@
 package com.zxzx74147.profile.data;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 
 import com.zxzx74147.devlib.data.UniApiData;
 import com.zxzx74147.devlib.modules.account.AccountManager;
@@ -20,7 +21,7 @@ import io.reactivex.functions.Consumer;
  * Created by zhengxin on 2018/2/20.
  */
 
-public class UserUniLiveData extends LiveData<UserUniData> {
+public class UserUniLiveData extends MutableLiveData<UserUniData> {
 
     private UserStorage mUserStorage = RetrofitClient.getClient().create(UserStorage.class);
     private Disposable mDisposable = null;

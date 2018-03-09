@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.zxzx74147.devlib.data.UserData" />
+
+        <variable
+            name="userUni"
+            type="com.zxzx74147.profile.data.UserUniData" />
+
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_grey"
+        android:padding="@dimen/default_gap_44">
+
+
+        <com.zxzx74147.devlib.widget.ZXImageView
+            android:id="@+id/portrait"
+            android:layout_width="@dimen/default_gap_140"
+            android:layout_height="@dimen/default_gap_140"
+            app:imageUrl="@{user.portraitUrl}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_corner_radius="@dimen/default_gap_100" />
+
+
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/profile_edit"
+            android:textColor="@color/text_dark_grey"
+            android:textSize="@dimen/default_size_54"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/portrait"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/portrait" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_gap_80"
+            android:text="@string/nickname"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/default_size_34"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/portrait" />
+
+        <EditText
+            android:id="@+id/nickName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@null"
+            android:imeOptions="actionSend"
+            android:singleLine="true"
+            android:text="@{user.nickName}"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/default_size_34"
+            app:layout_constraintBottom_toBottomOf="@+id/textView12"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <View
+            android:id="@+id/div1"
+            android:layout_width="0dp"
+            android:layout_height="1px"
+            android:layout_marginTop="@dimen/default_gap_44"
+            android:background="@color/div_default"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+        <TextView
+            android:id="@+id/t1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_gap_80"
+            android:text="@string/phone_number"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/default_size_34"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/div1" />
+
+        <TextView
+            android:id="@+id/t2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="@{user.phone}"
+            android:textColor="@color/text_light_grey"
+            android:textSize="@dimen/default_size_34"
+            app:layout_constraintBottom_toBottomOf="@+id/t1"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <View
+            android:id="@+id/div2"
+            android:layout_width="0dp"
+            android:layout_height="1px"
+            android:layout_marginTop="@dimen/default_gap_44"
+            android:background="@color/div_default"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/t1" />
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/default_gap_110"
+            android:textColor="@color/white"
+            android:text="@string/logout_current"
+            app:layout_constraintTop_toBottomOf="@+id/div2"
+            android:background="@drawable/rect_round_red"
+            android:textSize="@dimen/default_size_34"
+            android:layout_height="@dimen/default_gap_80" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

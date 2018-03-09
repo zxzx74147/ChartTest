@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="dialogItem"
+            type="com.zxzx74147.devlib.data.DialogItem" />
+
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_gap_96"
+            android:text="@{dialogItem.title}"
+            android:textColor="@color/text_light_grey"
+            android:textSize="@dimen/default_size_30" />
+
+        <LinearLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/cancel"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_gap_96"
+            android:gravity="center"
+            android:text="@string/cancel"
+            android:textColor="@color/text_light_grey"
+            android:textSize="@dimen/default_size_30" />
+
+
+    </LinearLayout>
+</layout>
