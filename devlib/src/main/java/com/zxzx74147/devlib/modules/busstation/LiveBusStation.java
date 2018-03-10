@@ -3,6 +3,7 @@ package com.zxzx74147.devlib.modules.busstation;
 import android.content.Context;
 
 import com.zxzx74147.devlib.data.MessageEvent;
+import com.zxzx74147.live.data.Live;
 import com.zxzx74147.live.data.Teacher;
 import com.zxzx74147.live.data.Text;
 
@@ -20,6 +21,7 @@ public class LiveBusStation {
     public static final int BUS_ID_LIVE_TEACHER = BusIDGen.genBusID("BUS_ID_LIVE_TEACHER");
 
     public static final int BUS_ID_FEED_VIEW = BusIDGen.genBusID("BUS_ID_FEED_VIEW");
+    public static final int BUS_ID_LIVE_VIEW = BusIDGen.genBusID("BUS_ID_LIVE_VIEW");
 
 
     private LiveBusStation() {
@@ -35,6 +37,11 @@ public class LiveBusStation {
     public static void startFeedView(Context context, Text text) {
         MessageEvent event = new MessageEvent<>(BUS_ID_FEED_VIEW, context);
         event.data = text;
+        EventBus.getDefault().post(event);
+    }
+    public static void startLive(Context context, Live live) {
+        MessageEvent event = new MessageEvent<>(BUS_ID_LIVE_VIEW, context);
+        event.data = live;
         EventBus.getDefault().post(event);
     }
 

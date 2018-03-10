@@ -1,11 +1,14 @@
 package com.zxzx74147.devlib.utils;
 
+import android.app.Activity;
+import android.arch.lifecycle.Lifecycle;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.view.ContextThemeWrapper;
 import android.view.View;
@@ -17,6 +20,7 @@ import android.widget.TextView;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxCompoundButton;
+import com.zxzx74147.devlib.base.BaseActivity;
 import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.live.data.Text;
 
@@ -157,8 +161,39 @@ public class ViewUtil {
 
     }
 
+    public static void showSoftPad(TextView text){
+        text.requestFocus();
+        InputMethodManager imm = (InputMethodManager) text.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+//隐藏软键盘 //
+
+        text.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                imm.showSoftInput(text, InputMethodManager.SHOW_IMPLICIT);
+            }
+        },150);
+
+
+    }
+
     public static void locateEditCursor(EditText editText){
         editText.setSelection(editText.getText().length());
+    }
+
+    public static Lifecycle getLivecircle(View v){
+        BaseActivity activity = (BaseActivity) v.getContext();
+        return activity.getLifecycle();
+    }
+
+    public static Context getContext(Object obj){
+        if(obj instanceof Activity){
+            return (Context) obj;
+        }
+        if(obj instanceof Fragment){
+            return ((Fragment) obj).getContext();
+        }
+        return null;
+
     }
 
     public static void changeTabs(View tabLayout,String text) {

@@ -2,6 +2,7 @@ package com.zxzx74147.profile.storage;
 
 import com.zxzx74147.devlib.data.UniApiData;
 import com.zxzx74147.devlib.network.RetrofitClient;
+import com.zxzx74147.profile.data.AuthApplyData;
 import com.zxzx74147.profile.data.UserUniData;
 
 import io.reactivex.Observable;
@@ -42,11 +43,16 @@ public interface AccountStorage {
     @GET("/user/trades/password")
     Observable<UserUniData> tradePassword(@Query("passwd") String passwd);
 
-    @GET("user/trades/login")
+    @GET("/user/trades/login")
     Observable<UserUniData> tradeLogin(@Query("passwd") String passwd);
 
+    @GET("/user/account/logout")
+    Observable<UniApiData> logout();
 
 
+
+    @GET("/user/simauth/apply")
+    Observable<AuthApplyData> authApply(@Query("name") String name, @Query("identityNo") String identityNo);
 
 
 

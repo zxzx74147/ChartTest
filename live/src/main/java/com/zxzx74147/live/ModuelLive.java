@@ -11,6 +11,7 @@ import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.live.activity.FeedReplyActivity;
 import com.zxzx74147.live.data.Live;
+import com.zxzx74147.live.data.Msg;
 import com.zxzx74147.live.data.Reply;
 import com.zxzx74147.live.data.Teacher;
 import com.zxzx74147.live.data.TeacherLive;
@@ -38,7 +39,6 @@ public class ModuelLive {
     public static void init(Application application) {
         mApp = application;
         mModule = new ModuelLive();
-
     }
 
     static {
@@ -46,6 +46,7 @@ public class ModuelLive {
         CommonMultiTypeDelegate.registDefaultViewType(TeacherLive.class, R.layout.item_live_time);
         CommonMultiTypeDelegate.registDefaultViewType(Text.class, R.layout.item_text);
         CommonMultiTypeDelegate.registDefaultViewType(Reply.class, R.layout.item_reply);
+        CommonMultiTypeDelegate.registDefaultViewType(Msg.class, R.layout.item_msg);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

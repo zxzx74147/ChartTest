@@ -1,8 +1,7 @@
 package com.zxzx74147.profile.storage;
 
 import com.zxzx74147.devlib.data.UniApiData;
-import com.zxzx74147.profile.data.UserUniData;
-import com.zxzx74147.profile.data.VoucherListData;
+import com.zxzx74147.profile.data.VocherListData;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -15,15 +14,13 @@ import retrofit2.http.Query;
 public interface EventStorage {
 
     @GET("/events/voucher/getmylist")
-    Observable<VoucherListData> eventsVoucherMyList(@Query("page") int page);
+    Observable<VocherListData> eventsVoucherMyList(@Query("page") int page);
 
     @GET("/events/voucher/getlist")
-    Observable<VoucherListData> eventsVoucherList();
+    Observable<VocherListData> eventsVoucherList();
 
     @GET("/events/voucher/pay")
     Observable<UniApiData> eventsVoucherPay(@Query("voucherId") String voucherId);
-
-
 
 
 }

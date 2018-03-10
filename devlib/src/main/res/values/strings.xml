@@ -39,4 +39,6 @@
     <string name="format_HHMM">HH:mm</string>
     <string name="format_YYYYMMDD">YYYY-MM-dd</string>
     <string name="just_now">刚刚</string>
+    <string name="submit">提交</string>
+    <string name="succ">成功</string>
 </resources>

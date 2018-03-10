@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="live"
+            type="com.zxzx74147.live.data.Live" />
+
+        <variable
+            name="liveMsg"
+            type="com.zxzx74147.live.data.LiveMsgListData" />
+
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/text_blue">
+
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="0dip"
+            android:layout_height="@dimen/default_gap_350"
+            android:layout_marginLeft="@dimen/default_gap_44"
+            app:layout_constraintBottom_toTopOf="@+id/goodList"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.zxzx74147.devlib.widget.CommonRecyclerView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom" />
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/default_gap_44"
+            android:background="@null"
+            android:drawablePadding="@dimen/default_gap_10"
+
+            android:drawableTop="@drawable/home_icon_like_normal"
+            android:text="@{String.valueOf(liveMsg.liveDynamic.loveNum)}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/default_size_22"
+            app:layout_constraintBottom_toTopOf="@+id/goodList"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_gap_44"
+            android:background="@null"
+            android:drawablePadding="@dimen/default_gap_10"
+            android:drawableTop="@drawable/selector_home_icon_comment"
+            android:paddingBottom="@dimen/default_gap_30"
+            android:text="@{String.valueOf(liveMsg.liveDynamic.msgNum)}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/default_size_22"
+            app:layout_constraintBottom_toTopOf="@+id/like"
+            app:layout_constraintEnd_toEndOf="@+id/like" />
+
+
+        <com.zxzx74147.stock.widget.GoodListWidget
+            android:id="@+id/goodList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/default_gap_16"
+            android:background="@color/tran"
+            android:layout_marginBottom="@dimen/default_gap_16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/comment_edit"
+            android:layout_width="match_parent"
+            android:singleLine="true"
+            android:imeOptions="actionSend"
+            android:layout_marginBottom="@dimen/default_gap_6"
+            android:textColor="@color/text_black"
+            android:textColorHint="@color/text_light_grey"
+            android:textSize="@dimen/default_size_30"
+            android:background="@drawable/rect_round_white"
+            android:hint="@string/live_msg_remind"
+            android:visibility="gone"
+            android:paddingLeft="@dimen/default_gap_24"
+            android:paddingRight="@dimen/default_gap_24"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/default_gap_44"
+            android:layout_marginRight="@dimen/default_gap_44"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:minHeight="@dimen/default_gap_88"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_height="wrap_content" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
+

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.zxzx74147.profile.data.Message" />
+
+        <import type="com.zxzx74147.devlib.utils.TimeUtil" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:background="@color/bg_grey">
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.2" />
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/common_title"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/default_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@{@string/auth}" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_gap_44"
+            android:layout_marginTop="@dimen/default_gap_60"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include"
+            app:srcCompat="@drawable/name_certification_icon" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_gap_44"
+            android:layout_marginRight="@dimen/default_gap_44"
+            android:text="@string/auth_remind"
+            android:textColor="@color/text_dark_grey"
+            android:textSize="@dimen/default_size_26"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_gap_100"
+            android:text="@string/name"
+            android:textSize="@dimen/default_size_30"
+            android:textColor="@color/text_black"
+            android:padding="@dimen/default_gap_20"
+            android:layout_marginLeft="@dimen/default_gap_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+        <EditText
+            android:id="@+id/name_edit"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/default_gap_20"
+            android:ems="10"
+            android:layout_marginRight="@dimen/default_gap_24"
+            android:hint="@string/name_hint"
+            android:singleLine="true"
+            android:textColor="@color/text_black"
+            android:textColorHint="@color/text_light_grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="@dimen/default_size_30"
+            android:background="@null"
+            app:layout_constraintBottom_toBottomOf="@+id/textView17"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toTopOf="@+id/textView17" />
+
+        <View
+            android:id="@+id/div1"
+            android:layout_width="0dp"
+            android:layout_height="1px"
+            android:layout_marginTop="@dimen/default_gap_24"
+            android:background="@color/div_default"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name_edit" />
+
+
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_gap_24"
+            android:text="@string/cid"
+            android:textSize="@dimen/default_size_30"
+            android:textColor="@color/text_black"
+            android:padding="@dimen/default_gap_20"
+            android:layout_marginLeft="@dimen/default_gap_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/div1" />
+
+        <EditText
+            android:id="@+id/cid_edit"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/default_gap_20"
+            android:ems="10"
+            android:layout_marginRight="@dimen/default_gap_24"
+            android:hint="@string/cid_hint"
+            android:singleLine="true"
+            android:textColor="@color/text_black"
+            android:textColorHint="@color/text_light_grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="@dimen/default_size_30"
+            android:background="@null"
+            app:layout_constraintBottom_toBottomOf="@+id/textView19"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toTopOf="@+id/textView19" />
+
+        <View
+            android:id="@+id/div2"
+            android:layout_width="0dp"
+            android:layout_height="1px"
+            android:layout_marginTop="@dimen/default_gap_24"
+            android:background="@color/div_default"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cid_edit" />
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_height="wrap_content"
+            android:text="@string/auth_remind2"
+            android:layout_marginLeft="@dimen/default_gap_44"
+            android:layout_marginRight="@dimen/default_gap_44"
+            android:layout_width="0dp"
+            android:textSize="@dimen/default_size_28"
+            android:textColor="@color/text_light_grey"
+            android:layout_marginTop="@dimen/default_gap_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/div2" />
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/auth_remind2"
+            android:gravity="center"
+            android:textColor="@color/text_light_grey"
+            android:layout_marginBottom="@dimen/default_gap_80"
+
+            android:textSize="@dimen/default_size_28"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="@string/auth_remind3" />
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="0dp"
+            android:layout_marginLeft="@dimen/default_gap_44"
+            android:layout_marginRight="@dimen/default_gap_44"
+            android:layout_height="wrap_content"
+            android:text="@string/submit"
+            android:textColor="@color/white"
+            android:textSize="@dimen/default_size_34"
+            android:layout_marginBottom="@dimen/default_gap_28"
+            android:background="@drawable/rect_round_red"
+            app:layout_constraintBottom_toTopOf="@+id/textView21"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.zxzx74147.devlib.base.BaseActivity;
 import com.zxzx74147.devlib.base.BaseFragment;
+import com.zxzx74147.devlib.modules.busstation.LiveBusStation;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.devlib.utils.ToastUtil;
@@ -47,7 +48,7 @@ public class LiveListFragment extends BaseFragment {
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static LiveListFragment newInstance(int columnCount) {
+    public static LiveListFragment newInstance() {
         LiveListFragment fragment = new LiveListFragment();
         return fragment;
     }
@@ -96,8 +97,9 @@ public class LiveListFragment extends BaseFragment {
     }
 
     private void startLive(Live live) {
-        BaseFragment fragment = LiveFragment.newInstance(live);
-        ((BaseActivity) getActivity()).loadRootFragment(R.id.root_fragment, fragment, true, false);
+        LiveBusStation.startLive(getContext(),live);
+//        BaseFragment fragment = LiveFragment.newInstance(live);
+//        ((BaseActivity) getActivity()).loadRootFragment(R.id.root_fragment, fragment, true, false);
     }
 
     private void initData() {

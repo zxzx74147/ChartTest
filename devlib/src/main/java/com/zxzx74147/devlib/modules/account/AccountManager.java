@@ -46,7 +46,8 @@ public class AccountManager {
     }
 
     public void logout(){
-        KVStore.put(KEY,null);
+        mUser = null;
+        KVStore.put(KEY,"");
     }
 
 

@@ -58,6 +58,7 @@
     <string name="withdraw_fail_content">提现失败，请联系客服 \n给您造成的不便，敬请谅解</string>
     <string name="withdraw_succ">提现成功</string>
 
+
     <!--<item name="recharge_wechat_drawable">@drawable/pay_weixin</item>-->
     <!--<item name="recharge_wechat_drawable">@drawable/pay_zhifubao</item>-->
     <!--<item name="recharge_wechat_drawable">@drawable/pay_up</item>-->

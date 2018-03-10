@@ -13,10 +13,13 @@ import com.zxzx74147.devlib.widget.CommonRecyclerViewAdapter;
 import com.zxzx74147.profile.activity.LoginPhoneActivity;
 import com.zxzx74147.profile.activity.MessageCenterActivity;
 import com.zxzx74147.profile.data.Message;
+import com.zxzx74147.profile.data.Voucher;
+import com.zxzx74147.profile.fragment.LogoutFragment;
 import com.zxzx74147.profile.fragment.PasswordInputFragment;
 import com.zxzx74147.profile.fragment.PasswordSetFragment;
 import com.zxzx74147.profile.fragment.ProfileEditFragment;
 import com.zxzx74147.profile.fragment.ProfileFragment;
+import com.zxzx74147.profile.fragment.VocherFragment;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -56,11 +59,19 @@ public class ModuleProfile {
         }else if (event.id == ProfileBusStation.BUS_ID_PROFILE_MOTIFY) {
             ProfileEditFragment fragment = ProfileEditFragment.newInstance();
             fragment.show((ViewUtil.getFragmentActivity(event.context)).getSupportFragmentManager(), fragment.getTag());
+        }else if (event.id == ProfileBusStation.BUS_ID_PROFILE_VOCHER) {
+            VocherFragment fragment = VocherFragment.newInstance();
+            fragment.show((ViewUtil.getFragmentActivity(event.context)).getSupportFragmentManager(), fragment.getTag());
+        }else if (event.id == ProfileBusStation.BUS_ID_PROFILE_LOGOUT_VERIFY) {
+            LogoutFragment fragment = LogoutFragment.newInstance();
+            fragment.show((ViewUtil.getFragmentActivity(event.context)).getSupportFragmentManager(), fragment.getTag());
         }
+
     }
 
     static {
         CommonMultiTypeDelegate.registDefaultViewType(Message.class,R.layout.item_message);
+        CommonMultiTypeDelegate.registDefaultViewType(Voucher.class,R.layout.item_voucher);
     }
 
 }

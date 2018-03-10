@@ -9,6 +9,8 @@ import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.live.stroage.LiveStorage;
 
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -18,10 +20,13 @@ import io.reactivex.disposables.Disposable;
 
 public class LiveMsgListLiveData extends LiveData<LiveMsgListData> implements Serializable {
 
+    private static final int MAX_MSG_NUM = 300;
     private Live mLive = null;
-    private static final int PERIOD = 1000 * 5;
+    private static final int PERIOD = 1000 * 2;
     private Timer mTimer = null;
     private Disposable mDisposable = null;
+    private LinkedList<Msg> mMsgData = new LinkedList<>();
+    private LinkedList<Msg> mBullsetMsgData = new LinkedList<>();
 
     public LiveMsgListLiveData() {
     }
@@ -29,6 +34,10 @@ public class LiveMsgListLiveData extends LiveData<LiveMsgListData> implements Se
     public void LiveMsgListLiveData(Live live) {
         mLive = live;
         doRefresh();
+    }
+
+    public void setLive(Live live){
+        mLive = live;
     }
 
     private LiveStorage mStockStorage = RetrofitClient.getClient().create(LiveStorage.class);
@@ -76,6 +85,8 @@ public class LiveMsgListLiveData extends LiveData<LiveMsgListData> implements Se
 
             @Override
             public void onNext(LiveMsgListData kline) {
+                updateMsg(kline.msgList.msg);
+                kline.msgList.msg = mMsgData;
                 setValue(kline);
                 mDisposable = null;
             }
@@ -93,4 +104,40 @@ public class LiveMsgListLiveData extends LiveData<LiveMsgListData> implements Se
         });
 
     }
+
+    public void updateMsg(List<Msg> msgs){
+        if(msgs==null){
+            return;
+        }
+        for(Msg msg:msgs){
+            switch (msg.type){
+                case Msg.TYPE_BULLET:
+                    mBullsetMsgData.addLast(msg);
+                    break;
+                case Msg.TYPE_TEXT:
+                case Msg.TYPE_PROFIT:
+                case Msg.TYPE_SYSTEM:
+                    mMsgData.addLast(msg);
+                    break;
+                    default:
+
+            }
+
+        }
+        while(mMsgData.size()>MAX_MSG_NUM){
+            mMsgData.removeFirst();
+        }
+        while(mBullsetMsgData.size()>MAX_MSG_NUM){
+            mBullsetMsgData.removeFirst();
+        }
+
+    }
+
+    public Msg popBullet(){
+        if(mBullsetMsgData.size()>0){
+            return mBullsetMsgData.removeFirst();
+        }
+        return null;
+    }
+
 }

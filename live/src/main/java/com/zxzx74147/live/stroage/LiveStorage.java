@@ -3,10 +3,13 @@ package com.zxzx74147.live.stroage;
 import com.zxzx74147.devlib.data.UniApiData;
 import com.zxzx74147.live.data.HomeData;
 import com.zxzx74147.live.data.LiveMsgListData;
+import com.zxzx74147.live.data.Msg;
+import com.zxzx74147.live.data.MsgData;
 import com.zxzx74147.live.data.TeacherLiveListData;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -15,7 +18,7 @@ import retrofit2.http.Query;
 
 public interface LiveStorage {
 
-    @GET("/live/room/getlist ")
+    @GET("/live/room/getlist")
     Observable<HomeData> roomGetList();
 
     @GET("/live/room/join")
@@ -44,6 +47,9 @@ public interface LiveStorage {
 
     @GET("/live/teacher/love")
     Observable<UniApiData> teacherLove(@Query("teacherId") int teacherId);
+
+    @POST("/live/msg/send")
+    Observable<MsgData> msgSend(@Query("liveId") long liveId, @Query("content") String content);
 
 
 

@@ -28,6 +28,7 @@ import com.zxzx74147.devlib.fragment.CommonItemSelectorDialog;
 import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.modules.account.UserStorage;
 import com.zxzx74147.devlib.modules.account.UserViewModel;
+import com.zxzx74147.devlib.modules.busstation.ProfileBusStation;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.devlib.utils.ImageUtil;
@@ -107,6 +108,10 @@ public class ProfileEditFragment extends BaseDialogFragment {
                     doEditName();
                 }
             }
+        });
+
+        RxView.clicks(mBinding.logout).subscribe(v->{
+            ProfileBusStation.startProfileLogout(getContext());
         });
 
 

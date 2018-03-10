@@ -38,6 +38,16 @@
     <string name="select">选择</string>
     <string name="take_photo">拍照</string>
     <string name="gallery">相册</string>
+    <string name="my_vocher">我的代金券</string>
+    <string name="auth">实名认证</string>
+    <string name="auth_remind">为保障资金安全，交易所实行提现实名认证制度，完成认证即可正常提现（申请人数较多时会延长审核时间，请耐心等待）</string>
+    <string name="name">姓名</string>
+    <string name="name_hint">请输入您的姓名</string>
+    <string name="cid">身份证</string>
+    <string name="cid_hint">请输入您的身份证号码</string>
+    <string name="auth_remind2">请填写实名认证信息，且实名认证姓名需与提现银行卡户 名一致</string>
+    <string name="auth_remind3">蚂蚁投资承诺您的信息安全</string>
+    <string name="logout_remind">确定退出该账号？</string>
 
     <array name="profile_list">
         <item>@string/online_service</item>

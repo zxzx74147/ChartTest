@@ -17,6 +17,8 @@ public class MainBusStation {
 
     public static final int BUS_ID_MAIN_START_MAIN = BusIDGen.genBusID("BUS_ID_MAIN_START_MAIN");
 
+    public static final int BUS_ID_MAIN_LOGOUT = BusIDGen.genBusID("BUS_ID_MAIN_LOGOUT");
+
 
     private MainBusStation() {
 
@@ -24,6 +26,11 @@ public class MainBusStation {
 
     public static void startMain(Context context) {
         MessageEvent event = new MessageEvent<>(BUS_ID_MAIN_START_MAIN, context);
+        EventBus.getDefault().post(event);
+    }
+
+    public static void logout(Context context) {
+        MessageEvent event = new MessageEvent<>(BUS_ID_MAIN_LOGOUT, context);
         EventBus.getDefault().post(event);
     }
 

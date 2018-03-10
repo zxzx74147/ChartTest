@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.zxzx74147.charttest.databinding.ActivityLauncherBinding;
+import com.zxzx74147.devlib.base.BaseActivity;
 import com.zxzx74147.devlib.data.SysInitData;
 import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.modules.busstation.MainBusStation;
@@ -23,7 +24,7 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class LauncherActivity extends AppCompatActivity {
+public class LauncherActivity extends BaseActivity {
 
     private ActivityLauncherBinding mBinding = null;
 

@@ -83,7 +83,7 @@ public class RecyclerViewUtil {
             if (lastData[0] == null) {
                 return;
             }
-            NetworkApi.ApiSubscribe(callback.getObserverble(lastData[0]), new Observer<Object>() {
+            NetworkApi.ApiSubscribe(ViewUtil.getLivecircle(mRecyclerView),callback.getObserverble(lastData[0]), new Observer<UniApiData>() {
                 @Override
                 public void onSubscribe(Disposable d) {
                     refreshDisposable[0] = d;
@@ -94,7 +94,7 @@ public class RecyclerViewUtil {
                 }
 
                 @Override
-                public void onNext(Object o) {
+                public void onNext(UniApiData o) {
                     if (((UniApiData) o).hasError()) {
                         ToastUtil.showToast(mRecyclerView.getContext(), ((UniApiData) o).error.usermsg);
                         return;

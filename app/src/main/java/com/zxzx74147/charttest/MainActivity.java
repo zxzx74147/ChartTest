@@ -7,12 +7,16 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
 
 import com.zxzx74147.charttest.databinding.ActivityMainBinding;
 import com.zxzx74147.devlib.base.BaseActivity;
 import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.devlib.modules.account.UserViewModel;
 import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
+import com.zxzx74147.live.fragments.FeedFragment;
+import com.zxzx74147.live.fragments.LiveListFragment;
 import com.zxzx74147.profile.data.UserUniData;
 import com.zxzx74147.profile.fragment.ProfileFragment;
 import com.zxzx74147.stock.data.GoodType;
@@ -52,6 +56,24 @@ public class MainActivity extends BaseActivity {
 //        mHeaderBinding= mBinding.headLayout;
 //        mHeaderBinding =(LayoutLiveHeadBinding)mBinding.headLayout;
 //        RxView.clicks(mBinding.headLayout.assetTotal).subscribe(o -> ZXFragmentJumpHelper.startFragment(MainActivity.this, ProfileFragment.class,null));
+
+        FeedFragment feedFragment = FeedFragment.newInstance();
+        LiveListFragment liveListFragment = LiveListFragment.newInstance();
+        FragmentPagerAdapter mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                if(position==0){
+                    return feedFragment;
+                }
+                return liveListFragment;
+            }
+
+            @Override
+            public int getCount() {
+                return 2;
+            }
+        };
+        mBinding.scrollView.setAdapter(mAdapter);
     }
 
     private void initData() {
@@ -63,6 +85,8 @@ public class MainActivity extends BaseActivity {
             mBinding.setUser(userUniData.user);
         });
     }
+
+
 
 
 }

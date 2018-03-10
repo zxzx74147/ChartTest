@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">蚂蚁投资教室</string>
-    <string name="network_host">http://47.104.7.90/</string>
+    <string name="network_host">http://47.104.27.243/</string>
     <string name="umeng">5a9668fba40fa3717e00025a</string>
+    <string name="live_msg_remind">学投资从互动开始…</string>
 </resources>
