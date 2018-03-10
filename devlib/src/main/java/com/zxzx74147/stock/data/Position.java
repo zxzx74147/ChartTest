@@ -34,6 +34,7 @@ public class Position implements Serializable {
     public int isDeferred;//是否过夜
     public float deferred;//累计过夜费
     public int isVoucher;
+    public DefferList deferredList;
 
     public String getCloseTypeStr() {
         switch (closeType) {

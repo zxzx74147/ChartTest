@@ -12,6 +12,7 @@ import com.zxzx74147.stock.activity.TradeListActivity;
 import com.zxzx74147.stock.data.GoodType;
 import com.zxzx74147.stock.data.MachPosition;
 import com.zxzx74147.stock.data.Position;
+import com.zxzx74147.stock.fragment.DefferListFragment;
 import com.zxzx74147.stock.fragment.PositionCloseFragment;
 import com.zxzx74147.stock.fragment.PositionFragment;
 import com.zxzx74147.stock.fragment.PositionModifyFragment;
@@ -73,7 +74,11 @@ public class ModuleStock {
         else if (event.id == StockBusStation.BUS_ID_MACH_POSITION_CLOSE) {
 //            PositionCloseFragment fragment = PositionModifyFragment.newInstance(new IntentData<>((Position) event.data));
 //            fragment.show((ViewUtil.getFragmentActivity(event.context)).getSupportFragmentManager(), fragment.getTag());
+        }else if (event.id == StockBusStation.BUS_ID_MACH_POSITION_DEFFER) {
+            DefferListFragment fragment = DefferListFragment.newInstance(new IntentData<>((Position) event.data));
+            fragment.show((ViewUtil.getFragmentActivity(event.context)).getSupportFragmentManager(), fragment.getTag());
         }
+
 
     }
 

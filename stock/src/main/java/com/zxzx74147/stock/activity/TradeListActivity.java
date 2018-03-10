@@ -67,6 +67,7 @@ public class TradeListActivity extends BaseActivity {
             }
         };
         mAdapter.setMultiTypeDelegate(delegate);
+        mAdapter.setCommonEmptyView(this,R.string.no_trade);
         mBinding.list.setLayoutManager(new LinearLayoutManager(this));
         mBinding.list.setAdapter(mAdapter);
         mBinding.list.addItemDecoration(new RecycleViewDivider(

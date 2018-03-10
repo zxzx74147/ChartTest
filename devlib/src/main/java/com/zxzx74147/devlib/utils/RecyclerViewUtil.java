@@ -2,6 +2,7 @@ package com.zxzx74147.devlib.utils;
 
 import android.support.v7.widget.RecyclerView;
 
+import com.dinuscxj.refresh.MaterialDragDistanceConverter;
 import com.dinuscxj.refresh.RecyclerRefreshLayout;
 import com.zxzx74147.devlib.data.BaseListData;
 import com.zxzx74147.devlib.data.UniApiData;
@@ -22,6 +23,7 @@ public class RecyclerViewUtil {
         final Disposable[] refreshDisposable = {null};
         final Disposable[] loadMoreDisposable = {null};
         final BaseListData[] lastData = {null};
+        mRecyclerRefreshLayout.setDragDistanceConverter(new MaterialDragDistanceConverter());
 //        mRecyclerView.post(new Runnable() {
 //            @Override
 //            public void run() {
@@ -138,7 +140,6 @@ public class RecyclerViewUtil {
         if (data.hasMore != 0) {
             adapter.setEnableLoadMore(true);
         }
-
 
     }
 

@@ -103,6 +103,9 @@ public class PositionFragment extends BaseDialogFragment {
         mPositionAdapter.setMultiTypeDelegate(delegate);
         mMachAdapter.setMultiTypeDelegate(delegate);
 
+        mPositionAdapter.setCommonEmptyView(getActivity(),R.string.no_position);
+        mMachAdapter.setCommonEmptyView(getActivity(),R.string.no_machposition);
+
         LinearLayoutManager lm = new LinearLayoutManager(getContext());
         lm.setOrientation(LinearLayoutManager.VERTICAL);
         mBinding.list.setLayoutManager(lm);

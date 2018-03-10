@@ -37,6 +37,7 @@
             android:id="@+id/imageView"
             android:layout_width="@dimen/default_gap_180"
             android:layout_height="@dimen/default_gap_180"
+            android:layout_marginTop="@dimen/default_gap_66"
             app:imageUrl="@{teacher.portraitUrl}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView"

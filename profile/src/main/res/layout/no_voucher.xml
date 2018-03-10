@@ -19,9 +19,9 @@
             android:drawablePadding="@dimen/default_gap_60"
             android:gravity="center"
 
-            android:drawableTop="@drawable/no_record"
+            android:drawableTop="@drawable/no_vouchers"
             android:orientation="vertical"
-            android:text="@{content}"
+            android:text="@string/no_vochers"
             android:textColor="@color/text_light_grey" />
 
 

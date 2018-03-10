@@ -73,7 +73,7 @@ public class VocherFragment extends BaseDialogFragment {
         mVoucherAdapter = new CommonRecyclerViewAdapter<>(null);
         CommonMultiTypeDelegate delegate = new CommonMultiTypeDelegate();
         mVoucherAdapter.setMultiTypeDelegate(delegate);
-
+        mVoucherAdapter.setEmptyView(R.layout.no_voucher);
         LinearLayoutManager lm = new LinearLayoutManager(getContext());
         lm.setOrientation(LinearLayoutManager.VERTICAL);
         mBinding.list.setLayoutManager(lm);

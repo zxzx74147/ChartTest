@@ -25,6 +25,7 @@ public class StockBusStation {
     public static final int BUS_ID_POSITION_CLOSE = BusIDGen.genBusID("BUS_ID_POSITION_CLOSE");
     public static final int BUS_ID_MACH_POSITION_MODIFY = BusIDGen.genBusID("BUS_ID_MACH_POSITION_MODIFY");
     public static final int BUS_ID_MACH_POSITION_CLOSE = BusIDGen.genBusID("BUS_ID_MACH_POSITION_CLOSE");
+    public static final int BUS_ID_MACH_POSITION_DEFFER = BusIDGen.genBusID("BUS_ID_MACH_POSITION_DEFFER");
 
 
     private StockBusStation() {
@@ -85,6 +86,12 @@ public class StockBusStation {
     public static void closeMachposition(Context context, MachPosition position) {
         MessageEvent event = new MessageEvent<>(BUS_ID_MACH_POSITION_CLOSE, context);
         event.data = position;
+        EventBus.getDefault().post(event);
+    }
+
+    public static void viewPositionDeffer(Context context,Position position) {
+        MessageEvent event = new MessageEvent<>(BUS_ID_MACH_POSITION_DEFFER, context);
+        event.data =position;
         EventBus.getDefault().post(event);
     }
 
