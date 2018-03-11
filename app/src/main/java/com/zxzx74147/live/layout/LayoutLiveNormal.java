@@ -72,6 +72,9 @@ public class LayoutLiveNormal extends FrameLayout {
         mBingding.list.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter.setMultiTypeDelegate(new CommonMultiTypeDelegate());
         mBingding.list.setAdapter(mAdapter);
+        mBingding.goodList.setProvider(ViewModelProviders.of((FragmentActivity) getContext()));
+        mBingding.goodList.setLifeCircle((FragmentActivity) getContext());
+        mBingding.bubble.setDefaultDrawableList();
 
 
 //        RxView.touches(mBingding.list).subscribe(new Consumer<MotionEvent>() {
@@ -100,6 +103,8 @@ public class LayoutLiveNormal extends FrameLayout {
                 return;
             }
             mAdapter.setNewData(liveMsgListData.msgList.msg);
+            mBingding.bubble.startAnimation( mBingding.bubble.getWidth()/2,  mBingding.bubble.getHeight()-getResources().getDimensionPixelSize(R.dimen.default_gap_50));
+
         });
 
 

@@ -7,7 +7,7 @@
     <application
         android:name=".ZXApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
@@ -16,7 +16,11 @@
             android:value="1.0.0"
             android:name="api_version">
 
+
         </meta-data>
+
+        <meta-data android:name="com.alibaba.app.appkey" android:value="24814378"/> <!-- 请填写你自己的- appKey -->
+        <meta-data android:name="com.alibaba.app.appsecret" android:value="b4474e6cf05380d7f6d7c380edbbb9e8"/> <!-- 请填写你自己的appSecret -->
 
         <meta-data android:value="5a9668fba40fa3717e00025a" android:name="UMENG_APPKEY"/>
         <meta-data android:value="main" android:name="UMENG_CHANNEL"/>
@@ -32,6 +36,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+
+
+
+        <receiver android:name=".push.AliPushReceiver">
+            <intent-filter>
+                <action android:name="com.alibaba.push2.action.NOTIFICATION_OPENED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.alibaba.push2.action.NOTIFICATION_REMOVED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.alibaba.sdk.android.push.RECEIVE" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

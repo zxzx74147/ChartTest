@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.zxzx74147.charttest.databinding.ActivityLauncherBinding;
 import com.zxzx74147.devlib.base.BaseActivity;
 import com.zxzx74147.devlib.data.SysInitData;
+import com.zxzx74147.devlib.kvstore.KVStore;
 import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.modules.busstation.MainBusStation;
 import com.zxzx74147.devlib.modules.sys.SysInitManager;
@@ -58,9 +59,9 @@ public class LauncherActivity extends BaseActivity {
     }
 
     private void sysInit() {
-
+        String token = KVStore.getString("push_id");
         SysStorage mStorage = RetrofitClient.getClient().create(SysStorage.class);
-        Observable<SysInitData> initObser = mStorage.sysInit("main", DeviceIDMananger.sharedInstance().getDeviceID(), "", "", PackageInfoMananger.sharedInstance().getVersionInfo().getVersonName());
+        Observable<SysInitData> initObser = mStorage.sysInit("main", DeviceIDMananger.sharedInstance().getDeviceID(), token, "", PackageInfoMananger.sharedInstance().getVersionInfo().getVersonName());
         NetworkApi.ApiSubscribe(initObser, sysInit -> {
             if (sysInit.hasError()) {
                 ToastUtil.showToast(LauncherActivity.this, sysInit.error.usermsg);

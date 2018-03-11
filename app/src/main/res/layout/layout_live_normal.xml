@@ -39,13 +39,13 @@
 
         <Button
             android:id="@+id/like"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/default_gap_48"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/default_gap_44"
             android:background="@null"
             android:drawablePadding="@dimen/default_gap_10"
-
             android:drawableTop="@drawable/home_icon_like_normal"
+            android:gravity="center"
             android:text="@{String.valueOf(liveMsg.liveDynamic.loveNum)}"
             android:textColor="@color/white"
             android:textSize="@dimen/default_size_22"
@@ -54,13 +54,13 @@
 
         <Button
             android:id="@+id/comment"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/default_gap_48"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_gap_44"
             android:background="@null"
             android:drawablePadding="@dimen/default_gap_10"
             android:drawableTop="@drawable/selector_home_icon_comment"
-            android:paddingBottom="@dimen/default_gap_30"
+            android:gravity="center"
             android:text="@{String.valueOf(liveMsg.liveDynamic.msgNum)}"
             android:textColor="@color/white"
             android:textSize="@dimen/default_size_22"
@@ -72,9 +72,9 @@
             android:id="@+id/goodList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/default_gap_16"
-            android:background="@color/tran"
             android:layout_marginBottom="@dimen/default_gap_16"
+            android:background="@color/tran"
+            android:paddingTop="@dimen/default_gap_16"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -82,25 +82,33 @@
         <EditText
             android:id="@+id/comment_edit"
             android:layout_width="match_parent"
-            android:singleLine="true"
-            android:imeOptions="actionSend"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_gap_6"
+            android:layout_marginLeft="@dimen/default_gap_44"
+            android:layout_marginRight="@dimen/default_gap_44"
+            android:background="@drawable/rect_round_white"
+            android:gravity="center_vertical"
+            android:hint="@string/live_msg_remind"
+            android:imeOptions="actionSend"
+            android:minHeight="@dimen/default_gap_88"
+            android:paddingLeft="@dimen/default_gap_24"
+            android:paddingRight="@dimen/default_gap_24"
+            android:singleLine="true"
             android:textColor="@color/text_black"
             android:textColorHint="@color/text_light_grey"
             android:textSize="@dimen/default_size_30"
-            android:background="@drawable/rect_round_white"
-            android:hint="@string/live_msg_remind"
             android:visibility="gone"
-            android:paddingLeft="@dimen/default_gap_24"
-            android:paddingRight="@dimen/default_gap_24"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="@dimen/default_gap_44"
-            android:layout_marginRight="@dimen/default_gap_44"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:minHeight="@dimen/default_gap_88"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_height="wrap_content" />
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.zxzx74147.live.widget.BubbleView
+            android:id="@+id/bubble"
+            android:layout_width="@dimen/default_gap_136"
+            android:layout_height="@dimen/default_gap_350"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintBottom_toBottomOf="@id/like"
+            app:layout_constraintEnd_toEndOf="parent" />
 
 
     </android.support.constraint.ConstraintLayout>

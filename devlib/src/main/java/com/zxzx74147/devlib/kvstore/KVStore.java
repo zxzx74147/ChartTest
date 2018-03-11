@@ -59,4 +59,13 @@ public class KVStore {
         }
         return null;
     }
+
+    public static String getString(String key) {
+        try {
+            return mSnappydb.get(key);
+        } catch (SnappydbException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

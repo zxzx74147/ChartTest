@@ -8,7 +8,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.zxzx74147.charttest"
+        applicationId "com.ylteb.antlive"
         minSdkVersion 19
         targetSdkVersion 27
         versionCode 1

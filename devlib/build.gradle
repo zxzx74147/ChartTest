@@ -17,6 +17,12 @@ android {
 
     }
 
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -90,6 +96,7 @@ dependencies {
     api 'com.squareup.okhttp3:okhttp:3.9.1'
     api 'com.squareup.retrofit2:converter-gson:2.3.0'
     api 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    api 'com.aliyun.ams:alicloud-android-push:3.1.1'
     //    api 'com.squareup.retrofit2:converter-scalars:2.3.0'
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
