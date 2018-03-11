@@ -23,75 +23,26 @@ import io.reactivex.functions.Consumer;
 
 public class UserUniLiveData extends MutableLiveData<UserUniData> {
 
-    private UserStorage mUserStorage = RetrofitClient.getClient().create(UserStorage.class);
-    private Disposable mDisposable = null;
-    private static final int PERIOD = 1000 * 10;
-    private Timer mTimer = null;
+
+
 
     @Override
     protected void onActive() {
-        if (mTimer != null) {
-            mTimer.cancel();
-            mTimer = null;
-        }
-        mTimer = new Timer();
-        mTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                doRefresh();
-            }
-        }, 0, PERIOD);
+        AccountManager.sharedInstance().registerConsumer(mConsumer);
     }
 
     @Override
     protected void onInactive() {
-        if (mDisposable != null) {
-            mDisposable.dispose();
-        }
-        mTimer.cancel();
-        mTimer = null;
+        AccountManager.sharedInstance().unregisterConsumer(mConsumer);
     }
 
-    public void doRefresh() {
+    private Consumer  mConsumer = new Consumer<UserUniData>() {
 
-        if (!AccountManager.sharedInstance().isLogin()) {
-            return;
+        @Override
+        public void accept(UserUniData userUniData) throws Exception {
+            setValue(userUniData);
         }
-        if (mDisposable != null) {
-            mDisposable.dispose();
-        }
-        Observable<UserUniData> userCall = mUserStorage.accountGet();
-        NetworkApi.ApiSubscribe(userCall, new Consumer<UserUniData>() {
-            @Override
-            public void accept(UserUniData userUniData) throws Exception {
-                setValue(userUniData);
-                AccountManager.sharedInstance().saveUser(userUniData.user);
-            }
-        });
-//        NetworkApi.ApiSubscribe(userCall, new Observer<UserUniData>() {
-//            @Override
-//            public void onSubscribe(Disposable d) {
-//                mDisposable = d;
-//            }
-//
-//            @Override
-//            public void onNext(UserUniData user) {
-//                setValue(user);
-//                AccountManager.sharedInstance().saveUser(user.user);
-//                mDisposable = null;
-//            }
-//
-//            @Override
-//            public void onError(Throwable e) {
-//                setValue(UniApiData.createError(e, UserUniData.class));
-//                mDisposable = null;
-//            }
-//
-//            @Override
-//            public void onComplete() {
-//                mDisposable = null;
-//            }
-//        });
+    };
 
-    }
+
 }

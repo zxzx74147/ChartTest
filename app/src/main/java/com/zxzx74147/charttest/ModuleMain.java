@@ -51,7 +51,9 @@ public class ModuleMain {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(MessageEvent event) {
         if (event.id == MainBusStation.BUS_ID_MAIN_START_MAIN) {
-            MainActivity.startMainActivity(event.context);
+//            MainActivity.startMainActivity(event.context);
+
+            MainFeedActivity.startMainActivity(event.context);
         }else if (event.id == MainBusStation.BUS_ID_MAIN_LOGOUT) {
             AccountManager.sharedInstance().logout();
             ZXActivityJumpHelper.startActivity(event.context,LauncherActivity.class);
@@ -61,7 +63,11 @@ public class ModuleMain {
 
         }else  if (event.id == MainBusStation.BUS_ID_PUSH_SUCC){
             updateToken((String) event.data);
+        }else  if (event.id == MainBusStation.BUS_ID_MAIN_TO_LIVE){
+            MainActivity.startMainActivity(event.context);
         }
+
+
     }
 
 

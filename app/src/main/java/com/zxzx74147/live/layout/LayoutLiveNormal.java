@@ -28,6 +28,7 @@ import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.devlib.widget.CommonRecyclerViewAdapter;
+import com.zxzx74147.live.data.LiveMsgListData;
 import com.zxzx74147.live.data.Msg;
 import com.zxzx74147.live.data.MsgData;
 import com.zxzx74147.live.stroage.LiveStorage;
@@ -49,6 +50,8 @@ public class LayoutLiveNormal extends FrameLayout {
     private boolean mIsTouchint = false;
     private KeyboardStatusDetector mDetector = new KeyboardStatusDetector();
 
+
+
     public LayoutLiveNormal(Context context) {
         super(context);
         init();
@@ -63,6 +66,7 @@ public class LayoutLiveNormal extends FrameLayout {
         super(context, attrs, defStyleAttr);
         init();
     }
+
 
     private void init() {
         mMsgViewModel = ViewModelProviders.of((FragmentActivity) getContext()).get(LiveMsgViewModel.class);
@@ -99,11 +103,12 @@ public class LayoutLiveNormal extends FrameLayout {
             if (liveMsgListData.hasError()) {
                 return;
             }
+            mBingding.setLiveMsg(liveMsgListData);
             if (mIsTouchint) {
                 return;
             }
             mAdapter.setNewData(liveMsgListData.msgList.msg);
-            mBingding.bubble.startAnimation( mBingding.bubble.getWidth()/2,  mBingding.bubble.getHeight()-getResources().getDimensionPixelSize(R.dimen.default_gap_50));
+            mBingding.bubble.startAnimation( mBingding.bubble.getWidth()/2,  mBingding.bubble.getHeight()-getResources().getDimensionPixelSize(R.dimen.default_gap_100),2);
 
         });
 

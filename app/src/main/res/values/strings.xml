@@ -3,4 +3,5 @@
     <string name="network_host">http://47.104.27.243/</string>
     <string name="umeng">5a9668fba40fa3717e00025a</string>
     <string name="live_msg_remind">学投资从互动开始…</string>
+    <string name="feed_title">蚂蚁投资</string>
 </resources>

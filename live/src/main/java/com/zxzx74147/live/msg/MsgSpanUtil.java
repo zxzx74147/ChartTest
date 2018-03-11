@@ -38,6 +38,7 @@ public class MsgSpanUtil {
         String nickName = msg.nickName + ":";
         SpannableString result = new SpannableString(nickName + msg.content);
         result.setSpan(new ForegroundColorSpan(ColorUtil.getColor(R.color.text_light_grey)), 0, nickName.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        result.setSpan(new ForegroundColorSpan(ColorUtil.getColor(R.color.white)),  nickName.length(), result.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return result;
     }
 
@@ -46,7 +47,7 @@ public class MsgSpanUtil {
             return new SpannableString("");
         }
         SpannableString result = new SpannableString(msg.nickName+msg.content);
-        result.setSpan(new ForegroundColorSpan(ColorUtil.getColor(R.color.text_light_grey)), 0, msg.content.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        result.setSpan(new ForegroundColorSpan(ColorUtil.getColor(R.color.text_light_grey)), 0, result.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return result;
     }
 

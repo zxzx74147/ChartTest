@@ -23,7 +23,7 @@ public class BubbleView extends RelativeLayout {
 
     private List<Drawable> drawableList = new ArrayList<Drawable>();
 
-    private int riseDuration = 3000;
+    private int riseDuration = 2500;
 
     private int bottomPadding = 0;
     private int originsOffset = 20;

@@ -72,9 +72,7 @@ public class ProfileFragment extends BaseDialogFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if(mUserModelView!=null) {
-            mUserModelView.getUserUniLiveData().doRefresh();
-        }
+        AccountManager.sharedInstance().doRefresh();
     }
 
     private void initView(){

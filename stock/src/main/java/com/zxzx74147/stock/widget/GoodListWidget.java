@@ -81,6 +81,8 @@ public class GoodListWidget extends RelativeLayout implements IViewModelHolder {
                 mCallback.callback(goodType);
             }
         });
+
+
     }
 
     public void setCallback(CommonCallback<GoodType> callback) {
@@ -110,8 +112,6 @@ public class GoodListWidget extends RelativeLayout implements IViewModelHolder {
     private void init() {
         initView();
 
-
-
     }
 
 
@@ -119,6 +119,10 @@ public class GoodListWidget extends RelativeLayout implements IViewModelHolder {
     @Override
     public void setProvider(ViewModelProvider provider) {
         mModel = provider.get(UserViewModel.class);
+        if(mModel.getUserUniLiveData().getValue()!=null&&mModel.getUserUniLiveData().getValue().goodsTypeList!=null) {
+            mData.addAll(mModel.getUserUniLiveData().getValue().goodsTypeList.goodType);
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override

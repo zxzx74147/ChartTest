@@ -5,6 +5,8 @@ import android.arch.lifecycle.Lifecycle;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.design.widget.TabLayout;
@@ -16,6 +18,8 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding2.view.RxView;
@@ -214,6 +218,13 @@ public class ViewUtil {
                     ((TextView) tabViewChild).setText(text);
                 }
             }
+        }
+    }
+
+    public static void startAnimition(ImageView imageView){
+        Drawable drawable = imageView.getDrawable();
+        if(drawable instanceof AnimationDrawable){
+            ((AnimationDrawable) drawable).start();
         }
     }
 

@@ -163,7 +163,7 @@ public class ProfileEditFragment extends BaseDialogFragment {
                     mUserModelView.getUserUniLiveData().getValue().user = userUniData.user;
                     mUserModelView.getUserUniLiveData().setValue(mUserModelView.getUserUniLiveData().getValue());
                 }
-                mUserModelView.getUserUniLiveData().doRefresh();
+                AccountManager.sharedInstance().doRefresh();
                 mBinding.setUser(userUniData.user);
                 ViewUtil.hideSoftPad(mBinding.nickName);
             }
@@ -199,7 +199,7 @@ public class ProfileEditFragment extends BaseDialogFragment {
                             mUserModelView.getUserUniLiveData().getValue().user = userUniData.user;
                             mUserModelView.getUserUniLiveData().setValue(mUserModelView.getUserUniLiveData().getValue());
                         }
-                        mUserModelView.getUserUniLiveData().doRefresh();
+                        AccountManager.sharedInstance().doRefresh();
                         mBinding.setUser(userUniData.user);
                         ViewUtil.hideSoftPad(mBinding.nickName);
                     }

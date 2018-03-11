@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.zxzx74147.devlib.data.UserData" />
+
+        <import type="com.zxzx74147.devlib.modules.busstation.StockBusStation" />
+        <import type="com.zxzx74147.devlib.modules.busstation.MainBusStation"/>
+        <import type="com.zxzx74147.devlib.modules.busstation.ProfileBusStation"/>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_title">
+
+            <ImageButton
+                android:id="@+id/to_live"
+                android:layout_width="wrap_content"
+                android:onClick="@{v->{MainBusStation.toLive(context)}}"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:paddingLeft="@dimen/default_gap_44"
+                android:src="@drawable/home_live" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="@string/feed_title"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/default_size_34" />
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/default_gap_56"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:onClick="@{()->ProfileBusStation.startProfile(context)}"
+                android:layout_marginRight="@dimen/default_gap_44"
+                android:background="@drawable/rect_round_grey_head">
+
+                <com.zxzx74147.devlib.widget.ZXImageView
+                    android:id="@+id/portrait"
+                    android:layout_width="@dimen/default_gap_56"
+                    android:layout_height="@dimen/default_gap_56"
+                    android:layout_gravity="right"
+                    app:imageUrl="@{user.portraitUrl}"
+                    app:riv_corner_radius="@dimen/default_gap_28" />
+
+                <!--android:text="@{@string/format_02(user.total)}"-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="@dimen/default_gap_20"
+                    android:layout_marginRight="@dimen/default_gap_66"
+                    android:text="@{@string/yuan_sign+@string/format_02(user.total)}"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/default_size_34" />
+
+                <View
+                    android:visibility="gone"
+                    android:layout_width="@dimen/default_gap_10"
+                    android:layout_height="@dimen/default_gap_10"
+                    android:layout_gravity="right|top"
+                    android:layout_marginRight="@dimen/default_gap_4"
+                    android:layout_marginTop="@dimen/default_gap_4"
+                    android:background="@drawable/rect_round_red_point" />
+            </FrameLayout>
+
+        </RelativeLayout>
+
+
+        <fragment
+            android:id="@+id/feed_fragment"
+            android:name="com.zxzx74147.live.fragments.FeedFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/goodList"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/header" />
+
+
+        <com.zxzx74147.stock.widget.GoodListWidget
+            android:id="@+id/goodList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginBottom="@dimen/default_gap_16"
+            android:background="@color/bg_grey"
+            android:paddingTop="@dimen/default_gap_16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageButton
+            android:id="@+id/send_feed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_gap_80"
+            android:layout_marginEnd="@dimen/default_gap_44"
+            android:background="@null"
+            android:src="@drawable/selector_home_send_feed"
+            app:layout_constraintBottom_toTopOf="@+id/goodList"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageButton
+            android:id="@+id/coupons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_gap_50"
+            android:layout_marginEnd="@dimen/default_gap_44"
+            android:background="@null"
+            android:src="@drawable/home_icon_coupons_normal"
+            app:layout_constraintBottom_toTopOf="@+id/send_feed"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+        <com.zxzx74147.devlib.widget.ZXImageView
+            android:id="@+id/activity"
+            android:layout_width="@dimen/default_gap_72"
+            android:layout_height="@dimen/default_gap_72"
+            android:layout_marginBottom="@dimen/default_gap_50"
+            android:layout_marginEnd="@dimen/default_gap_44"
+            android:background="@null"
+            app:layout_constraintBottom_toTopOf="@+id/send_feed"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+</layout>
+

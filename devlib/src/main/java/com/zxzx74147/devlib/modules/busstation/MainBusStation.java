@@ -21,6 +21,8 @@ public class MainBusStation {
 
     public static final int BUS_ID_PUSH_SUCC = BusIDGen.genBusID("BUS_ID_PUSH_SUCC");
 
+    public static final int BUS_ID_MAIN_TO_LIVE = BusIDGen.genBusID("BUS_ID_MAIN_TO_LIVE");
+
 
     private MainBusStation() {
 
@@ -39,6 +41,11 @@ public class MainBusStation {
     public static void onPushSucc(Context context,String token) {
         MessageEvent event = new MessageEvent<>(BUS_ID_PUSH_SUCC, context);
         event.data= token;
+        EventBus.getDefault().post(event);
+    }
+
+    public static void toLive(Context context) {
+        MessageEvent event = new MessageEvent<>(BUS_ID_MAIN_TO_LIVE, context);
         EventBus.getDefault().post(event);
     }
 

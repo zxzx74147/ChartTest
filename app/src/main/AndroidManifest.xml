@@ -3,7 +3,6 @@
     package="com.zxzx74147.charttest">
 
 
-
     <application
         android:name=".ZXApplication"
         android:allowBackup="true"
@@ -13,22 +12,33 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data
-            android:value="1.0.0"
-            android:name="api_version">
+            android:name="api_version"
+            android:value="1.0.0">
 
 
         </meta-data>
 
-        <meta-data android:name="com.alibaba.app.appkey" android:value="24814378"/> <!-- 请填写你自己的- appKey -->
-        <meta-data android:name="com.alibaba.app.appsecret" android:value="b4474e6cf05380d7f6d7c380edbbb9e8"/> <!-- 请填写你自己的appSecret -->
+        <meta-data
+            android:name="com.alibaba.app.appkey"
+            android:value="24814378" /> <!-- 请填写你自己的- appKey -->
+        <meta-data
+            android:name="com.alibaba.app.appsecret"
+            android:value="b4474e6cf05380d7f6d7c380edbbb9e8" /> <!-- 请填写你自己的appSecret -->
 
-        <meta-data android:value="5a9668fba40fa3717e00025a" android:name="UMENG_APPKEY"/>
-        <meta-data android:value="main" android:name="UMENG_CHANNEL"/>
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5a9668fba40fa3717e00025a" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="main" />
 
-        <activity android:name=".MainActivity"
-            android:launchMode="singleInstance">
+        <activity android:name=".MainActivity"></activity>
 
-        </activity>
+        <activity
+            android:name=".MainFeedActivity"
+            android:launchMode="singleInstance"></activity>
+
+
         <activity android:name=".LauncherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,9 +46,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-
 
 
         <receiver android:name=".push.AliPushReceiver">
