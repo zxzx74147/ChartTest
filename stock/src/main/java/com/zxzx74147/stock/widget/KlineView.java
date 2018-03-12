@@ -58,6 +58,7 @@ public class KlineView extends LinearLayout {
         ChartUtil.setChart(mBinding.kline);
         ChartUtil.setRealTimeChart(mBinding.klineRealtime);
         ChartUtil.setChart(mBinding.kline2);
+        ChartUtil.showHighline(mBinding.kline);
         XAxis xAxis = mBinding.kline2.getXAxis();
         xAxis.setDrawLabels(false);
 
@@ -96,9 +97,9 @@ public class KlineView extends LinearLayout {
         refreshReadTime();
         mBinding.klineRealtime.setVisibility(View.VISIBLE);
         mBinding.klineOther.setVisibility(INVISIBLE);
-        if(needRefresh){
-            ChartUtil.fitData(mBinding.klineRealtime);
-        }
+//        if(needRefresh){
+//            ChartUtil.fitData(mBinding.klineRealtime);
+//        }
     }
 
     private void refreshReadTime() {

@@ -3,6 +3,7 @@ package com.zxzx74147.stock.utils;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.service.autofill.Dataset;
+import android.util.Log;
 
 import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.CombinedChart;
@@ -15,7 +16,9 @@ import com.github.mikephil.charting.data.CandleDataSet;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IDataSet;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.zxzx74147.devlib.DevLib;
 import com.zxzx74147.devlib.utils.DisplayUtil;
@@ -205,7 +208,7 @@ public class ChartUtil {
     }
 
     public static void setLineDataleSet(LineDataSet set, int color) {
-
+//        set.setHighlightEnabled();
         set.setHighLightColor(DevLib.getApp().getResources().getColor(R.color.text_grey));
         set.setDrawValues(false);
         set.setLineWidth(1f);
@@ -219,6 +222,7 @@ public class ChartUtil {
     }
 
     public static void setChart(CombinedChart chart) {
+
 
         chart.setScaleEnabled(true);//启用图表缩放事件
         chart.setDrawBorders(true);//是否绘制边线
@@ -362,8 +366,49 @@ public class ChartUtil {
         chart.setDragEnabled(true);//启用图表拖拽事件
         chart.setScaleEnabled(true);
 
-        setVisibleXRange(chart,60,10);
+        setVisibleXRange(chart,60,20);
         chart.moveViewToX(chart.getCombinedData().getEntryCount());
 
+    }
+
+    public static void showHighline(CombinedChart chart){
+        chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(Entry e,  Highlight h) {
+                Log.i("showHighline",""+h.getX());
+//                h.getX()
+//                Highlight highlight = new Highlight(h.getXIndex(), h.getValue(), h.getDataIndex(), h.getDataSetIndex());
+//
+//                float touchY = h.getTouchY() - mChartKline.getHeight();
+//                Highlight h1 = mChartVolume.getHighlightByTouchPoint(h.getXIndex(), touchY);
+//                highlight.setTouchY(touchY);
+//                if (null == h1) {
+//                    highlight.setTouchYValue(0);
+//                } else {
+//                    highlight.setTouchYValue(h1.getTouchYValue());
+//                }
+//                mChartVolume.highlightValues(new Highlight[]{highlight});
+//
+//                Highlight highlight2 = new Highlight(h.getXIndex(), h.getValue(), h.getDataIndex(), h.getDataSetIndex());
+//
+//                float touchY2 = h.getTouchY() - mChartKline.getHeight() - mChartVolume.getHeight();
+//                Highlight h2 = mChartCharts.getHighlightByTouchPoint(h.getXIndex(), touchY2);
+//                highlight2.setTouchY(touchY2);
+//                if (null == h2) {
+//                    highlight2.setTouchYValue(0);
+//                } else {
+//                    highlight2.setTouchYValue(h2.getTouchYValue());
+//                }
+//                mChartCharts.highlightValues(new Highlight[]{highlight2});
+//
+//                updateText(e.getXIndex());
+            }
+
+
+            @Override
+            public void onNothingSelected() {
+                chart.highlightValue(null);
+            }
+        });
     }
 }

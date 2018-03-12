@@ -85,10 +85,13 @@ public class StockWidget extends FrameLayout implements IViewModelHolder {
                 return;
             }
             mDataParse.clear();
+            mDataParse = new DataParse();
             if(stockData.mIsRealtime){
+                mDataParse.mType = stockData.mType;
                 mDataParse.parseRealTime(stockData.PriceKChartList.priceKChart);
                 mBinding.klineview.setRealTime(mDataParse);
             }else{
+                mDataParse.mType = stockData.mType;
                 mDataParse.parseKLine(stockData.PriceKChartList.priceKChart);
                 mBinding.klineview.setData(mDataParse);
             }
