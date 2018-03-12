@@ -2,6 +2,8 @@ package com.zxzx74147.charttest;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 
 import com.zxzx74147.devlib.DevLib;
 import com.zxzx74147.devlib.base.BaseActivity;
@@ -50,8 +52,13 @@ public class ModuleMain {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(MessageEvent event) {
+        if(event.context instanceof LiveActivity){
+            if(((LiveActivity)event.context).getResources().getConfiguration().orientation== Configuration.ORIENTATION_LANDSCAPE){
+                ((LiveActivity)event.context).prepareToRotate();
+                ((LiveActivity)event.context).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            }
+        }
         if (event.id == MainBusStation.BUS_ID_MAIN_START_MAIN) {
-//            MainActivity.startMainActivity(event.context);
 
             MainFeedActivity.startMainActivity(event.context);
         }else if (event.id == MainBusStation.BUS_ID_MAIN_LOGOUT) {

@@ -167,7 +167,7 @@
             android:id="@+id/textView21"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/auth_remind2"
+
             android:gravity="center"
             android:textColor="@color/text_light_grey"
             android:layout_marginBottom="@dimen/default_gap_80"
@@ -176,7 +176,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="@string/auth_remind3" />
+            android:text="@string/auth_remind3" />
 
         <Button
             android:id="@+id/submit"
