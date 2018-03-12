@@ -108,6 +108,14 @@ public class GoodListWidget extends RelativeLayout implements IViewModelHolder {
         mAdapter.notifyDataSetChanged();
     }
 
+    public void clearSelect(){
+        for(GoodType item:mData){
+
+                item.mIsSelect= false;
+
+        }
+    }
+
 
     private void init() {
         initView();

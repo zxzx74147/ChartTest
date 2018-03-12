@@ -3,8 +3,7 @@ package com.zxzx74147.stock.data;
 
 import java.io.Serializable;
 
-public class Good implements Serializable
-{
+public class Good implements Serializable {
     /**
      * goodsId : AGB100G
      * name : 银饰品0.1KG
@@ -33,12 +32,14 @@ public class Good implements Serializable
     public float openChargeFee;
     public float closeChargeFee;
     public float deferredFee;
-    public float costBack    ;      //多少点可以回本
+    public float costBack;      //多少点可以回本
     public int maxLot;
     public int minLot;
     public int category;
     public int status;
     public int sort;
+    public float weightNum;
+    public String weightUnit;
 
 //    public String goodsId;
 //    public String name;

@@ -15,7 +15,7 @@ import com.zxzx74147.devlib.utils.RecyclerViewUtil;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.devlib.widget.CommonRecyclerViewAdapter;
 import com.zxzx74147.profile.R;
-import com.zxzx74147.profile.data.VocherListData;
+import com.zxzx74147.profile.data.VocherUserListData;
 import com.zxzx74147.profile.data.Voucher;
 import com.zxzx74147.profile.databinding.FragmentVocherBinding;
 import com.zxzx74147.profile.storage.EventStorage;
@@ -80,7 +80,7 @@ public class VocherFragment extends BaseDialogFragment {
 
         RecyclerViewUtil.setupRecyclerView(mBinding.refreshLayout, mBinding.list, mVoucherAdapter, new CommonListRequestCallback<Voucher>() {
             @Override
-            public Observable<VocherListData> getObserverble(BaseListData listdata) {
+            public Observable<VocherUserListData> getObserverble(BaseListData listdata) {
                 return mEventStorage.eventsVoucherMyList(listdata == null ? 0 : listdata.nextPage);
             }
         });

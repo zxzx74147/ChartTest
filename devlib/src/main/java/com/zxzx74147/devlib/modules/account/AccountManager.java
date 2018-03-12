@@ -76,6 +76,10 @@ public class AccountManager {
         return mUser;
     }
 
+    public UserUniData getUserUni() {
+        return mUserUniData;
+    }
+
 
     public void registerConsumer(Consumer consumer) {
         mConsumers.add(consumer);

@@ -9,11 +9,11 @@ import java.util.List;
 public class VoucherList  extends BaseListData<Voucher> implements Serializable
 
 {
-    public List<Voucher> userVoucher = null;
+    public List<Voucher> voucher = null;
     private final static long serialVersionUID = -8001284931850519223L;
 
     @Override
     public List<Voucher> getListItems() {
-        return userVoucher;
+        return voucher;
     }
 }

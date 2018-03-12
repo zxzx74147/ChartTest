@@ -12,7 +12,9 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.zxzx74147.balance.R;
 import com.zxzx74147.balance.data.Deposit;
 import com.zxzx74147.balance.data.DepositListData;
+import com.zxzx74147.balance.data.Withdraw;
 import com.zxzx74147.balance.data.WithdrawData;
+import com.zxzx74147.balance.data.WithdrawListData;
 import com.zxzx74147.balance.databinding.ActivityDepositListBinding;
 import com.zxzx74147.balance.storage.DepositStorage;
 import com.zxzx74147.balance.storage.WithDrawStorage;
@@ -46,7 +48,7 @@ public class DepositListActivity extends BaseActivity {
 
     private List<Deposit> mData = new LinkedList<>();
     private CommonRecyclerViewAdapter<Deposit> mAdapter = null;
-    private CommonRecyclerViewAdapter<Deposit> mAdapter2 = null;
+    private CommonRecyclerViewAdapter<Withdraw> mAdapter2 = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,16 +58,19 @@ public class DepositListActivity extends BaseActivity {
         mWithdrawStorage= RetrofitClient.getClient().create(WithDrawStorage.class);
         mDepositStorage = RetrofitClient.getClient().create(DepositStorage.class);
         mAdapter = new CommonRecyclerViewAdapter<>(mData);
-        mAdapter2 = new CommonRecyclerViewAdapter<>(mData);
 
         CommonMultiTypeDelegate delegate = new CommonMultiTypeDelegate();
         delegate.registViewType(Deposit.class, R.layout.item_recharge_record);
+        delegate.registViewType(Withdraw.class, R.layout.item_withdraw_record);
 
         mAdapter.setMultiTypeDelegate(delegate);
-        mAdapter2 = new CommonRecyclerViewAdapter<>(mData);
+        mAdapter2 = new CommonRecyclerViewAdapter<>(null);
         mBinding.list.setLayoutManager(new LinearLayoutManager(this));
         mBinding.list.setAdapter(mAdapter);
         initView();
+
+        mAdapter.setCommonEmptyView(this,R.string.no_deposit);
+        mAdapter2.setCommonEmptyView(this,R.string.no_withdraw);
 
     }
 
@@ -92,9 +97,9 @@ public class DepositListActivity extends BaseActivity {
 //                mBinding.refreshLayout2.setVisibility(View.VISIBLE);
 
                 mAdapter2.loadMoreComplete();
-                RecyclerViewUtil.setupRecyclerView(mBinding.refreshLayout, mBinding.list, mAdapter2, new CommonListRequestCallback<Deposit>() {
+                RecyclerViewUtil.setupRecyclerView(mBinding.refreshLayout, mBinding.list, mAdapter2, new CommonListRequestCallback<Withdraw>() {
                     @Override
-                    public Observable<DepositListData> getObserverble(BaseListData listdata) {
+                    public Observable<WithdrawListData> getObserverble(BaseListData listdata) {
                         if(listdata==null){
                             return mWithdrawStorage.withdrawList(0);
                         }else

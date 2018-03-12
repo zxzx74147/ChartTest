@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -9,12 +8,14 @@
             name="data"
             type="com.zxzx74147.profile.data.Voucher" />
 
+        <import type="com.zxzx74147.devlib.utils.TimeUtil"/>
+
     </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/default_gap_180"
-        android:background="@drawable/vouchers_9_new">
+        app:voucher_back='@{data}'>
 
 
         <android.support.constraint.Guideline
@@ -24,40 +25,66 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.34" />
 
-        <TextView
-            android:id="@+id/textView14"
+
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:textColor="@color/white"
-            android:textSize="@dimen/default_size_30"
-
+            android:layout_marginLeft="@dimen/default_gap_35"
             android:layout_height="wrap_content"
-            android:text="@{data.title}"
+            android:orientation="vertical"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{data.title}"
+                android:layout_marginTop="@dimen/default_gap_45"
+                android:textColor="@color/white"
+                android:textSize="@dimen/default_size_30" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="@dimen/default_gap_5"
+                android:layout_height="wrap_content"
+                android:text="@{@string/format_voucher_price(data.goods.depositFee)}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/default_size_24" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_marginTop="@dimen/default_gap_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{@string/active_time+TimeUtil.reformatDefaultTime(data.activeEndDt,@string/format_YYYYMMDD_HHMM)}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/default_size_24" />
+        </LinearLayout>
 
         <!--<TextView-->
-            <!--android:id="@+id/textView12"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/yuan_sign"-->
-            <!--android:textColor="@color/white"-->
-            <!--android:textSize="@dimen/default_size_22"-->
-            <!--android:layout_marginLeft="@dimen/default_gap_61"-->
-            <!--app:layout_constraintLeft_toLeftOf="parent"-->
-            <!--android:layout_marginTop="@dimen/default_gap_117"-->
-            <!--app:layout_constraintStart_toStartOf="parent"-->
-            <!--app:layout_constraintTop_toTopOf="parent" />-->
+        <!--android:id="@+id/textView12"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/yuan_sign"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textSize="@dimen/default_size_22"-->
+        <!--android:layout_marginLeft="@dimen/default_gap_61"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--android:layout_marginTop="@dimen/default_gap_117"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent" />-->
 
         <!--<TextView-->
-            <!--android:id="@+id/textView13"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@{data.goods.depositFee}"-->
-            <!--android:textColor="@color/white"-->
-            <!--android:layout_marginLeft="@dimen/default_gap_10"-->
-            <!--android:textSize="@dimen/default_size_80"-->
-            <!--app:layout_constraintBottom_toBottomOf="@+id/textView12"-->
-            <!--app:layout_constraintStart_toEndOf="@+id/textView12" />-->
+        <!--android:id="@+id/textView13"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@{data.goods.depositFee}"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:layout_marginLeft="@dimen/default_gap_10"-->
+        <!--android:textSize="@dimen/default_size_80"-->
+        <!--app:layout_constraintBottom_toBottomOf="@+id/textView12"-->
+        <!--app:layout_constraintStart_toEndOf="@+id/textView12" />-->
 
 
     </android.support.constraint.ConstraintLayout>

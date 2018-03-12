@@ -5,8 +5,10 @@ import android.content.Context;
 import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.devlib.data.DialogItem;
 import com.zxzx74147.devlib.data.IntentData;
+import com.zxzx74147.devlib.data.UniApiData;
 import com.zxzx74147.devlib.fragment.CommonFragmentDialog;
 import com.zxzx74147.devlib.modules.busstation.ProfileBusStation;
+import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
 import com.zxzx74147.stock.data.Fail;
 
@@ -15,6 +17,8 @@ import com.zxzx74147.stock.data.Fail;
  */
 
 public class FailDealUtil {
+
+
     public static boolean dealFail(Context context,Fail failed){
         if(failed==null){
             return false;

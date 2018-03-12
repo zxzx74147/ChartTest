@@ -58,7 +58,7 @@
     <string name="none">无</string>
     <string name="format_cost">%.1f元</string>
     <string name="format_defer">%.1f元/天</string>
-    <string name="format_trade_amount">共%s，涨1个点可赚%.2f元，%.1f点回本</string>
+    <string name="format_trade_amount">共%.1f%s，涨1个点可赚%.2f元，%.1f点回本</string>
     <string name="total">总价(元)</string>
     <string name="total_asset">总资产(元)</string>
     <string name="left_asset">可用余额(元)</string>
@@ -81,7 +81,9 @@
     <string name="format_stop">止损点: %.0f点</string>
     <string name="format_stop_none">止损点: 无</string>
     <string name="format_point">%.0f点</string>
+    <string name="format_voucher_amount">%.0f元券%d张</string>
     <string name="close_position">平仓</string>
+
     <string name="modify">修改</string>
     <string name="trade_his">交易记录</string>
 

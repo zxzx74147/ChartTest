@@ -54,7 +54,7 @@ public class CommonRecyclerViewAdapter<T> extends BaseQuickAdapter<T, BaseBindin
     }
 
     public void setEmptyView(int layout_id) {
-        layout_id = layout_id;
+        this.layout_id = layout_id;
     }
 
     public void setNewData(List<T> data) {

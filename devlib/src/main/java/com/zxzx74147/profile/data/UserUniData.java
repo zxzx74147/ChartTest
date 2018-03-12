@@ -1,5 +1,6 @@
 package com.zxzx74147.profile.data;
 
+import com.thefinestartist.utils.service.VibratorUtil;
 import com.zxzx74147.devlib.data.UniApiData;
 import com.zxzx74147.devlib.data.UserData;
 import com.zxzx74147.stock.data.GoodsList;
@@ -18,7 +19,7 @@ public class UserUniData extends UniApiData implements Serializable {
     public PositionList positionList;
     public GoodsList goodsTypeList;
     public MachPositionList machPositionList;
-    public VoucherList userVoucherList;
+    public VoucherUserList userVoucherList;
 
 
 //    public

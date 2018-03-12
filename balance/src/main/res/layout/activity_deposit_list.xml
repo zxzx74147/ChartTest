@@ -15,32 +15,17 @@
         android:paddingBottom="0dp"
         android:paddingTop="0dp">
 
+        <include
 
-        <TextView
             android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_gap_27"
-            android:layout_marginTop="@dimen/default_gap_27"
-            android:text="@string/deposit_withdraw_his"
-            android:textColor="@color/text_black"
-            android:textSize="@dimen/default_size_34"
+            layout="@layout/common_title"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/default_gap_100"
+            android:layout_marginEnd="8dp"
+            app:title="@{@string/deposit_withdraw_his}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <ImageButton
-            android:id="@+id/imageButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="22dp"
-            android:background="@null"
-            android:scaleType="centerInside"
-            app:layout_constraintBottom_toBottomOf="@+id/title"
-            app:layout_constraintEnd_toStartOf="@+id/refresh_layout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/title"
-            app:srcCompat="@drawable/icon_back" />
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabLayout2"

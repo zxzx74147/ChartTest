@@ -6,9 +6,11 @@ import android.arch.lifecycle.OnLifecycleEvent;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 
+import com.jakewharton.rxbinding2.view.RxView;
+import com.zxzx74147.devlib.R;
 import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.devlib.data.IntentData;
 import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
@@ -24,28 +26,40 @@ public class BaseActivity extends SupportActivity {
     protected CommonCallback mCallback = null;
     protected IntentData mIntentData = null;
     MyObserver myObserver = null;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        myObserver =new MyObserver(this,getLifecycle());
+        myObserver = new MyObserver(this, getLifecycle());
         mCallback = ZXActivityJumpHelper.getCallBack();
         mIntentData = (IntentData) getIntent().getSerializableExtra(ZXActivityJumpHelper.INTENT_DATA);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        View v = findViewById(R.id.close);
+        if(v!=null){
+            RxView.clicks(v).subscribe(a->{finish();});
+        }
+
+    }
+
     public class MyObserver implements LifecycleObserver {
         private Lifecycle mLifecycle;
+
         public MyObserver(Context context, Lifecycle lifecycle) {
             mLifecycle = lifecycle;
         }
 
         @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
         public void connectListener() {
-            Log.i(TAG,"ON_RESUME");
+            Log.i(TAG, "ON_RESUME");
         }
 
         @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
         public void disconnectListener() {
-            Log.i(TAG,"ON_PAUSE");
+            Log.i(TAG, "ON_PAUSE");
         }
     }
 

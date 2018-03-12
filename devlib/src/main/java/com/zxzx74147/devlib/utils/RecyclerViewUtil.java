@@ -49,6 +49,7 @@ public class RecyclerViewUtil {
                             ToastUtil.showToast(mRecyclerView.getContext(), ((UniApiData) o).error.usermsg);
                             return;
                         }
+                        mRecyclerRefreshLayout.setRefreshing(false);
                         IBaseListDataHolder<T> iBaseListDataHolder = (IBaseListDataHolder<T>) o;
                         if (iBaseListDataHolder.getListData() == null) {
                             return;
@@ -56,7 +57,6 @@ public class RecyclerViewUtil {
                         lastData[0] = iBaseListDataHolder.getListData();
                         adapter.setNewData(iBaseListDataHolder.getListData().getListItems());
                         adapter.notifyDataSetChanged();
-                        mRecyclerRefreshLayout.setRefreshing(false);
                         dealLoadMore(adapter, iBaseListDataHolder.getListData());
                         if (loadMoreDisposable[0] != null) {
                             loadMoreDisposable[0].dispose();
@@ -66,7 +66,10 @@ public class RecyclerViewUtil {
 
                     @Override
                     public void onError(Throwable e) {
+                        e.printStackTrace();
 
+                        mRecyclerRefreshLayout.setRefreshing(false);
+                        loadMoreDisposable[0] = null;
                     }
 
                     @Override

@@ -8,10 +8,12 @@ import android.databinding.DataBindingUtil;
 import android.support.design.widget.TabLayout;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import com.jakewharton.rxbinding2.support.design.widget.RxTabLayout;
 import com.jakewharton.rxbinding2.view.RxView;
+import com.jakewharton.rxbinding2.widget.RxCompoundButton;
 import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.devlib.data.DialogItem;
 import com.zxzx74147.devlib.data.IntentData;
@@ -20,6 +22,7 @@ import com.zxzx74147.devlib.data.WheelSelectorData;
 import com.zxzx74147.devlib.fragment.CommonFragmentDialog;
 import com.zxzx74147.devlib.fragment.CommonWheelSelectorDialog;
 import com.zxzx74147.devlib.interfaces.IViewModelHolder;
+import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.modules.busstation.StockBusStation;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
@@ -27,6 +30,8 @@ import com.zxzx74147.devlib.utils.FormatUtil;
 import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
+import com.zxzx74147.profile.data.UserUniData;
+import com.zxzx74147.profile.data.Voucher;
 import com.zxzx74147.stock.R;
 import com.zxzx74147.stock.data.Good;
 import com.zxzx74147.stock.data.GoodType;
@@ -36,6 +41,9 @@ import com.zxzx74147.stock.databinding.WidgetTradeBinding;
 import com.zxzx74147.stock.fragment.TradeFragment;
 import com.zxzx74147.stock.storage.TradesStorage;
 import com.zxzx74147.stock.util.FailDealUtil;
+
+import java.util.LinkedList;
+import java.util.List;
 
 import io.reactivex.Observable;
 
@@ -50,6 +58,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
     private Good mSelectGood;
     private int mAmount = 1;
     private TradesStorage mTradeStorage = RetrofitClient.getClient().create(TradesStorage.class);
+
 
 
     @BindingAdapter({"good"})
@@ -67,6 +76,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
     public static void setUser(TradeWidget view, UserData user) {
         view.setUser(user);
     }
+
 
 
     public TradeWidget(Context context) {
@@ -91,8 +101,9 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             ViewUtil.setSelect(mBinding.byDown, false);
             if (mType <= TradeFragment.TYPE_POSITION_BUY_DOWN) {
                 mType = TradeFragment.TYPE_POSITION_BUY_UP;
+            }else {
+                mType = TradeFragment.TYPE_MACH_POSITION_BUY_UP;
             }
-            mType = TradeFragment.TYPE_MACH_POSITION_BUY_UP;
             mBinding.setType(mType);
 
         });
@@ -103,8 +114,9 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             ViewUtil.setSelect(mBinding.byDown, true);
             if (mType <= TradeFragment.TYPE_POSITION_BUY_DOWN) {
                 mType = TradeFragment.TYPE_POSITION_BUY_DOWN;
+            }else {
+                mType = TradeFragment.TYPE_MACH_POSITION_BUY_DOWN;
             }
-            mType = TradeFragment.TYPE_MACH_POSITION_BUY_DOWN;
             mBinding.setType(mType);
         });
 
@@ -113,12 +125,14 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             mSelectGood = good;
             mBinding.setGood(mSelectGood);
             refreshAmount();
+            refreshVucher();
         });
 
         RxTabLayout.selectionEvents(mBinding.listAmount).subscribe(tabLayoutSelectionEvent -> {
             Integer amount = (Integer) tabLayoutSelectionEvent.tab().getTag();
             mAmount = amount;
             refreshAmount();
+            mBinding.setAmount(amount);
         });
 
         RxView.clicks(mBinding.doIt).subscribe(a -> {
@@ -159,6 +173,14 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             });
         });
 
+        RxCompoundButton.checkedChanges(mBinding.balance).subscribe(isChecked->{
+            mBinding.voucher.setChecked(!isChecked);
+        });
+
+        RxCompoundButton.checkedChanges(mBinding.voucher).subscribe(isChecked->{
+            mBinding.balance.setChecked(!isChecked);
+        });
+
 
     }
 
@@ -195,6 +217,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
         }
 
         mBinding.setType(mType);
+        mBinding.setAmount(1);
         mBinding.listType.removeAllTabs();
         mBinding.listAmount.removeAllTabs();
         for (Good good : mGoodType.goods) {
@@ -237,8 +260,8 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
         }
         int stop = FormatUtil.getPureNum(mBinding.buyStopValue.getText().toString());
         int limit = FormatUtil.getPureNum(mBinding.buyLimitValue.getText().toString());
-        String stopStr = stop == 0 ? "" : String.valueOf(stop / 100f);
-        String limitStr = limit == 0 ? "" : String.valueOf(limit / 100f);
+        String stopStr = stop == 0 ? "" : String.valueOf(stop );
+        String limitStr = limit == 0 ? "" : String.valueOf(limit );
 
 
 
@@ -324,5 +347,29 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
     @Override
     public void setLifeCircle(LifecycleOwner owner) {
 
+    }
+
+    public void refreshVucher(){
+        if(AccountManager.sharedInstance().getUserUni()==null){
+            return;
+        }
+        mBinding.voucher.setVisibility(View.GONE);
+        List<Voucher> myVouchers = AccountManager.sharedInstance().getUserUni().userVoucherList.getListItems();
+        if(myVouchers==null){
+            return;
+        }
+        List<Voucher> validVochers = new LinkedList<>();
+        for(Voucher voucher:myVouchers){
+            if(voucher.goods.goodsId.equals(mSelectGood.goodsId)){
+                validVochers.add(voucher);
+            }
+        }
+        if(validVochers.size()==0){
+            mBinding.balance.setChecked(true);
+            return;
+        }
+        mBinding.voucher.setVisibility(View.VISIBLE);
+        String text = String.format(getResources().getString(R.string.format_voucher_amount),mSelectGood.depositFee,validVochers.size());
+        mBinding.voucher.setText(text);
     }
 }

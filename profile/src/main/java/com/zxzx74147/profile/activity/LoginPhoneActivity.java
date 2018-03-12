@@ -15,6 +15,7 @@ import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.devlib.os.DeviceIDMananger;
 import com.zxzx74147.devlib.os.PackageInfoMananger;
 import com.zxzx74147.devlib.utils.ToastUtil;
+import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.profile.R;
 import com.zxzx74147.profile.data.UserUniData;
 import com.zxzx74147.profile.databinding.ActivityLoginPhoneBinding;
@@ -100,6 +101,7 @@ public class LoginPhoneActivity extends BaseActivity {
                         String format = getResources().getString(R.string.vcode_countdown);
                         mBinding.layoutRegist.vcodeRemind.setText(String.format(format, t));
                         mBinding.layoutRegist.vcodeRemind.setTextColor(getResources().getColor(R.color.text_light_grey));
+                        ViewUtil.showSoftPad(mBinding.layoutRegist.vcode);
                     }
                 });
 

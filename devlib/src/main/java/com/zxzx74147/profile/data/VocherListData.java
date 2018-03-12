@@ -10,11 +10,11 @@ import java.io.Serializable;
 public class VocherListData extends UniApiData implements Serializable,IBaseListDataHolder<Voucher>
 {
 
-    public VoucherList userVoucherList;
+    public VoucherList voucherList;
     private final static long serialVersionUID = -1146491776787044507L;
 
     @Override
     public BaseListData<Voucher> getListData() {
-        return userVoucherList;
+        return voucherList;
     }
 }

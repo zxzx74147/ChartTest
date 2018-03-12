@@ -2,17 +2,12 @@ package com.zxzx74147.devlib.base;
 
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.BottomSheetDialog;
-import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.Gravity;
@@ -23,10 +18,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 
+import com.jakewharton.rxbinding2.view.RxView;
 import com.zxzx74147.devlib.R;
 import com.zxzx74147.devlib.callback.CommonCallback;
-import com.zxzx74147.devlib.data.IntentData;
-import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
 import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
 
 import me.yokeyword.fragmentation.ExtraTransaction;
@@ -44,8 +38,6 @@ public class BaseDialogFragment extends DialogFragment implements ISupportFragme
     protected FragmentActivity _mActivity;
     protected BottomSheetBehavior mBehavior;
     protected CommonCallback mCallback = null;
-
-
 
 
     @Override
@@ -98,6 +90,14 @@ public class BaseDialogFragment extends DialogFragment implements ISupportFragme
     public void onResume() {
         super.onResume();
         mDelegate.onResume();
+        View v = getView().findViewById(R.id.close);
+        if (v != null) {
+            RxView.clicks(v).subscribe(a -> {
+                dismiss();
+            });
+        }
+
+
     }
 
     @Override
@@ -413,10 +413,6 @@ public class BaseDialogFragment extends DialogFragment implements ISupportFragme
 //        });
         return null;
     }
-
-
-
-
 
 
 }

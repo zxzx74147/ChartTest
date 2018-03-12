@@ -68,6 +68,13 @@ public class TradeFragment extends BaseDialogFragment {
                 mBinding.setUser(userUniData.user);
             }
         });
+
+
+    }
+
+    public void  onDestroyView(){
+        super.onDestroyView();
+        mBinding.goodList.clearSelect();
     }
 
 
