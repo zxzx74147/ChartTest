@@ -22,6 +22,7 @@ import com.zxzx74147.devlib.data.DialogItem;
 import com.zxzx74147.devlib.data.IntentData;
 import com.zxzx74147.devlib.data.UniApiData;
 import com.zxzx74147.devlib.fragment.CommonFragmentDialog;
+import com.zxzx74147.devlib.fragment.CommonInfoDialog;
 import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
@@ -105,6 +106,12 @@ public class WithdrawActivity extends BaseActivity {
             }
             requestVcode();
         });
+
+        RxView.clicks(mBinding.withdrawAmount.remind).subscribe(a -> {
+            CommonInfoDialog dialog = CommonInfoDialog.newInstance(new IntentData<Integer>(R.layout.info_withdraw));
+            ZXFragmentJumpHelper.startFragment(this, dialog,null);
+        });
+
 
         RxTextView.textChanges(mBinding.withdrawAmount.amount).subscribe(new Consumer<CharSequence>() {
             @Override

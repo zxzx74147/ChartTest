@@ -134,8 +134,8 @@ public class PositionModifyFragment extends BaseDialogFragment {
     public void submit(){
         int stop = FormatUtil.getPureNum(mBinding.buyStopValue.getText().toString());
         int limit = FormatUtil.getPureNum(mBinding.buyLimitValue.getText().toString());
-        String stopStr = stop==0? "":String.valueOf(stop/100f);
-        String limitStr = limit==0? "":String.valueOf(limit/100f);
+        String stopStr = stop==0? "":String.valueOf(stop);
+        String limitStr = limit==0? "":String.valueOf(limit);
         NetworkApi.ApiSubscribe(mTradeStorage.positionModify(mBinding.getData().positionId, limitStr, stopStr, mBinding.checkDeffer.isChecked() ? 1 : 0), new Consumer<PositionData>() {
             @Override
             public void accept(PositionData machPositionData) throws Exception {

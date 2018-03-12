@@ -273,7 +273,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
 
 
         if (mType <= TradeFragment.TYPE_POSITION_BUY_DOWN) {
-            Observable<PositionData> observable = mTradeStorage.positionOpen(mSelectGood.goodsId, mType+1, mAmount, String.valueOf(mGoodType.price.close), limitStr, stopStr, null, 1);
+            Observable<PositionData> observable = mTradeStorage.positionOpen(mSelectGood.goodsId, mType+1, mAmount, String.valueOf(mGoodType.price.curPrice), limitStr, stopStr, null, 1);
             NetworkApi.ApiSubscribe(observable, machPositionData -> {
                 if (machPositionData.hasError()) {
                     if (FailDealUtil.dealFail(getContext(), machPositionData.failed)) {

@@ -131,4 +131,5 @@
     <string name="mach_position_help">挂单帮助</string>
     <string name="no_position">暂无持仓</string>
     <string name="no_machposition">暂无挂单</string>
+    <string name="gross_profit">浮动盈亏（元）</string>
 </resources>

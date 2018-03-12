@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
@@ -156,13 +157,27 @@ public class LayoutLiveNormalLand extends FrameLayout {
             public void accept(Object o) throws Exception {
                 if (mBingding.tinyTrade.getRoot().getVisibility() == View.GONE) {
                     mBingding.tinyTrade.getRoot().setVisibility(View.VISIBLE);
+                    mBingding.closePosition.setVisibility(View.INVISIBLE);
                     ViewUtil.setSelect(mBingding.openPosition, true);
                     mBingding.tinyTrade.getRoot().bringToFront();
                 } else {
                     mBingding.tinyTrade.getRoot().setVisibility(View.GONE);
+                    mBingding.closePosition.setVisibility(View.VISIBLE);
                     ViewUtil.setSelect(mBingding.openPosition, false);
                 }
             }
+        });
+
+        RxView.clicks(mBingding.closePosition).subscribe(v->{
+            ((LiveActivity)getContext()).prepareToRotate();
+            ((LiveActivity)getContext()).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            mBingding.closePosition.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    StockBusStation.viewPosition(getContext());
+                }
+            },1500);
+
         });
 
 
@@ -276,7 +291,7 @@ public class LayoutLiveNormalLand extends FrameLayout {
         if(mSelectGood==null){
             return;
         }
-        Observable<PositionData> observable = mTradeStorage.positionOpen(mSelectGood.goodsId, type, mBingding.tinyTrade.getAmount(), String.valueOf(mSelectGoodType.price.close), "0", "0", "0", 1);
+        Observable<PositionData> observable = mTradeStorage.positionOpen(mSelectGood.goodsId, type, mBingding.tinyTrade.getAmount(), String.valueOf(mSelectGoodType.price.curPrice), "0", "0", "0", 1);
         NetworkApi.ApiSubscribe(observable, machPositionData -> {
             if (machPositionData.hasError()) {
                 if (FailDealUtil.dealFail(getContext(), machPositionData.failed)) {

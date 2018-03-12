@@ -9,8 +9,12 @@
             type="com.zxzx74147.live.data.Live" />
 
         <variable
-            name="liveMsg"
-            type="com.zxzx74147.live.data.LiveMsgListData" />
+        name="liveMsg"
+        type="com.zxzx74147.live.data.LiveMsgListData" />
+
+        <variable
+            name="userUni"
+            type="com.zxzx74147.profile.data.UserUniData" />
 
 
     </data>
@@ -141,6 +145,19 @@
             android:layout_height="@dimen/default_gap_296"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
+
+        <include
+            android:id="@+id/exchange"
+            android:visibility="gone"
+            layout="@layout/layout_exchange"
+            app:userUni="@{userUni}"
+            android:layout_width="@dimen/default_gap_662"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/default_gap_144"
+            app:user="@{userUni.user}" />
 
 
 

@@ -47,15 +47,25 @@ public class CommonInfoDialog extends BaseDialogFragment {
     private void initView() {
         View cancel = mBinding.getRoot().findViewById(R.id.cancel);
         View ok = mBinding.getRoot().findViewById(R.id.ok);
+        View close = mBinding.getRoot().findViewById(R.id.close);
+        if(close!=null)
+        RxView.clicks(close).subscribe(v->{
+            dismiss();
+
+        });
+
+        if(cancel!=null)
         RxView.clicks(cancel).subscribe(v->{
+            dismiss();
             if(mCallback!=null){
                 mCallback.callback(null);
             }else{
                 Log.e(TAG, "NO CALLBACK !");
             }
         });
-
+        if(ok!=null)
         RxView.clicks(ok).subscribe(v->{
+            dismiss();
             if(mCallback!=null){
                 mCallback.callback(intentData);
             }else{

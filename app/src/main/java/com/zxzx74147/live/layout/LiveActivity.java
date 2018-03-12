@@ -73,7 +73,7 @@ public class LiveActivity extends BaseActivity {
         }
     }
 
-    private void prepareToRotate(){
+    public void prepareToRotate(){
         mIsRequestRotate = true;
 //        mVideoHolder1.clearRender();
 //        mVideoHolder2.clearRender();
