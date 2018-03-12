@@ -22,10 +22,12 @@ public class ToastUtil {
     }
 
     public static void showToast(Context context, String content) {
-        Toasty.info(context, content, Toast.LENGTH_LONG).show();
+//        Toasty.info(context, content, Toast.LENGTH_LONG).show();
+
+        Toasty.custom(context, content, null, Toast.LENGTH_LONG, false).show();
     }
 
     public static void showToast(Context context, int content) {
-        Toasty.info(context, DevLib.getApp().getResources().getString(content),Toast.LENGTH_LONG).show();
+        showToast(context, DevLib.getApp().getResources().getString(content));
     }
 }

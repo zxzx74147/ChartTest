@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/bg_grey"
-        android:padding="@dimen/default_gap_44"
+
         android:paddingBottom="0dp"
         android:paddingTop="0dp">
 
@@ -26,11 +26,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-
         <android.support.design.widget.TabLayout
             android:id="@+id/tabLayout2"
             style="@style/TitleTabLayout"
             android:layout_width="0dp"
+            android:paddingLeft="@dimen/default_gap_44"
+            android:paddingRight="@dimen/default_gap_44"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,6 +52,8 @@
         <com.dinuscxj.refresh.RecyclerRefreshLayout
             android:id="@+id/refresh_layout"
             android:layout_width="0dp"
+            android:paddingLeft="@dimen/default_gap_44"
+            android:paddingRight="@dimen/default_gap_44"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

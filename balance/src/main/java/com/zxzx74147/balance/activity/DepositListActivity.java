@@ -28,6 +28,7 @@ import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.devlib.utils.RecyclerViewUtil;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.devlib.widget.CommonRecyclerViewAdapter;
+import com.zxzx74147.devlib.widget.RecycleViewDivider;
 import com.zxzx74147.stock.data.Position;
 
 import java.util.LinkedList;
@@ -71,6 +72,10 @@ public class DepositListActivity extends BaseActivity {
 
         mAdapter.setCommonEmptyView(this,R.string.no_deposit);
         mAdapter2.setCommonEmptyView(this,R.string.no_withdraw);
+
+        mBinding.list.addItemDecoration(new RecycleViewDivider(
+                this, LinearLayoutManager.HORIZONTAL, getResources().getDimensionPixelOffset(R.dimen.default_gap_1), getResources().getColor(R.color.div_default)));
+
 
     }
 
