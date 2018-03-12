@@ -57,7 +57,7 @@
             app:layout_constraintTop_toBottomOf="@+id/list" />
 
         <LinearLayout
-            android:id="@+id/linearLayout3"
+            android:id="@+id/wechat_layout"
 
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linearLayout4"
+            android:id="@+id/alipay_layout"
 
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -106,7 +106,7 @@
             android:paddingTop="@dimen/default_gap_32"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+            app:layout_constraintTop_toBottomOf="@+id/wechat_layout">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -135,44 +135,44 @@
                 android:button="@drawable/selector_red_circle" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/linearLayout5"
+        <!--<LinearLayout-->
+            <!--android:id="@+id/linearLayout5"-->
 
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/default_gap_32"
-            android:paddingTop="@dimen/default_gap_32"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:paddingBottom="@dimen/default_gap_32"-->
+            <!--android:paddingTop="@dimen/default_gap_32"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/linearLayout4">-->
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/pay_up" />
+            <!--<ImageView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:src="@drawable/pay_up" />-->
 
-            <TextView
-                android:layout_width="@dimen/default_gap_130"
-                android:layout_height="wrap_content"
-                android:text="@string/recharge_unipay"
-                android:textColor="@color/text_black"
-                android:textSize="@dimen/default_size_30" />
+            <!--<TextView-->
+                <!--android:layout_width="@dimen/default_gap_130"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/recharge_unipay"-->
+                <!--android:textColor="@color/text_black"-->
+                <!--android:textSize="@dimen/default_size_30" />-->
 
-            <TextView
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/recharge_unipay_remind"
-                android:textColor="@color/text_light_grey"
-                android:textSize="@dimen/default_size_24" />
+            <!--<TextView-->
+                <!--android:layout_width="0dip"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="@string/recharge_unipay_remind"-->
+                <!--android:textColor="@color/text_light_grey"-->
+                <!--android:textSize="@dimen/default_size_24" />-->
 
-            <CheckBox
-                android:id="@+id/checkbox_uni"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@drawable/selector_red_circle" />
-        </LinearLayout>
+            <!--<CheckBox-->
+                <!--android:id="@+id/checkbox_uni"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:button="@drawable/selector_red_circle" />-->
+        <!--</LinearLayout>-->
 
         <Button
             android:id="@+id/recharge"
@@ -184,7 +184,7 @@
             android:textSize="@dimen/default_size_34"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
+            app:layout_constraintTop_toBottomOf="@+id/alipay_layout" />
 
 
     </android.support.constraint.ConstraintLayout>

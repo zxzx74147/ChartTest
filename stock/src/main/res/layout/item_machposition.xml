@@ -128,7 +128,7 @@
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{@string/format_mach_error((int)(data.error*100))}"
+                android:text="@{@string/format_mach_error((int)(data.error))}"
                 android:textColor="@color/text_light_grey"
                 android:textSize="@dimen/default_size_24"
                 app:layout_constraintBottom_toBottomOf="@+id/textView6"

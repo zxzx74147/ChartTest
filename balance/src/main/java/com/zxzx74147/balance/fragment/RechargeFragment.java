@@ -87,9 +87,16 @@ public class RechargeFragment extends BaseDialogFragment {
                 }
             }
         });
-        ViewUtil.mergeRadioButton(mBinding.checkboxWechat, mBinding.checkboxAli, mBinding.checkboxUni);
+//        ViewUtil.mergeRadioButton(mBinding.checkboxWechat, mBinding.checkboxAli);
 
 
+        RxView.clicks(mBinding.wechatLayout).subscribe(v->{
+            mBinding.checkboxWechat.setChecked(true);
+        });
+
+        RxView.clicks(mBinding.alipayLayout).subscribe(v->{
+            mBinding.checkboxAli.setChecked(true);
+        });
         RxView.clicks(mBinding.recharge).subscribe(o -> {
             IntentData<PayRequest> intent = new IntentData<>();
             PayRequest payRequest = new PayRequest();
@@ -101,8 +108,6 @@ public class RechargeFragment extends BaseDialogFragment {
             } else if (mBinding.checkboxAli.isChecked()) {
                 payRequest.type = PayRequest.TYPE_ALIPAY;
                 ZXFragmentJumpHelper.startFragment(getContext(),RechargeWechatFragment.class,intent);
-            } else if (mBinding.checkboxUni.isChecked()) {
-
             }
         });
     }

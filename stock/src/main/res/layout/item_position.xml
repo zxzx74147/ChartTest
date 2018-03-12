@@ -52,6 +52,7 @@
                 android:textSize="@dimen/default_size_26"
                 android:textColor="@color/white"
                 android:text="@{@string/format_02(data.closePrice)}"
+                android:drawablePadding="@dimen/default_gap_5"
                 android:drawableRight='@{data.closePrice-data.openPrice>0? @drawable/home_quotes_rise_white:@drawable/home_quotes_fall_white}'
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -66,6 +67,7 @@
 
             <TextView
                 android:textSize="@dimen/default_size_26"
+                android:layout_marginLeft="@dimen/default_gap_10"
                 android:text='@{@string/format_sign_02((data.closePrice-data.openPrice)*100/data.openPrice)}'
                 android:textColor="@color/white"
                 android:layout_width="wrap_content"

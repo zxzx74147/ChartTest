@@ -24,6 +24,7 @@ import com.zxzx74147.devlib.data.UniApiData;
 import com.zxzx74147.devlib.fragment.CommonFragmentDialog;
 import com.zxzx74147.devlib.fragment.CommonInfoDialog;
 import com.zxzx74147.devlib.modules.account.AccountManager;
+import com.zxzx74147.devlib.modules.busstation.ProfileBusStation;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.devlib.utils.ToastUtil;
@@ -198,7 +199,12 @@ public class WithdrawActivity extends BaseActivity {
             return;
         }
         NetworkApi.ApiSubscribe(mWithdrawStorage.withdrawCase(mBinding.getBankCard().bankCardId, (int) (amount*100)), withdrawData -> {
+            if(withdrawData.needAuth!=0){
+                ProfileBusStation.startProfileAuth(this);
+                return;
+            }
             if(withdrawData.hasError()){
+
                 DialogItem item = new DialogItem();
                 item.title = getResources().getString(R.string.withdraw_fail);
                 item.content = withdrawData.error.usermsg==null? getResources().getString(R.string.withdraw_fail_content):withdrawData.error.usermsg;

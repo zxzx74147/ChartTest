@@ -53,6 +53,7 @@
     <string name="my_vocher_unget">可领代金券</string>
     <string name="vocher_get_succ">领取成功</string>
     <string name="active_time">有效期至：</string>
+    <string name="format_auth_state">实名认证（%s）</string>
 
 
     <array name="profile_list">

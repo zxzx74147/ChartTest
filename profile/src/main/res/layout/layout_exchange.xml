@@ -195,5 +195,30 @@
             app:layout_constraintStart_toStartOf="@+id/button2"
             app:layout_constraintTop_toBottomOf="@+id/button2" />
 
+        <View
+            android:id="@+id/div"
+            android:layout_width="0dp"
+            android:layout_height="1px"
+            android:layout_marginTop="@dimen/default_gap_36"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+        <TextView
+            android:id="@+id/auth_state"
+
+            android:layout_width="0dp"
+            style="@style/label_grey"
+            android:onClick="@{()->ProfileBusStation.startProfileAuth(context)}"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/more1"
+            android:textSize="@dimen/default_size_26"
+            android:text="@{@string/format_auth_state(userUni.auth.stateName)}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="@dimen/default_gap_38"
+            app:layout_constraintStart_toStartOf="@+id/div"
+            app:layout_constraintEnd_toEndOf="@+id/div"
+            app:layout_constraintTop_toBottomOf="@+id/div" />
+
     </android.support.constraint.ConstraintLayout>
 </layout>

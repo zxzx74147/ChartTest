@@ -25,6 +25,7 @@ public class ProfileBusStation {
 
     public static final int BUS_ID_PROFILE_LOGOUT_VERIFY = BusIDGen.genBusID("BUS_ID_PROFILE_LOGOUT_VERIFY");
     public static final int BUS_ID_PROFILE_VOUCHER_LIST = BusIDGen.genBusID("BUS_ID_PROFILE_VOUCHER_LIST");
+    public static final int BUS_ID_PROFILE_AUTH = BusIDGen.genBusID("BUS_ID_PROFILE_AUTH");
 
 
     private ProfileBusStation() {
@@ -72,6 +73,11 @@ public class ProfileBusStation {
     }
     public static void startProfileVoucherList(Context context) {
         MessageEvent event = new MessageEvent<>(BUS_ID_PROFILE_VOUCHER_LIST, context);
+        EventBus.getDefault().post(event);
+    }
+
+    public static void startProfileAuth(Context context) {
+        MessageEvent event = new MessageEvent<>(BUS_ID_PROFILE_AUTH, context);
         EventBus.getDefault().post(event);
     }
 

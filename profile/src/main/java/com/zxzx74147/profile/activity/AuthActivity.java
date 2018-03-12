@@ -6,6 +6,7 @@ import android.text.TextUtils;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.zxzx74147.devlib.base.BaseActivity;
+import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.devlib.utils.ToastUtil;
@@ -59,6 +60,7 @@ public class AuthActivity extends BaseActivity {
                     return;
                 }
                 ToastUtil.showToast(AuthActivity.this, R.string.succ);
+                AccountManager.sharedInstance().doRefresh();
 
                 finish();
 

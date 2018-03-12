@@ -8,6 +8,9 @@
         <variable
             name="data"
             type="com.zxzx74147.profile.data.Message" />
+        <variable
+            name="auth"
+            type="com.zxzx74147.profile.data.Auth"/>
 
         <import type="com.zxzx74147.devlib.utils.TimeUtil" />
     </data>
@@ -78,6 +81,7 @@
             android:padding="@dimen/default_gap_20"
             android:ems="10"
             android:layout_marginRight="@dimen/default_gap_24"
+            android:text="@{auth.name}"
             android:hint="@string/name_hint"
             android:singleLine="true"
             android:textColor="@color/text_black"
@@ -120,6 +124,7 @@
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:padding="@dimen/default_gap_20"
+            android:text="@{auth.identityNo}"
             android:ems="10"
             android:layout_marginRight="@dimen/default_gap_24"
             android:hint="@string/cid_hint"

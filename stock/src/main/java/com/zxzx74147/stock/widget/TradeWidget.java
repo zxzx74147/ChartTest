@@ -445,6 +445,14 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                 mBinding.listAmount.getTabAt(mAmount - 1).select();
                 mType = machPosition.buySell + 2;
                 mBinding.setType(mType);
+
+                if (mType == TradeFragment.TYPE_MACH_POSITION_BUY_DOWN) {
+                    ViewUtil.setSelect(mBinding.byUp, false);
+                    ViewUtil.setSelect(mBinding.byDown, true);
+                } else {
+                    ViewUtil.setSelect(mBinding.byUp, true);
+                    ViewUtil.setSelect(mBinding.byDown, false);
+                }
             }
         }, 50);
 

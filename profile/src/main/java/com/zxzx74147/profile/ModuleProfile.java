@@ -10,6 +10,7 @@ import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
 import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
+import com.zxzx74147.profile.activity.AuthActivity;
 import com.zxzx74147.profile.activity.LoginPhoneActivity;
 import com.zxzx74147.profile.activity.MessageCenterActivity;
 import com.zxzx74147.profile.data.Message;
@@ -69,6 +70,8 @@ public class ModuleProfile {
         } else if (event.id == ProfileBusStation.BUS_ID_PROFILE_VOUCHER_LIST) {
             VocherUnGetFragment fragment = VocherUnGetFragment.newInstance();
             fragment.show((ViewUtil.getFragmentActivity(event.context)).getSupportFragmentManager(), fragment.getTag());
+        }else if (event.id == ProfileBusStation.BUS_ID_PROFILE_AUTH) {
+            ZXActivityJumpHelper.startActivity(event.context,AuthActivity.class);
         }
 
 

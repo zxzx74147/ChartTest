@@ -11,4 +11,5 @@ import java.io.Serializable;
 public class WithdrawData extends UniApiData implements Serializable {
     public int needAuth;   //是否需要实名认证(1：需要, 0:不需要)
     public long withdrawID;   //提现流水号
+
 }
