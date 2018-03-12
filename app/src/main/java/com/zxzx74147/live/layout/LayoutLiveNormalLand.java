@@ -171,7 +171,7 @@ public class LayoutLiveNormalLand extends FrameLayout {
         RxView.clicks(mBingding.closePosition).subscribe(v->{
             ((LiveActivity)getContext()).prepareToRotate();
             ((LiveActivity)getContext()).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-            mBingding.closePosition.postDelayed(new Runnable() {
+            ((LiveActivity)getContext()).getWindow().getDecorView().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     StockBusStation.viewPosition(getContext());
