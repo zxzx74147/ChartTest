@@ -20,6 +20,7 @@ import com.zxzx74147.devlib.data.IntentData;
 import com.zxzx74147.devlib.data.UserData;
 import com.zxzx74147.devlib.data.WheelSelectorData;
 import com.zxzx74147.devlib.fragment.CommonFragmentDialog;
+import com.zxzx74147.devlib.fragment.CommonInfoDialog;
 import com.zxzx74147.devlib.fragment.CommonWheelSelectorDialog;
 import com.zxzx74147.devlib.interfaces.IViewModelHolder;
 import com.zxzx74147.devlib.modules.account.AccountManager;
@@ -179,6 +180,11 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
 
         RxCompoundButton.checkedChanges(mBinding.voucher).subscribe(isChecked->{
             mBinding.balance.setChecked(!isChecked);
+        });
+
+        RxView.clicks(mBinding.machRemind).subscribe(v->{
+            CommonInfoDialog dialog = CommonInfoDialog.newInstance(new IntentData<Integer>(R.layout.info_mach));
+            ZXFragmentJumpHelper.startFragment(getContext(), dialog,null);
         });
 
 
