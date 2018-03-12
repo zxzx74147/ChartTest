@@ -17,6 +17,7 @@ import com.zxzx74147.devlib.base.BaseDialogFragment;
 import com.zxzx74147.devlib.data.BaseListData;
 import com.zxzx74147.devlib.data.IntentData;
 import com.zxzx74147.devlib.interfaces.CommonListRequestCallback;
+import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.modules.account.UserViewModel;
 import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.devlib.utils.RecyclerViewUtil;
@@ -32,6 +33,7 @@ import com.zxzx74147.stock.data.Position;
 import com.zxzx74147.stock.data.PositionListData;
 import com.zxzx74147.stock.databinding.FragmentPositionBinding;
 import com.zxzx74147.stock.databinding.ItemMachpositionHeaderBinding;
+import com.zxzx74147.stock.databinding.LayoutPositionHeaderBinding;
 import com.zxzx74147.stock.storage.TradesStorage;
 
 import java.util.LinkedList;
@@ -80,19 +82,6 @@ public class PositionFragment extends BaseDialogFragment {
         ViewUtil.changeTabs(((ViewGroup)mBinding.tabLayout2.getChildAt(0)).getChildAt(0),String.format(getString(R.string.format_my_position), userdata.positionList.num));
         ViewUtil.changeTabs(((ViewGroup)mBinding.tabLayout2.getChildAt(0)).getChildAt(1),String.format(getString(R.string.format_my_machposition), userdata.machPositionList.num));
 
-
-
-//        UserUniData userUniData = mUserViewModel.getUserUniLiveData().getValue();
-//        if (userUniData == null || userUniData.hasError()) {
-//            return;
-//        }
-//        if (userUniData.positionList != null && userUniData.positionList.position != null) {
-//            mPositionAdapter.setNewData(userUniData.positionList.position);
-//        }
-//        if (userUniData.machPositionList != null && userUniData.machPositionList.machPosition != null) {
-//            mMachAdapter.setNewData(userUniData.machPositionList.machPosition);
-//        }
-//        mBinding.setUserUniData(userUniData);
     }
 
 
@@ -132,11 +121,12 @@ public class PositionFragment extends BaseDialogFragment {
         });
 
 
-
-
-
         ItemMachpositionHeaderBinding mMachpositionHeaderBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.item_machposition_header, null, false);
         mMachAdapter.addHeaderView(mMachpositionHeaderBinding.getRoot());
+
+        LayoutPositionHeaderBinding mLayoutPositionHeaderBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.layout_position_header, null, false);
+        mPositionAdapter.addHeaderView(mLayoutPositionHeaderBinding.getRoot());
+        mLayoutPositionHeaderBinding.setUserUniData(AccountManager.sharedInstance().getUserUni());
 
         RxView.clicks(mMachpositionHeaderBinding.expand).subscribe(o->{
             if(mMachpositionHeaderBinding.content.getMaxLines()==2){

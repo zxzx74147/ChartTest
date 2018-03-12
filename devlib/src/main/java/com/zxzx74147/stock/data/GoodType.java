@@ -11,6 +11,8 @@ public class GoodType implements Serializable
     public List<Good> goods = null;
     public String goodsTypeName;
     public Price price;
+    public int buyUserNum;
+    public int sellUserNum;
     private final static long serialVersionUID = -3100535611730018923L;
 
     public boolean mIsSelect = false;

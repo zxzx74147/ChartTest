@@ -81,10 +81,11 @@
                             android:textSize="@dimen/default_size_34" />
 
                         <TextView
+                            android:id="@+id/up_per"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/default_gap_12"
-                            android:text="@string/buy_up"
+                            android:text=""
                             android:textColor="@color/text_grey_white"
                             android:textSize="@dimen/default_size_24" />
                     </LinearLayout>
@@ -107,10 +108,11 @@
                             android:textSize="@dimen/default_size_34" />
 
                         <TextView
+                            android:id="@+id/down_per"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/default_gap_12"
-                            android:text="@string/buy_down"
+                            android:text=""
                             android:textColor="@color/text_grey_white"
                             android:textSize="@dimen/default_size_24" />
                     </LinearLayout>
@@ -376,7 +378,7 @@
                             android:layout_height="@dimen/default_gap_56"
                             android:layout_marginTop="@dimen/default_gap_24"
                             android:gravity="left|center_vertical"
-                            android:text='@{@string/format_defer(good.deferredFee)}'
+                            android:text='@{@string/format_defer(good.deferredFee*amount)}'
                             android:textColor="@color/text_dark_grey"
                             android:textSize="@dimen/default_size_26" />
 
@@ -403,7 +405,7 @@
                             android:layout_height="@dimen/default_gap_56"
                             android:layout_marginTop="@dimen/default_gap_24"
                             android:gravity="left|center_vertical"
-                            android:text='@{@string/format_cost(good.openChargeFee)}'
+                            android:text='@{@string/format_cost(good.openChargeFee*amount)}'
                             android:textColor="@color/text_dark_grey"
                             android:textSize="@dimen/default_size_26" />
 

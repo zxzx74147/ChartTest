@@ -215,6 +215,12 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
         if (mGoodType == null) {
             return;
         }
+        if(mGoodType.sellUserNum+mGoodType.buyUserNum!=0){
+            int upPer = mGoodType.buyUserNum*100/(mGoodType.buyUserNum+mGoodType.sellUserNum);
+            mBinding.upPer.setText(upPer+"%人选择");
+            mBinding.downPer.setText((100-upPer)+"%人选择");
+        }
+
 
         mBinding.setType(mType);
         mBinding.setAmount(1);
@@ -250,6 +256,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             ViewUtil.setSelect(mBinding.byUp, false);
             ViewUtil.setSelect(mBinding.byDown, true);
         }
+        refreshVucher();
 
 
     }
@@ -371,5 +378,6 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
         mBinding.voucher.setVisibility(View.VISIBLE);
         String text = String.format(getResources().getString(R.string.format_voucher_amount),mSelectGood.depositFee,validVochers.size());
         mBinding.voucher.setText(text);
+        mBinding.voucher.setChecked(false);
     }
 }

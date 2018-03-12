@@ -74,7 +74,7 @@
     <string name="format_buy_price">建仓价：%.2f</string>
     <string name="format_buy_open_charge">手续费: %.1f元</string>
     <string name="format_buy_deferred_free">过夜费: 用券不过夜</string>
-    <string name="format_buy_deferred">过夜费: %.1f元</string>
+    <string name="format_buy_deferred">过夜费: %.1f元/天</string>
     <string name="format_float_num">浮动点: 上升%.1f点</string>
     <string name="format_limit">止盈点: %.0f点</string>
     <string name="format_limit_none">止盈点: 无</string>
@@ -110,10 +110,12 @@
     <string name="machposition_open_succ">恭喜您挂单成功</string>
     <string name="mach_price">挂单价</string>
     <string name="format_mach_error">（允许%d点误差）</string>
+
     <string name="format_mach_price">成本: %.1f元</string>
     <string name="format_amount">数量: %s</string>
     <string name="format_price">%.1f元/手</string>
     <string name="valid_time">有效期</string>
+    <string name="cancel_time">撤销时间</string>
 
 
 
