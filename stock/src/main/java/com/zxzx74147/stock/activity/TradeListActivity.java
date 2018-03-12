@@ -1,6 +1,7 @@
 package com.zxzx74147.stock.activity;
 
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
@@ -70,8 +71,9 @@ public class TradeListActivity extends BaseActivity {
         mAdapter.setCommonEmptyView(this,R.string.no_trade);
         mBinding.list.setLayoutManager(new LinearLayoutManager(this));
         mBinding.list.setAdapter(mAdapter);
+
         mBinding.list.addItemDecoration(new RecycleViewDivider(
-                this, LinearLayoutManager.VERTICAL, getResources().getDimensionPixelOffset(R.dimen.default_gap_1), getResources().getColor(R.color.div_default)));
+                this, LinearLayoutManager.HORIZONTAL, getResources().getDimensionPixelOffset(R.dimen.default_gap_1), getResources().getColor(R.color.div_default)));
         initView();
     }
 

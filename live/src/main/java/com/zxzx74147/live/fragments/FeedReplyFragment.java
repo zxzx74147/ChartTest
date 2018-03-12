@@ -97,8 +97,8 @@ public class FeedReplyFragment extends BaseFragment {
     }
 
     private void initView() {
-        mBinding.list.addItemDecoration(new RecycleViewDivider(getContext(), LinearLayout.VERTICAL,
-                getResources().getDimensionPixelOffset(R.dimen.default_gap_16), getResources().getColor(R.color.div_default)));
+        mBinding.list.addItemDecoration(new RecycleViewDivider(getContext(), LinearLayout.HORIZONTAL,
+                1, getResources().getColor(R.color.div_default)));
         mAdapter = new CommonRecyclerViewAdapter<Reply>(new LinkedList<>()){
             @Override
             protected void convert(BaseBindingViewHolder helper, Reply item) {

@@ -45,7 +45,7 @@ public class MessageCenterActivity extends BaseActivity {
     }
 
     private void initView() {
-        mBinding.list.addItemDecoration(new RecycleViewDivider(this, LinearLayout.VERTICAL,
+        mBinding.list.addItemDecoration(new RecycleViewDivider(this, LinearLayout.HORIZONTAL,
                 getResources().getDimensionPixelOffset(R.dimen.default_gap_24), getResources().getColor(R.color.div_default)));
         mAdapter = new CommonRecyclerViewAdapter<Message>(new LinkedList<>());
         mBinding.list.setLayoutManager(new LinearLayoutManager(this));

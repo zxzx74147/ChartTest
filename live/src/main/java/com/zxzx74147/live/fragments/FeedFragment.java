@@ -74,7 +74,7 @@ public class FeedFragment extends BaseFragment {
     }
 
     private void initView() {
-        mBinding.list.addItemDecoration(new RecycleViewDivider(getContext(), LinearLayout.VERTICAL,
+        mBinding.list.addItemDecoration(new RecycleViewDivider(getContext(), LinearLayout.HORIZONTAL,
                 getResources().getDimensionPixelOffset(R.dimen.default_gap_16), getResources().getColor(R.color.bg_grey)));
         mAdapter = new CommonRecyclerViewAdapter<Text>(new LinkedList<>()){
             @Override

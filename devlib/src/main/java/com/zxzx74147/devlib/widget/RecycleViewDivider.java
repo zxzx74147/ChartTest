@@ -127,4 +127,5 @@ public class RecycleViewDivider extends RecyclerView.ItemDecoration {
             }
         }
     }
+
 }

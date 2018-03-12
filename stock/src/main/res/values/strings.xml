@@ -77,8 +77,10 @@
     <string name="format_buy_deferred">过夜费: %.1f元/天</string>
     <string name="format_float_num">浮动点: 上升%.1f点</string>
     <string name="format_limit">止盈点: %.0f点</string>
+    <string name="format_limit_value">%.0f点</string>
     <string name="format_limit_none">止盈点: 无</string>
     <string name="format_stop">止损点: %.0f点</string>
+    <string name="format_stop_value">%.0f点</string>
     <string name="format_stop_none">止损点: 无</string>
     <string name="format_point">%.0f点</string>
     <string name="format_voucher_amount">%.0f元券%d张</string>
