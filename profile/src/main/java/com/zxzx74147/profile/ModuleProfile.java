@@ -19,7 +19,7 @@ import com.zxzx74147.profile.fragment.PasswordInputFragment;
 import com.zxzx74147.profile.fragment.PasswordSetFragment;
 import com.zxzx74147.profile.fragment.ProfileEditFragment;
 import com.zxzx74147.profile.fragment.ProfileFragment;
-import com.zxzx74147.profile.fragment.VocherFragment;
+import com.zxzx74147.profile.fragment.VoucherFragment;
 import com.zxzx74147.profile.fragment.VocherUnGetFragment;
 
 import org.greenrobot.eventbus.EventBus;
@@ -60,8 +60,8 @@ public class ModuleProfile {
         } else if (event.id == ProfileBusStation.BUS_ID_PROFILE_MOTIFY) {
             ProfileEditFragment fragment = ProfileEditFragment.newInstance();
             fragment.show((ViewUtil.getFragmentActivity(event.context)).getSupportFragmentManager(), fragment.getTag());
-        } else if (event.id == ProfileBusStation.BUS_ID_PROFILE_VOCHER) {
-            VocherFragment fragment = VocherFragment.newInstance();
+        } else if (event.id == ProfileBusStation.BUS_ID_PROFILE_VOUCHER) {
+            VoucherFragment fragment = VoucherFragment.newInstance();
             fragment.show((ViewUtil.getFragmentActivity(event.context)).getSupportFragmentManager(), fragment.getTag());
         } else if (event.id == ProfileBusStation.BUS_ID_PROFILE_LOGOUT_VERIFY) {
             LogoutFragment fragment = LogoutFragment.newInstance();

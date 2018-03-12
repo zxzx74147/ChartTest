@@ -74,6 +74,7 @@ public class LoginPhoneActivity extends BaseActivity {
             }
         });
 
+
     }
 
     private boolean checkPhoneNum(CharSequence charSequence) {

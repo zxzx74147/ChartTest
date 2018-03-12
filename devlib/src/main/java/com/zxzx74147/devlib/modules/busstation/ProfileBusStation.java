@@ -21,7 +21,7 @@ public class ProfileBusStation {
     public static final int BUS_ID_PROFILE_TRADE_LOGIN = BusIDGen.genBusID("BUS_ID_PROFILE_TRADE_LOGIN");
     public static final int BUS_ID_PROFILE_MESSAGE_CENTER = BusIDGen.genBusID("BUS_ID_PROFILE_MESSAGE_CENTER");
     public static final int BUS_ID_PROFILE_MOTIFY = BusIDGen.genBusID("BUS_ID_PROFILE_MOTIFY");
-    public static final int BUS_ID_PROFILE_VOCHER = BusIDGen.genBusID("BUS_ID_PROFILE_VOCHER");
+    public static final int BUS_ID_PROFILE_VOUCHER = BusIDGen.genBusID("BUS_ID_PROFILE_VOUCHER");
 
     public static final int BUS_ID_PROFILE_LOGOUT_VERIFY = BusIDGen.genBusID("BUS_ID_PROFILE_LOGOUT_VERIFY");
     public static final int BUS_ID_PROFILE_VOUCHER_LIST = BusIDGen.genBusID("BUS_ID_PROFILE_VOUCHER_LIST");
@@ -62,7 +62,7 @@ public class ProfileBusStation {
     }
 
     public static void startProfileVocher(Context context) {
-        MessageEvent event = new MessageEvent<>(BUS_ID_PROFILE_VOCHER, context);
+        MessageEvent event = new MessageEvent<>(BUS_ID_PROFILE_VOUCHER, context);
         EventBus.getDefault().post(event);
     }
 
