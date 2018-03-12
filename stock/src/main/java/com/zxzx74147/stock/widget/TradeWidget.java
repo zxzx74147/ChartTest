@@ -31,11 +31,11 @@ import com.zxzx74147.devlib.utils.FormatUtil;
 import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
-import com.zxzx74147.profile.data.UserUniData;
 import com.zxzx74147.profile.data.Voucher;
 import com.zxzx74147.stock.R;
 import com.zxzx74147.stock.data.Good;
 import com.zxzx74147.stock.data.GoodType;
+import com.zxzx74147.stock.data.MachPosition;
 import com.zxzx74147.stock.data.MachPositionData;
 import com.zxzx74147.stock.data.PositionData;
 import com.zxzx74147.stock.databinding.WidgetTradeBinding;
@@ -59,7 +59,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
     private Good mSelectGood;
     private int mAmount = 1;
     private TradesStorage mTradeStorage = RetrofitClient.getClient().create(TradesStorage.class);
-
+    private MachPosition mMachPosition = null;
 
 
     @BindingAdapter({"good"})
@@ -77,7 +77,6 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
     public static void setUser(TradeWidget view, UserData user) {
         view.setUser(user);
     }
-
 
 
     public TradeWidget(Context context) {
@@ -102,7 +101,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             ViewUtil.setSelect(mBinding.byDown, false);
             if (mType <= TradeFragment.TYPE_POSITION_BUY_DOWN) {
                 mType = TradeFragment.TYPE_POSITION_BUY_UP;
-            }else {
+            } else {
                 mType = TradeFragment.TYPE_MACH_POSITION_BUY_UP;
             }
             mBinding.setType(mType);
@@ -115,7 +114,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             ViewUtil.setSelect(mBinding.byDown, true);
             if (mType <= TradeFragment.TYPE_POSITION_BUY_DOWN) {
                 mType = TradeFragment.TYPE_POSITION_BUY_DOWN;
-            }else {
+            } else {
                 mType = TradeFragment.TYPE_MACH_POSITION_BUY_DOWN;
             }
             mBinding.setType(mType);
@@ -174,17 +173,17 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             });
         });
 
-        RxCompoundButton.checkedChanges(mBinding.balance).subscribe(isChecked->{
+        RxCompoundButton.checkedChanges(mBinding.balance).subscribe(isChecked -> {
             mBinding.voucher.setChecked(!isChecked);
         });
 
-        RxCompoundButton.checkedChanges(mBinding.voucher).subscribe(isChecked->{
+        RxCompoundButton.checkedChanges(mBinding.voucher).subscribe(isChecked -> {
             mBinding.balance.setChecked(!isChecked);
         });
 
-        RxView.clicks(mBinding.machRemind).subscribe(v->{
+        RxView.clicks(mBinding.machRemind).subscribe(v -> {
             CommonInfoDialog dialog = CommonInfoDialog.newInstance(new IntentData<Integer>(R.layout.info_mach));
-            ZXFragmentJumpHelper.startFragment(getContext(), dialog,null);
+            ZXFragmentJumpHelper.startFragment(getContext(), dialog, null);
         });
 
 
@@ -221,10 +220,10 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
         if (mGoodType == null) {
             return;
         }
-        if(mGoodType.sellUserNum+mGoodType.buyUserNum!=0){
-            int upPer = mGoodType.buyUserNum*100/(mGoodType.buyUserNum+mGoodType.sellUserNum);
-            mBinding.upPer.setText(upPer+"%人选择");
-            mBinding.downPer.setText((100-upPer)+"%人选择");
+        if (mGoodType.sellUserNum + mGoodType.buyUserNum != 0) {
+            int upPer = mGoodType.buyUserNum * 100 / (mGoodType.buyUserNum + mGoodType.sellUserNum);
+            mBinding.upPer.setText(upPer + "%人选择");
+            mBinding.downPer.setText((100 - upPer) + "%人选择");
         }
 
 
@@ -273,13 +272,46 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
         }
         int stop = FormatUtil.getPureNum(mBinding.buyStopValue.getText().toString());
         int limit = FormatUtil.getPureNum(mBinding.buyLimitValue.getText().toString());
-        String stopStr = stop == 0 ? "" : String.valueOf(stop );
-        String limitStr = limit == 0 ? "" : String.valueOf(limit );
+        String stopStr = stop == 0 ? "" : String.valueOf(stop);
+        String limitStr = limit == 0 ? "" : String.valueOf(limit);
 
+        if (mMachPosition != null) {
+            float price = FormatUtil.getPureFloatNum(mBinding.price.getText().toString());
+            if (price == 0) {
+                ToastUtil.showToast(getContext(), R.string.mach_price_remind);
+                return;
+            }
+            Observable<MachPositionData> observable = mTradeStorage.machpositionModify(mMachPosition.machPositionId, mSelectGood.goodsId, mType - 2, mAmount, price, limitStr, stopStr, "100", 1);
+            NetworkApi.ApiSubscribe(observable, machPositionData -> {
+                if (machPositionData.hasError()) {
+//                    if (FailDealUtil.dealFail(getContext(), machPositionData.failed)) {
+//                        return;
+//                    }
+                    ToastUtil.showToast(getContext(), machPositionData.error.usermsg);
+                    return;
+                }
+                DialogItem dialogItem = new DialogItem();
+                dialogItem.title = getResources().getString(R.string.machposition_motify_succ);
+                dialogItem.content = null;
+                dialogItem.cancel = getResources().getString(R.string.position_view);
+                dialogItem.cancel = getResources().getString(R.string.continu_trade);
+                CommonFragmentDialog fragmentDialog = CommonFragmentDialog.newInstance(new IntentData<>(dialogItem));
+                ZXFragmentJumpHelper.startFragment(getContext(), fragmentDialog, new CommonCallback() {
+                    @Override
+                    public void callback(Object item) {
+                        //TODO
+                        if (item == null) {
+                            StockBusStation.viewMachPosition(getContext());
+                        } else {
+                            ;
+                        }
 
+                    }
+                });
 
-        if (mType <= TradeFragment.TYPE_POSITION_BUY_DOWN) {
-            Observable<PositionData> observable = mTradeStorage.positionOpen(mSelectGood.goodsId, mType+1, mAmount, String.valueOf(mGoodType.price.curPrice), limitStr, stopStr, null, 1);
+            });
+        } else if (mType <= TradeFragment.TYPE_POSITION_BUY_DOWN) {
+            Observable<PositionData> observable = mTradeStorage.positionOpen(mSelectGood.goodsId, mType + 1, mAmount, String.valueOf(mGoodType.price.curPrice), limitStr, stopStr, null, 1);
             NetworkApi.ApiSubscribe(observable, machPositionData -> {
                 if (machPositionData.hasError()) {
                     if (FailDealUtil.dealFail(getContext(), machPositionData.failed)) {
@@ -308,14 +340,14 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                 });
 
             });
-        }else{
+        } else {
 
             float price = FormatUtil.getPureNum(mBinding.price.getText().toString());
-            if(price==0){
-                ToastUtil.showToast(getContext(),R.string.mach_price_remind);
+            if (price == 0) {
+                ToastUtil.showToast(getContext(), R.string.mach_price_remind);
                 return;
             }
-            Observable<MachPositionData> observable = mTradeStorage.machpositionOpen(mSelectGood.goodsId, mType-2, mAmount, price, limitStr, stopStr, null, 1);
+            Observable<MachPositionData> observable = mTradeStorage.machpositionOpen(mSelectGood.goodsId, mType - 2, mAmount, price, limitStr, stopStr, "100", 1);
             NetworkApi.ApiSubscribe(observable, machPositionData -> {
                 if (machPositionData.hasError()) {
 //                    if (FailDealUtil.dealFail(getContext(), machPositionData.failed)) {
@@ -362,28 +394,60 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
 
     }
 
-    public void refreshVucher(){
-        if(AccountManager.sharedInstance().getUserUni()==null){
+    public void refreshVucher() {
+        if (AccountManager.sharedInstance().getUserUni() == null) {
             return;
         }
         mBinding.voucher.setVisibility(View.GONE);
         List<Voucher> myVouchers = AccountManager.sharedInstance().getUserUni().userVoucherList.getListItems();
-        if(myVouchers==null){
+        if (myVouchers == null) {
             return;
         }
         List<Voucher> validVochers = new LinkedList<>();
-        for(Voucher voucher:myVouchers){
-            if(voucher.goods.goodsId.equals(mSelectGood.goodsId)){
+        for (Voucher voucher : myVouchers) {
+            if (voucher.goods.goodsId.equals(mSelectGood.goodsId)) {
                 validVochers.add(voucher);
             }
         }
-        if(validVochers.size()==0){
+        if (validVochers.size() == 0) {
             mBinding.balance.setChecked(true);
             return;
         }
         mBinding.voucher.setVisibility(View.VISIBLE);
-        String text = String.format(getResources().getString(R.string.format_voucher_amount),mSelectGood.depositFee,validVochers.size());
+        String text = String.format(getResources().getString(R.string.format_voucher_amount), mSelectGood.depositFee, validVochers.size());
         mBinding.voucher.setText(text);
         mBinding.voucher.setChecked(false);
+    }
+
+    //    private GoodType  mGoodType;
+//    public void setGoodType(GoodType goodType) {
+//        mGoodType = goodType;
+//    }
+    public void setMachPosition(MachPosition machPosition) {
+        mMachPosition = machPosition;
+        postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mBinding.price.setText(String.valueOf(machPosition.price));
+                mBinding.buyLimitValue.setText(String.format("%.0f点",machPosition.limit));
+                mBinding.buyStopValue.setText(String.format("%.0f点",machPosition.stop));
+                GoodType goodType = mGoodType;
+                int i = 0;
+                for (Good good : goodType.goods) {
+                    if (good.goodsId.equals(machPosition.goodsId)) {
+                        mSelectGood = good;
+                        mBinding.listAmount.getTabAt(i).select();
+                        break;
+                    }
+                    i++;
+                }
+                mAmount = (int) machPosition.amount;
+                mBinding.listAmount.getTabAt(mAmount - 1).select();
+                mType = machPosition.buySell + 2;
+                mBinding.setType(mType);
+            }
+        }, 50);
+
+
     }
 }

@@ -13,13 +13,17 @@ import android.view.ViewGroup;
 
 import com.zxzx74147.devlib.base.BaseDialogFragment;
 import com.zxzx74147.devlib.data.IntentData;
+import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.modules.account.UserViewModel;
 import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
 import com.zxzx74147.profile.data.UserUniData;
 import com.zxzx74147.stock.R;
 import com.zxzx74147.stock.data.GoodType;
+import com.zxzx74147.stock.data.MachPosition;
 import com.zxzx74147.stock.databinding.FragmentTradeBinding;
+
+import java.util.List;
 
 /**
  */
@@ -29,6 +33,7 @@ public class TradeFragment extends BaseDialogFragment {
     public static int TYPE_POSITION_BUY_DOWN = 1;
     public static int TYPE_MACH_POSITION_BUY_UP = 3;
     public static int TYPE_MACH_POSITION_BUY_DOWN = 4;
+    public static int TYPE_MACH_POSITION_MOTIFY = 5;
     private FragmentTradeBinding mBinding = null;
     private UserViewModel mUserViewModel = null;
 
@@ -37,6 +42,16 @@ public class TradeFragment extends BaseDialogFragment {
         Bundle args = new Bundle();
         IntentData<GoodType> intentData = new IntentData<>(mGoodType);
         intentData.type = type;
+        args.putSerializable(ZXActivityJumpHelper.INTENT_DATA, intentData);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    public static TradeFragment newInstance(MachPosition machPosition) {
+        TradeFragment fragment = new TradeFragment();
+        Bundle args = new Bundle();
+        IntentData<MachPosition> intentData = new IntentData<>(machPosition);
+        intentData.type = TYPE_MACH_POSITION_MOTIFY;
         args.putSerializable(ZXActivityJumpHelper.INTENT_DATA, intentData);
         fragment.setArguments(args);
         return fragment;
@@ -51,8 +66,24 @@ public class TradeFragment extends BaseDialogFragment {
 
         Bundle bundle = getArguments();
         IntentData goodIntent = (IntentData) bundle.getSerializable(ZXActivityJumpHelper.INTENT_DATA);
-        mBinding.setGood((GoodType) goodIntent.data);
-        mBinding.setType(goodIntent.type);
+        int type = goodIntent.type;
+        if(type==TYPE_MACH_POSITION_MOTIFY){
+            MachPosition machPosition = (MachPosition) goodIntent.data;
+            UserUniData uniData= AccountManager.sharedInstance().getUserUni();
+            List<GoodType> goodList = uniData.goodsTypeList.goodType;
+            for(GoodType goodType:goodList){
+                if(goodType.goodsType.equals(machPosition.goodsType)){
+                    mBinding.setGood(goodType);
+                    mBinding.widgetTrade.setGood(goodType);
+                    break;
+                }
+            }
+            mBinding.widgetTrade.setMachPosition(machPosition);
+        }else {
+            mBinding.setGood((GoodType) goodIntent.data);
+            mBinding.setType(goodIntent.type);
+        }
+
         mBinding.goodList.setCallback(item -> mBinding.setGood(item));
         onLazyInitView(savedInstanceState);
 
@@ -75,6 +106,7 @@ public class TradeFragment extends BaseDialogFragment {
     public void  onDestroyView(){
         super.onDestroyView();
         mBinding.goodList.clearSelect();
+
     }
 
 

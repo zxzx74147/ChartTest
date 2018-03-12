@@ -132,4 +132,5 @@
     <string name="no_position">暂无持仓</string>
     <string name="no_machposition">暂无挂单</string>
     <string name="gross_profit">浮动盈亏（元）</string>
+    <string name="machposition_motify_succ">修改挂单成功</string>
 </resources>

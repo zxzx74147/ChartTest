@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 
 public class FormatUtil {
     private static Pattern P_PURE_NUMBER = Pattern.compile("[^0-9]");
+    private static Pattern P_PURE_NUMBER_FLOAT = Pattern.compile("[^0-9.]");
 
     public  static List<String> POINT_LIST = null;
     static {
@@ -30,6 +31,16 @@ public class FormatUtil {
             return Integer.valueOf(pure);
         }catch (Exception e){
             return 0;
+        }
+    }
+
+    public static float getPureFloatNum(String input){
+        try {
+            Matcher m = P_PURE_NUMBER_FLOAT.matcher(input);
+            String pure = m.replaceAll("").trim();
+            return Float.valueOf(pure);
+        }catch (Exception e){
+            return 0f;
         }
     }
 }

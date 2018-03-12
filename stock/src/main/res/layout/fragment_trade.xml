@@ -35,8 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/default_gap_54"
             android:layout_marginTop="@dimen/default_gap_54"
-
-            android:text='@{type==TradeFragment.TYPE_MACH_POSITION_BUY_DOWN||type==TradeFragment.TYPE_MACH_POSITION_BUY_UP? @string/stock_by_without:@string/trade_open_position}'
+            android:text='@{type==TradeFragment.TYPE_POSITION_BUY_DOWN||type==TradeFragment.TYPE_POSITION_BUY_UP? @string/trade_open_position: @string/stock_by_without}'
             android:textColor="@color/text_black"
             android:textSize="@dimen/default_size_54"
             app:layout_constraintStart_toStartOf="parent"

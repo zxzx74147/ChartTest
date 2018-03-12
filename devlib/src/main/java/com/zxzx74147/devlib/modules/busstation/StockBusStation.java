@@ -27,15 +27,18 @@ public class StockBusStation {
     public static final int BUS_ID_MACH_POSITION_CLOSE = BusIDGen.genBusID("BUS_ID_MACH_POSITION_CLOSE");
     public static final int BUS_ID_MACH_POSITION_DEFFER = BusIDGen.genBusID("BUS_ID_MACH_POSITION_DEFFER");
 
+    public static final int BUS_ID_MOTIFY_POSITION= BusIDGen.genBusID("BUS_ID_MOTIFY_POSITION");
+
 
     private StockBusStation() {
 
     }
 
     public static void startStock(Context context, GoodType type) {
-        MessageEvent<GoodType > event = new MessageEvent<>(BUS_ID_STOCK_VIEW, context, type);
+        MessageEvent<GoodType> event = new MessageEvent<>(BUS_ID_STOCK_VIEW, context, type);
         EventBus.getDefault().post(event);
     }
+
 
 
     public static void startStockTrade(Context context, GoodType good,int type) {
@@ -78,8 +81,7 @@ public class StockBusStation {
     }
 
     public static void modifyMachposition(Context context, MachPosition position) {
-        MessageEvent event = new MessageEvent<>(BUS_ID_MACH_POSITION_MODIFY, context);
-        event.data = position;
+        MessageEvent<MachPosition> event = new MessageEvent<>(BUS_ID_MOTIFY_POSITION, context, position);
         EventBus.getDefault().post(event);
     }
 

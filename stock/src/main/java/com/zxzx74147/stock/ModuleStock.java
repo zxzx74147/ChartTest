@@ -67,17 +67,18 @@ public class ModuleStock {
             PositionCloseFragment fragment = PositionCloseFragment.newInstance(new IntentData<>((Position) event.data));
             fragment.show((ViewUtil.getFragmentActivity(event.context)).getSupportFragmentManager(), fragment.getTag());
         }
-        else if (event.id == StockBusStation.BUS_ID_MACH_POSITION_MODIFY) {
-//            PositionCloseFragment fragment = PositionModifyFragment.newInstance(new IntentData<>((Position) event.data));
-//            fragment.show((ViewUtil.getFragmentActivity(event.context)).getSupportFragmentManager(), fragment.getTag());
-        }
-        else if (event.id == StockBusStation.BUS_ID_MACH_POSITION_CLOSE) {
+        else
+         if (event.id == StockBusStation.BUS_ID_MACH_POSITION_CLOSE) {
 //            PositionCloseFragment fragment = PositionModifyFragment.newInstance(new IntentData<>((Position) event.data));
 //            fragment.show((ViewUtil.getFragmentActivity(event.context)).getSupportFragmentManager(), fragment.getTag());
         }else if (event.id == StockBusStation.BUS_ID_MACH_POSITION_DEFFER) {
             DefferListFragment fragment = DefferListFragment.newInstance(new IntentData<>((Position) event.data));
             fragment.show((ViewUtil.getFragmentActivity(event.context)).getSupportFragmentManager(), fragment.getTag());
+        }else if (event.id == StockBusStation.BUS_ID_MOTIFY_POSITION) {
+            TradeFragment fragment = TradeFragment.newInstance((MachPosition) event.data);
+            fragment.show((ViewUtil.getFragmentActivity(event.context)).getSupportFragmentManager(), fragment.getTag());
         }
+
 
 
     }

@@ -20,7 +20,9 @@ public interface TradesStorage {
     Observable<MachPositionData> machpositionCancel(@Query("machPositionId") long machPositionId);
 
     @GET("/trades/machposition/modify")
-    Observable<MachPositionData> machpositionModify(@Query("machPositionId") long machPositionId);
+    Observable<MachPositionData> machpositionModify(@Query("machPositionId") long machPositionId,@Query("goodsId") String goodsId, @Query("buySell")
+            int buySell, @Query("amount") int amount, @Query("price") float price, @Query("limit") String limit
+            , @Query("stop") String stop, @Query("error") String error, @Query("deferred") int deferred);
 
 
     @GET("/trades/machposition/open")
