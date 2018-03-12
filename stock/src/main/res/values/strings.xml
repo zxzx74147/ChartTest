@@ -110,6 +110,7 @@
     <string name="format_mach_error">（允许%d点误差）</string>
     <string name="format_mach_price">成本: %.1f元</string>
     <string name="format_amount">数量: %s</string>
+    <string name="format_price">%.1f元/手</string>
     <string name="valid_time">有效期</string>
 
 

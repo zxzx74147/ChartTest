@@ -47,6 +47,9 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="com.zxzx74147.live.layout.LiveActivity"
+            android:screenOrientation="portrait" />
 
         <receiver android:name=".push.AliPushReceiver">
             <intent-filter>

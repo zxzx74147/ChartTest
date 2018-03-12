@@ -128,7 +128,8 @@ public class GoodListWidget extends RelativeLayout implements IViewModelHolder {
     @Override
     public void setLifeCircle(LifecycleOwner owner) {
         mModel.getUserUniLiveData().observe(owner, userUniData -> {
-            if (userUniData.hasError()) {
+
+            if (userUniData==null||userUniData.hasError()) {
                 return;
             }
             if(mMyPositionBinding!=null) {

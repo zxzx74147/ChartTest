@@ -52,8 +52,8 @@
         <FrameLayout
             android:layout_width="@dimen/default_gap_180"
             android:layout_height="0dp"
-            android:layout_marginRight="@dimen/default_gap_80"
-            android:layout_marginTop="@dimen/default_gap_150"
+            android:layout_marginRight="@dimen/default_gap_50"
+            android:layout_marginTop="@dimen/default_gap_50"
             app:layout_constraintDimensionRatio="9:16"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -66,7 +66,7 @@
         </FrameLayout>
 
 
-        <com.zxzx74147.live.layout.LayoutLiveNormal
+        <com.zxzx74147.live.layout.LayoutLiveNormalLand
             android:id="@+id/normal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

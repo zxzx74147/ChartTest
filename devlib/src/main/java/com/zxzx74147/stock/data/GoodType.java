@@ -15,4 +15,5 @@ public class GoodType implements Serializable
 
     public boolean mIsSelect = false;
 
+
 }

@@ -81,7 +81,9 @@ public class AccountManager {
         mConsumers.add(consumer);
         checkStatus();
         try {
-            consumer.accept(mUserUniData);
+            if(mUserUniData!=null) {
+                consumer.accept(mUserUniData);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -7,7 +7,8 @@ public class Config implements Serializable {
 
     public String userGuideUrl;     //新手课堂Url
     public String userProtocolUrl;     //用户协议Url
-    public String liveActivityUrl;     //直播活动Url
-    public String liveActivityIconUrl;     //直播活动IconUrl
+    public String activityJumpUrl;     //直播活动跳转Url（如果为空，则代表活动关闭）
+    public String activityIconUrl;     //直播活动IconUrl
+    public String activityPicUrl;     //直播活动弹层图片Url
 
 }

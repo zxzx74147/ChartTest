@@ -17,6 +17,7 @@ public class ToastUtil {
         Toasty.Config.getInstance()
                 .setInfoColor(0xB4000000) // optional
                 .setTextColor(ColorUtil.getColor(R.color.white))
+                .tintIcon(false)
                 .apply(); // required
     }
 

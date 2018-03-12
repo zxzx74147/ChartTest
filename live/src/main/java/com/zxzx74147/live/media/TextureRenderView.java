@@ -123,7 +123,9 @@ public class TextureRenderView extends TextureView implements IRenderView {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         mMeasureHelper.doMeasure(widthMeasureSpec, heightMeasureSpec);
-        setMeasuredDimension(mMeasureHelper.getMeasuredWidth(), mMeasureHelper.getMeasuredHeight());
+        setMeasuredDimension(View.MeasureSpec.EXACTLY|mMeasureHelper.getMeasuredWidth(), View.MeasureSpec.EXACTLY|mMeasureHelper.getMeasuredHeight());
+
+        Log.i("onMeasure","width:"+mMeasureHelper.getMeasuredWidth()+"height:"+mMeasureHelper.getMeasuredHeight());
     }
 
     //--------------------

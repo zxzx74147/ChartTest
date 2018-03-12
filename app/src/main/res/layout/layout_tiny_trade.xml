@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+
+        <variable
+            name="data"
+            type="com.zxzx74147.stock.data.GoodType" />
+        <variable
+            name="good"
+            type="com.zxzx74147.stock.data.Good" />
+
+        <variable
+            name="amount"
+            type="Integer"/>
+
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="@dimen/default_gap_423"
+        android:layout_height="@dimen/default_gap_296"
+        android:background="@drawable/rect_round_white"
+        android:padding="@dimen/default_gap_30">
+
+
+        <LinearLayout
+            android:id="@+id/good_layout"
+
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_gap_70"
+            android:background="@drawable/rect_round_grey"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/default_gap_10"
+            android:paddingRight="@dimen/default_gap_10">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{data.goodsTypeName}"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/default_size_30" />
+            <!--android:drawableRight="@{data.price.curPrice-data.price.open>0? @drawable/home_quotes_rise:@drawable/home_quotes_fall}"-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_gap_20"
+                android:text='@{@string/format_02(data.price.curPrice)}'
+                android:textColor='@{data.price.curPrice-data.price.open>0? @color/stock_up:@color/stock_down}'
+                android:textSize="@dimen/default_size_26" />
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_gap_20"
+                android:layout_weight="1"
+                android:drawableRight="@drawable/expand_arrow"
+                android:text="@{@string/format_01_sign(data.price.curPrice-data.price.open)}"
+                android:textColor='@{data.price.curPrice-data.price.open>0? @color/stock_up:@color/stock_down}'
+                android:textSize="@dimen/default_size_26" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout7"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/default_gap_70"
+            android:layout_marginEnd="@dimen/default_gap_7"
+            android:layout_marginTop="@dimen/default_gap_12"
+            android:background="@drawable/rect_round_grey"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/default_gap_10"
+            android:paddingRight="@dimen/default_gap_10"
+            app:layout_constraintEnd_toStartOf="@+id/guideline4"
+            app:layout_constraintStart_toStartOf="@+id/good_layout"
+            app:layout_constraintTop_toBottomOf="@+id/good_layout">
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_gap_20"
+                android:layout_weight="1"
+                android:drawableRight="@drawable/expand_arrow"
+                android:text="@{@string/format_price(good.depositFee)}"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/default_size_30" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout8"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/default_gap_70"
+            android:layout_marginStart="@dimen/default_gap_7"
+            android:background="@drawable/rect_round_grey"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/default_gap_10"
+            android:paddingRight="@dimen/default_gap_10"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout7"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline4"
+            app:layout_constraintTop_toTopOf="@+id/linearLayout7">
+
+            <TextView
+                android:id="@+id/amount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_gap_20"
+                android:layout_weight="1"
+                android:text="@{@string/format_lot(amount)}"
+                android:drawableRight="@drawable/expand_arrow"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/default_size_30" />
+        </LinearLayout>
+
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <Button
+            android:id="@+id/by_up"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/default_gap_70"
+            android:layout_marginEnd="@dimen/default_gap_7"
+            android:layout_marginTop="@dimen/default_gap_13"
+            android:background="@drawable/rect_round_red"
+            android:text="@string/by_up_tiny"
+            android:textColor="@color/white"
+            android:textSize="@dimen/default_size_30"
+            app:layout_constraintEnd_toEndOf="@+id/guideline4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
+
+        <Button
+            android:id="@+id/by_down"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/default_gap_70"
+            android:layout_marginStart="@dimen/default_gap_7"
+            android:layout_marginTop="@dimen/default_gap_13"
+            android:background="@drawable/rect_round_green"
+            android:text="@string/by_down_tiny"
+            android:textColor="@color/white"
+            android:textSize="@dimen/default_size_30"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline4"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
+

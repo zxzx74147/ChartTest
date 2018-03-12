@@ -103,11 +103,11 @@
                 android:tag="@string/stock_k_1h_s"
                 android:text="@string/stock_k_1h" />
 
-            <android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:tag="@string/stock_k_1d_s"
-                android:text="@string/stock_k_1d" />
+            <!--<android.support.design.widget.TabItem-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:tag="@string/stock_k_1d_s"-->
+                <!--android:text="@string/stock_k_1d" />-->
         </android.support.design.widget.TabLayout>
 
         <FrameLayout
