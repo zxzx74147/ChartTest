@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.zxzx74147.balance.data.BankCard"/>
+
+        <variable
+            name="user"
+            type="com.zxzx74147.devlib.data.UserData"/>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="0dp"
+        android:paddingRight="@dimen/default_gap_44"
+        android:paddingTop="@dimen/default_gap_44"
+        android:paddingLeft="@dimen/default_gap_44">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="@string/unbind_card"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/default_size_40"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/default_gap_24"
+            android:text="@string/unbind_card_remind"
+            android:textColor="@color/text_light_grey"
+            android:textSize="@dimen/default_size_26"
+            app:layout_constraintTop_toBottomOf="@id/textView"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/icon_close" />
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/bank_info"
+            android:layout_width="0dp"
+            android:layout_marginTop="@dimen/default_gap_70"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView2">
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.22" />
+
+            <TextView
+                android:id="@+id/cardName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{data.bank}"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/default_size_30"
+                app:layout_constraintBottom_toBottomOf="@+id/editText"
+                app:layout_constraintEnd_toStartOf="@+id/editText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/editText" />
+
+            <TextView
+                android:id="@+id/phone_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/phone_number"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/default_size_30"
+                app:layout_constraintBottom_toBottomOf="@+id/editText2"
+                app:layout_constraintStart_toStartOf="@+id/cardName"
+                app:layout_constraintTop_toTopOf="@+id/editText2" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/vcode"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/default_size_30"
+                app:layout_constraintBottom_toBottomOf="@+id/layout_vcode"
+                app:layout_constraintStart_toStartOf="@+id/cardName"
+                app:layout_constraintTop_toTopOf="@+id/layout_vcode" />
+
+
+            <TextView
+                android:id="@+id/editText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/default_size_24"
+                android:text="@{data.getBankSecu2()}"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/default_size_30"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/editText2"
+                android:layout_width="0dp"
+                android:text="@{user.phone}"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_gap_32"
+                android:padding="@dimen/default_size_24"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/default_size_30"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+
+
+
+            <LinearLayout
+                android:id="@+id/layout_vcode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_gap_32"
+                android:orientation="horizontal"
+                android:padding="@dimen/default_size_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/editText2">
+
+                <EditText
+                    android:id="@+id/vcode"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/tran"
+                    android:inputType="number"
+                    android:hint="@string/vcode"
+                    android:textColorHint="@color/text_light_grey"
+                    android:textColor="@color/text_black"
+                    android:textCursorDrawable="@color/text_black"
+                    android:textSize="@dimen/default_size_30" />
+
+                <TextView
+                    android:id="@+id/vcode_remind"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/get_vcode"
+                    android:textColor="@color/text_blue"
+                    android:textSize="@dimen/default_size_26" />
+            </LinearLayout>
+
+
+        </android.support.constraint.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/default_gap_24"
+            android:text="@string/unbind_card_remind2"
+            android:textColor="@color/text_light_grey"
+            android:textSize="@dimen/default_size_26"
+            app:layout_constraintTop_toBottomOf="@id/bank_info"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/unbind"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_gap_88"
+            android:layout_marginTop="@dimen/default_gap_35"
+            android:background="@drawable/rect_round_red"
+            android:text="@string/unbind_verify"
+            android:textColor="@color/white"
+            android:textSize="@dimen/default_size_34"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        
+        <View
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/unbind"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_gap_100"/>
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

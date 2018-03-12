@@ -23,4 +23,11 @@ public class BankCard implements Serializable {
         }
         return "*"+cardNo.substring(cardNo.length()-4,cardNo.length());
     }
+
+    public String getBankSecu2(){
+        if(TextUtils.isEmpty(cardNo)||cardNo.length()!=16){
+            return "*";
+        }
+        return cardNo.substring(0,4)+" **** **** "+cardNo.substring(cardNo.length()-4,cardNo.length());
+    }
 }

@@ -41,4 +41,6 @@
     <string name="just_now">刚刚</string>
     <string name="submit">提交</string>
     <string name="succ">成功</string>
+    <string name="str_loading">--</string>
+
 </resources>

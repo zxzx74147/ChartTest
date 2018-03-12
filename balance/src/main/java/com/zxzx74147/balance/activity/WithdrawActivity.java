@@ -84,8 +84,18 @@ public class WithdrawActivity extends BaseActivity {
             }
         });
         RxView.clicks(mBinding.withdrawAmount.all).subscribe(o -> {
+            float all = AccountManager.sharedInstance().getUser().balance;
+            if(all<202){
+                all = all-2;
+                all = all<0? 0:all;
+            }else if(all>2020){
+                all = all-20;
+            }else{
+                all = all/1.01f;
+            }
+
             mBinding.withdrawAmount.amount.setText(String.format(getResources().getString(R.string.format_02),
-                    AccountManager.sharedInstance().getUser().balance));
+                    all));
         });
 
 
@@ -96,6 +106,30 @@ public class WithdrawActivity extends BaseActivity {
             requestVcode();
         });
 
+        RxTextView.textChanges(mBinding.withdrawAmount.amount).subscribe(new Consumer<CharSequence>() {
+            @Override
+            public void accept(CharSequence charSequence) throws Exception {
+                float all = 0;
+                try {
+                    Float num = Float.valueOf(charSequence.toString());
+                    all = num;
+                }catch (Exception e){
+
+                }
+                if(all==0){
+                    mBinding.withdrawAmount.setFee(null);
+                    return;
+                }
+                float fee = all*0.01f;
+                if(fee<2){
+                    fee = 2;
+                }
+                if(fee>20){
+                    fee = 20;
+                }
+                mBinding.withdrawAmount.setFee(fee);
+            }
+        });
 
     }
 

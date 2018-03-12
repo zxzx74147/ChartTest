@@ -93,6 +93,7 @@ public class LoginPhoneActivity extends BaseActivity {
                 }
 
                 final long count = 60;
+                ViewUtil.showSoftPad(mBinding.layoutRegist.vcode);
                 Observable.interval(0, 1, TimeUnit.SECONDS).take(count + 1).map(aLong -> count - aLong).doOnSubscribe(disposable -> mIsCountDonw = true).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(t -> {
                     if (t <= 0) {
                         mIsCountDonw = false;
@@ -101,7 +102,7 @@ public class LoginPhoneActivity extends BaseActivity {
                         String format = getResources().getString(R.string.vcode_countdown);
                         mBinding.layoutRegist.vcodeRemind.setText(String.format(format, t));
                         mBinding.layoutRegist.vcodeRemind.setTextColor(getResources().getColor(R.color.text_light_grey));
-                        ViewUtil.showSoftPad(mBinding.layoutRegist.vcode);
+
                     }
                 });
 

@@ -43,6 +43,7 @@
     <string name="format_bank_curr">提现至：%s %s</string>
     <string name="bind_card_remind_content">为保障资金安全,仅限使用一张银行卡提现。如需更换,请联系客服</string>
     <string name="unbind_card">解除绑定银行卡</string>
+    <string name="unbind_verify">确认解绑</string>
     <string name="submit">提交</string>
     <string name="withdraw_remind_mayi">蚂蚁投资承诺您的信息安全</string>
     <string name="hint_card_name">请输入持卡人姓名</string>
@@ -59,6 +60,15 @@
     <string name="withdraw_succ">提现成功</string>
     <string name="no_deposit">暂无充值记录</string>
     <string name="no_withdraw">暂无提现记录</string>
+    <string name="unbind_card_remind">更换绑定银行卡之前，您需要先解绑当前银行卡</string>
+    <string name="unbind_card_remind2">如果您在绑定银行卡中碰到任何问题，请联系客服</string>
+    <string name="unbind_succ">解除绑定成功</string>
+    <string name="unbind_succ_content">您需要绑定一张新的银行卡以提现</string>
+    <string name="bind_new">绑定新卡</string>
+    <string name="unbind_fail">解除绑定失败</string>
+    <string name="unbind_fail_content">请联系客服 \n给您造成的不便，敬请谅解</string>
+    <string name="withdraw_fee">手续费(元)</string>
+    <string name="withdraw_time_remind">24小时内到账</string>
 
 
     <!--<item name="recharge_wechat_drawable">@drawable/pay_weixin</item>-->

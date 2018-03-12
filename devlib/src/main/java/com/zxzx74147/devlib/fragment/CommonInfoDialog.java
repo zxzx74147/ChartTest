@@ -23,6 +23,7 @@ public class CommonInfoDialog extends BaseDialogFragment {
     private static final String TAG = CommonFragmentDialogBinding.class.getSimpleName();
 
     private ViewDataBinding mBinding = null;
+    private IntentData<Integer> intentData;
 
 
     public static CommonInfoDialog newInstance(IntentData<Integer> item) {
@@ -36,7 +37,7 @@ public class CommonInfoDialog extends BaseDialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        IntentData<Integer> intentData = (IntentData<Integer>) getArguments().getSerializable(ZXActivityJumpHelper.INTENT_DATA);
+        intentData = (IntentData<Integer>) getArguments().getSerializable(ZXActivityJumpHelper.INTENT_DATA);
         Integer id = intentData.data;
         mBinding = DataBindingUtil.inflate(inflater, id, container, false);
         initView();
@@ -44,6 +45,23 @@ public class CommonInfoDialog extends BaseDialogFragment {
     }
 
     private void initView() {
+        View cancel = mBinding.getRoot().findViewById(R.id.cancel);
+        View ok = mBinding.getRoot().findViewById(R.id.ok);
+        RxView.clicks(cancel).subscribe(v->{
+            if(mCallback!=null){
+                mCallback.callback(null);
+            }else{
+                Log.e(TAG, "NO CALLBACK !");
+            }
+        });
+
+        RxView.clicks(ok).subscribe(v->{
+            if(mCallback!=null){
+                mCallback.callback(intentData);
+            }else{
+                Log.e(TAG, "NO CALLBACK !");
+            }
+        });
     }
 
 

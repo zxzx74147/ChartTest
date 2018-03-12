@@ -5,8 +5,11 @@ import android.view.View;
 
 import com.zxzx74147.balance.activity.DepositListActivity;
 import com.zxzx74147.balance.activity.WithdrawActivity;
+import com.zxzx74147.balance.data.BankCard;
 import com.zxzx74147.balance.data.RechargeAmount;
 import com.zxzx74147.balance.fragment.RechargeFragment;
+import com.zxzx74147.balance.fragment.UnBindCardFragment;
+import com.zxzx74147.devlib.data.IntentData;
 import com.zxzx74147.devlib.data.MessageEvent;
 import com.zxzx74147.devlib.modules.busstation.BalanceBusStation;
 import com.zxzx74147.devlib.modules.busstation.ProfileBusStation;
@@ -46,6 +49,9 @@ public class ModuleBalance {
            ZXActivityJumpHelper.startActivity(event.context, DepositListActivity.class,null);
         }else if(event.id== BalanceBusStation.BUS_ID_BALANCE_WITHDRAW){
             ZXActivityJumpHelper.startActivity(event.context, WithdrawActivity.class,null);
+        }else if(event.id== BalanceBusStation.BUS_ID_BALANCE_UNBIND){
+            UnBindCardFragment fragement = UnBindCardFragment.newInstance(new IntentData<BankCard>((BankCard) event.data));
+            ZXFragmentJumpHelper.startFragment(event.context,fragement,null);
         }
     }
 

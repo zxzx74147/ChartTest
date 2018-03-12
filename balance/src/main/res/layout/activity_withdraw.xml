@@ -13,6 +13,7 @@
             name="bankCard"
             type="com.zxzx74147.balance.data.BankCard" />
         <import type="android.view.View"/>
+        <import type="com.zxzx74147.devlib.modules.busstation.BalanceBusStation"/>
 
 
     </data>
@@ -21,7 +22,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-
         android:paddingBottom="0dp"
         android:paddingTop="0dp">
 
@@ -78,6 +78,7 @@
                 android:drawablePadding="@dimen/default_gap_10"
                 android:drawableRight="@drawable/more_white"
                 android:text="@string/unbind_card"
+                android:onClick="@{()->{BalanceBusStation.startUnbind(context,bankCard)}}"
                 android:gravity="center_vertical|left"
                 android:textColor="@color/white" />
         </LinearLayout>

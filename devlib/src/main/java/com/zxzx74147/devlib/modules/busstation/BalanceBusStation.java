@@ -19,6 +19,7 @@ public class BalanceBusStation {
     public static final int BUS_ID_BALANCE_RECHARGE= BusIDGen.genBusID("BUS_ID_BALANCE_RECHARGE");
     public static final int BUS_ID_BALANCE_DEPOSIT_LIST= BusIDGen.genBusID("BUS_ID_BALANCE_DEPOSIT_LIST");
     public static final int BUS_ID_BALANCE_WITHDRAW= BusIDGen.genBusID("BUS_ID_BALANCE_WITHDRAW");
+    public static final int BUS_ID_BALANCE_UNBIND= BusIDGen.genBusID("BUS_ID_BALANCE_UNBIND");
 
 
     private BalanceBusStation() {
@@ -37,6 +38,12 @@ public class BalanceBusStation {
 
     public static void startWithdarw(Context context){
         MessageEvent event = new MessageEvent<>(BUS_ID_BALANCE_WITHDRAW, context);
+        EventBus.getDefault().post(event);
+    }
+
+    public static void startUnbind(Context context,Object obj){
+        MessageEvent event = new MessageEvent<>(BUS_ID_BALANCE_UNBIND, context);
+        event.data = obj;
         EventBus.getDefault().post(event);
     }
 
