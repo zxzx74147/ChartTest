@@ -10,12 +10,14 @@ import com.zxzx74147.devlib.base.BaseActivity;
 import com.zxzx74147.devlib.data.UniApiData;
 import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.modules.busstation.MainBusStation;
+import com.zxzx74147.devlib.modules.sys.SysInitManager;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.devlib.os.DeviceIDMananger;
 import com.zxzx74147.devlib.os.PackageInfoMananger;
 import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.devlib.utils.ViewUtil;
+import com.zxzx74147.devlib.utils.WebviewUtil;
 import com.zxzx74147.profile.R;
 import com.zxzx74147.profile.data.UserUniData;
 import com.zxzx74147.profile.databinding.ActivityLoginPhoneBinding;
@@ -57,6 +59,10 @@ public class LoginPhoneActivity extends BaseActivity {
 
         RxView.clicks(mBinding.layoutRegist.start).subscribe(a -> {
             requestLogin();
+        });
+
+        RxView.clicks(mBinding.layoutRegist.protocol).subscribe(a -> {
+            WebviewUtil.showWebActivity(this, SysInitManager.sharedInstance().getSysInitData().config.userProtocolUrl);
         });
 
         RxView.clicks(mBinding.layoutRegist.vcodeRemind).subscribe(a -> {

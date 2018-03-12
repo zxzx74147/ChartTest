@@ -2,7 +2,6 @@ package com.zxzx74147.charttest;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import com.zxzx74147.charttest.databinding.ActivityLauncherBinding;
 import com.zxzx74147.devlib.base.BaseActivity;
@@ -28,6 +27,8 @@ import io.reactivex.schedulers.Schedulers;
 public class LauncherActivity extends BaseActivity {
 
     private ActivityLauncherBinding mBinding = null;
+    private boolean mIsSysInit = false;
+    private boolean misAnimation = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +38,13 @@ public class LauncherActivity extends BaseActivity {
 
         Observable.just("").delay(100, TimeUnit.MILLISECONDS).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(s -> {
-            if (AccountManager.sharedInstance().isLogin()) {
-                openMain();
-            } else {
-                showLoginButton();
+            misAnimation = true;
+            if (mIsSysInit) {
+                if (AccountManager.sharedInstance().isLogin()) {
+                    openMain();
+                } else {
+                    showLoginButton();
+                }
             }
         });
     }
@@ -68,6 +72,14 @@ public class LauncherActivity extends BaseActivity {
                 return;
             }
             SysInitManager.sharedInstance().setSysInitData(sysInit);
+            mIsSysInit = true;
+            if(misAnimation){
+                if (AccountManager.sharedInstance().isLogin()) {
+                    openMain();
+                } else {
+                    showLoginButton();
+                }
+            }
         });
     }
 }
