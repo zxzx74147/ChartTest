@@ -158,7 +158,7 @@
                     android:hint="@string/vcode"
                     android:textColorHint="@color/text_light_grey"
                     android:textColor="@color/text_black"
-                    android:textCursorDrawable="@color/text_black"
+                    android:textCursorDrawable="@drawable/color_cursor"
                     android:textSize="@dimen/default_size_30" />
 
                 <TextView

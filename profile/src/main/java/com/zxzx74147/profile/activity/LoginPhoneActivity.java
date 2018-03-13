@@ -61,6 +61,10 @@ public class LoginPhoneActivity extends BaseActivity {
             requestLogin();
         });
 
+        RxView.clicks(mBinding.layoutRegist.close).subscribe(a -> {
+            finish();
+        });
+
         RxView.clicks(mBinding.layoutRegist.protocol).subscribe(a -> {
             WebviewUtil.showWebActivity(this, SysInitManager.sharedInstance().getSysInitData().config.userProtocolUrl);
         });

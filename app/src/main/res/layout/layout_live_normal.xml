@@ -72,6 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_gap_16"
+            android:maxHeight="@dimen/default_gap_400"
             android:background="@color/tran"
             android:paddingTop="@dimen/default_gap_16"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -108,6 +109,14 @@
             app:layout_constraintBottom_toBottomOf="@id/like"
             app:layout_constraintEnd_toEndOf="parent" />
 
+        <include
+            android:layout_width="wrap_content"
+            android:id="@+id/profit_layout"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/frameLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            layout="@layout/widget_profit"/>
 
     </android.support.constraint.ConstraintLayout>
 </layout>

@@ -1,5 +1,7 @@
 package com.zxzx74147.live.layout;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -11,6 +13,8 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -108,8 +112,12 @@ public class LayoutLiveNormal extends FrameLayout {
                 return;
             }
             mAdapter.setNewData(liveMsgListData.msgList.msg);
-            mBingding.bubble.startAnimation( mBingding.bubble.getWidth()/2,  mBingding.bubble.getHeight()-getResources().getDimensionPixelSize(R.dimen.default_gap_100),2);
 
+            mBingding.bubble.startAnimation( mBingding.bubble.getWidth()/2,  mBingding.bubble.getHeight()-getResources().getDimensionPixelSize(R.dimen.default_gap_100),2);
+            if(mBingding.profitLayout.getRoot().getVisibility()==View.GONE) {
+                Msg msg = mMsgViewModel.getLiveMsgListLiveData().popBullet();
+                showProfit(msg);
+            }
         });
 
 
@@ -164,5 +172,54 @@ public class LayoutLiveNormal extends FrameLayout {
         },MsgData.class);
 
     }
+
+    private void showProfit(Msg msg){
+        if(msg==null){
+            return;
+        }
+        mBingding.profitLayout.setData(msg);
+        mBingding.profitLayout.getRoot().setVisibility(View.VISIBLE);
+        Animator mFirstAnimator = getAnimator(mBingding.profitLayout.getRoot());
+        mFirstAnimator.start();
+        mFirstAnimator.addListener(mAnimListener);
+    }
+
+    private Animator.AnimatorListener mAnimListener = new Animator.AnimatorListener() {
+
+        @Override
+        public void onAnimationStart(Animator animation) {
+
+        }
+
+        @Override
+        public void onAnimationEnd(Animator animation) {
+//            mBingding.profitLayout.setVisibility(View.GONE);
+        }
+
+        @Override
+        public void onAnimationCancel(Animator animation) {
+
+        }
+
+        @Override
+        public void onAnimationRepeat(Animator animation) {
+
+        }
+    };
+
+
+
+    private static Animator getAnimator(View view) {
+        ObjectAnimator result;
+        int SCREEN_WIDTH=1080;
+        int length = SCREEN_WIDTH + view.getRootView().getMeasuredWidth();
+        result = ObjectAnimator
+                .ofFloat(view.getRootView(), "translationX", SCREEN_WIDTH, -view.getRootView().getMeasuredWidth())//
+                .setDuration(300);
+            result.setInterpolator(new LinearInterpolator());
+
+        return result;
+    }
+
 
 }

@@ -160,6 +160,14 @@
             app:user="@{userUni.user}" />
 
 
+        <include
+            android:layout_width="wrap_content"
+            android:id="@+id/profit_layout"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/frameLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            layout="@layout/widget_profit"/>
 
 
     </android.support.constraint.ConstraintLayout>
