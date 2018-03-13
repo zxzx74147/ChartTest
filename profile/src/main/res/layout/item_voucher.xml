@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{data.title}"
-                android:layout_marginTop="@dimen/default_gap_45"
+                android:layout_marginTop="@dimen/default_gap_35"
                 android:textColor="@color/white"
                 android:textSize="@dimen/default_size_30" />
 

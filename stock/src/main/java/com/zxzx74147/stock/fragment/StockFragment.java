@@ -48,5 +48,11 @@ public class StockFragment extends BaseDialogFragment {
         return mBinding.getRoot();
     }
 
+    public void  onDestroyView(){
+        super.onDestroyView();
+        mBinding.goodList.clearSelect();
+
+    }
+
 
 }

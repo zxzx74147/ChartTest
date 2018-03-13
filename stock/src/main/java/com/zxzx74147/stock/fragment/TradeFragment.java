@@ -103,11 +103,7 @@ public class TradeFragment extends BaseDialogFragment {
 
     }
 
-    public void  onDestroyView(){
-        super.onDestroyView();
-        mBinding.goodList.clearSelect();
 
-    }
 
 
 }

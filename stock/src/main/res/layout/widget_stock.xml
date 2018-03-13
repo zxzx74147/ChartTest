@@ -20,7 +20,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-
             android:orientation="horizontal"
             android:padding="@dimen/default_gap_44">
 
@@ -53,6 +52,97 @@
                 android:text='@{@string/format_sign_02(((float)(price.curPrice)-(float)(price.open))*100/(float)price.open)}'
                 android:textColor='@{(price.curPrice-price.open)>0? @color/stock_up:@color/stock_down}'
                 android:textSize="@dimen/default_size_26" />
+
+
+            <TextView
+
+                android:id="@+id/close_value"
+                android:layout_width="wrap_content"
+                android:text="@{@string/format_01(price.close)}"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/current_price"
+                android:textColor="@color/text_black"
+                android:layout_alignParentRight="true"
+                android:textSize="@dimen/default_size_26" />
+
+            <TextView
+                android:id="@+id/close_label"
+                android:layout_width="wrap_content"
+                android:layout_marginRight="@dimen/default_gap_5"
+                android:text="昨收"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/current_price"
+                android:textColor="@color/text_light_grey"
+                android:layout_toLeftOf="@id/close_value"
+                android:textSize="@dimen/default_size_26" />
+
+            <TextView
+                android:id="@+id/low_value"
+                android:layout_width="wrap_content"
+                android:text="@{@string/format_01(price.low)}"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/current_price"
+                android:textColor="@color/green"
+                android:layout_alignParentRight="true"
+                android:textSize="@dimen/default_size_26" />
+
+            <TextView
+                android:id="@+id/low_label"
+                android:layout_width="wrap_content"
+                android:text="最低"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/default_gap_5"
+                android:layout_alignBottom="@+id/current_price"
+                android:textColor="@color/text_light_grey"
+                android:layout_toLeftOf="@id/low_value"
+                android:textSize="@dimen/default_size_26" />
+
+
+            <TextView
+
+                android:id="@+id/open_value"
+                android:layout_marginRight="@dimen/default_gap_15"
+                android:layout_width="wrap_content"
+                android:text="@{@string/format_01(price.open)}"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/current_price"
+                android:textColor="@color/text_black"
+                android:layout_toLeftOf="@id/close_label"
+                android:textSize="@dimen/default_size_26" />
+
+            <TextView
+                android:id="@+id/open_label"
+                android:layout_marginRight="@dimen/default_gap_5"
+                android:layout_width="wrap_content"
+                android:text="今开"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/current_price"
+                android:textColor="@color/text_light_grey"
+                android:layout_toLeftOf="@id/open_value"
+                android:textSize="@dimen/default_size_26" />
+
+            <TextView
+                android:layout_marginRight="@dimen/default_gap_15"
+                android:id="@+id/high_value"
+                android:layout_width="wrap_content"
+                android:text="@{@string/format_01(price.high)}"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/current_price"
+                android:textColor="@color/red"
+                android:layout_toLeftOf="@id/low_label"
+                android:textSize="@dimen/default_size_26" />
+
+            <TextView
+                android:id="@+id/high_label"
+                android:layout_width="wrap_content"
+                android:text="最低"
+                android:layout_marginRight="@dimen/default_gap_5"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/current_price"
+                android:textColor="@color/text_light_grey"
+                android:layout_toLeftOf="@id/high_value"
+                android:textSize="@dimen/default_size_26" />
+
         </RelativeLayout>
 
         <android.support.design.widget.TabLayout
