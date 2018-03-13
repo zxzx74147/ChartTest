@@ -25,6 +25,7 @@ import com.jakewharton.rxbinding2.widget.TextViewEditorActionEvent;
 import com.zxzx74147.charttest.R;
 import com.zxzx74147.charttest.databinding.LayoutLiveNormalBinding;
 import com.zxzx74147.devlib.base.BaseActivity;
+import com.zxzx74147.devlib.data.UniApiData;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.devlib.utils.KeyboardStatusDetector;
@@ -38,6 +39,7 @@ import com.zxzx74147.live.data.MsgData;
 import com.zxzx74147.live.stroage.LiveStorage;
 import com.zxzx74147.live.viewmodel.LiveMsgViewModel;
 
+import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 
 /**
@@ -143,6 +145,10 @@ public class LayoutLiveNormal extends FrameLayout {
             }
         });
 
+        RxView.clicks(mBingding.like).subscribe(v->{
+            doLike();
+        });
+
     }
 
     public void showComment(){
@@ -225,6 +231,22 @@ public class LayoutLiveNormal extends FrameLayout {
             result.setInterpolator(new LinearInterpolator());
 
         return result;
+    }
+
+    private void doLike(){
+        LiveMsgListData liveMsgListLiveData=  mMsgViewModel.getLiveMsgListLiveData().getValue();
+        Observable<UniApiData> obs = null;
+        if(liveMsgListLiveData.liveDynamic.isLove>0){
+            obs = mLiveStorage.roomHate(mMsgViewModel.getLive().liveId);
+        }else{
+            obs = mLiveStorage.roomLove(mMsgViewModel.getLive().liveId);
+        }
+        NetworkApi.ApiSubscribe(((BaseActivity) getContext()).getLifecycle(), obs, new Consumer<UniApiData>() {
+            @Override
+            public void accept(UniApiData uniApiData) throws Exception {
+
+            }
+        },UniApiData.class);
     }
 
 

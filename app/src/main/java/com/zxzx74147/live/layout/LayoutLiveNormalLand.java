@@ -1,5 +1,7 @@
 package com.zxzx74147.live.layout;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -13,6 +15,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 import android.view.inputmethod.EditorInfo;
 import android.widget.FrameLayout;
 
@@ -25,6 +28,7 @@ import com.zxzx74147.devlib.base.BaseActivity;
 import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.devlib.data.DialogItem;
 import com.zxzx74147.devlib.data.IntentData;
+import com.zxzx74147.devlib.data.UniApiData;
 import com.zxzx74147.devlib.data.WheelSelectorData;
 import com.zxzx74147.devlib.fragment.CommonFragmentDialog;
 import com.zxzx74147.devlib.fragment.CommonWheelSelectorDialog;
@@ -39,6 +43,8 @@ import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.devlib.widget.CommonRecyclerViewAdapter;
+import com.zxzx74147.live.data.LiveMsgListData;
+import com.zxzx74147.live.data.LiveMsgListLiveData;
 import com.zxzx74147.live.data.Msg;
 import com.zxzx74147.live.data.MsgData;
 import com.zxzx74147.live.stroage.LiveStorage;
@@ -127,6 +133,10 @@ public class LayoutLiveNormalLand extends FrameLayout {
             mAdapter.setNewData(liveMsgListData.msgList.msg);
             mBingding.bubble.startAnimation(mBingding.bubble.getWidth() / 2, mBingding.bubble.getHeight() - getResources().getDimensionPixelSize(R.dimen.default_gap_100), 2);
 
+            if(mBingding.profitLayout.rootView.getVisibility()==View.GONE) {
+                Msg msg = mMsgViewModel.getLiveMsgListLiveData().popBullet();
+                showProfit(msg);
+            }
         });
 
 
@@ -243,6 +253,10 @@ public class LayoutLiveNormalLand extends FrameLayout {
             });
         });
 
+        RxView.clicks(mBingding.like).subscribe(v->{
+            doLike();
+        });
+
 
         RxView.clicks(mBingding.tinyTrade.goodLayout).subscribe(v->{
 
@@ -312,6 +326,22 @@ public class LayoutLiveNormalLand extends FrameLayout {
         ViewUtil.showSoftPad(mBingding.commentEdit);
     }
 
+    private void doLike(){
+        LiveMsgListData liveMsgListLiveData=  mMsgViewModel.getLiveMsgListLiveData().getValue();
+        Observable<UniApiData> obs = null;
+        if(liveMsgListLiveData.liveDynamic.isLove>0){
+            obs = mLiveStorage.roomHate(mMsgViewModel.getLive().liveId);
+        }else{
+            obs = mLiveStorage.roomLove(mMsgViewModel.getLive().liveId);
+        }
+        NetworkApi.ApiSubscribe(((BaseActivity) getContext()).getLifecycle(), obs, new Consumer<UniApiData>() {
+            @Override
+            public void accept(UniApiData uniApiData) throws Exception {
+
+            }
+        },UniApiData.class);
+    }
+
     private void doSendComment() {
         String comment = mBingding.commentEdit.getText().toString();
         if (TextUtils.isEmpty(comment)) {
@@ -333,6 +363,58 @@ public class LayoutLiveNormalLand extends FrameLayout {
             }
         }, MsgData.class);
 
+    }
+
+    private void showProfit(Msg msg){
+        if(msg==null){
+            return;
+        }
+        mBingding.profitLayout.setData(msg);
+        mBingding.profitLayout.rootView.setVisibility(View.VISIBLE);
+        Animator mFirstAnimator = getAnimator(mBingding.profitLayout.rootView);
+        mFirstAnimator.start();
+        mFirstAnimator.addListener(mAnimListener);
+    }
+
+    private Animator.AnimatorListener mAnimListener = new Animator.AnimatorListener() {
+
+        @Override
+        public void onAnimationStart(Animator animation) {
+
+        }
+
+        @Override
+        public void onAnimationEnd(Animator animation) {
+            mBingding.getRoot().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mBingding.profitLayout.rootView.setVisibility(View.GONE);
+                }
+            },2000);
+
+        }
+
+        @Override
+        public void onAnimationCancel(Animator animation) {
+
+        }
+
+        @Override
+        public void onAnimationRepeat(Animator animation) {
+
+        }
+    };
+
+    private static Animator getAnimator(View view) {
+        ObjectAnimator result;
+        int SCREEN_WIDTH=1080;
+        int length = SCREEN_WIDTH + view.getRootView().getMeasuredWidth();
+        result = ObjectAnimator
+                .ofFloat(view, "translationX", SCREEN_WIDTH, 0)//
+                .setDuration(3000);
+        result.setInterpolator(new LinearInterpolator());
+
+        return result;
     }
 
 }

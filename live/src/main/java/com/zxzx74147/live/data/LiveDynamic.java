@@ -8,5 +8,6 @@ public class LiveDynamic implements Serializable {
     public int joinNum;
     public int loveNum;
     public int msgNum;
+    public int isLove;
 
 }
