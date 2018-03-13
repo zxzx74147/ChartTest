@@ -114,7 +114,7 @@ public class LayoutLiveNormal extends FrameLayout {
             mAdapter.setNewData(liveMsgListData.msgList.msg);
 
             mBingding.bubble.startAnimation( mBingding.bubble.getWidth()/2,  mBingding.bubble.getHeight()-getResources().getDimensionPixelSize(R.dimen.default_gap_100),2);
-            if(mBingding.profitLayout.getRoot().getVisibility()==View.GONE) {
+            if(mBingding.profitLayout.rootView.getVisibility()==View.GONE) {
                 Msg msg = mMsgViewModel.getLiveMsgListLiveData().popBullet();
                 showProfit(msg);
             }
@@ -178,8 +178,8 @@ public class LayoutLiveNormal extends FrameLayout {
             return;
         }
         mBingding.profitLayout.setData(msg);
-        mBingding.profitLayout.getRoot().setVisibility(View.VISIBLE);
-        Animator mFirstAnimator = getAnimator(mBingding.profitLayout.getRoot());
+        mBingding.profitLayout.rootView.setVisibility(View.VISIBLE);
+        Animator mFirstAnimator = getAnimator(mBingding.profitLayout.rootView);
         mFirstAnimator.start();
         mFirstAnimator.addListener(mAnimListener);
     }
@@ -193,7 +193,13 @@ public class LayoutLiveNormal extends FrameLayout {
 
         @Override
         public void onAnimationEnd(Animator animation) {
-//            mBingding.profitLayout.setVisibility(View.GONE);
+            mBingding.getRoot().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mBingding.profitLayout.rootView.setVisibility(View.GONE);
+                }
+            },2000);
+
         }
 
         @Override
@@ -214,8 +220,8 @@ public class LayoutLiveNormal extends FrameLayout {
         int SCREEN_WIDTH=1080;
         int length = SCREEN_WIDTH + view.getRootView().getMeasuredWidth();
         result = ObjectAnimator
-                .ofFloat(view.getRootView(), "translationX", SCREEN_WIDTH, -view.getRootView().getMeasuredWidth())//
-                .setDuration(300);
+                .ofFloat(view, "translationX", SCREEN_WIDTH, 0)//
+                .setDuration(3000);
             result.setInterpolator(new LinearInterpolator());
 
         return result;

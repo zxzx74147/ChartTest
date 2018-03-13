@@ -14,6 +14,7 @@
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/root_view"
         android:background="@drawable/home_egg"
         android:gravity="left|center_vertical"
         android:orientation="vertical">
@@ -29,6 +30,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/default_gap_15"
                 android:text="@{@string/format_profit(data.nickName)}"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/default_size_26" />

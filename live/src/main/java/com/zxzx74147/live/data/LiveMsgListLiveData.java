@@ -118,6 +118,7 @@ public class LiveMsgListLiveData extends LiveData<LiveMsgListData> implements Se
                 case Msg.TYPE_PROFIT:
                 case Msg.TYPE_SYSTEM:
                     mMsgData.addLast(msg);
+//                    mBullsetMsgData.addLast(msg);
                     break;
                     default:
 

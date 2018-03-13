@@ -112,10 +112,11 @@
         <include
             android:layout_width="wrap_content"
             android:id="@+id/profit_layout"
+            android:layout_marginLeft="@dimen/default_gap_44"
             android:visibility="gone"
-            android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@+id/frameLayout"
             app:layout_constraintStart_toStartOf="parent"
+            android:layout_height="wrap_content"
             layout="@layout/widget_profit"/>
 
     </android.support.constraint.ConstraintLayout>
