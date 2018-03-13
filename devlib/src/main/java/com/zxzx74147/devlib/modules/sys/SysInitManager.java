@@ -8,7 +8,7 @@ import com.zxzx74147.devlib.data.SysInitData;
 
 public class SysInitManager {
     private static SysInitManager mSysInitManager = new SysInitManager();
-    private SysInitData mSysInitData = null;
+    private SysInitData mSysInitData = new SysInitData();
 
     private SysInitManager() {
 

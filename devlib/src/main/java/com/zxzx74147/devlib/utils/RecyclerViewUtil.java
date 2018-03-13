@@ -1,15 +1,19 @@
 package com.zxzx74147.devlib.utils;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.ViewGroup;
 
 import com.dinuscxj.refresh.MaterialDragDistanceConverter;
 import com.dinuscxj.refresh.RecyclerRefreshLayout;
+import com.zxzx74147.devlib.DevLib;
+import com.zxzx74147.devlib.R;
 import com.zxzx74147.devlib.data.BaseListData;
 import com.zxzx74147.devlib.data.UniApiData;
 import com.zxzx74147.devlib.interfaces.CommonListRequestCallback;
 import com.zxzx74147.devlib.interfaces.IBaseListDataHolder;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.widget.CommonRecyclerViewAdapter;
+import com.zxzx74147.devlib.widget.CommonRefreshView;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -23,6 +27,9 @@ public class RecyclerViewUtil {
         final Disposable[] refreshDisposable = {null};
         final Disposable[] loadMoreDisposable = {null};
         final BaseListData[] lastData = {null};
+        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
+                DevLib.getApp().getResources().getDimensionPixelSize(R.dimen.default_gap_50), DevLib.getApp().getResources().getDimensionPixelSize(R.dimen.default_gap_50));
+        mRecyclerRefreshLayout.setRefreshView(new CommonRefreshView(mRecyclerRefreshLayout.getContext()),layoutParams);
         mRecyclerRefreshLayout.setDragDistanceConverter(new MaterialDragDistanceConverter());
 //        mRecyclerView.post(new Runnable() {
 //            @Override

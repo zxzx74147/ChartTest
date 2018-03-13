@@ -7,6 +7,16 @@ android {
         enabled = true
     }
 
+    signingConfigs {
+
+        release {
+            storeFile file('mayi.keystore')
+            storePassword "mayi20180302"
+            keyAlias "mayi"
+            keyPassword "mayi20180302"
+        }
+    }
+
     defaultConfig {
         applicationId "com.ylteb.antlive"
         minSdkVersion 19
@@ -19,19 +29,37 @@ android {
             abiFilters  "armeabi-v7a"
         }
     }
+
+
+
+
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             ndk {
                 abiFilters  "armeabi-v7a"
             }
+        }
+        debug{
+            signingConfig signingConfigs.release
+
         }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+//    productFlavors {
+//        main{}
+//    }
+
+
+
+
+
 }
 
 dependencies {

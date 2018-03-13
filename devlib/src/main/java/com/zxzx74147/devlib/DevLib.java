@@ -14,6 +14,7 @@ import com.zxzx74147.devlib.kvstore.KVStore;
 import com.zxzx74147.devlib.modules.busstation.MainBusStation;
 import com.zxzx74147.devlib.utils.DisplayUtil;
 import com.zxzx74147.devlib.utils.SharedPreferenceHelper;
+import com.zxzx74147.devlib.wxapi.WxApiHandler;
 
 import me.yokeyword.fragmentation.Fragmentation;
 
@@ -39,6 +40,7 @@ public class DevLib {
         initOthers();
         initUmeng();
         initPush();
+        initWXAPI();
     }
 
     public static Application getApp() {
@@ -76,6 +78,10 @@ public class DevLib {
 
     private static void initUmeng(){
 //        UMConfigure.init(mApplication, UMConfigure.DEVICE_TYPE_PHONE, mApplication.getResources().getString(R.string.umeng));
+    }
+
+    private static void initWXAPI(){
+        WxApiHandler.createApi(mApplication);
     }
 
     private static void initPush(){

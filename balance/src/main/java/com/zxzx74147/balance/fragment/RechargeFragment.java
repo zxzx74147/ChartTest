@@ -54,6 +54,7 @@ public class RechargeFragment extends BaseDialogFragment {
 
     private void initView() {
         mAdapter = new CommonRecyclerViewAdapter<>(mData);
+        mBinding.setSwich(SysInitManager.sharedInstance().getSysInitData().swich);
         CommonMultiTypeDelegate temp = new CommonMultiTypeDelegate();
         temp.registViewType(DepositItem.class, R.layout.item_recharge_amount);
         mAdapter.setMultiTypeDelegate(temp);

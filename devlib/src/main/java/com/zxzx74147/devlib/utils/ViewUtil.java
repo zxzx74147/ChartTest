@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.design.widget.TabLayout;
@@ -225,6 +226,13 @@ public class ViewUtil {
         Drawable drawable = imageView.getDrawable();
         if(drawable instanceof AnimationDrawable){
             ((AnimationDrawable) drawable).start();
+        }else if(drawable instanceof LayerDrawable){
+            for(int i=0;i<((LayerDrawable) drawable).getNumberOfLayers();i++) {
+                Drawable drawablel = ((LayerDrawable) drawable).getDrawable(i);
+                if(drawablel instanceof AnimationDrawable){
+                    ((AnimationDrawable) drawablel).start();
+                }
+            }
         }
     }
 

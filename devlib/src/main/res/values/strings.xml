@@ -44,4 +44,6 @@
     <string name="succ">成功</string>
     <string name="str_loading">--</string>
 
+    <string name="wx_appid">wx8f763f88fcd1bd9b</string>
+
 </resources>

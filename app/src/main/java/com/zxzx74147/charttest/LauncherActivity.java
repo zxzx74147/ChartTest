@@ -10,10 +10,12 @@ import android.view.View;
 import com.allenliu.versionchecklib.v2.AllenVersionChecker;
 import com.allenliu.versionchecklib.v2.builder.UIData;
 import com.jakewharton.rxbinding2.view.RxView;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.zxzx74147.charttest.databinding.ActivityLauncherBinding;
 import com.zxzx74147.charttest.databinding.LayoutUpgradeBinding;
 import com.zxzx74147.devlib.DevLib;
 import com.zxzx74147.devlib.base.BaseActivity;
+import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.devlib.data.SysInitData;
 import com.zxzx74147.devlib.data.Upgrade;
 import com.zxzx74147.devlib.kvstore.KVStore;
@@ -26,6 +28,7 @@ import com.zxzx74147.devlib.os.DeviceIDMananger;
 import com.zxzx74147.devlib.os.PackageInfoMananger;
 import com.zxzx74147.devlib.utils.AnimationUtil;
 import com.zxzx74147.devlib.utils.ToastUtil;
+import com.zxzx74147.devlib.wxapi.WxApiHandler;
 import com.zxzx74147.profile.storage.SysStorage;
 
 import java.util.concurrent.TimeUnit;
@@ -64,8 +67,17 @@ public class LauncherActivity extends BaseActivity {
         AnimationUtil.translationView(mBinding.launcherApp, 0, y);
         AnimationUtil.showViewAlpha(mBinding.loginPhone);
         AnimationUtil.showViewAlpha(mBinding.loginWechat);
+        RxView.clicks(mBinding.loginWechat).subscribe(v->{loginWechat();});
     }
 
+    private void loginWechat(){
+        WxApiHandler.doLogin(this, new CommonCallback<SendAuth.Resp>() {
+            @Override
+            public void callback(SendAuth.Resp item) {
+                String code = item.code;
+            }
+        });
+    }
     private void openMain() {
         MainBusStation.startMain(this);
         finish();
