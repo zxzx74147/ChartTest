@@ -73,7 +73,7 @@
             android:id="@+id/header"
             layout="@layout/layout_live_head"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/default_gap_132"
+            android:layout_height="@dimen/default_gap_112"
             app:live='@{live}'
             app:user='@{user}' />
     </android.support.constraint.ConstraintLayout>

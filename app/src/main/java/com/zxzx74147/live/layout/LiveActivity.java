@@ -45,6 +45,7 @@ public class LiveActivity extends BaseActivity {
         mLive = (Live) mIntentData.data;
         mLiveMsgViewModel.setLive(mLive);
         mLiveMsgViewModel.getLiveMsgListLiveData().setLive(mLive);
+        mBinding.setLive(mLive);
         initData();
         initView();
         initVideo();
