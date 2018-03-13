@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jakewharton.rxbinding2.view.RxView;
+import com.jakewharton.rxbinding2.widget.RxCompoundButton;
 import com.zxzx74147.balance.R;
 import com.zxzx74147.balance.data.PayRequest;
 import com.zxzx74147.balance.databinding.FragmentRechargeBinding;
@@ -90,6 +91,8 @@ public class RechargeFragment extends BaseDialogFragment {
 //        ViewUtil.mergeRadioButton(mBinding.checkboxWechat, mBinding.checkboxAli);
 
 
+        RxCompoundButton.checkedChanges(mBinding.checkboxWechat).subscribe(checked->{mBinding.checkboxAli.setChecked(!checked);});
+        RxCompoundButton.checkedChanges(mBinding.checkboxAli).subscribe(checked->{mBinding.checkboxWechat.setChecked(!checked);});
         RxView.clicks(mBinding.wechatLayout).subscribe(v->{
             mBinding.checkboxWechat.setChecked(true);
         });

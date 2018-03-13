@@ -66,6 +66,7 @@ public class BindCorfirmFragment extends BaseDialogFragment {
             if(mCallback!=null){
                 mCallback.callback(mBinding.getBankCard());
             }
+            dismiss();
         });
 
     }

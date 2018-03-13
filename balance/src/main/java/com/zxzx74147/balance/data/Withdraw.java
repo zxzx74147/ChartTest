@@ -1,5 +1,7 @@
 package com.zxzx74147.balance.data;
 
+import android.text.TextUtils;
+
 import java.io.Serializable;
 
 /**
@@ -17,4 +19,11 @@ public class Withdraw implements Serializable {
     public String name            ;     //持卡人姓名
     public String comment         ;     //备注
     public int  status          ;   //提现状态：1-处理中，2-成功，3-失败
+
+    public String getBankSecu(){
+        if(TextUtils.isEmpty(cardNo)||cardNo.length()<4){
+            return "*";
+        }
+        return "*"+cardNo.substring(cardNo.length()-4,cardNo.length());
+    }
 }

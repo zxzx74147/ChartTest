@@ -31,6 +31,7 @@ public class AuthActivity extends BaseActivity {
     }
 
     private void init() {
+        mBinding.setAuth(AccountManager.sharedInstance().getUserUni().auth);
         RxView.clicks(mBinding.submit).subscribe(v -> {
             submit();
         });
@@ -39,6 +40,7 @@ public class AuthActivity extends BaseActivity {
 
 
     public void submit() {
+
         String name = mBinding.nameEdit.getText().toString();
         String cid = mBinding.cidEdit.getText().toString();
         if (TextUtils.isEmpty(name)) {

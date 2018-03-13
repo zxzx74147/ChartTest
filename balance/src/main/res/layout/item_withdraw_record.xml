@@ -13,6 +13,8 @@
 
     <RelativeLayout
 
+        android:paddingTop="@dimen/default_gap_44"
+        android:paddingBottom="@dimen/default_gap_44"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -24,18 +26,17 @@
             android:layout_alignParentTop="true"
             android:text="@{data.bank}"
             android:textColor="@color/text_black"
-            android:textSize="@dimen/default_size_24" />
+            android:textSize="@dimen/default_size_34" />
 
         <TextView
             android:id="@+id/bank_card"
             android:layout_toRightOf="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:text="@{data.cardNo}"
+            android:text="@{data.getBankSecu()}"
             android:textColor="@color/text_black"
-            android:textSize="@dimen/default_size_24" />
+            android:textSize="@dimen/default_size_34" />
 
         <TextView
             android:id="@+id/amount"

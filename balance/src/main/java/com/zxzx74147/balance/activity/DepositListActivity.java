@@ -66,6 +66,7 @@ public class DepositListActivity extends BaseActivity {
 
         mAdapter.setMultiTypeDelegate(delegate);
         mAdapter2 = new CommonRecyclerViewAdapter<>(null);
+        mAdapter2.setMultiTypeDelegate(delegate);
         mBinding.list.setLayoutManager(new LinearLayoutManager(this));
         mBinding.list.setAdapter(mAdapter);
         initView();
