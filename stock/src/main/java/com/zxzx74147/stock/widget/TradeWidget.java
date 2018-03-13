@@ -410,7 +410,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             }
         }
         if (validVochers.size() == 0) {
-            mBinding.balance.setChecked(true);
+            mBinding.balance.setChecked(false);
             return;
         }
         mBinding.voucher.setVisibility(View.VISIBLE);

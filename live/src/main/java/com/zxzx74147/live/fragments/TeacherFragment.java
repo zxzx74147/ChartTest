@@ -12,8 +12,10 @@ import android.view.ViewGroup;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.zxzx74147.devlib.base.BaseDialogFragment;
+import com.zxzx74147.devlib.data.UniApiData;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
+import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.devlib.widget.CommonRecyclerViewAdapter;
@@ -79,6 +81,9 @@ public class TeacherFragment extends BaseDialogFragment {
         RxView.clicks(mBinding.close).subscribe(o -> {
             this.dismiss();
         });
+        RxView.clicks(mBinding.like).subscribe(o -> {
+            this.like();
+        });
         return mBinding.getRoot();
     }
 
@@ -109,6 +114,21 @@ public class TeacherFragment extends BaseDialogFragment {
                 }
                 mData.addAll(teacherLiveListData.teacherLiveList.teacherLive);
                 mAdapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    private void like(){
+        LiveStorage liveStorage = RetrofitClient.getClient().create(LiveStorage.class);
+        NetworkApi.ApiSubscribe(liveStorage.teacherLove(mTeacher.teacherId), new Consumer<UniApiData>() {
+            @Override
+            public void accept(UniApiData uniApiData) throws Exception {
+                if(uniApiData.hasError()){
+                    ToastUtil.showToast(getActivity(),uniApiData.error.usermsg);
+                    return;
+                }
+                mTeacher.loveNum++;
+                mBinding.setTeacher(mTeacher);
             }
         });
     }

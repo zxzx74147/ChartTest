@@ -17,6 +17,7 @@ public class Live implements Serializable {
     public long liveId;
     public int status;
     public int num;
+    public String timeTitle;
     public RtmpList rtmpList;
     public TeacherList teacherList;
     public long startTime;

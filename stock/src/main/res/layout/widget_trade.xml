@@ -274,6 +274,7 @@
                         android:id="@+id/voucher"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:checked="false"
                         android:button="@drawable/radio_checked"
                         android:visibility='@{type==TradeFragment.TYPE_MACH_POSITION_BUY_DOWN||type==TradeFragment.TYPE_MACH_POSITION_BUY_UP? View.GONE:View.VISIBLE}'
                         android:gravity="center_vertical"

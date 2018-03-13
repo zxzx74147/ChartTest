@@ -20,10 +20,10 @@ import com.zxzx74147.live.data.Live;
 import com.zxzx74147.live.media.IjkVideoViewHolder;
 import com.zxzx74147.live.stroage.LiveStorage;
 import com.zxzx74147.live.viewmodel.LiveMsgViewModel;
+
 import io.reactivex.functions.Consumer;
 
 public class LiveActivity extends BaseActivity {
-
 
 
     private ActivityLiveBinding mBinding = null;
@@ -34,7 +34,7 @@ public class LiveActivity extends BaseActivity {
     private boolean mIsRequestRotate = false;
 
 
-    private IjkVideoViewHolder mVideoHolder1,mVideoHolder2;
+    private IjkVideoViewHolder mVideoHolder1, mVideoHolder2;
 
 
     @Override
@@ -73,7 +73,7 @@ public class LiveActivity extends BaseActivity {
         }
     }
 
-    public void prepareToRotate(){
+    public void prepareToRotate() {
         mIsRequestRotate = true;
 //        mVideoHolder1.clearRender();
 //        mVideoHolder2.clearRender();
@@ -81,8 +81,8 @@ public class LiveActivity extends BaseActivity {
 
     private static final String RTMP_HKS = "rtmp://live.hkstv.hk.lxdns.com/live/hks";
 
-    private void initVideo(){
-        if(mIsRequestRotate){
+    private void initVideo() {
+        if (mIsRequestRotate) {
             mVideoHolder1.setTextureRender(mBinding.video2);
             mVideoHolder2.setTextureRender(mBinding.video1);
             mIsRequestRotate = false;
@@ -94,12 +94,12 @@ public class LiveActivity extends BaseActivity {
         mVideoHolder1.setTextureRender(mBinding.video1);
         mVideoHolder2.setTextureRender(mBinding.video2);
 
-        if(mLive.rtmpList.rtmp.size()>0) {
+        if (mLive.rtmpList.rtmp.size() > 0) {
             mVideoHolder1.setVideoPath(RTMP_HKS);
             mVideoHolder1.start();
         }
 
-        if(mLive.rtmpList.rtmp.size()>1) {
+        if (mLive.rtmpList.rtmp.size() > 1) {
             mVideoHolder2.setVideoPath(RTMP_HKS);
             mVideoHolder2.start();
         }
@@ -141,7 +141,6 @@ public class LiveActivity extends BaseActivity {
     }
 
 
-
     @Override
     protected void onPause() {
         super.onPause();
@@ -150,16 +149,25 @@ public class LiveActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(!mIsRequestRotate) {
-            mVideoHolder1.stopPlayback();
-            mVideoHolder1.release(true);
-            mVideoHolder2.stopPlayback();
-            mVideoHolder2.release(true);
+        if (mIsRequestRotate) {
+            return;
         }
+
+        mVideoHolder1.stopPlayback();
+        mVideoHolder1.release(true);
+        mVideoHolder2.stopPlayback();
+        mVideoHolder2.release(true);
+
+        NetworkApi.ApiSubscribe(mLiveStorage.roomQuite(mLive.liveId), new Consumer<UniApiData>() {
+            @Override
+            public void accept(UniApiData uniApiData) throws Exception {
+                if (uniApiData.hasError()) {
+                    return;
+                }
+            }
+        });
+
     }
-
-
-
 
 
 }
