@@ -3,6 +3,9 @@ package com.zxzx74147.balance.fragment;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +21,7 @@ import com.zxzx74147.devlib.data.DepositItem;
 import com.zxzx74147.devlib.data.IntentData;
 import com.zxzx74147.devlib.modules.sys.SysInitManager;
 import com.zxzx74147.devlib.network.RetrofitClient;
-import com.zxzx74147.devlib.utils.ViewUtil;
+import com.zxzx74147.devlib.utils.ColorUtil;
 import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.devlib.widget.CommonRecyclerViewAdapter;
@@ -26,8 +29,6 @@ import com.zxzx74147.devlib.widget.GridSpaceItemDecoration;
 
 import java.util.LinkedList;
 import java.util.List;
-
-import io.reactivex.functions.Consumer;
 
 /**
  */
@@ -62,8 +63,14 @@ public class RechargeFragment extends BaseDialogFragment {
         mBinding.list.getItemAnimator().setChangeDuration(0);// 通过设置动画执行时间为0来解决闪烁问题
         mBinding.list.addItemDecoration(new GridSpaceItemDecoration(3, spacingInPixels, spacingInPixels));
         mBinding.list.setLayoutManager(lm);
+        String dst = "18元代金券";
+        String str = getResources().getString(R.string.recharge_remind);
+        int start = str.indexOf(dst);
+        Spannable strSpan = new SpannableString(str);
+        strSpan.setSpan(new ForegroundColorSpan(ColorUtil.getColor(R.color.red)), start, start + dst.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        mBinding.textView2.setText(strSpan);
 
-        if(SysInitManager.sharedInstance().getSysInitData().depositItemList!=null) {
+        if (SysInitManager.sharedInstance().getSysInitData().depositItemList != null) {
             mData.addAll(SysInitManager.sharedInstance().getSysInitData().depositItemList.depositItem);
         }
         amount = mData.get(0).amount;
@@ -91,13 +98,17 @@ public class RechargeFragment extends BaseDialogFragment {
 //        ViewUtil.mergeRadioButton(mBinding.checkboxWechat, mBinding.checkboxAli);
 
 
-        RxCompoundButton.checkedChanges(mBinding.checkboxWechat).subscribe(checked->{mBinding.checkboxAli.setChecked(!checked);});
-        RxCompoundButton.checkedChanges(mBinding.checkboxAli).subscribe(checked->{mBinding.checkboxWechat.setChecked(!checked);});
-        RxView.clicks(mBinding.wechatLayout).subscribe(v->{
+        RxCompoundButton.checkedChanges(mBinding.checkboxWechat).subscribe(checked -> {
+            mBinding.checkboxAli.setChecked(!checked);
+        });
+        RxCompoundButton.checkedChanges(mBinding.checkboxAli).subscribe(checked -> {
+            mBinding.checkboxWechat.setChecked(!checked);
+        });
+        RxView.clicks(mBinding.wechatLayout).subscribe(v -> {
             mBinding.checkboxWechat.setChecked(true);
         });
 
-        RxView.clicks(mBinding.alipayLayout).subscribe(v->{
+        RxView.clicks(mBinding.alipayLayout).subscribe(v -> {
             mBinding.checkboxAli.setChecked(true);
         });
         RxView.clicks(mBinding.recharge).subscribe(o -> {
@@ -107,10 +118,10 @@ public class RechargeFragment extends BaseDialogFragment {
             intent.data = payRequest;
             if (mBinding.checkboxWechat.isChecked()) {
                 payRequest.type = PayRequest.TYPE_WECHAT;
-                ZXFragmentJumpHelper.startFragment(getContext(),RechargeWechatFragment.class,intent);
+                ZXFragmentJumpHelper.startFragment(getContext(), RechargeWechatFragment.class, intent);
             } else if (mBinding.checkboxAli.isChecked()) {
                 payRequest.type = PayRequest.TYPE_ALIPAY;
-                ZXFragmentJumpHelper.startFragment(getContext(),RechargeWechatFragment.class,intent);
+                ZXFragmentJumpHelper.startFragment(getContext(), RechargeWechatFragment.class, intent);
             }
         });
     }

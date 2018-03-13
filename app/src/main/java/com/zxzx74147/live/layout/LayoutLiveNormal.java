@@ -25,12 +25,14 @@ import com.jakewharton.rxbinding2.widget.TextViewEditorActionEvent;
 import com.zxzx74147.charttest.R;
 import com.zxzx74147.charttest.databinding.LayoutLiveNormalBinding;
 import com.zxzx74147.devlib.base.BaseActivity;
+import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.devlib.data.UniApiData;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.devlib.utils.KeyboardStatusDetector;
 import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.devlib.utils.ViewUtil;
+import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.devlib.widget.CommonRecyclerViewAdapter;
 import com.zxzx74147.live.data.LiveMsgListData;
@@ -38,6 +40,8 @@ import com.zxzx74147.live.data.Msg;
 import com.zxzx74147.live.data.MsgData;
 import com.zxzx74147.live.stroage.LiveStorage;
 import com.zxzx74147.live.viewmodel.LiveMsgViewModel;
+import com.zxzx74147.stock.data.GoodType;
+import com.zxzx74147.stock.fragment.StockFragment;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
@@ -85,6 +89,7 @@ public class LayoutLiveNormal extends FrameLayout {
         mBingding.goodList.setProvider(ViewModelProviders.of((FragmentActivity) getContext()));
         mBingding.goodList.setLifeCircle((FragmentActivity) getContext());
         mBingding.bubble.setDefaultDrawableList();
+        mBingding.goodList.setCallback(mCallback);
 
 
 //        RxView.touches(mBingding.list).subscribe(new Consumer<MotionEvent>() {
@@ -150,6 +155,14 @@ public class LayoutLiveNormal extends FrameLayout {
         });
 
     }
+
+
+    private CommonCallback<GoodType> mCallback = item -> {
+        StockFragment fragment = StockFragment.newInstance(item);
+        ZXFragmentJumpHelper.startFragment(getContext(),fragment,null);
+
+//        ZXFragmentJumpHelper.startFragment(this, ProfileFragment.class, null);
+    };
 
     public void showComment(){
         mBingding.commentEdit.setVisibility(View.VISIBLE);

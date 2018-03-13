@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.zxzx74147.devlib.data.Upgrade" />
+
+        <variable
+            name="liveMsg"
+            type="com.zxzx74147.live.data.LiveMsgListData" />
+
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/content_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/rect_round_white_big_corner"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="@dimen/default_gap_10">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/placeholder_upgrade" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_gap_60"
+                android:text="@string/upgrade_title"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/default_size_60"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_gap_20"
+                android:gravity="center"
+                android:text="@{data.msg}"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/default_size_30" />
+
+            <Button
+                android:id="@+id/upgrade"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="@dimen/default_gap_30"
+                android:layout_height="@dimen/default_gap_72"
+                android:background="@drawable/rect_round_stroke_red_big"
+                android:paddingLeft="@dimen/default_gap_36"
+                android:paddingRight="@dimen/default_gap_36"
+                android:text="@string/upgrade_button"
+                android:textColor="@color/red"
+                android:textSize="@dimen/default_size_34" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/content_layout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/default_gap_100"
+            android:src="@drawable/icon_close_big" />
+    </RelativeLayout>
+</layout>
+

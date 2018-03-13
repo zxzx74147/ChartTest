@@ -403,6 +403,9 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
         if (myVouchers == null) {
             return;
         }
+        if(mType>TradeFragment.TYPE_POSITION_BUY_DOWN){
+            return;
+        }
         List<Voucher> validVochers = new LinkedList<>();
         for (Voucher voucher : myVouchers) {
             if (voucher.goods.goodsId.equals(mSelectGood.goodsId)) {

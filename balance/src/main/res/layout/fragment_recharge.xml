@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="swich"
+            type="com.zxzx74147.devlib.data.Swich"/>
+        <import type="android.view.View"/>
 
     </data>
 
@@ -12,13 +16,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:padding="@dimen/default_gap_44">
+        android:paddingLeft="@dimen/default_gap_44"
+        android:paddingRight="@dimen/default_gap_44">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginStart="1dp"
+            android:paddingTop="@dimen/default_gap_44"
             android:text="@string/recharge"
             android:textColor="@color/text_black"
             android:textSize="@dimen/default_size_54"
@@ -30,7 +36,9 @@
             android:id="@+id/textView2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_gap_10"
             android:text="@string/recharge_remind"
+            android:textColor="@color/text_black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView"
@@ -40,6 +48,7 @@
             android:id="@+id/list"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_gap_10"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -61,6 +70,7 @@
 
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:visibility="@{swich.wechatPay==0? View.GONE:View.VISIBLE}"
             android:orientation="horizontal"
             android:paddingBottom="@dimen/default_gap_32"
             android:paddingTop="@dimen/default_gap_32"
@@ -98,7 +108,7 @@
 
         <LinearLayout
             android:id="@+id/alipay_layout"
-
+            android:visibility="@{swich.aliPay==0? View.GONE:View.VISIBLE}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -129,62 +139,38 @@
                 android:textSize="@dimen/default_size_24" />
 
             <CheckBox
-                android:layout_width="wrap_content"
                 android:id="@+id/checkbox_ali"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@drawable/selector_red_circle" />
         </LinearLayout>
 
-        <!--<LinearLayout-->
-            <!--android:id="@+id/linearLayout5"-->
-
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:paddingBottom="@dimen/default_gap_32"-->
-            <!--android:paddingTop="@dimen/default_gap_32"-->
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--app:layout_constraintStart_toStartOf="parent"-->
-            <!--app:layout_constraintTop_toBottomOf="@+id/linearLayout4">-->
-
-            <!--<ImageView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:src="@drawable/pay_up" />-->
-
-            <!--<TextView-->
-                <!--android:layout_width="@dimen/default_gap_130"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="@string/recharge_unipay"-->
-                <!--android:textColor="@color/text_black"-->
-                <!--android:textSize="@dimen/default_size_30" />-->
-
-            <!--<TextView-->
-                <!--android:layout_width="0dip"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:text="@string/recharge_unipay_remind"-->
-                <!--android:textColor="@color/text_light_grey"-->
-                <!--android:textSize="@dimen/default_size_24" />-->
-
-            <!--<CheckBox-->
-                <!--android:id="@+id/checkbox_uni"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:button="@drawable/selector_red_circle" />-->
-        <!--</LinearLayout>-->
-
         <Button
             android:id="@+id/recharge"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/go_recharge"
+            android:layout_height="@dimen/default_gap_88"
             android:background="@drawable/rect_round_red"
+            android:layout_marginTop="@dimen/default_gap_44"
+            android:text="@string/go_recharge"
             android:textColor="@color/white"
             android:textSize="@dimen/default_size_34"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/alipay_layout" />
+
+        <View
+            android:id="@+id/outside"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_gap_88"
+            android:background="@drawable/rect_round_red"
+            android:layout_marginTop="@dimen/default_gap_44"
+            android:text="@string/go_recharge"
+            android:visibility="invisible"
+            android:textColor="@color/white"
+            android:textSize="@dimen/default_size_34"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recharge" />
 
 
     </android.support.constraint.ConstraintLayout>

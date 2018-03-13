@@ -1,11 +1,21 @@
 package com.zxzx74147.charttest;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
 
+import com.allenliu.versionchecklib.v2.AllenVersionChecker;
+import com.allenliu.versionchecklib.v2.builder.UIData;
+import com.jakewharton.rxbinding2.view.RxView;
 import com.zxzx74147.charttest.databinding.ActivityLauncherBinding;
+import com.zxzx74147.charttest.databinding.LayoutUpgradeBinding;
+import com.zxzx74147.devlib.DevLib;
 import com.zxzx74147.devlib.base.BaseActivity;
 import com.zxzx74147.devlib.data.SysInitData;
+import com.zxzx74147.devlib.data.Upgrade;
 import com.zxzx74147.devlib.kvstore.KVStore;
 import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.modules.busstation.MainBusStation;
@@ -72,8 +82,17 @@ public class LauncherActivity extends BaseActivity {
                 return;
             }
             SysInitManager.sharedInstance().setSysInitData(sysInit);
+//            sysInit.upgrade = new Upgrade();
+//            sysInit.upgrade.show = 1;
+//            sysInit.upgrade.force = 1;
+//            sysInit.upgrade.msg = "hahah";
+//            sysInit.upgrade.url = "http://pws.myhug.cn/android_apk/avalon/559818/common/channels/avalon_common_main_2.0.0.apk";
+
+//            if (dealUpgrade(sysInit.upgrade)) {
+//                return;
+//            }
             mIsSysInit = true;
-            if(misAnimation){
+            if (misAnimation) {
                 if (AccountManager.sharedInstance().isLogin()) {
                     openMain();
                 } else {
@@ -81,5 +100,51 @@ public class LauncherActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    private boolean dealUpgrade(Upgrade upgrade) {
+        if (upgrade == null || upgrade.show == 0) {
+            return false;
+        }
+        Dialog dialog = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        LayoutUpgradeBinding binding = DataBindingUtil.inflate(LayoutInflater.from(DevLib.getApp()), R.layout.layout_upgrade, null, false);
+        dialog.setContentView(binding.getRoot());
+        RxView.clicks(binding.close).subscribe(v -> {
+            dialog.dismiss();
+        });
+        RxView.clicks(binding.upgrade).subscribe(v -> {
+            AllenVersionChecker
+                    .getInstance()
+                    .downloadOnly(
+                            UIData.create().setDownloadUrl(upgrade.url).setTitle("开始下载").setContent("")
+                    ).setSilentDownload(true).setDownloadUrl(upgrade.url).excuteMission(getApplication());
+        });
+        binding.setData(upgrade);
+        dialog.show();
+        if (upgrade.force != 0) {
+            binding.close.setVisibility(View.GONE);
+            dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    finish();
+                }
+            });
+        } else {
+            dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    mIsSysInit = true;
+                    if (misAnimation) {
+                        if (AccountManager.sharedInstance().isLogin()) {
+                            openMain();
+                        } else {
+                            showLoginButton();
+                        }
+                    }
+                }
+            });
+
+        }
+        return true;
     }
 }

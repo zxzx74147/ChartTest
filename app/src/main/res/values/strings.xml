@@ -6,4 +6,6 @@
     <string name="feed_title">蚂蚁投资</string>
     <string name="by_up_tiny">看多买涨</string>
     <string name="by_down_tiny">看空买跌</string>
+    <string name="upgrade_title">有新版本啦</string>
+    <string name="upgrade_button">升级此版本</string>
 </resources>

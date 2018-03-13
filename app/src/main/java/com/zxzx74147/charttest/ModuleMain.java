@@ -59,8 +59,11 @@ public class ModuleMain {
             }
         }
         if (event.id == MainBusStation.BUS_ID_MAIN_START_MAIN) {
-
-            MainFeedActivity.startMainActivity(event.context);
+            if(SysInitManager.sharedInstance().getSysInitData().swich.homeIndex==1){
+                MainActivity.startMainActivity(event.context);
+            }else {
+                MainFeedActivity.startMainActivity(event.context);
+            }
         }else if (event.id == MainBusStation.BUS_ID_MAIN_LOGOUT) {
             AccountManager.sharedInstance().logout();
             ZXActivityJumpHelper.startActivity(event.context,LauncherActivity.class);

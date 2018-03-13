@@ -96,12 +96,14 @@ public class LiveActivity extends BaseActivity {
         mVideoHolder2.setTextureRender(mBinding.video2);
 
         if (mLive.rtmpList.rtmp.size() > 0) {
-            mVideoHolder1.setVideoPath(RTMP_HKS);
+//            mVideoHolder1.setVideoPath(RTMP_HKS);
+            mVideoHolder1.setVideoPath(mLive.rtmpList.rtmp.get(0).url);
             mVideoHolder1.start();
         }
 
         if (mLive.rtmpList.rtmp.size() > 1) {
-            mVideoHolder2.setVideoPath(RTMP_HKS);
+            mVideoHolder1.setVideoPath(mLive.rtmpList.rtmp.get(1).url);
+//            mVideoHolder2.setVideoPath(RTMP_HKS);
             mVideoHolder2.start();
         }
     }
@@ -128,13 +130,10 @@ public class LiveActivity extends BaseActivity {
 //            }
 //        });
 
-        NetworkApi.ApiSubscribe(mLiveStorage.roomJoin(mLive.liveId), new Consumer<UniApiData>() {
-            @Override
-            public void accept(UniApiData uniApiData) throws Exception {
-                if (uniApiData.hasError()) {
-                    ToastUtil.showToast(LiveActivity.this, uniApiData.error.usermsg);
-                    return;
-                }
+        NetworkApi.ApiSubscribe(mLiveStorage.roomJoin(mLive.liveId), uniApiData -> {
+            if (uniApiData.hasError()) {
+                ToastUtil.showToast(LiveActivity.this, uniApiData.error.usermsg);
+                return;
             }
         });
 
