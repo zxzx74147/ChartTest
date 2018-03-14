@@ -12,6 +12,7 @@
         <import type="com.zxzx74147.devlib.modules.busstation.MainBusStation"/>
         <import type="com.zxzx74147.devlib.modules.busstation.ProfileBusStation"/>
         <import type="com.zxzx74147.devlib.modules.sys.SysInitManager"/>
+        <import type="com.zxzx74147.devlib.utils.WebviewUtil"/>
         <import type="android.view.View"/>
 
     </data>
@@ -139,14 +140,18 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
 
+
+
         <com.zxzx74147.devlib.widget.ZXImageView
             android:id="@+id/activity"
             android:layout_width="@dimen/default_gap_72"
             android:layout_height="@dimen/default_gap_72"
             android:layout_marginBottom="@dimen/default_gap_50"
             android:layout_marginEnd="@dimen/default_gap_44"
+            android:onClick="@{v->WebviewUtil.showWebActivity(context,SysInitManager.sharedInstance().getSysInitData().config.activityJumpUrl)}"
+            app:imageUrl="@{SysInitManager.sharedInstance().getSysInitData().config.activityIconUrl}"
             android:background="@null"
-            app:layout_constraintBottom_toTopOf="@+id/send_feed"
+            app:layout_constraintBottom_toTopOf="@+id/coupons"
             app:layout_constraintEnd_toEndOf="parent" />
     </android.support.constraint.ConstraintLayout>
 </layout>

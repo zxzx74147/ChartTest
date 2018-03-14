@@ -101,8 +101,6 @@ public class TradeFragment extends BaseDialogFragment {
                 mBinding.setUser(userUniData.user);
             }
         });
-
-
     }
 
 

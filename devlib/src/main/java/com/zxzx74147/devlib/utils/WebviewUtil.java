@@ -1,6 +1,7 @@
 package com.zxzx74147.devlib.utils;
 
 import android.app.Activity;
+import android.content.Context;
 
 import com.thefinestartist.finestwebview.FinestWebView;
 import com.thefinestartist.finestwebview.listeners.WebViewListener;
@@ -10,7 +11,7 @@ import com.thefinestartist.finestwebview.listeners.WebViewListener;
  */
 
 public class WebviewUtil {
-    public static void showWebActivity(Activity activity, String url) {
+    public static void showWebActivity(Context activity, String url) {
         FinestWebView.Builder builder = new FinestWebView.Builder(activity);
         builder.addWebViewListener(mWebViewListener);
         builder.disableIconMenu(true);
