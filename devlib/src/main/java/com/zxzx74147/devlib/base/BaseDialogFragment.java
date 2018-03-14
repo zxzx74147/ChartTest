@@ -37,7 +37,7 @@ public class BaseDialogFragment extends DialogFragment implements ISupportFragme
     final SupportFragmentDelegate mDelegate = new SupportFragmentDelegate(this);
     protected FragmentActivity _mActivity;
     protected BottomSheetBehavior mBehavior;
-    protected CommonCallback mCallback = null;
+    public CommonCallback mCallback = null;
 
 
     @Override

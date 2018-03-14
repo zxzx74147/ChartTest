@@ -16,7 +16,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/tran"
         android:paddingTop="@dimen/default_gap_15"
         android:orientation="vertical">
@@ -28,11 +28,12 @@
             app:goodName="@{data.name}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="@dimen/default_gap_50"/>
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraintLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/default_gap_480"
+            android:clipChildren="false"
             android:layout_marginTop="@dimen/default_gap_24"
             android:background="@drawable/rect_round_white_big_corner"
             android:orientation="vertical"
@@ -170,7 +171,7 @@
             <Button
                 android:id="@+id/modify"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/default_gap_88"
                 android:layout_marginRight="@dimen/default_gap_21"
                 android:layout_marginTop="@dimen/default_gap_50"
                 android:background="@drawable/rect_round_gold_stroke"
@@ -180,6 +181,7 @@
                 android:textSize="@dimen/default_size_34"
                 app:layout_constraintEnd_toStartOf="@+id/guideline"
                 app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
             <Button
@@ -195,6 +197,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toTopOf="@+id/modify" />
+
+
 
 
         </android.support.constraint.ConstraintLayout>

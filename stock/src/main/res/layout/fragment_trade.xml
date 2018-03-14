@@ -17,6 +17,10 @@
             type="Integer"/>
         <import type="com.zxzx74147.stock.fragment.TradeFragment"/>
 
+        <variable
+            name="fragment"
+            type="TradeFragment"/>
+
     </data>
 
     <!--<android.support.v4.widget.NestedScrollView-->
@@ -69,6 +73,7 @@
             android:id="@+id/widget_trade"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:fragment="@{fragment}"
             app:good="@{good}"
             app:type="@{type}"
             app:layout_constraintEnd_toEndOf="parent"

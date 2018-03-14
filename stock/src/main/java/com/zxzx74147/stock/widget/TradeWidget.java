@@ -60,6 +60,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
     private int mAmount = 1;
     private TradesStorage mTradeStorage = RetrofitClient.getClient().create(TradesStorage.class);
     private MachPosition mMachPosition = null;
+    private TradeFragment fragment;
 
 
     @BindingAdapter({"good"})
@@ -76,6 +77,15 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
     @BindingAdapter({"user"})
     public static void setUser(TradeWidget view, UserData user) {
         view.setUser(user);
+    }
+
+    @BindingAdapter({"fragment"})
+    public static void setUser(TradeWidget view, TradeFragment fragment) {
+        view.setFragment(fragment);
+    }
+
+    private void setFragment(TradeFragment fragment) {
+        this.fragment = fragment;
     }
 
 
@@ -294,18 +304,16 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                 dialogItem.title = getResources().getString(R.string.machposition_motify_succ);
                 dialogItem.content = null;
                 dialogItem.cancel = getResources().getString(R.string.position_view);
-                dialogItem.cancel = getResources().getString(R.string.continu_trade);
                 CommonFragmentDialog fragmentDialog = CommonFragmentDialog.newInstance(new IntentData<>(dialogItem));
                 ZXFragmentJumpHelper.startFragment(getContext(), fragmentDialog, new CommonCallback() {
                     @Override
                     public void callback(Object item) {
-                        //TODO
-                        if (item == null) {
-                            StockBusStation.viewMachPosition(getContext());
-                        } else {
-                            ;
+                        if (fragment != null) {
+                            fragment.dismiss();
+                            if (fragment.mCallback != null) {
+                                fragment.mCallback.callback(machPositionData);
+                            }
                         }
-
                     }
                 });
 
@@ -403,7 +411,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
         if (myVouchers == null) {
             return;
         }
-        if(mType>TradeFragment.TYPE_POSITION_BUY_DOWN){
+        if (mType > TradeFragment.TYPE_POSITION_BUY_DOWN) {
             return;
         }
         List<Voucher> validVochers = new LinkedList<>();
@@ -432,8 +440,8 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             @Override
             public void run() {
                 mBinding.price.setText(String.valueOf(machPosition.price));
-                mBinding.buyLimitValue.setText(String.format("%.0f点",machPosition.limit));
-                mBinding.buyStopValue.setText(String.format("%.0f点",machPosition.stop));
+                mBinding.buyLimitValue.setText(String.format("%.0f点", machPosition.limit));
+                mBinding.buyStopValue.setText(String.format("%.0f点", machPosition.stop));
                 GoodType goodType = mGoodType;
                 int i = 0;
                 for (Good good : goodType.goods) {

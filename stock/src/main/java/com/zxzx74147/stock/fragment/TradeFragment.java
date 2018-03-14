@@ -61,12 +61,14 @@ public class TradeFragment extends BaseDialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_trade, container, false);
+        mBinding.setFragment(this);
         mBinding.goodList.setProvider(ViewModelProviders.of(ViewUtil.getFragmentActivity(mBinding.getRoot())));
         mBinding.goodList.setLifeCircle(this);
 
         Bundle bundle = getArguments();
         IntentData goodIntent = (IntentData) bundle.getSerializable(ZXActivityJumpHelper.INTENT_DATA);
         int type = goodIntent.type;
+        mBinding.setType(goodIntent.type);
         if(type==TYPE_MACH_POSITION_MOTIFY){
             MachPosition machPosition = (MachPosition) goodIntent.data;
             UserUniData uniData= AccountManager.sharedInstance().getUserUni();
@@ -81,7 +83,7 @@ public class TradeFragment extends BaseDialogFragment {
             mBinding.widgetTrade.setMachPosition(machPosition);
         }else {
             mBinding.setGood((GoodType) goodIntent.data);
-            mBinding.setType(goodIntent.type);
+//            mBinding.setType(goodIntent.type);
         }
 
         mBinding.goodList.setCallback(item -> mBinding.setGood(item));

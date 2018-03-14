@@ -29,13 +29,13 @@
             app:goodName="@{data.name}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="@dimen/default_gap_50"/>
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraintLayout2"
             android:layout_width="match_parent"
             android:layout_marginTop="@dimen/default_gap_24"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/default_gap_380"
             android:background="@drawable/rect_round_white_big_corner"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"

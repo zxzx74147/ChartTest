@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:onClick="@{v->{StockBusStation.startStock(context,data)}}"
         android:gravity="center_vertical"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
         <!--android:text="@{data.name}"-->
         <TextView
             android:id="@+id/textView2"
