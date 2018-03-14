@@ -17,6 +17,8 @@
 
     <color name="btn_red">@color/red</color>
 
+    <color name="yello">#F5C864</color>
+
 
     <color name="bg_grey">#F4F4F4</color>
     <color name="div_default">#E7E7E7</color>

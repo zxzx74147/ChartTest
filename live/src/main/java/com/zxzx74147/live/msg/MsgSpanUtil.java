@@ -55,10 +55,11 @@ public class MsgSpanUtil {
         if (msg.content == null) {
             return new SpannableString("");
         }
-        String s1 = "盈利播报 ";
-        String s2 = "刚盈利";
-        SpannableString result = new SpannableString(s1 + msg.nickName + s2 + msg.profitNum);
-//        result.setSpan(new ForegroundColorSpan(ColorUtil.getColor(R.color.text_light_grey)), 0, msg.content.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        String s1 = "盈利播报 "+msg.nickName+"盈利";
+        String s2 = String.valueOf(msg.profitNum)+"元";
+        SpannableString result = new SpannableString(s1+s2);
+        result.setSpan(new ForegroundColorSpan(ColorUtil.getColor(R.color.yello)), 0, s1.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        result.setSpan(new ForegroundColorSpan(ColorUtil.getColor(R.color.red)), s1.length(),s1.length()+s2.length(),  Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return result;
     }
 
