@@ -89,7 +89,7 @@
             app:imageUrl="@{SysInitManager.sharedInstance().getSysInitData().config.activityIconUrl}"
             android:background="@null"
             app:layout_constraintBottom_toTopOf="@+id/coupons"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="@+id/like" />
 
 
         <com.zxzx74147.stock.widget.GoodListWidget

@@ -21,6 +21,7 @@ import com.zxzx74147.devlib.data.Upgrade;
 import com.zxzx74147.devlib.kvstore.KVStore;
 import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.modules.busstation.MainBusStation;
+import com.zxzx74147.devlib.modules.busstation.ProfileBusStation;
 import com.zxzx74147.devlib.modules.sys.SysInitManager;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
@@ -67,10 +68,16 @@ public class LauncherActivity extends BaseActivity {
         AnimationUtil.translationView(mBinding.launcherApp, 0, y);
         AnimationUtil.showViewAlpha(mBinding.loginPhone);
 //        AnimationUtil.showViewAlpha(mBinding.loginWechat);
-        RxView.clicks(mBinding.loginWechat).subscribe(v->{loginWechat();});
+        RxView.clicks(mBinding.loginWechat).subscribe(v -> {
+            loginWechat();
+        });
+        RxView.clicks(mBinding.loginPhone).subscribe(v -> {
+            ProfileBusStation.startLogin(this);
+            finish();
+        });
     }
 
-    private void loginWechat(){
+    private void loginWechat() {
         WxApiHandler.doLogin(this, new CommonCallback<SendAuth.Resp>() {
             @Override
             public void callback(SendAuth.Resp item) {
@@ -78,6 +85,7 @@ public class LauncherActivity extends BaseActivity {
             }
         });
     }
+
     private void openMain() {
         MainBusStation.startMain(this);
         finish();
