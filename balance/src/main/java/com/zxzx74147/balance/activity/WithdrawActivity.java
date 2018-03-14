@@ -252,6 +252,10 @@ public class WithdrawActivity extends BaseActivity {
         });
     }
 
+    public void refresh(){
+        initData();
+    }
+
     private void bindCard(BankCard card) {
         NetworkApi.ApiSubscribe(mBankStorage.bindAdd(card.bank,card.cardNo,card.name,mBinding.withdrawBank.vcode.getText().toString()), bankCardData -> {
             if(bankCardData.hasError()){

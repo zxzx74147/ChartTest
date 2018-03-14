@@ -95,14 +95,15 @@
             app:layout_constraintTop_toBottomOf="@+id/bank_current"
             app:user="@{user}" />
 
-
+        <!--android:visibility="@{bankCard!=null? View.GONE:View.VISIBLE}"-->
         <LinearLayout
             android:id="@+id/bank_remind"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_gap_30"
+            android:visibility="gone"
             android:orientation="vertical"
-            android:visibility="@{bankCard!=null? View.GONE:View.VISIBLE}"
+
             android:layout_marginLeft="@dimen/default_gap_44"
             android:layout_marginRight="@dimen/default_gap_44"
             app:layout_constraintEnd_toEndOf="parent"
@@ -145,8 +146,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_gap_30"
             app:layout_constraintEnd_toEndOf="parent"
+            app:user="@{user}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bank_remind" />
+            app:layout_constraintTop_toBottomOf="@+id/withdraw_amount" />
 
         <Button
             android:id="@+id/submit"

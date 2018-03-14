@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.zxzx74147.balance.R;
+import com.zxzx74147.balance.activity.WithdrawActivity;
 import com.zxzx74147.balance.data.BankCard;
 import com.zxzx74147.balance.databinding.FragmentUnbindBankBinding;
 import com.zxzx74147.balance.storage.BankStorage;
@@ -97,6 +98,7 @@ public class UnBindCardFragment extends BaseDialogFragment {
                         @Override
                         public void callback(Object item) {
                             //TODO
+                            dismiss();
                         }
                     });
 
@@ -107,10 +109,8 @@ public class UnBindCardFragment extends BaseDialogFragment {
                 ZXFragmentJumpHelper.startFragment(getActivity(), dialog, new CommonCallback() {
                     @Override
                     public void callback(Object item) {
-                        if(item!=null){
-                            BalanceBusStation.startWithdarw(getActivity());
-                        }
-                        getActivity().finish();
+                        ((WithdrawActivity)getActivity()).refresh();
+                        dismiss();
                     }
                 });
             }
