@@ -9,6 +9,7 @@
 
         <import type="android.view.View"/>
         <import type="android.text.TextUtils"/>
+        <import type="com.zxzx74147.devlib.modules.busstation.MainBusStation"/>
     </data>
 
 
@@ -57,6 +58,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/default_gap_42"
                 android:layout_weight="1"
+                android:onClick="@{v->MainBusStation.toUnicorn(context)}"
                 android:background="@drawable/rect_round_gold"
                 android:text='@string/contact_service'
                 android:textColor="@color/white" />

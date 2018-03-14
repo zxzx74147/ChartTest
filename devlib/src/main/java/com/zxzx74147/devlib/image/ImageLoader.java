@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 import com.zxzx74147.devlib.DevLib;
@@ -31,8 +32,12 @@ public class ImageLoader {
     }
 
     public static Bitmap loadImageSync(String url,int width,int height){
+        if(TextUtils.isEmpty(url)){
+            return null;
+        }
         try {
             Bitmap bitmap =  Picasso.with(DevLib.getApp()).load(url).resize(width,height).get();
+            return bitmap;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -40,7 +45,10 @@ public class ImageLoader {
         return null;
     }
 
-    public static void loadImageAync(String url, int width, int height, CommonCallback callback){
+    public static void loadImageAsync(String url, int width, int height, CommonCallback callback){
+        if(TextUtils.isEmpty(url)){
+            return;
+        }
          Picasso.with(DevLib.getApp()).load(url).resize(width,height).into(new Target() {
                 @Override
                 public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {

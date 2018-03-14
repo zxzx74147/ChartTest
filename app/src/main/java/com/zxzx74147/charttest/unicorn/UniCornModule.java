@@ -11,9 +11,9 @@ import com.qiyukf.unicorn.api.StatusBarNotificationConfig;
 import com.qiyukf.unicorn.api.Unicorn;
 import com.qiyukf.unicorn.api.UnicornImageLoader;
 import com.qiyukf.unicorn.api.YSFOptions;
-import com.zxzx74147.devlib.callback.CommonCallback;
+import com.zxzx74147.charttest.R;
+import com.zxzx74147.devlib.DevLib;
 import com.zxzx74147.devlib.image.ImageLoader;
-import com.zxzx74147.stock.ModuleStock;
 
 /**
  * Created by zhengxin on 2018/3/14.
@@ -24,22 +24,23 @@ public class UniCornModule {
     private static Application mApp = null;
     private static UniCornModule mModule = null;
 
-    private UniCornModule(){
+    private UniCornModule() {
         YSFOptions options = new YSFOptions();
         options.statusBarNotificationConfig = new StatusBarNotificationConfig();
-        Unicorn.init(mApp, "aeeac4bfbb8953094b728aee3332fba1", options, new UnicornImageLoader() {
+        String key = DevLib.getApp().getResources().getString(R.string.unicorn_key);
+        Unicorn.init(mApp, key, options, new UnicornImageLoader() {
             @Nullable
             @Override
             public Bitmap loadImageSync(String uri, int width, int height) {
-                return ImageLoader.loadImageSync(uri,width,height);
+                return ImageLoader.loadImageSync(uri, width, height);
             }
 
             @Override
             public void loadImage(String uri, int width, int height, ImageLoaderListener listener) {
-                ImageLoader.loadImageAync(uri, width, height, item -> {
-                    if(item instanceof Bitmap){
+                ImageLoader.loadImageAsync(uri, width, height, item -> {
+                    if (item instanceof Bitmap) {
                         listener.onLoadComplete((Bitmap) item);
-                    }else{
+                    } else {
                         listener.onLoadFailed(new Throwable("fail"));
                     }
                 });
@@ -53,7 +54,7 @@ public class UniCornModule {
 
     }
 
-    public static void startUnicorn(Context context){
+    public static void startUnicorn(Context context) {
         String title = "在线客服";
         /**
          * 设置访客来源，标识访客是从哪个页面发起咨询的，用于客服了解用户是从什么页面进入。

@@ -24,6 +24,7 @@ import com.zxzx74147.devlib.data.UniApiData;
 import com.zxzx74147.devlib.fragment.CommonFragmentDialog;
 import com.zxzx74147.devlib.fragment.CommonInfoDialog;
 import com.zxzx74147.devlib.modules.account.AccountManager;
+import com.zxzx74147.devlib.modules.busstation.MainBusStation;
 import com.zxzx74147.devlib.modules.busstation.ProfileBusStation;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
@@ -214,7 +215,7 @@ public class WithdrawActivity extends BaseActivity {
                 ZXFragmentJumpHelper.startFragment(WithdrawActivity.this, dialog, new CommonCallback() {
                     @Override
                     public void callback(Object item) {
-                        //TODO 联系客服
+                        MainBusStation.toUnicorn(WithdrawActivity.this);
                         return;
                     }
                 });
