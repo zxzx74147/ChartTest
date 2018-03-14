@@ -16,6 +16,7 @@
 
     <AbsoluteLayout
         android:layout_width="@dimen/default_gap_512"
+        android:id="@+id/root"
         android:layout_height="@dimen/default_gap_918"
         android:background="@drawable/wechat_save">
 

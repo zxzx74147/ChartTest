@@ -25,6 +25,7 @@ import com.zxzx74147.devlib.image.ImageBinder;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.devlib.utils.FileUtil;
+import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
 
@@ -106,12 +107,27 @@ public class RechargeWechatFragment extends BaseDialogFragment {
                 FileUtil.verifyStoragePermissions(getActivity());
                 return;
             }
+            if(mBinding.getPay()==null){
+                ToastUtil.showToast(getActivity(),"加载中，请稍后");
+                return;
+            }
+
             ShareRechargeWechatBinding mShareBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.share_recharge_wechat, null, false);
+            switch (mPayReqeust.type) {
+                case PayRequest.TYPE_WECHAT:
+                    mShareBinding.root.setBackgroundResource(R.drawable.wechat_save);
+                    break;
+                case PayRequest.TYPE_ALIPAY:
+                    mShareBinding.root.setBackgroundResource(R.drawable.alipay_save);
+                    break;
+            }
             mShareBinding.amount.setText(mPayReqeust.amount / 100 + "");
             ImageBinder.loadImageFromBase64(mShareBinding.qrCode, mBinding.getData().codeImg);
             mBinding.getRoot().postDelayed(() -> {
                 Bitmap bm = ViewUtil.generateBitmapFromView(mShareBinding.getRoot(), getResources().getDimensionPixelSize(R.dimen.default_gap_512), getResources().getDimensionPixelSize(R.dimen.default_gap_918));
-                ViewUtil.saveImageToGallery(getContext(), bm);
+                if(ViewUtil.saveImageToGallery(getContext(), bm)){
+                    ToastUtil.showToast(getActivity(),"保存成功");
+                }
             }, 500);
         });
 
