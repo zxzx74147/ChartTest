@@ -152,7 +152,7 @@ public class ProfileEditFragment extends BaseDialogFragment {
             return;
         }
 
-        NetworkApi.ApiSubscribe(mUserStroage.accountUpdate(name, null), new Consumer<UserUniData>() {
+        NetworkApi.ApiSubscribe(getActivity(),mUserStroage.accountUpdate(name, null),true, new Consumer<UserUniData>() {
             @Override
             public void accept(UserUniData userUniData) throws Exception {
                 if (userUniData.hasError()) {
@@ -167,7 +167,7 @@ public class ProfileEditFragment extends BaseDialogFragment {
                 mBinding.setUser(userUniData.user);
                 ViewUtil.hideSoftPad(mBinding.nickName);
             }
-        });
+        },UserUniData.class);
     }
 
     private void doEditPortrait(Uri resultUri) {

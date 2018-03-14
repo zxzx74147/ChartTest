@@ -3,10 +3,12 @@ package com.zxzx74147.devlib.network;
 
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
+import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.OnLifecycleEvent;
 
 import com.zxzx74147.devlib.data.UniApiData;
 import com.zxzx74147.devlib.utils.ViewUtil;
+import com.zxzx74147.devlib.widget.CommonLoading;
 import com.zxzx74147.devlib.widget.CommonProgressDialog;
 
 import io.reactivex.Observable;
@@ -47,25 +49,32 @@ public class NetworkApi {
     }
 
 
-    public static <T extends UniApiData> void ApiSubscribe(Lifecycle lifecycle,Observable<? extends T> observable,boolean hasProgress, Consumer<T> observer, Class<T> mClass) {
+    public static <T extends UniApiData> void ApiSubscribe(LifecycleOwner owner,Observable<? extends T> observable,boolean hasProgress, Consumer<T> observer, Class<T> mClass) {
         final Disposable[] mDisposable = {null};
-        if (lifecycle != null) {
-            lifecycle.addObserver(new LifecycleObserver() {
+
+        CommonLoading mProgress = null;
+        if(hasProgress){
+            mProgress = new CommonLoading(ViewUtil.getContext(owner));
+            mProgress.show();
+        }
+        CommonLoading finalMProgress = mProgress;
+
+
+        if (owner != null) {
+            owner.getLifecycle().addObserver(new LifecycleObserver() {
                 @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
                 public void onDestroy() {
                     if (mDisposable[0] != null) {
                         mDisposable[0].dispose();
                         mDisposable[0] = null;
                     }
+                    if(finalMProgress!=null){
+                        finalMProgress.dismiss();
+                    }
                 }
             });
         }
-        CommonProgressDialog mProgress = null;
-        if(hasProgress){
-            mProgress = new CommonProgressDialog(ViewUtil.getContext(lifecycle));
-            mProgress.show();
-        }
-        CommonProgressDialog finalMProgress = mProgress;
+
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<T>() {
@@ -110,8 +119,8 @@ public class NetworkApi {
                 });
     }
 
-    public static <T extends UniApiData> void ApiSubscribe(Lifecycle lifecycle,Observable<? extends T> observable, Consumer<T> observer, Class<T> mClass) {
-        ApiSubscribe(lifecycle,observable,false,observer,mClass);
+    public static <T extends UniApiData> void ApiSubscribe(LifecycleOwner owner, Observable<? extends T> observable, Consumer<T> observer, Class<T> mClass) {
+        ApiSubscribe(owner,observable,false,observer,mClass);
     }
 
     public static <T> void ApiSubscribe(Observable<T> observable, Consumer<T> observer) {
@@ -143,6 +152,7 @@ public class NetworkApi {
                     }
                 });
     }
+
 
 
 }

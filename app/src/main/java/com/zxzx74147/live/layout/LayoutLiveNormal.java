@@ -176,7 +176,7 @@ public class LayoutLiveNormal extends FrameLayout {
             return;
         }
 
-        NetworkApi.ApiSubscribe(((BaseActivity) getContext()).getLifecycle(), mLiveStorage.msgSend(mMsgViewModel.getLive().liveId, comment), new Consumer<MsgData>() {
+        NetworkApi.ApiSubscribe(((BaseActivity) getContext()), mLiveStorage.msgSend(mMsgViewModel.getLive().liveId, comment), new Consumer<MsgData>() {
             @Override
             public void accept(MsgData msgData) throws Exception {
                 if(msgData.hasError()){
@@ -254,7 +254,7 @@ public class LayoutLiveNormal extends FrameLayout {
         }else{
             obs = mLiveStorage.roomLove(mMsgViewModel.getLive().liveId);
         }
-        NetworkApi.ApiSubscribe(((BaseActivity) getContext()).getLifecycle(), obs, new Consumer<UniApiData>() {
+        NetworkApi.ApiSubscribe(((BaseActivity) getContext()), obs, new Consumer<UniApiData>() {
             @Override
             public void accept(UniApiData uniApiData) throws Exception {
 

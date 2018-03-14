@@ -3,6 +3,7 @@ package com.zxzx74147.devlib.widget;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.WindowManager;
 
 import com.zxzx74147.devlib.R;
@@ -39,6 +40,7 @@ public class CommonProgressDialog extends ProgressDialog {
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.width = WindowManager.LayoutParams.WRAP_CONTENT;
         params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        params.gravity = Gravity.CENTER;
         getWindow().setAttributes(params);
     }
 

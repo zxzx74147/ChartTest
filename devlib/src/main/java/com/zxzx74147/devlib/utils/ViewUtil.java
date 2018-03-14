@@ -2,7 +2,9 @@ package com.zxzx74147.devlib.utils;
 
 import android.app.Activity;
 import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.AnimationDrawable;
@@ -185,9 +187,20 @@ public class ViewUtil {
         editText.setSelection(editText.getText().length());
     }
 
+    public static LifecycleOwner getLivecirceOwer(View v){
+        if(v.getContext() instanceof BaseActivity){
+            BaseActivity activity = (BaseActivity) v.getContext();
+            return activity;
+        }
+        if(v.getContext() instanceof ContextWrapper){
+            BaseActivity activity = (BaseActivity) ((ContextWrapper) v.getContext()).getBaseContext();
+            return activity;
+        }
+        return null;
+    }
+
     public static Lifecycle getLivecircle(View v){
-        BaseActivity activity = (BaseActivity) v.getContext();
-        return activity.getLifecycle();
+        return getLivecirceOwer(v).getLifecycle();
     }
 
     public static Context getContext(Object obj){

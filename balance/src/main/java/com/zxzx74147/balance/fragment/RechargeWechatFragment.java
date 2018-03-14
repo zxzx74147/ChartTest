@@ -57,7 +57,7 @@ public class RechargeWechatFragment extends BaseDialogFragment {
     private void initView() {
 
         IntentData<PayRequest> intentData = (IntentData<PayRequest>) getArguments().getSerializable(ZXActivityJumpHelper.INTENT_DATA);
-         mPayReqeust = intentData.data;
+        mPayReqeust = intentData.data;
         mBinding.setPay(mPayReqeust);
         Observable<PayNewData> obs = null;
         switch (mPayReqeust.type) {
@@ -68,14 +68,14 @@ public class RechargeWechatFragment extends BaseDialogFragment {
                 obs = mPayStorage.payAli(mPayReqeust.amount);
                 break;
         }
-        NetworkApi.ApiSubscribe(obs, payNewData -> {
+        NetworkApi.ApiSubscribe(getActivity(), obs, false, payNewData -> {
             if (payNewData.hasError()) {
                 return;
             }
             mBinding.setData(payNewData);
             mBinding.setPay(mPayReqeust);
             mPayResultLiveDat.setDepositId(payNewData.depositId);
-        });
+        }, PayNewData.class);
 
 
         //支付结果
@@ -117,18 +117,22 @@ public class RechargeWechatFragment extends BaseDialogFragment {
 
     }
 
-    public void showSucc(){
+    public void showSucc() {
         BottomSheetDialog dialog = new BottomSheetDialog(getActivity());
-        FragmentRechargeSuccBinding binding = DataBindingUtil.inflate(LayoutInflater.from(getActivity()),R.layout.fragment_recharge_succ,null,false);
+        FragmentRechargeSuccBinding binding = DataBindingUtil.inflate(LayoutInflater.from(getActivity()), R.layout.fragment_recharge_succ, null, false);
         binding.setAmount(mPayReqeust.amount);
         dialog.setContentView(binding.getRoot());
         dialog.show();
+        RxView.clicks(binding.recharge).subscribe(v -> {
+                    dialog.dismiss();
+                }
+        );
 
     }
 
-    public void showFail(){
+    public void showFail() {
         BottomSheetDialog dialog = new BottomSheetDialog(getActivity());
-        FragmentRechargeFailBinding binding = DataBindingUtil.inflate(LayoutInflater.from(getActivity()),R.layout.fragment_recharge_fail,null,false);
+        FragmentRechargeFailBinding binding = DataBindingUtil.inflate(LayoutInflater.from(getActivity()), R.layout.fragment_recharge_fail, null, false);
         dialog.setContentView(binding.getRoot());
         dialog.show();
     }

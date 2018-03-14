@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import com.jakewharton.rxbinding2.support.design.widget.RxTabLayout;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxCompoundButton;
+import com.zxzx74147.devlib.base.BaseActivity;
 import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.devlib.data.DialogItem;
 import com.zxzx74147.devlib.data.IntentData;
@@ -47,6 +48,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
 
 /**
  * Created by zhengxin on 2018/2/8.
@@ -292,7 +294,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                 return;
             }
             Observable<MachPositionData> observable = mTradeStorage.machpositionModify(mMachPosition.machPositionId, mSelectGood.goodsId, mType - 2, mAmount, price, limitStr, stopStr, "100", 1);
-            NetworkApi.ApiSubscribe(observable, machPositionData -> {
+            NetworkApi.ApiSubscribe(ViewUtil.getLivecirceOwer(this),observable,true, machPositionData -> {
                 if (machPositionData.hasError()) {
 //                    if (FailDealUtil.dealFail(getContext(), machPositionData.failed)) {
 //                        return;
@@ -317,15 +319,15 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                     }
                 });
 
-            });
+            },MachPositionData.class);
         } else if (mType <= TradeFragment.TYPE_POSITION_BUY_DOWN) {
             Observable<PositionData> observable = mTradeStorage.positionOpen(mSelectGood.goodsId, mType + 1, mAmount, String.valueOf(mGoodType.price.curPrice), limitStr, stopStr, null, 1);
-            NetworkApi.ApiSubscribe(observable, machPositionData -> {
-                if (machPositionData.hasError()) {
-                    if (FailDealUtil.dealFail(getContext(), machPositionData.failed)) {
+            NetworkApi.ApiSubscribe(ViewUtil.getLivecirceOwer(this), observable, true,positionData -> {
+                if (positionData.hasError()) {
+                    if (FailDealUtil.dealFail(getContext(), positionData.failed)) {
                         return;
                     }
-                    ToastUtil.showToast(getContext(), machPositionData.error.usermsg);
+                    ToastUtil.showToast(getContext(), positionData.error.usermsg);
                     return;
                 }
                 DialogItem dialogItem = new DialogItem();
@@ -346,8 +348,10 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
 
                     }
                 });
+            },PositionData.class);
 
-            });
+
+
         } else {
 
             float price = FormatUtil.getPureNum(mBinding.price.getText().toString());
@@ -356,7 +360,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                 return;
             }
             Observable<MachPositionData> observable = mTradeStorage.machpositionOpen(mSelectGood.goodsId, mType - 2, mAmount, price, limitStr, stopStr, "100", 1);
-            NetworkApi.ApiSubscribe(observable, machPositionData -> {
+            NetworkApi.ApiSubscribe(ViewUtil.getLivecirceOwer(this),observable, true,machPositionData -> {
                 if (machPositionData.hasError()) {
 //                    if (FailDealUtil.dealFail(getContext(), machPositionData.failed)) {
 //                        return;
@@ -383,7 +387,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                     }
                 });
 
-            });
+            },MachPositionData.class);
         }
     }
 

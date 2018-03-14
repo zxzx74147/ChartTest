@@ -94,7 +94,7 @@ public class LoginPhoneActivity extends BaseActivity {
 
     public void requestVcode() {
 
-        NetworkApi.ApiSubscribe(mStockStorage.accountGetVCode(mBinding.layoutRegist.phoneNumber.getText().toString()), new Consumer<UniApiData>() {
+        NetworkApi.ApiSubscribe(this,mStockStorage.accountGetVCode(mBinding.layoutRegist.phoneNumber.getText().toString()),true, new Consumer<UniApiData>() {
 
             @Override
             public void accept(UniApiData uniApiData) throws Exception {
@@ -118,7 +118,7 @@ public class LoginPhoneActivity extends BaseActivity {
                 });
 
             }
-        });
+        },UniApiData.class);
 
     }
 
@@ -132,7 +132,7 @@ public class LoginPhoneActivity extends BaseActivity {
         Observable<UserUniData> observable = mStockStorage.acctountLogin(mBinding.layoutRegist.phoneNumber.getText().toString(),
                 mBinding.layoutRegist.vcode.getText().toString(),
                 DeviceIDMananger.sharedInstance().getDeviceID(), PackageInfoMananger.sharedInstance().getVersionInfo().getVersonName());
-        NetworkApi.ApiSubscribe(observable, new Consumer<UserUniData>() {
+        NetworkApi.ApiSubscribe(this,observable, true,new Consumer<UserUniData>() {
             @Override
             public void accept(UserUniData userUniData) throws Exception {
                 if (userUniData.hasError()) {
@@ -143,7 +143,7 @@ public class LoginPhoneActivity extends BaseActivity {
                 MainBusStation.startMain(LoginPhoneActivity.this);
                 finish();
             }
-        });
+        },UserUniData.class);
     }
 
 

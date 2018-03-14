@@ -301,9 +301,10 @@ public class PositionFragment extends BaseDialogFragment {
                         MachPositionList list = AccountManager.sharedInstance().getUserUni().machPositionList;
                         if(list!=null&&list.num>0&&iBaseListDataHolder.getListData()!=null){
                             iBaseListDataHolder.getListData().getListItems().addAll(0,list.getListItems());
-                            if(iBaseListDataHolder.getListData().num>0){
-                                iBaseListDataHolder.getListData().getListItems().add(list.num,"");
-                            }
+
+                        }
+                        if(iBaseListDataHolder.getListData().num>0){
+                            iBaseListDataHolder.getListData().getListItems().add(list.num,"");
                         }
                         lastData[0] = iBaseListDataHolder.getListData();
                         adapter.setNewData(iBaseListDataHolder.getListData().getListItems());

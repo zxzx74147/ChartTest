@@ -56,7 +56,7 @@ public class LogoutFragment extends BaseDialogFragment {
     }
 
     private void logout(){
-        NetworkApi.ApiSubscribe(this.getLifecycle(),mAccountStorage.logout(), t -> {
+        NetworkApi.ApiSubscribe(this,mAccountStorage.logout(), t -> {
             if(t.hasError()){
                 ToastUtil.showToast(getContext(),t.error.usermsg);
                 return;

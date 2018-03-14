@@ -8,7 +8,7 @@
     <string name="recharge_unipay">银联支付</string>
 
     <string name="recharge_wechat_remind">仅支持微信4.2及以上版本</string>
-    <string name="recharge_alipay_remind">正在维护升级</string>
+    <string name="recharge_alipay_remind"></string>
     <string name="recharge_unipay_remind">跳转到银联官方页面</string>
     <string name="go_recharge">去充值</string>
     <string name="recharge_wechat_qr">使用微信扫码支付</string>

@@ -9,13 +9,21 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.widget.ImageView;
 
+import com.jakewharton.rxbinding2.view.RxView;
+import com.zxzx74147.balance.activity.WithdrawActivity;
 import com.zxzx74147.charttest.databinding.ActivityMainBinding;
 import com.zxzx74147.charttest.databinding.ActivityMainFeedBinding;
 import com.zxzx74147.devlib.base.BaseActivity;
 import com.zxzx74147.devlib.callback.CommonCallback;
+import com.zxzx74147.devlib.data.DialogItem;
+import com.zxzx74147.devlib.data.IntentData;
+import com.zxzx74147.devlib.fragment.CommonFragmentDialog;
 import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.modules.account.UserViewModel;
 import com.zxzx74147.devlib.utils.ViewUtil;
+import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
+import com.zxzx74147.devlib.widget.CommonLoading;
+import com.zxzx74147.devlib.widget.CommonProgressDialog;
 import com.zxzx74147.live.fragments.FeedFragment;
 import com.zxzx74147.live.fragments.LiveListFragment;
 import com.zxzx74147.stock.data.GoodType;
@@ -58,6 +66,23 @@ public class MainFeedActivity extends BaseActivity {
 //        mHeaderBinding= mBinding.headLayout;
 //        mHeaderBinding =(LayoutLiveHeadBinding)mBinding.headLayout;
 //        RxView.clicks(mBinding.headLayout.assetTotal).subscribe(o -> ZXFragmentJumpHelper.startFragment(MainActivity.this, ProfileFragment.class,null));
+
+        RxView.clicks(mBinding.sendFeed).subscribe(o->{
+            DialogItem item = new DialogItem();
+            item.title = getResources().getString(R.string.send_remind);
+            item.cancel = null;
+            item.ok = getResources().getString(com.zxzx74147.balance.R.string.i_know);
+            CommonFragmentDialog dialog = CommonFragmentDialog.newInstance(new IntentData<>(item));
+            ZXFragmentJumpHelper.startFragment(MainFeedActivity.this, dialog, new CommonCallback() {
+                @Override
+                public void callback(Object item) {
+
+                    return;
+                }
+            });
+        });
+
+
 
     }
 

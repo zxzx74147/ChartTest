@@ -14,6 +14,7 @@ import com.zxzx74147.devlib.R;
 import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.devlib.data.IntentData;
 import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
+import com.zxzx74147.devlib.widget.CommonLoading;
 
 import me.yokeyword.fragmentation.SupportActivity;
 
@@ -26,10 +27,12 @@ public class BaseActivity extends SupportActivity {
     protected CommonCallback mCallback = null;
     protected IntentData mIntentData = null;
     MyObserver myObserver = null;
+    public CommonLoading mLoading = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mLoading = new CommonLoading(this);
         myObserver = new MyObserver(this, getLifecycle());
         mCallback = ZXActivityJumpHelper.getCallBack();
         mIntentData = (IntentData) getIntent().getSerializableExtra(ZXActivityJumpHelper.INTENT_DATA);

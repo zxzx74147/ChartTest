@@ -46,7 +46,9 @@
                 android:id="@+id/cancel"
                 android:layout_width="0dip"
                 android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/default_gap_42"
                 android:layout_weight="1"
+                android:visibility="@{dialogItem.cancel==null? View.GONE:View.VISIBLE}"
                 android:background="@drawable/rect_round_gold_stroke"
                 android:text="@{dialogItem.cancel}"
                 android:textColor="@color/text_gold" />
@@ -55,7 +57,6 @@
                 android:id="@+id/ok"
                 android:layout_width="0dip"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/default_gap_42"
                 android:layout_weight="1"
                 android:background="@drawable/rect_round_gold"
                 android:text="@{dialogItem.ok}"
