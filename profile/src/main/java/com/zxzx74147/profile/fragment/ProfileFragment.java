@@ -14,18 +14,16 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.zxzx74147.devlib.base.BaseDialogFragment;
 import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.modules.account.UserViewModel;
+import com.zxzx74147.devlib.modules.busstation.MainBusStation;
 import com.zxzx74147.devlib.modules.busstation.ProfileBusStation;
 import com.zxzx74147.devlib.modules.sys.SysInitManager;
-import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.utils.WebviewUtil;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.devlib.widget.CommonRecyclerViewAdapter;
-import com.zxzx74147.devlib.widget.SpaceItemDecoration;
 import com.zxzx74147.profile.R;
 import com.zxzx74147.profile.data.UserUniData;
 import com.zxzx74147.profile.databinding.LayoutProfileBinding;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -60,7 +58,7 @@ public class ProfileFragment extends BaseDialogFragment {
         mUserModelView.getUserUniLiveData().observe(ProfileFragment.this, new Observer<UserUniData>() {
             @Override
             public void onChanged(@Nullable UserUniData userUniData) {
-                if(userUniData.hasError()){
+                if (userUniData.hasError()) {
                     return;
                 }
 
@@ -75,22 +73,23 @@ public class ProfileFragment extends BaseDialogFragment {
         AccountManager.sharedInstance().doRefresh();
     }
 
-    private void initView(){
+    private void initView() {
         mAdapter = new CommonRecyclerViewAdapter<>(mData);
         CommonMultiTypeDelegate temp = new CommonMultiTypeDelegate();
-        temp.registViewType(String.class,R.layout.item_mine);
+        temp.registViewType(String.class, R.layout.item_mine);
         mAdapter.setMultiTypeDelegate(temp);
         mBinding.list.setAdapter(mAdapter);
         LinearLayoutManager lm = new LinearLayoutManager(getContext());
         mBinding.list.setLayoutManager(lm);
-        String[] items=getResources().getStringArray(R.array.profile_list);
+        String[] items = getResources().getStringArray(R.array.profile_list);
         mData.addAll(Arrays.asList(items));
 
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                switch (position){
+                switch (position) {
                     case 0:
+                        MainBusStation.toUnicorn(getActivity());
                         break;
                     case 1:
                         WebviewUtil.showWebActivity(getActivity(), SysInitManager.sharedInstance().getSysInitData().config.userGuideUrl);

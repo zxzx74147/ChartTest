@@ -19,7 +19,7 @@
         android:padding="@dimen/default_gap_44"
         android:paddingBottom="0dp">
 
-        <android.support.design.widget.TabLayout
+        <com.zxzx74147.devlib.widget.CommonTabLayout
             android:id="@+id/tabLayout2"
             style="@style/TitleTabLayout"
             android:layout_width="0dp"
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/my_machposition" />
 
-        </android.support.design.widget.TabLayout>
+        </com.zxzx74147.devlib.widget.CommonTabLayout>
 
         <!--<android.support.v4.view.ViewPager-->
             <!--android:layout_width="match_parent"-->

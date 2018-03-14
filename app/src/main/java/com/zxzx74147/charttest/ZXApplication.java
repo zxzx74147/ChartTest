@@ -4,6 +4,7 @@ import android.app.Application;
 import android.support.multidex.MultiDexApplication;
 
 import com.zxzx74147.balance.ModuleBalance;
+import com.zxzx74147.charttest.unicorn.UniCornModule;
 import com.zxzx74147.devlib.DevLib;
 import com.zxzx74147.live.ModuelLive;
 import com.zxzx74147.profile.ModuleProfile;
@@ -25,5 +26,6 @@ public class ZXApplication extends MultiDexApplication {
         ModuelLive.init(this);
         ModuleMain.init(this);
         ModuleBalance.init(this);
+        UniCornModule.init(this);
     }
 }

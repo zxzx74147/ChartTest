@@ -45,17 +45,22 @@ public class CommonWheelSelectorDialog extends BaseDialogFragment {
     private void initView() {
         IntentData<WheelSelectorData> intentData = (IntentData<WheelSelectorData>) getArguments().getSerializable(ZXActivityJumpHelper.INTENT_DATA);
         WheelSelectorData wheelSelectorData = intentData.data;
+
+        mBinding.wheel.setDividerColor(getResources().getColor(R.color.text_black));
+        mBinding.wheel.setTextColor(getResources().getColor(R.color.text_dark_grey), getResources().getColor(R.color.text_black));
+        mBinding.wheel.setLineSpaceMultiplier(2.5f);
+        mBinding.wheel.setVisibleItemCount(5);
+        mBinding.wheel.setCycleDisable(true);
         mBinding.wheel.setItems(wheelSelectorData.items, wheelSelectorData.offset);
         float textSize = getResources().getDimension(R.dimen.default_size_26)/2;
-        mBinding.wheel.setDividerColor(getResources().getColor(R.color.red));
-        mBinding.wheel.setTextColor(getResources().getColor(R.color.text_dark_grey), getResources().getColor(R.color.text_red));
         mBinding.wheel.setTextSize(textSize);
-        mBinding.wheel.setVisibleItemCount(5);
-        mBinding.wheel.setCycleDisable(false);
         mBinding.wheel.setOnItemSelectListener(new WheelView.OnItemSelectListener() {
             @Override
             public void onSelected(int index) {
-
+//                if (mCallback != null) {
+//                    mCallback.callback(mBinding.wheel.getSelectedIndex());
+//                }
+//                dismiss();
             }
         });
 

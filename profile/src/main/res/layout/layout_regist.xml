@@ -154,6 +154,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/default_gap_46"
+            android:visibility="gone"
             android:drawableLeft="@drawable/weixin_green"
             android:drawablePadding="@dimen/default_gap_10"
             android:text="@string/login_wechat"

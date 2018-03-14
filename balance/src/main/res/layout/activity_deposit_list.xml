@@ -26,7 +26,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <android.support.design.widget.TabLayout
+        <com.zxzx74147.devlib.widget.CommonTabLayout
             android:id="@+id/tabLayout2"
             style="@style/TitleTabLayout"
             android:layout_width="0dp"
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/withdraw_his" />
 
-        </android.support.design.widget.TabLayout>
+        </com.zxzx74147.devlib.widget.CommonTabLayout>
 
         <com.dinuscxj.refresh.RecyclerRefreshLayout
             android:id="@+id/refresh_layout"

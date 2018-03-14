@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 
+import com.zxzx74147.charttest.unicorn.UniCornModule;
 import com.zxzx74147.devlib.DevLib;
 import com.zxzx74147.devlib.base.BaseActivity;
 import com.zxzx74147.devlib.data.IntentData;
@@ -75,7 +76,11 @@ public class ModuleMain {
             updateToken((String) event.data);
         }else  if (event.id == MainBusStation.BUS_ID_MAIN_TO_LIVE){
             MainActivity.startMainActivity(event.context);
+        }else  if (event.id == MainBusStation.BUS_ID_MAIN_START_UNICORN){
+            UniCornModule.startUnicorn(event.context);
         }
+
+
 
 
     }

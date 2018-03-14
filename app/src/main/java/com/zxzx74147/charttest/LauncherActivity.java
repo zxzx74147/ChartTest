@@ -66,7 +66,7 @@ public class LauncherActivity extends BaseActivity {
         float y = mBinding.logo.getTop() + mBinding.logo.getHeight() - mBinding.launcherApp.getTop() + getResources().getDimensionPixelOffset(R.dimen.default_gap_80);
         AnimationUtil.translationView(mBinding.launcherApp, 0, y);
         AnimationUtil.showViewAlpha(mBinding.loginPhone);
-        AnimationUtil.showViewAlpha(mBinding.loginWechat);
+//        AnimationUtil.showViewAlpha(mBinding.loginWechat);
         RxView.clicks(mBinding.loginWechat).subscribe(v->{loginWechat();});
     }
 

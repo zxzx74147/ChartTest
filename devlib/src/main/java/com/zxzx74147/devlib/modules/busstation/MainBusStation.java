@@ -23,6 +23,8 @@ public class MainBusStation {
 
     public static final int BUS_ID_MAIN_TO_LIVE = BusIDGen.genBusID("BUS_ID_MAIN_TO_LIVE");
 
+    public static final int BUS_ID_MAIN_START_UNICORN = BusIDGen.genBusID("BUS_ID_MAIN_TO_LIVE");
+
 
     private MainBusStation() {
 
@@ -46,6 +48,11 @@ public class MainBusStation {
 
     public static void toLive(Context context) {
         MessageEvent event = new MessageEvent<>(BUS_ID_MAIN_TO_LIVE, context);
+        EventBus.getDefault().post(event);
+    }
+
+    public static void toUnicorn(Context context) {
+        MessageEvent event = new MessageEvent<>(BUS_ID_MAIN_START_UNICORN, context);
         EventBus.getDefault().post(event);
     }
 
