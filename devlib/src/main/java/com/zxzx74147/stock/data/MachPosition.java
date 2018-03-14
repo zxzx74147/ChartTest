@@ -25,4 +25,19 @@ public class MachPosition implements Serializable {
     public String validTime;     //有效期(option)，仅（status==0时有效）
     public long positionId;   //仓位ID(option)，仅（status==1时有效）
     public String reason;     //建仓撤销/失败原因(option)（仅 status==2, 3时有效）
+
+    public String getStatus(){
+        switch (status){
+            case 0:
+                return "等待建仓";
+            case 1:
+                return "建仓成功";
+            case 2:
+                return "建仓撤销";
+            case 3:
+                return "建仓失败";
+
+        }
+        return null;
+    }
 }

@@ -35,6 +35,9 @@ public class StockBusStation {
     }
 
     public static void startStock(Context context, GoodType type) {
+        if(type==null){
+            return;
+        }
         MessageEvent<GoodType> event = new MessageEvent<>(BUS_ID_STOCK_VIEW, context, type);
         EventBus.getDefault().post(event);
     }
@@ -53,6 +56,12 @@ public class StockBusStation {
 
     public static void viewPosition(Context context) {
         MessageEvent event = new MessageEvent<>(BUS_ID_VIEW_POSITION, context);
+        EventBus.getDefault().post(event);
+    }
+
+    public static void viewPosition(Context context,int type) {
+        MessageEvent event = new MessageEvent<>(BUS_ID_VIEW_POSITION, context);
+        event.type = type;
         EventBus.getDefault().post(event);
     }
     public static void viewMachPosition(Context context) {

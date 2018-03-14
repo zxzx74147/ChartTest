@@ -88,7 +88,21 @@ public class PositionFragment extends BaseDialogFragment {
     private void initView() {
         mPositionAdapter = new CommonRecyclerViewAdapter<>(new LinkedList<>());
         mMachAdapter = new CommonRecyclerViewAdapter<>(new LinkedList<>());
-        CommonMultiTypeDelegate delegate = new CommonMultiTypeDelegate();
+        CommonMultiTypeDelegate delegate = new CommonMultiTypeDelegate(){
+            @Override
+            protected int getItemType(Object o) {
+                if(o instanceof MachPosition){
+                    MachPosition mach = (MachPosition) o;
+                    if(mach.status==0){
+                        return R.layout.item_machposition;
+                    }
+                    return R.layout.item_machposition_his;
+                }
+                return super.getItemType(o);
+            }
+        };
+        delegate.registerItemType(R.layout.item_machposition,R.layout.item_machposition);
+        delegate.registerItemType(R.layout.item_machposition_his,R.layout.item_machposition_his);
         mPositionAdapter.setMultiTypeDelegate(delegate);
         mMachAdapter.setMultiTypeDelegate(delegate);
 
@@ -114,7 +128,8 @@ public class PositionFragment extends BaseDialogFragment {
                 RecyclerViewUtil.setupRecyclerView(mBinding.refreshLayout, mBinding.list, mMachAdapter, new CommonListRequestCallback<MachPosition>() {
                     @Override
                     public Observable<MachPositionListData> getObserverble(BaseListData listdata) {
-                        return mTradeStorage.machpositionGetList(listdata == null ? 0 : listdata.nextPage);
+//                        return mTradeStorage.machpositionGetList(listdata == null ? 0 : listdata.nextPage);
+                        return mTradeStorage.machpositionGetHisList(listdata == null ? 0 : listdata.nextPage);
                     }
                 });
             }

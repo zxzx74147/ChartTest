@@ -18,77 +18,30 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
+        android:paddingTop="@dimen/default_gap_15"
         android:layout_height="wrap_content"
         android:background="@color/tran"
         android:orientation="vertical">
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{data.name}"
-            android:textColor="@color/text_black"
-            android:textSize="@dimen/default_size_34"
-            app:layout_constraintEnd_toStartOf="@+id/constraintLayout2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!--<LinearLayout-->
-            <!--android:id="@+id/good_lite"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--app:layout_constraintBottom_toBottomOf="@+id/textView2"-->
-            <!--app:layout_constraintStart_toEndOf="@+id/textView2"-->
-            <!--android:paddingLeft="@dimen/default_gap_10"-->
-            <!--android:paddingRight="@dimen/default_gap_10"-->
-            <!--app:layout_constraintTop_toTopOf="@+id/textView2"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:background='@{data.closePrice-data.openPrice>0? @drawable/rect_round_red:@drawable/rect_round_green}' >-->
-
-            <!--<TextView-->
-                <!--android:textSize="@dimen/default_size_26"-->
-                <!--android:textColor="@color/white"-->
-                <!--android:text="@{@string/format_02(data.closePrice)}"-->
-                <!--android:drawableRight='@{data.closePrice-data.openPrice>0? @drawable/home_quotes_rise_white:@drawable/home_quotes_fall_white}'-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content" />-->
-
-            <!--<TextView-->
-                <!--android:textSize="@dimen/default_size_26"-->
-                <!--android:textColor="@color/white"-->
-                <!--android:text="@{@string/format_01_sign(data.closePrice-data.openPrice)}"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_marginLeft="@dimen/default_gap_14"-->
-                <!--android:layout_height="wrap_content" />-->
-
-            <!--<TextView-->
-                <!--android:textSize="@dimen/default_size_26"-->
-                <!--android:text='@{@string/format_sign_02((data.closePrice-data.openPrice)*100/data.openPrice)}'-->
-                <!--android:textColor="@color/white"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content" />-->
-        <!--</LinearLayout>-->
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:paddingLeft="@dimen/default_gap_30"
-            android:paddingTop="@dimen/default_gap_11"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+        <com.zxzx74147.stock.widget.GoodLiteWidget
+            android:id="@+id/good_lite"
+            android:layout_width="match_parent"
+            app:goodType="@{data.goodsType}"
+            app:goodName="@{data.name}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/more1" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_height="wrap_content"/>
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraintLayout2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/default_gap_24"
+            android:layout_height="wrap_content"
             android:background="@drawable/rect_round_white_big_corner"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             android:padding="@dimen/default_gap_40"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2">
+            app:layout_constraintTop_toBottomOf="@+id/good_lite">
 
             <android.support.constraint.Guideline
                 android:id="@+id/guideline"
@@ -195,25 +148,29 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/default_gap_50"
-                android:text="@{@string/cancel_time+data.validTime}"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@{data.reason}"
                 android:textColor="@color/text_light_grey"
                 android:textSize="@dimen/default_size_26"
+                app:layout_constraintBottom_toBottomOf="@+id/textView41"
                 app:layout_constraintLeft_toLeftOf="parent"
-
-                app:layout_constraintTop_toBottomOf="@+id/textView13"/>
+                app:layout_constraintTop_toTopOf="@+id/textView41" />
 
             <TextView
                 android:id="@+id/textView41"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginRight="16dp"
+                android:layout_height="@dimen/default_gap_58"
                 android:background="@drawable/rect_round_stroke_grey"
-                android:text="@{data.reason}"
-                android:visibility="@{data.status>1? View.VISIBLE:View.GONE}"
-                app:layout_constraintBottom_toTopOf="@+id/textView3"
-                app:layout_constraintRight_toRightOf="parent" />
+                android:paddingLeft="@dimen/default_gap_27"
+                android:layout_marginTop="@dimen/default_gap_34"
+                android:gravity="center"
+                android:textColor="@color/text_light_grey"
+                android:paddingRight="@dimen/default_gap_27"
+                android:text="@{data.getStatus()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
 
         </android.support.constraint.ConstraintLayout>

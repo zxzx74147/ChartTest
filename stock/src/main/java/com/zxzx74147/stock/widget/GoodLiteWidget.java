@@ -2,10 +2,12 @@ package com.zxzx74147.stock.widget;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -18,6 +20,7 @@ import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.devlib.image.ImageLoader;
 import com.zxzx74147.devlib.interfaces.IViewModelHolder;
 import com.zxzx74147.devlib.modules.account.UserViewModel;
+import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.devlib.widget.CommonRecyclerViewAdapter;
 import com.zxzx74147.devlib.widget.SpaceItemDecoration;
@@ -42,14 +45,18 @@ public class GoodLiteWidget extends FrameLayout implements IViewModelHolder {
     private UserUniData mUniData = null;
 
 
-    @BindingAdapter({"good"})
-    public static void setGood(GoodLiteWidget view, GoodType goodType) {
-        view.setGood(goodType);
-    }
-
     @BindingAdapter({"goodType"})
     public static void setGood(GoodLiteWidget view, String goodType) {
         view.setGoodType(goodType);
+    }
+
+    @BindingAdapter({"goodName"})
+    public static void setGoodName(GoodLiteWidget view, String goodName) {
+        view.setGoodname(goodName);
+    }
+
+    private void setGoodname(String goodName) {
+        mBinding.setGoodName(goodName);
     }
 
     public GoodLiteWidget(Context context) {
@@ -68,6 +75,8 @@ public class GoodLiteWidget extends FrameLayout implements IViewModelHolder {
 
     private void initView() {
         mBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.item_good_lite, this, true);
+        mModel = ViewModelProviders.of(ViewUtil.getFragmentActivity(this)).get(UserViewModel.class);
+        mUniData = mModel.getUserUniLiveData().getValue();
     }
 
 
@@ -100,19 +109,19 @@ public class GoodLiteWidget extends FrameLayout implements IViewModelHolder {
 
     @Override
     public void setProvider(ViewModelProvider provider) {
-        mModel = provider.get(UserViewModel.class);
+
     }
 
     @Override
     public void setLifeCircle(LifecycleOwner owner) {
-        mModel.getUserUniLiveData().observe(owner, userUniData -> {
-            if (userUniData.hasError()) {
-                return;
-            }
-
-
-            refreshData();
-
-        });
+//        mModel.getUserUniLiveData().observe(owner, userUniData -> {
+//            if (userUniData.hasError()) {
+//                return;
+//            }
+//
+//
+//            refreshData();
+//
+//        });
     }
 }
