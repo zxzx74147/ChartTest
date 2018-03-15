@@ -10,11 +10,16 @@ import android.content.pm.ActivityInfo;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.view.inputmethod.EditorInfo;
 import android.widget.FrameLayout;
@@ -36,6 +41,7 @@ import com.zxzx74147.devlib.modules.account.UserViewModel;
 import com.zxzx74147.devlib.modules.busstation.StockBusStation;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
+import com.zxzx74147.devlib.utils.DisplayUtil;
 import com.zxzx74147.devlib.utils.FormatUtil;
 import com.zxzx74147.devlib.utils.KeyboardStatusDetector;
 import com.zxzx74147.devlib.utils.ToastUtil;
@@ -53,6 +59,7 @@ import com.zxzx74147.profile.data.UserUniData;
 import com.zxzx74147.stock.data.Good;
 import com.zxzx74147.stock.data.GoodType;
 import com.zxzx74147.stock.data.PositionData;
+import com.zxzx74147.stock.fragment.StockFragment;
 import com.zxzx74147.stock.storage.TradesStorage;
 import com.zxzx74147.stock.util.FailDealUtil;
 
@@ -80,6 +87,116 @@ public class LayoutLiveNormalLand extends FrameLayout {
     private GoodType mSelectGoodType = null;
     private Good mSelectGood = null;
     private TradesStorage mTradeStorage = RetrofitClient.getClient().create(TradesStorage.class);
+
+    private GestureDetectorCompat mGestureDetector;
+    private GestureDetector.OnGestureListener mOnGestureListener = new GestureDetector.OnGestureListener() {
+        @Override
+        public boolean onDown(MotionEvent e) {
+            return false;
+        }
+
+        @Override
+        public void onShowPress(MotionEvent e) {
+
+        }
+
+        @Override
+        public boolean onSingleTapUp(MotionEvent e) {
+            return false;
+        }
+
+        @Override
+        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+            return false;
+        }
+
+        @Override
+        public void onLongPress(MotionEvent e) {
+
+        }
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            if(velocityY<0){
+                showAll();
+            }else{
+                hideAll();
+            }
+            return true;
+        }
+    };
+
+    private void showGoodList(){
+        if(mBingding.goodList.getVisibility()==View.GONE) {
+            ViewUtil.showView(mBingding.goodList, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_up));
+        }
+
+        if(mBingding.goodSwitch.getVisibility()==View.VISIBLE) {
+            ViewUtil.hideView(mBingding.goodSwitch, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_alpha_out));
+        }
+    }
+
+    private void showList(){
+        if(mBingding.allItem.getVisibility()==View.GONE) {
+            ViewUtil.showView(mBingding.allItem, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_up));
+        }
+
+        if(mBingding.goodSwitch.getVisibility()==View.VISIBLE) {
+            ViewUtil.hideView(mBingding.goodSwitch, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_alpha_out));
+        }
+
+        if(mBingding.showList.getVisibility()==View.VISIBLE) {
+            ViewUtil.hideView(mBingding.showList, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_alpha_out));
+        }
+    }
+
+    private void hideAll(){
+        if(mBingding.allItem.getVisibility()==View.VISIBLE) {
+            ViewUtil.hideView(mBingding.allItem, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_down));
+        }
+
+        if(mBingding.goodList.getVisibility()==View.VISIBLE) {
+            ViewUtil.hideView(mBingding.goodList, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_down));
+        }
+        if(mBingding.goodSwitch.getVisibility()==View.GONE) {
+            ViewUtil.showView(mBingding.goodSwitch, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_alpha_in));
+        }
+
+        if(mBingding.showList.getVisibility()==View.GONE) {
+            ViewUtil.showView(mBingding.showList, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_alpha_in));
+        }
+    }
+
+    private void showAll(){
+        if(mBingding.allItem.getVisibility()==View.GONE) {
+            ViewUtil.showView(mBingding.allItem, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_up));
+        }
+
+        if(mBingding.goodList.getVisibility()==View.GONE) {
+            ViewUtil.showView(mBingding.goodList, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_up));
+        }
+
+        if(mBingding.goodSwitch.getVisibility()==View.VISIBLE) {
+            ViewUtil.hideView(mBingding.goodSwitch, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_alpha_out));
+        }
+
+        if(mBingding.showList.getVisibility()==View.VISIBLE) {
+            ViewUtil.hideView(mBingding.showList, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_alpha_out));
+        }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        this.mGestureDetector.onTouchEvent(event);
+        if(event.getAction()==MotionEvent.ACTION_DOWN){
+            if(event.getY()< DisplayUtil.getDisplayMetrics().heightPixels/3){
+                return false;
+            }
+        }
+        // Be sure to call the superclass implementation
+        super.onTouchEvent(event);
+        return true;
+    }
 
 
     public LayoutLiveNormalLand(Context context) {
@@ -119,7 +236,11 @@ public class LayoutLiveNormalLand extends FrameLayout {
         mBingding.list.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter.setMultiTypeDelegate(new CommonMultiTypeDelegate());
         mBingding.list.setAdapter(mAdapter);
+        mBingding.goodList.setProvider(ViewModelProviders.of((FragmentActivity) getContext()));
+        mBingding.goodList.setLifeCircle((FragmentActivity) getContext());
         mBingding.bubble.setDefaultDrawableList();
+        mBingding.goodList.setCallback(mCallback);
+        mGestureDetector = new GestureDetectorCompat(getContext(), mOnGestureListener);
 
 
         mMsgViewModel.getLiveMsgListLiveData().observe((BaseActivity) getContext(), liveMsgListData -> {
@@ -298,8 +419,22 @@ public class LayoutLiveNormalLand extends FrameLayout {
             doTrade(2);
         });
 
+        RxView.clicks(mBingding.showList).subscribe(v -> {
+            showList();
+        });
+        RxView.clicks(mBingding.goodSwitch).subscribe(v -> {
+            showGoodList();
+        });
+
 
     }
+
+    private CommonCallback<GoodType> mCallback = item -> {
+        StockFragment fragment = StockFragment.newInstance(item);
+        ZXFragmentJumpHelper.startFragment(getContext(), fragment, null);
+
+//        ZXFragmentJumpHelper.startFragment(this, ProfileFragment.class, null);
+    };
 
     public void doTrade(int type){
         if(mSelectGood==null){

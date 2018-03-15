@@ -9,11 +9,18 @@
             type="com.zxzx74147.live.data.Live" />
 
         <variable
+            name="user"
+            type="com.zxzx74147.devlib.data.UserData" />
+
+        <variable
             name="liveMsg"
             type="com.zxzx74147.live.data.LiveMsgListData" />
-        <import type="com.zxzx74147.devlib.modules.busstation.ProfileBusStation"/>
-        <import type="com.zxzx74147.devlib.modules.sys.SysInitManager"/>
-        <import type="com.zxzx74147.devlib.utils.WebviewUtil"/>
+
+        <import type="com.zxzx74147.devlib.modules.busstation.ProfileBusStation" />
+
+        <import type="com.zxzx74147.devlib.modules.sys.SysInitManager" />
+
+        <import type="com.zxzx74147.devlib.utils.WebviewUtil" />
 
 
     </data>
@@ -22,128 +29,180 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <FrameLayout
-            android:id="@+id/frameLayout"
-            android:layout_width="0dip"
-            android:layout_height="@dimen/default_gap_350"
-            android:layout_marginLeft="@dimen/default_gap_44"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/all_item"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@+id/goodList"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <com.zxzx74147.devlib.widget.CommonRecyclerView
-                android:id="@+id/list"
+            <include
+                android:id="@+id/header"
+                layout="@layout/layout_live_head"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_gap_112"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:live='@{live}'
+                app:user='@{user}' />
+
+            <FrameLayout
+                android:id="@+id/frameLayout"
+                android:layout_width="0dip"
+                android:layout_height="@dimen/default_gap_350"
+                android:layout_marginLeft="@dimen/default_gap_44"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <com.zxzx74147.devlib.widget.CommonRecyclerView
+                    android:id="@+id/list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom" />
+            </FrameLayout>
+
+            <Button
+                android:id="@+id/like"
+                android:layout_width="@dimen/default_gap_48"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/default_gap_44"
+                android:background="@null"
+                android:drawablePadding="@dimen/default_gap_10"
+                android:drawableTop="@{liveMsg.liveDynamic.isLove==0? @drawable/home_icon_like:@drawable/home_icon_like_normal}"
+                android:gravity="center"
+                android:text="@{String.valueOf(liveMsg.liveDynamic.loveNum)}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/default_size_22"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <Button
+                android:id="@+id/comment"
+                android:layout_width="@dimen/default_gap_48"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/default_gap_44"
+                android:background="@null"
+                android:drawablePadding="@dimen/default_gap_10"
+                android:drawableTop="@drawable/selector_home_icon_comment"
+                android:gravity="center"
+                android:text="@{String.valueOf(liveMsg.liveDynamic.msgNum)}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/default_size_22"
+                app:layout_constraintBottom_toTopOf="@+id/like"
+                app:layout_constraintEnd_toEndOf="@+id/like" />
+
+            <ImageButton
+                android:id="@+id/coupons"
+                android:layout_width="@dimen/default_gap_48"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/default_gap_44"
+                android:background="@null"
+                android:onClick="@{v->{ProfileBusStation.startProfileVoucherList(context)}}"
+                android:src="@drawable/home_icon_coupons_normal"
+                app:layout_constraintBottom_toTopOf="@+id/comment"
+                app:layout_constraintEnd_toEndOf="@+id/like" />
+
+            <com.zxzx74147.devlib.widget.ZXImageView
+                android:id="@+id/activity"
+                android:layout_width="@dimen/default_gap_72"
+                android:layout_height="@dimen/default_gap_48"
+                android:layout_marginBottom="@dimen/default_gap_72"
+                android:layout_marginRight="@dimen/default_gap_32"
+                android:background="@null"
+                android:onClick="@{v->WebviewUtil.showWebActivity(context,SysInitManager.sharedInstance().getSysInitData().config.activityJumpUrl)}"
+                app:imageUrl="@{SysInitManager.sharedInstance().getSysInitData().config.activityIconUrl}"
+                app:layout_constraintBottom_toTopOf="@+id/coupons"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+            <EditText
+                android:id="@+id/comment_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom" />
-        </FrameLayout>
+                android:layout_marginBottom="@dimen/default_gap_6"
+                android:layout_marginLeft="@dimen/default_gap_44"
+                android:layout_marginRight="@dimen/default_gap_44"
+                android:background="@drawable/rect_round_white"
+                android:gravity="center_vertical"
+                android:hint="@string/live_msg_remind"
+                android:imeOptions="actionSend"
+                android:minHeight="@dimen/default_gap_88"
+                android:paddingLeft="@dimen/default_gap_24"
+                android:paddingRight="@dimen/default_gap_24"
+                android:singleLine="true"
+                android:textColor="@color/text_black"
+                android:textColorHint="@color/text_light_grey"
+                android:textSize="@dimen/default_size_30"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:id="@+id/like"
-            android:layout_width="@dimen/default_gap_48"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/default_gap_44"
-            android:background="@null"
-            android:drawablePadding="@dimen/default_gap_10"
-            android:drawableTop="@{liveMsg.liveDynamic.isLove==0? @drawable/home_icon_like:@drawable/home_icon_like_normal}"
-            android:gravity="center"
-            android:text="@{String.valueOf(liveMsg.liveDynamic.loveNum)}"
-            android:textColor="@color/white"
-            android:textSize="@dimen/default_size_22"
-            app:layout_constraintBottom_toTopOf="@+id/goodList"
-            app:layout_constraintEnd_toEndOf="parent" />
+            <com.zxzx74147.live.widget.BubbleView
+                android:id="@+id/bubble"
+                android:layout_width="@dimen/default_gap_136"
+                android:layout_height="@dimen/default_gap_350"
+                app:layout_constraintBottom_toBottomOf="@id/like"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-        <Button
-            android:id="@+id/comment"
-            android:layout_width="@dimen/default_gap_48"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_gap_44"
-            android:background="@null"
-            android:drawablePadding="@dimen/default_gap_10"
-            android:drawableTop="@drawable/selector_home_icon_comment"
-            android:gravity="center"
-            android:text="@{String.valueOf(liveMsg.liveDynamic.msgNum)}"
-            android:textColor="@color/white"
-            android:textSize="@dimen/default_size_22"
-            app:layout_constraintBottom_toTopOf="@+id/like"
-            app:layout_constraintEnd_toEndOf="@+id/like" />
+            <include
+                android:id="@+id/profit_layout"
+                layout="@layout/widget_profit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_gap_44"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/frameLayout"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <ImageButton
-            android:id="@+id/coupons"
-            android:layout_width="@dimen/default_gap_48"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_gap_44"
-            android:background="@null"
-            android:onClick="@{v->{ProfileBusStation.startProfileVoucherList(context)}}"
-            android:src="@drawable/home_icon_coupons_normal"
-            app:layout_constraintBottom_toTopOf="@+id/comment"
-            app:layout_constraintEnd_toEndOf="@+id/like"  />
-
-        <com.zxzx74147.devlib.widget.ZXImageView
-            android:id="@+id/activity"
-            android:layout_width="@dimen/default_gap_72"
-            android:onClick="@{v->WebviewUtil.showWebActivity(context,SysInitManager.sharedInstance().getSysInitData().config.activityJumpUrl)}"
-            android:layout_height="@dimen/default_gap_72"
-            android:layout_marginBottom="@dimen/default_gap_44"
-            app:imageUrl="@{SysInitManager.sharedInstance().getSysInitData().config.activityIconUrl}"
-            android:background="@null"
-            app:layout_constraintBottom_toTopOf="@+id/coupons"
-            app:layout_constraintEnd_toEndOf="@+id/like" />
-
+        </android.support.constraint.ConstraintLayout>
 
         <com.zxzx74147.stock.widget.GoodListWidget
             android:id="@+id/goodList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_gap_16"
-            android:maxHeight="@dimen/default_gap_400"
             android:background="@color/tran"
+            android:maxHeight="@dimen/default_gap_400"
             android:paddingTop="@dimen/default_gap_16"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <EditText
-            android:id="@+id/comment_edit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_gap_6"
-            android:layout_marginLeft="@dimen/default_gap_44"
-            android:layout_marginRight="@dimen/default_gap_44"
-            android:background="@drawable/rect_round_white"
-            android:gravity="center_vertical"
-            android:hint="@string/live_msg_remind"
-            android:imeOptions="actionSend"
-            android:minHeight="@dimen/default_gap_88"
-            android:paddingLeft="@dimen/default_gap_24"
-            android:paddingRight="@dimen/default_gap_24"
-            android:singleLine="true"
-            android:textColor="@color/text_black"
-            android:textColorHint="@color/text_light_grey"
-            android:textSize="@dimen/default_size_30"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
-        <com.zxzx74147.live.widget.BubbleView
-            android:id="@+id/bubble"
-            android:layout_width="@dimen/default_gap_136"
-            android:layout_height="@dimen/default_gap_350"
-            app:layout_constraintBottom_toBottomOf="@id/like"
+        <ImageButton
+            android:id="@+id/good_switch"
+            android:layout_width="@dimen/default_gap_48"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/default_gap_44"
+            android:background="@null"
+            android:gravity="center"
+            android:src="@drawable/selector_home_icon_quotes"
+            android:textColor="@color/white"
+            android:textSize="@dimen/default_size_22"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/goodList"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <include
-            android:layout_width="wrap_content"
-            android:id="@+id/profit_layout"
-            android:layout_marginLeft="@dimen/default_gap_44"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/frameLayout"
-            app:layout_constraintStart_toStartOf="parent"
+        <ImageButton
+            android:id="@+id/show_list"
+            android:layout_width="@dimen/default_gap_48"
             android:layout_height="wrap_content"
-            layout="@layout/widget_profit"/>
-
+            android:layout_marginBottom="@dimen/default_gap_44"
+            android:background="@null"
+            android:layout_marginRight="@dimen/default_gap_44"
+            android:drawablePadding="@dimen/default_gap_10"
+            android:gravity="center"
+            android:src="@drawable/selector_home_icon_conventional"
+            android:textColor="@color/white"
+            android:textSize="@dimen/default_size_22"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/good_switch"
+            app:layout_constraintEnd_toEndOf="parent" />
     </android.support.constraint.ConstraintLayout>
 </layout>
 
