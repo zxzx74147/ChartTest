@@ -57,6 +57,10 @@
             android:name="com.zxzx74147.live.layout.LiveActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".AboutActivity"
+            android:screenOrientation="portrait" />
+
         <receiver android:name=".push.AliPushReceiver">
             <intent-filter>
                 <action android:name="com.alibaba.push2.action.NOTIFICATION_OPENED" />

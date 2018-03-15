@@ -49,6 +49,8 @@
             android:id="@+id/close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/default_gap_30"
+            android:paddingBottom="@dimen/default_gap_30"
             android:background="@null"
             android:src="@drawable/icon_close"
             app:layout_constraintEnd_toEndOf="@+id/tabLayout2"

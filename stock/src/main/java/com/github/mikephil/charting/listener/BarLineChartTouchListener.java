@@ -172,6 +172,7 @@ public class BarLineChartTouchListener extends ChartTouchListener<BarLineChartBa
                     float x = mChart.isDragXEnabled() ? event.getX() - mTouchStartPoint.x : 0.f;
                     float y = mChart.isDragYEnabled() ? event.getY() - mTouchStartPoint.y : 0.f;
                     mHighlight=false;
+                    mChart.highlightValue(null,true);
                     performDrag(event, x, y);
 
                 } else if (mTouchMode == X_ZOOM || mTouchMode == Y_ZOOM || mTouchMode == PINCH_ZOOM) {

@@ -46,6 +46,7 @@ public class Entry extends BaseEntry implements Parcelable {
         this.x = x;
     }
 
+
     /**
      * A Entry represents one single entry in the chart.
      *

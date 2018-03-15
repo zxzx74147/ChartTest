@@ -59,7 +59,9 @@ public class KlineView extends LinearLayout {
         ChartUtil.setChart(mBinding.kline);
         ChartUtil.setRealTimeChart(mBinding.klineRealtime);
         ChartUtil.setChart(mBinding.kline2);
-        ChartUtil.showHighline(mBinding.kline,mBinding.kline2);
+        ChartUtil.showHighline(mBinding.kline, mBinding.kline2);
+        ChartUtil.setMarkerView(mBinding.kline);
+
 //        ChartUtil.showHighline();
         mBinding.kline.setExtraBottomOffset(3);
         mBinding.kline.setExtraTopOffset(5);
@@ -70,7 +72,7 @@ public class KlineView extends LinearLayout {
 
         XAxis xAxis = mBinding.kline2.getXAxis();
         xAxis.setDrawLabels(false);
-        YAxis axisRKline=mBinding.kline2.getAxisRight();
+        YAxis axisRKline = mBinding.kline2.getAxisRight();
         axisRKline.setLabelCount(3, true);
 
         initChartListener();
@@ -86,14 +88,14 @@ public class KlineView extends LinearLayout {
 
     public void setData(DataParse dataParse) {
         boolean needRefresh = false;
-        if(mDataParse==null||mDataParse.mType!=dataParse.mType){
+        if (mDataParse == null || mDataParse.mType != dataParse.mType) {
             needRefresh = true;
         }
         mDataParse = dataParse;
         refresh();
         mBinding.klineRealtime.setVisibility(View.GONE);
         mBinding.klineOther.setVisibility(VISIBLE);
-        if(needRefresh){
+        if (needRefresh) {
             ChartUtil.fitData(mBinding.kline);
             ChartUtil.fitData(mBinding.kline2);
         }
@@ -101,16 +103,17 @@ public class KlineView extends LinearLayout {
 
     public void setRealTime(DataParse dataParse) {
         boolean needRefresh = false;
-        if(mDataParse==null||mDataParse.mType!=dataParse.mType){
+        if (mDataParse == null || mDataParse.mType != dataParse.mType) {
             needRefresh = true;
         }
         mDataParse = dataParse;
         refreshReadTime();
+
         mBinding.klineRealtime.setVisibility(View.VISIBLE);
         mBinding.klineOther.setVisibility(INVISIBLE);
-//        if(needRefresh){
-//            ChartUtil.fitData(mBinding.klineRealtime);
-//        }
+        if (needRefresh) {
+            mBinding.klineRealtime.highlightValue(null);
+        }
     }
 
     private void refreshReadTime() {
@@ -147,7 +150,7 @@ public class KlineView extends LinearLayout {
 
     private void initChartListener() {
         mBinding.kline.setOnChartGestureListener(new CoupleChartGestureListener(mBinding.kline, mBinding.kline2));
-        mBinding.kline2.setOnChartGestureListener(new CoupleChartGestureListener(mBinding.kline, mBinding.kline2));
+        mBinding.kline2.setOnChartGestureListener(new CoupleChartGestureListener(mBinding.kline2, mBinding.kline));
 //        mBinding.kline.setOnChartValueSelectedListener(new InfoViewListener(mContext, mLastClose, mData, mChartInfoView, mChartVolume));
 //        mBinding.kline2.setOnChartValueSelectedListener(new InfoViewListener(mContext, mLastClose, mData, mChartInfoView, mChartPrice));
 //        mChartPrice.setOnTouchListener(new ChartInfoViewHandler(mChartPrice));
@@ -235,13 +238,12 @@ public class KlineView extends LinearLayout {
         ArrayList<ILineDataSet> sets = new ArrayList<>();
         LineDataSet lineDea = new LineDataSet(mDataParse.getDeaData(), "dea");
         LineDataSet lineDif = new LineDataSet(mDataParse.getDeaData(), "dif");
-        ChartUtil.setLineDataleSet(lineDea, getResources().getColor(R.color.stock_kline_dea));
-        ChartUtil.setLineDataleSet(lineDif, getResources().getColor(R.color.stock_kline_dif));
+        ChartUtil.setLineDataleSet(lineDea, getResources().getColor(R.color.stock_kline_dea), true);
+        ChartUtil.setLineDataleSet(lineDif, getResources().getColor(R.color.stock_kline_dif), true);
         sets.add(lineDea);
         sets.add(lineDif);
         LineData lineData = new LineData(sets);
         combinedData.setData(lineData);
-        lineDea.setHighlightEnabled(true);
         mBinding.kline2.setData(combinedData);
         mBinding.kline2.invalidate();
     }
@@ -254,16 +256,15 @@ public class KlineView extends LinearLayout {
         LineDataSet lineK = new LineDataSet(mDataParse.getkData(), "k");
         LineDataSet lineD = new LineDataSet(mDataParse.getdData(), "d");
         LineDataSet lineJ = new LineDataSet(mDataParse.getjData(), "j");
-        ChartUtil.setLineDataleSet(lineK, getResources().getColor(R.color.stock_kline_dea));
-        ChartUtil.setLineDataleSet(lineD, getResources().getColor(R.color.stock_kline_ma5));
-        ChartUtil.setLineDataleSet(lineJ, getResources().getColor(R.color.stock_kline_dif));
+        ChartUtil.setLineDataleSet(lineK, getResources().getColor(R.color.stock_kline_dea), true);
+        ChartUtil.setLineDataleSet(lineD, getResources().getColor(R.color.stock_kline_ma5), true);
+        ChartUtil.setLineDataleSet(lineJ, getResources().getColor(R.color.stock_kline_dif), true);
         sets.add(lineK);
         sets.add(lineD);
         sets.add(lineJ);
         LineData lineData = new LineData(sets);
         combinedData.setData(lineData);
         ((CombinedChartRenderer) mBinding.kline2.getRenderer()).getSubRenderers().clear();
-        lineK.setHighlightEnabled(true);
         mBinding.kline2.setData(combinedData);
         mBinding.kline2.invalidate();
     }
@@ -275,15 +276,14 @@ public class KlineView extends LinearLayout {
         LineDataSet lineK = new LineDataSet(mDataParse.getRsiData6(), "rsi6");
         LineDataSet lineD = new LineDataSet(mDataParse.getRsiData12(), "rsi12");
         LineDataSet lineJ = new LineDataSet(mDataParse.getRsiData24(), "rsi21");
-        ChartUtil.setLineDataleSet(lineK, getResources().getColor(R.color.stock_kline_dea));
-        ChartUtil.setLineDataleSet(lineD, getResources().getColor(R.color.stock_kline_ma5));
-        ChartUtil.setLineDataleSet(lineJ, getResources().getColor(R.color.stock_kline_dif));
+        ChartUtil.setLineDataleSet(lineK, getResources().getColor(R.color.stock_kline_dea), true);
+        ChartUtil.setLineDataleSet(lineD, getResources().getColor(R.color.stock_kline_ma5), true);
+        ChartUtil.setLineDataleSet(lineJ, getResources().getColor(R.color.stock_kline_dif), true);
         sets.add(lineK);
         sets.add(lineD);
         sets.add(lineJ);
         LineData lineData = new LineData(sets);
         combinedData.setData(lineData);
-        lineK.setHighlightEnabled(true);
         ((CombinedChartRenderer) mBinding.kline2.getRenderer()).getSubRenderers().clear();
         mBinding.kline2.setData(combinedData);
         mBinding.kline2.invalidate();
@@ -295,7 +295,7 @@ public class KlineView extends LinearLayout {
         CombinedData combinedData = new CombinedData();
         ArrayList<ILineDataSet> sets = new ArrayList<>();
         LineDataSet lineK = new LineDataSet(mDataParse.getReadTime(), "realtime");
-        ChartUtil.setupRealTimeY(mBinding.klineRealtime,mDataParse.getReadTime());
+        ChartUtil.setupRealTimeY(mBinding.klineRealtime, mDataParse.getReadTime());
         ChartUtil.setLineDataleSet(lineK, getResources().getColor(R.color.stock_kline_realtime));
         sets.add(lineK);
         lineK.setDrawFilled(true);
@@ -303,6 +303,9 @@ public class KlineView extends LinearLayout {
         lineK.setFormLineWidth(1f);
         lineK.setFormLineDashEffect(new DashPathEffect(new float[]{10f, 5f}, 0f));
         lineK.setFormSize(15.f);
+        lineK.setHighlightEnabled(true);
+        lineK.setDrawHighlightIndicators(true);
+        lineK.setHighlightLineWidth(1f);
         LineData lineData = new LineData(sets);
         combinedData.setData(lineData);
         ((CombinedChartRenderer) mBinding.klineRealtime.getRenderer()).getSubRenderers().clear();

@@ -28,7 +28,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.github.mikephil.charting.charts.CombinedChart
+            <com.github.mikephil.charting.mychart.MyCombinedChart
                 android:id="@+id/kline"
                 android:layout_width="0dp"
                 android:paddingTop="@dimen/default_gap_5"
@@ -39,7 +39,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.github.mikephil.charting.charts.CombinedChart
+            <com.github.mikephil.charting.mychart.MyCombinedChart
                 android:id="@+id/kline2"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -182,12 +182,13 @@
             <!--app:layout_constraintEnd_toEndOf="parent"-->
             <!--app:layout_constraintStart_toStartOf="parent"-->
             <!--app:layout_constraintTop_toTopOf="parent" />-->
-        <com.github.mikephil.charting.charts.CombinedChart
+        <com.github.mikephil.charting.mychart.MyCombinedChart
             android:id="@+id/kline_realtime"
             app:layout_constraintBottom_toBottomOf="@id/kline_other"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/kline_other"
             app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

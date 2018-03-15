@@ -177,7 +177,7 @@ public class CombinedData extends BarLineScatterCandleBubbleData<IBarLineScatter
     @Override
     public Entry getEntryForHighlight(Highlight highlight) {
 
-        if (highlight.getDataIndex() >= getAllData().size())
+        if (highlight.getDataIndex() >= getAllData().size()||highlight.getDataIndex()<0)
             return null;
 
         ChartData data = getDataByIndex(highlight.getDataIndex());
