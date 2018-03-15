@@ -49,6 +49,11 @@ public interface TradesStorage {
             int buySell, @Query("amount") int amount, @Query("price") String price, @Query("limit") String limit
             , @Query("stop") String stop, @Query("error") String error, @Query("deferred") int deferred);
 
+    @GET("/trades/position/voucheropen")
+    Observable<PositionData> voucherOpen(@Query("goodsId") String goodsId, @Query("buySell")
+            int buySell, @Query("amount") int amount, @Query("price") String price, @Query("limit") String limit
+            , @Query("stop") String stop, @Query("error") String error, @Query("deferred") int deferred);
+
 
     @GET("/trades/position/modify")
     Observable<PositionData> positionModify(@Query("positionId") long positionId, @Query("limit")

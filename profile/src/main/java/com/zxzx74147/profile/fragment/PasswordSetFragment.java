@@ -16,6 +16,7 @@ import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.profile.R;
+import com.zxzx74147.profile.data.UserUniData;
 import com.zxzx74147.profile.databinding.LayoutSetPasswordBinding;
 import com.zxzx74147.profile.storage.AccountStorage;
 
@@ -82,14 +83,14 @@ public class PasswordSetFragment extends BaseDialogFragment {
                 ToastUtil.showToast(getActivity(), "请设置6-12位登录密码");
                 return;
             }
-            NetworkApi.ApiSubscribe(mStorage.tradePassword(p1), userUniData -> {
+            NetworkApi.ApiSubscribe(getActivity(),mStorage.tradePassword(p1),true, userUniData -> {
                 if(userUniData.hasError()){
 
                     return;
                 }
                 AccountManager.sharedInstance().saveUser(userUniData.user);
                 dismiss();
-            });
+            },UserUniData.class);
         });
 
 

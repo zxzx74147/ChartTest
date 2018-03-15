@@ -16,6 +16,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.view.ContextThemeWrapper;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -23,6 +24,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding2.view.RxView;
@@ -246,6 +248,22 @@ public class ViewUtil {
                     ((AnimationDrawable) drawablel).start();
                 }
             }
+        }
+    }
+
+    public static void disableTabLayout(TabLayout mTabLayout){
+        LinearLayout tabStrip = ((LinearLayout)mTabLayout.getChildAt(0));
+        tabStrip.setEnabled(false);
+        for(int i = 0; i < tabStrip.getChildCount(); i++) {
+            tabStrip.getChildAt(i).setClickable(false);
+        }
+    }
+
+    public static void enableTabLayout(TabLayout mTabLayout){
+        LinearLayout tabStrip = ((LinearLayout)mTabLayout.getChildAt(0));
+        tabStrip.setEnabled(true);
+        for(int i = 0; i < tabStrip.getChildCount(); i++) {
+            tabStrip.getChildAt(i).setClickable(true);
         }
     }
 

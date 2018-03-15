@@ -29,6 +29,10 @@
             name="amount"
             type="Integer" />
 
+        <variable
+            type="Boolean"
+            name="voucher"/>
+
         <import type="com.zxzx74147.stock.fragment.TradeFragment" />
         <import type="android.view.View" />
 
@@ -234,7 +238,7 @@
                     android:layout_marginLeft="@dimen/default_gap_125"
                     android:layout_marginRight="@dimen/default_gap_44"
                     android:layout_marginTop="@dimen/default_gap_24"
-                    android:text='@{@string/format_trade_amount(good.weightNum*amount,good.weightUnit,good.profitPerUnit*amount,good.costBack)}'
+                    android:text='@{voucher? @string/voucher_limit_remind:@string/format_trade_amount(good.weightNum*amount,good.weightUnit,good.profitPerUnit*amount,good.costBack)}'
                     android:textColor="@color/text_light_grey"
                     android:textSize="@dimen/default_size_26" />
 
@@ -249,7 +253,7 @@
                         android:id="@+id/balance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:button="@drawable/radio_checked"
+                        android:button="@drawable/radio_red"
                         android:gravity="center_vertical"
                         android:text='@{@string/format_left(user.balance)}'
                         android:textColor="@color/text_black"
@@ -275,7 +279,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="false"
-                        android:button="@drawable/radio_checked"
+                        android:button="@drawable/radio_red"
                         android:gravity="center_vertical"
                         android:textColor="@color/text_black"
                         android:textSize="@dimen/default_size_26" />
@@ -379,7 +383,7 @@
                             android:layout_height="@dimen/default_gap_56"
                             android:layout_marginTop="@dimen/default_gap_24"
                             android:gravity="left|center_vertical"
-                            android:text='@{@string/format_defer(good.deferredFee*amount)}'
+                            android:text='@{voucher? @string/voucher_deffer_remind:@string/format_defer(good.deferredFee*amount)}'
                             android:textColor="@color/text_dark_grey"
                             android:textSize="@dimen/default_size_26" />
 
@@ -406,7 +410,7 @@
                             android:layout_height="@dimen/default_gap_56"
                             android:layout_marginTop="@dimen/default_gap_24"
                             android:gravity="left|center_vertical"
-                            android:text='@{@string/format_cost(good.openChargeFee*amount)}'
+                            android:text='@{voucher? @string/voucher_fee_remind:@string/format_cost(good.openChargeFee*amount)}'
                             android:textColor="@color/text_dark_grey"
                             android:textSize="@dimen/default_size_26" />
 

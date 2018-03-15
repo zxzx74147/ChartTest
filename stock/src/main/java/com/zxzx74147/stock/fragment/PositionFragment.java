@@ -191,7 +191,7 @@ public class PositionFragment extends BaseDialogFragment {
 
         Bundle bundle = getArguments();
         IntentData goodIntent = (IntentData) bundle.getSerializable(ZXActivityJumpHelper.INTENT_DATA);
-        mBinding.tabLayout2.setScrollPosition(goodIntent.type, 0, false);
+        mBinding.tabLayout2.getTabAt(goodIntent.type).select();
     }
 
     private CommonCallback<MachPosition> mMotifyCallback = new CommonCallback<MachPosition>() {

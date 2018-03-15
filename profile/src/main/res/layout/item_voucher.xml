@@ -57,7 +57,7 @@
                 android:layout_marginTop="@dimen/default_gap_5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{@string/active_time+TimeUtil.reformatDefaultTime(data.activeEndDt,@string/format_YYYYMMDD_HHMM)}"
+                android:text="@{data.getEndTime()}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/default_size_24" />
         </LinearLayout>

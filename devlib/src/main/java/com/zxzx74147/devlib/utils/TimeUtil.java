@@ -1,5 +1,7 @@
 package com.zxzx74147.devlib.utils;
 
+import android.text.TextUtils;
+
 import com.zxzx74147.devlib.DevLib;
 import com.zxzx74147.devlib.R;
 
@@ -44,6 +46,9 @@ public class TimeUtil {
     }
 
     public static String reformatDefaultTime(String input, String formatOutput) {
+        if(TextUtils.isEmpty(formatOutput)){
+            return "";
+        }
         SimpleDateFormat inputDateFormat = getSampleFormat(DevLib.getApp().getResources().getString(R.string.format_input));
         SimpleDateFormat outDateFormat = getSampleFormat(formatOutput);
         try {

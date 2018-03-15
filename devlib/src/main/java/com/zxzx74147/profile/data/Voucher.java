@@ -1,10 +1,9 @@
 
 package com.zxzx74147.profile.data;
 
-import android.databinding.BindingAdapter;
-import android.widget.ImageView;
-
-import com.zxzx74147.devlib.image.ImageLoader;
+import com.zxzx74147.devlib.DevLib;
+import com.zxzx74147.devlib.R;
+import com.zxzx74147.devlib.utils.TimeUtil;
 import com.zxzx74147.stock.data.Good;
 
 import java.io.Serializable;
@@ -25,7 +24,16 @@ public class Voucher implements Serializable {
     public Good goods;
     private final static long serialVersionUID = 6384799606472812016L;
 
+    public String getEndTime() {
+        if (validEndDt != null) {
+            return DevLib.getApp().getString(R.string.active_time) + TimeUtil.reformatDefaultTime(validEndDt, DevLib.getApp().getString(R.string.format_YYYYMMDD_HHMM));
 
+        }
+        if (activeEndDt != null) {
+            return DevLib.getApp().getString(R.string.active_time) + TimeUtil.reformatDefaultTime(activeEndDt, DevLib.getApp().getString(R.string.format_YYYYMMDD_HHMM));
+        }
+        return "";
+    }
 
 
 }

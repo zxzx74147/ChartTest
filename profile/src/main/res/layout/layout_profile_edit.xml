@@ -66,6 +66,7 @@
             android:background="@null"
             android:imeOptions="actionSend"
             android:singleLine="true"
+            android:minWidth="@dimen/default_gap_220"
             android:text="@{user.nickName}"
             android:textColor="@color/text_black"
             android:textSize="@dimen/default_size_34"

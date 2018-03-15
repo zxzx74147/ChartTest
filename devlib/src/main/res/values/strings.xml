@@ -43,6 +43,7 @@
     <string name="submit">提交</string>
     <string name="succ">成功</string>
     <string name="str_loading">--</string>
+    <string name="active_time">有效期：</string>
 
     <string name="wx_appid">wx8f763f88fcd1bd9b</string>
 

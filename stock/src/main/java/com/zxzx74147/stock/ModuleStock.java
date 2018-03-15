@@ -52,7 +52,9 @@ public class ModuleStock {
             fragment.show((ViewUtil.getFragmentActivity(event.context)).getSupportFragmentManager(), fragment.getTag());
         }
         else if (event.id == StockBusStation.BUS_ID_VIEW_POSITION) {
-            PositionFragment fragment = PositionFragment.newInstance(new IntentData(event.type));
+            IntentData intent = new IntentData();
+            intent.type = event.type;
+            PositionFragment fragment = PositionFragment.newInstance(intent);
             fragment.show((ViewUtil.getFragmentActivity(event.context)).getSupportFragmentManager(), fragment.getTag());
         }
         else if (event.id == StockBusStation.BUS_ID_VIEW_TRADE) {

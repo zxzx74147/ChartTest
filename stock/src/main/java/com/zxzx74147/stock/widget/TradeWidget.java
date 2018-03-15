@@ -186,11 +186,16 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
         });
 
         RxCompoundButton.checkedChanges(mBinding.balance).subscribe(isChecked -> {
+            if(!isChecked&&mBinding.voucher.getVisibility()==View.GONE){
+                mBinding.balance.setChecked(true);
+                return ;
+            }
             mBinding.voucher.setChecked(!isChecked);
         });
 
         RxCompoundButton.checkedChanges(mBinding.voucher).subscribe(isChecked -> {
             mBinding.balance.setChecked(!isChecked);
+            onVucherChecked(isChecked);
         });
 
         RxView.clicks(mBinding.machRemind).subscribe(v -> {
@@ -320,8 +325,8 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                 });
 
             },MachPositionData.class);
-        } else if (mType <= TradeFragment.TYPE_POSITION_BUY_DOWN) {
-            Observable<PositionData> observable = mTradeStorage.positionOpen(mSelectGood.goodsId, mType + 1, mAmount, String.valueOf(mGoodType.price.curPrice), limitStr, stopStr, null, 1);
+        } else if(mBinding.voucher.isChecked()){
+            Observable<PositionData> observable = mTradeStorage.voucherOpen(mSelectGood.goodsId, mType + 1, mAmount, String.valueOf(mGoodType.price.curPrice), limitStr, stopStr, null, 0);
             NetworkApi.ApiSubscribe(ViewUtil.getLivecirceOwer(this), observable, true,positionData -> {
                 if (positionData.hasError()) {
                     if (FailDealUtil.dealFail(getContext(), positionData.failed)) {
@@ -342,6 +347,36 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                         //TODO
                         if (item == null) {
                             StockBusStation.viewPosition(getContext());
+                        } else {
+                            ;
+                        }
+
+                    }
+                });
+            },PositionData.class);
+        }
+        else if (mType <= TradeFragment.TYPE_POSITION_BUY_DOWN) {
+            Observable<PositionData> observable = mTradeStorage.positionOpen(mSelectGood.goodsId, mType + 1, mAmount, String.valueOf(mGoodType.price.curPrice), limitStr, stopStr, null, 1);
+            NetworkApi.ApiSubscribe(ViewUtil.getLivecirceOwer(this), observable, true,positionData -> {
+                if (positionData.hasError()) {
+                    if (FailDealUtil.dealFail(getContext(), positionData.failed)) {
+                        return;
+                    }
+                    ToastUtil.showToast(getContext(), positionData.error.usermsg);
+                    return;
+                }
+                DialogItem dialogItem = new DialogItem();
+                dialogItem.title = getResources().getString(R.string.position_open_succ);
+                dialogItem.content = null;
+                dialogItem.cancel = getResources().getString(R.string.position_view);
+                dialogItem.cancel = getResources().getString(R.string.continu_trade);
+                CommonFragmentDialog fragmentDialog = CommonFragmentDialog.newInstance(new IntentData<>(dialogItem));
+                ZXFragmentJumpHelper.startFragment(getContext(), fragmentDialog, new CommonCallback() {
+                    @Override
+                    public void callback(Object item) {
+                        //TODO
+                        if (item == null) {
+                            StockBusStation.viewPosition(getContext(),1);
                         } else {
                             ;
                         }
@@ -410,7 +445,12 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
         if (AccountManager.sharedInstance().getUserUni() == null) {
             return;
         }
+        mBinding.balance.setChecked(true);
         mBinding.voucher.setVisibility(View.GONE);
+        mBinding.setVoucher(false);
+        if (mType != TradeFragment.TYPE_POSITION_BUY_UP && mType != TradeFragment.TYPE_POSITION_BUY_DOWN) {
+            return;
+        }
         List<Voucher> myVouchers = AccountManager.sharedInstance().getUserUni().userVoucherList.getListItems();
         if (myVouchers == null) {
             return;
@@ -425,13 +465,31 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             }
         }
         if (validVochers.size() == 0) {
-            mBinding.balance.setChecked(false);
+            mBinding.balance.setChecked(true);
             return;
         }
         mBinding.voucher.setVisibility(View.VISIBLE);
         String text = String.format(getResources().getString(R.string.format_voucher_amount), mSelectGood.depositFee, validVochers.size());
         mBinding.voucher.setText(text);
         mBinding.voucher.setChecked(false);
+    }
+
+    public void onVucherChecked(boolean check){
+        mBinding.setVoucher(check);
+        if(check){
+            mBinding.buyLimitValue.setText("10点");
+            mBinding.buyStopValue.setText("10点");
+            mBinding.buyLimitValue.setClickable(false);
+            mBinding.buyStopValue.setClickable(false);
+            if(mBinding.listAmount.getTabCount()>0) {
+                mBinding.listAmount.getTabAt(0).select();
+            }
+            ViewUtil.disableTabLayout(mBinding.listAmount);
+        }else{
+            mBinding.buyLimitValue.setClickable(true);
+            mBinding.buyStopValue.setClickable(true);
+            ViewUtil.enableTabLayout(mBinding.listAmount);
+        }
     }
 
     //    private GoodType  mGoodType;
