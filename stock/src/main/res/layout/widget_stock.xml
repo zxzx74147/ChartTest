@@ -30,14 +30,14 @@
                 android:layout_centerVertical="true"
                 android:text="@{String.valueOf(price.curPrice)}"
                 android:textColor='@{(price.curPrice-price.open)>0? @color/stock_up:@color/stock_down}'
-                android:textSize="@dimen/default_size_72" />
+                android:textSize="@dimen/default_size_70" />
 
             <TextView
                 android:id="@+id/up_down_abs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/current_price"
-                android:layout_marginLeft="@dimen/default_gap_24"
+                android:layout_marginLeft="@dimen/default_gap_20"
                 android:layout_toRightOf="@+id/current_price"
                 android:text="@{String.valueOf(price.curPrice-price.open)}"
                 android:textColor='@{(price.curPrice-price.open)>0? @color/stock_up:@color/stock_down}'
@@ -135,7 +135,7 @@
             <TextView
                 android:id="@+id/high_label"
                 android:layout_width="wrap_content"
-                android:text="最低"
+                android:text="最高"
                 android:layout_marginRight="@dimen/default_gap_5"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/current_price"

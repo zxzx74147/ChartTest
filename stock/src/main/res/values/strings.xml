@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">stock</string>
 
-    <string name="network_host_stock">http://47.104.7.90/</string>
+    <string name="network_host_stock">http://47.104.27.243/</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

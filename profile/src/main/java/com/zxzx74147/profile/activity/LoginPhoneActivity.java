@@ -94,7 +94,7 @@ public class LoginPhoneActivity extends BaseActivity {
 
     public void requestVcode() {
 
-        NetworkApi.ApiSubscribe(this,mStockStorage.accountGetVCode(mBinding.layoutRegist.phoneNumber.getText().toString()),true, new Consumer<UniApiData>() {
+        NetworkApi.ApiSubscribe(this,mStockStorage.accountGetVCode(mBinding.layoutRegist.phoneNumber.getText().toString()),false, new Consumer<UniApiData>() {
 
             @Override
             public void accept(UniApiData uniApiData) throws Exception {

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.CandleData;
@@ -58,9 +59,19 @@ public class KlineView extends LinearLayout {
         ChartUtil.setChart(mBinding.kline);
         ChartUtil.setRealTimeChart(mBinding.klineRealtime);
         ChartUtil.setChart(mBinding.kline2);
-        ChartUtil.showHighline(mBinding.kline);
+        ChartUtil.showHighline(mBinding.kline,mBinding.kline2);
+//        ChartUtil.showHighline();
+        mBinding.kline.setExtraBottomOffset(3);
+        mBinding.kline.setExtraTopOffset(5);
+        mBinding.klineRealtime.setExtraBottomOffset(3);
+        mBinding.klineRealtime.setExtraTopOffset(5);
+        mBinding.kline2.setExtraBottomOffset(3);
+        mBinding.kline2.setExtraTopOffset(5);
+
         XAxis xAxis = mBinding.kline2.getXAxis();
         xAxis.setDrawLabels(false);
+        YAxis axisRKline=mBinding.kline2.getAxisRight();
+        axisRKline.setLabelCount(3, true);
 
         initChartListener();
 
@@ -230,6 +241,7 @@ public class KlineView extends LinearLayout {
         sets.add(lineDif);
         LineData lineData = new LineData(sets);
         combinedData.setData(lineData);
+        lineDea.setHighlightEnabled(true);
         mBinding.kline2.setData(combinedData);
         mBinding.kline2.invalidate();
     }
@@ -251,6 +263,7 @@ public class KlineView extends LinearLayout {
         LineData lineData = new LineData(sets);
         combinedData.setData(lineData);
         ((CombinedChartRenderer) mBinding.kline2.getRenderer()).getSubRenderers().clear();
+        lineK.setHighlightEnabled(true);
         mBinding.kline2.setData(combinedData);
         mBinding.kline2.invalidate();
     }
@@ -270,6 +283,7 @@ public class KlineView extends LinearLayout {
         sets.add(lineJ);
         LineData lineData = new LineData(sets);
         combinedData.setData(lineData);
+        lineK.setHighlightEnabled(true);
         ((CombinedChartRenderer) mBinding.kline2.getRenderer()).getSubRenderers().clear();
         mBinding.kline2.setData(combinedData);
         mBinding.kline2.invalidate();

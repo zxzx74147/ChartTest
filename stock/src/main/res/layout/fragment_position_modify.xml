@@ -57,7 +57,7 @@
                     android:gravity="left|center_vertical"
                     android:paddingLeft="@dimen/default_gap_10"
                     android:paddingRight="@dimen/default_gap_10"
-                    android:text="@{data.stop==0? @string/none:@string/format_point(data.stop*100)}"
+                    android:text="@{data.stop==0? @string/none:@string/format_point(data.stop)}"
                     android:textColor="@color/text_dark_grey"
                     android:textSize="@dimen/default_size_26" />
 
@@ -89,7 +89,7 @@
                     android:gravity="left|center_vertical"
                     android:paddingLeft="@dimen/default_gap_10"
                     android:paddingRight="@dimen/default_gap_10"
-                    android:text="@{data.limit==0? @string/none:@string/format_point(data.limit*100)}"
+                    android:text="@{data.limit==0? @string/none:@string/format_point(data.limit)}"
                     android:textColor="@color/text_dark_grey"
                     android:textSize="@dimen/default_size_26" />
 

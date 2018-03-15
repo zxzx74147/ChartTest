@@ -77,6 +77,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
+        <ProgressBar
+            android:id="@+id/progress"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="@dimen/default_gap_150"
+            app:layout_constraintTop_toTopOf="@+id/qr_code"
+            app:layout_constraintBottom_toBottomOf="@+id/qr_code"
+            app:layout_constraintEnd_toEndOf="@+id/qr_code"
+            app:layout_constraintStart_toStartOf="@+id/qr_code"
+            android:layout_height="@dimen/default_gap_150"
+            android:theme="@style/CircularProgress" />
+
         <View
             android:id="@+id/view"
             android:layout_width="match_parent"

@@ -20,6 +20,7 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ViewPortHandler;
+import com.jakewharton.rxbinding2.view.RxView;
 import com.zxzx74147.devlib.DevLib;
 import com.zxzx74147.devlib.utils.DisplayUtil;
 import com.zxzx74147.stock.R;
@@ -119,7 +120,7 @@ public class ChartUtil {
         axisRKline.setGridLineWidth(1f);
         axisRKline.setTextColor(DevLib.getApp().getResources().getColor(R.color.text_light_grey));
         axisRKline.setLabelCount(5, true); //第一个参数是Y轴坐标的个数，第二个参数是 是否不均匀分布，true是不均匀分布
-        axisRKline.setSpaceTop(10);//距离顶部留白
+        axisRKline.setSpaceTop(0);//距离顶部留白
         axisRKline.setValueFormatter(yrformatter);
 
 
@@ -144,7 +145,7 @@ public class ChartUtil {
         axisLKline.setDrawLabels(true);
         axisLKline.setTextColor(DevLib.getApp().getResources().getColor(R.color.text_light_grey));
         axisLKline.setLabelCount(5, true); //第一个参数是Y轴坐标的个数，第二个参数是 是否不均匀分布，true是不均匀分布
-        axisLKline.setSpaceTop(10);//距离顶部留白
+        axisLKline.setSpaceTop(0);//距离顶部留白
 
 
 
@@ -156,6 +157,7 @@ public class ChartUtil {
         xAxis.setValueFormatter(xformatter);
         xAxis.setAxisMinimum(0);
         xAxis.setAxisMaximum(1260);
+        xAxis.setYOffset(0);
     }
 
     public static <T extends Entry> IAxisValueFormatter getYValuePercentFormatter(List<T> data) {
@@ -190,11 +192,10 @@ public class ChartUtil {
 
     public static void setCandDataleSet(CandleDataSet set) {
         set.setHighlightEnabled(true);
-        set.setDrawHorizontalHighlightIndicator(false);
+        set.setDrawHorizontalHighlightIndicator(true);
         set.setAxisDependency(YAxis.AxisDependency.RIGHT);
         set.setShadowWidth(1f);
         set.setDrawIcons(false);
-        set.setDrawValues(false);
         set.setDecreasingColor(DevLib.getApp().getResources().getColor(R.color.stock_down));//设置开盘价高于收盘价的颜色
         set.setDecreasingPaintStyle(Paint.Style.FILL);
         set.setIncreasingColor(DevLib.getApp().getResources().getColor(R.color.stock_up));//设置开盘价地狱收盘价的颜色
@@ -205,10 +206,12 @@ public class ChartUtil {
         set.setHighLightColor(DevLib.getApp().getResources().getColor(R.color.text_grey));
         set.setDrawValues(false);
         set.setValueTextColor(DevLib.getApp().getResources().getColor(R.color.text_black));
+
     }
 
     public static void setLineDataleSet(LineDataSet set, int color) {
-//        set.setHighlightEnabled();
+        set.setHighlightEnabled(false);
+        set.setDrawHighlightIndicators(false);
         set.setHighLightColor(DevLib.getApp().getResources().getColor(R.color.text_grey));
         set.setDrawValues(false);
         set.setLineWidth(1f);
@@ -218,7 +221,6 @@ public class ChartUtil {
         set.setColor(color);
         set.setAxisDependency(YAxis.AxisDependency.LEFT);
 
-        set.setHighlightEnabled(false);
     }
 
     public static void setChart(CombinedChart chart) {
@@ -235,6 +237,9 @@ public class ChartUtil {
         chart.setExtraOffsets(0f, 0f, 0f, 0f);
         chart.setAutoScaleMinMaxEnabled(true);
         chart.getLegend().setEnabled(false);
+        chart.getLegend().setDrawInside(true);
+
+
 
 
         XAxis xAxis = chart.getXAxis();
@@ -246,6 +251,8 @@ public class ChartUtil {
         xAxis.setTextColor(DevLib.getApp().getResources().getColor(R.color.text_light_grey));
         xAxis.setAvoidFirstLastClipping(true);//设置首尾的值是否自动调整，避免被遮挡
         xAxis.setLabelCount(5, true);
+        xAxis.setYOffset(0);
+
 
         YAxis axisRKline = chart.getAxisRight();
         axisRKline.setDrawGridLines(true);
@@ -258,7 +265,7 @@ public class ChartUtil {
         axisRKline.setGridLineWidth(1f);
         axisRKline.setTextColor(DevLib.getApp().getResources().getColor(R.color.text_light_grey));
         axisRKline.setLabelCount(5, true); //第一个参数是Y轴坐标的个数，第二个参数是 是否不均匀分布，true是不均匀分布
-        axisRKline.setSpaceTop(10);//距离顶部留白
+        axisRKline.setSpaceTop(0);//距离顶部留白
 
 
         YAxis axisRightKline = chart.getAxisLeft();
@@ -336,12 +343,6 @@ public class ChartUtil {
         set.setColors(list);
     }
 
-    private static float culcMaxscale(float count) {
-        float max = 1;
-        max = count / 127 * 5;
-        return max;
-    }
-
     /**
      * Limits the maximum and minimum x range that can be visible by pinching and zooming. e.g. minRange=10, maxRange=100 the
      * smallest range to be displayed at once is 10, and no more than a range of 100 values can be viewed at once without
@@ -365,32 +366,34 @@ public class ChartUtil {
     public static void fitData(CombinedChart chart){
         chart.setDragEnabled(true);//启用图表拖拽事件
         chart.setScaleEnabled(true);
-
+        chart.highlightValue(null);
         setVisibleXRange(chart,60,20);
         chart.moveViewToX(chart.getCombinedData().getEntryCount());
 
     }
 
-    public static void showHighline(CombinedChart chart){
+    public static void showHighline(CombinedChart chart,CombinedChart chart2){
         chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e,  Highlight h) {
                 Log.i("showHighline",""+h.getX());
-//                h.getX()
-//                Highlight highlight = new Highlight(h.getXIndex(), h.getValue(), h.getDataIndex(), h.getDataSetIndex());
+//                Highlight highlight = new Highlight(h.getX(), h.getY(),h.getXPx(),h.getYPx(), h.getDataIndex(),YAxis.AxisDependency.RIGHT);
+//                Highlight highlight  = chart2.getHighlightByTouchPoint(h.getX(), 1);
+                Highlight highlight=new Highlight(h.getX(), h.getY(),h.getXPx(),h.getYPx(), h.getDataSetIndex(),YAxis.AxisDependency.RIGHT);
+                highlight.setDataIndex(h.getDataIndex());
 //
-//                float touchY = h.getTouchY() - mChartKline.getHeight();
-//                Highlight h1 = mChartVolume.getHighlightByTouchPoint(h.getXIndex(), touchY);
-//                highlight.setTouchY(touchY);
+//  float touchY = h.getYPx() - chart.getHeight();
+//                Highlight h1 = chart2.getHighlightByTouchPoint(h.getX(), touchY);
+//                highlight.setDraw(h.(),touchY);
+//                highlight.setDraw(h.getX(),0);
 //                if (null == h1) {
-//                    highlight.setTouchYValue(0);
+//                    highlight.setDraw(0,0);
 //                } else {
-//                    highlight.setTouchYValue(h1.getTouchYValue());
+//                    highlight.setDraw(h.getX(),0);
 //                }
-//                mChartVolume.highlightValues(new Highlight[]{highlight});
-//
-//                Highlight highlight2 = new Highlight(h.getXIndex(), h.getValue(), h.getDataIndex(), h.getDataSetIndex());
-//
+                chart2.highlightValues(new Highlight[]{highlight});
+                Highlight highlight2 = new Highlight(h.getX(), h.getY(),h.getXPx(),h.getYPx(), h.getDataSetIndex(),YAxis.AxisDependency.RIGHT);
+                highlight2.setDataIndex(h.getDataIndex());
 //                float touchY2 = h.getTouchY() - mChartKline.getHeight() - mChartVolume.getHeight();
 //                Highlight h2 = mChartCharts.getHighlightByTouchPoint(h.getXIndex(), touchY2);
 //                highlight2.setTouchY(touchY2);
@@ -399,8 +402,8 @@ public class ChartUtil {
 //                } else {
 //                    highlight2.setTouchYValue(h2.getTouchYValue());
 //                }
-//                mChartCharts.highlightValues(new Highlight[]{highlight2});
-//
+                chart.highlightValues(new Highlight[]{highlight2});
+
 //                updateText(e.getXIndex());
             }
 

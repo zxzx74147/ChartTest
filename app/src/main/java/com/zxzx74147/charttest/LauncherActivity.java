@@ -50,7 +50,14 @@ public class LauncherActivity extends BaseActivity {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_launcher);
         sysInit();
 
-        Observable.just("").delay(100, TimeUnit.MILLISECONDS).subscribeOn(Schedulers.io())
+        Observable.just("").delay(10, TimeUnit.MILLISECONDS).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(s -> {
+            float y = mBinding.logo.getTop() + mBinding.logo.getHeight() - mBinding.launcherApp.getTop() + getResources().getDimensionPixelOffset(R.dimen.default_gap_80);
+            AnimationUtil.translationView(mBinding.launcherApp, 0, y);
+        });
+
+
+        Observable.just("").delay(1000, TimeUnit.MILLISECONDS).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(s -> {
             misAnimation = true;
             if (mIsSysInit) {
@@ -64,8 +71,7 @@ public class LauncherActivity extends BaseActivity {
     }
 
     private void showLoginButton() {
-        float y = mBinding.logo.getTop() + mBinding.logo.getHeight() - mBinding.launcherApp.getTop() + getResources().getDimensionPixelOffset(R.dimen.default_gap_80);
-        AnimationUtil.translationView(mBinding.launcherApp, 0, y);
+
         AnimationUtil.showViewAlpha(mBinding.loginPhone);
 //        AnimationUtil.showViewAlpha(mBinding.loginWechat);
         RxView.clicks(mBinding.loginWechat).subscribe(v -> {

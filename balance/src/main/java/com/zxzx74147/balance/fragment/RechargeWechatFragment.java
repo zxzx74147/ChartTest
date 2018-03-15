@@ -56,7 +56,6 @@ public class RechargeWechatFragment extends BaseDialogFragment {
     }
 
     private void initView() {
-
         IntentData<PayRequest> intentData = (IntentData<PayRequest>) getArguments().getSerializable(ZXActivityJumpHelper.INTENT_DATA);
         mPayReqeust = intentData.data;
         mBinding.setPay(mPayReqeust);
@@ -70,7 +69,9 @@ public class RechargeWechatFragment extends BaseDialogFragment {
                 break;
         }
         NetworkApi.ApiSubscribe(getActivity(), obs, false, payNewData -> {
+            mBinding.progress.setVisibility(View.GONE);
             if (payNewData.hasError()) {
+                ToastUtil.showToast(getActivity(),payNewData.error.usermsg);
                 return;
             }
             mBinding.setData(payNewData);

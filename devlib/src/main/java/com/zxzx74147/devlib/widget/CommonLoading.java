@@ -22,6 +22,7 @@ public class CommonLoading extends Dialog {
         WindowManager.LayoutParams params = window.getAttributes();
         params.gravity = Gravity.CENTER;
         window.setAttributes(params);
+        window.setWindowAnimations(R.style.dialogWindowAnim);
 
     }
 }
