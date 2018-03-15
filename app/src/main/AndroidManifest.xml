@@ -16,7 +16,13 @@
             android:value="1.0.0">
 
 
+
+
         </meta-data>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="3291dbeae0619eda62b1ff1387dddb9fb3261372" />
 
         <meta-data
             android:name="com.alibaba.app.appkey"

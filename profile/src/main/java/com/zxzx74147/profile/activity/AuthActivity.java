@@ -53,21 +53,17 @@ public class AuthActivity extends BaseActivity {
             return;
         }
 
-        NetworkApi.ApiSubscribe(mStockStorage.authApply(name, cid), new Consumer<AuthApplyData>() {
-
-            @Override
-            public void accept(AuthApplyData uniApiData) throws Exception {
-                if (uniApiData.hasError()) {
-                    ToastUtil.showToast(AuthActivity.this, uniApiData.error.usermsg);
-                    return;
-                }
-                ToastUtil.showToast(AuthActivity.this, R.string.succ);
-                AccountManager.sharedInstance().doRefresh();
-
-                finish();
-
+        NetworkApi.ApiSubscribe(this,mStockStorage.authApply(name, cid),true, uniApiData -> {
+            if (uniApiData.hasError()) {
+                ToastUtil.showToast(AuthActivity.this, uniApiData.error.usermsg);
+                return;
             }
-        });
+            ToastUtil.showToast(AuthActivity.this, R.string.succ);
+            AccountManager.sharedInstance().doRefresh();
+
+            finish();
+
+        },AuthApplyData.class);
 
     }
 
