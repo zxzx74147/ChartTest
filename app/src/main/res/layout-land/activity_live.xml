@@ -64,18 +64,14 @@
             android:id="@+id/normal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:live='@{live}'
+            app:user='@{user}'
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <include
-            android:id="@+id/header"
-            layout="@layout/layout_live_head"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/default_gap_132"
-            app:live='@{live}'
-            app:user='@{user}' />
+
     </android.support.constraint.ConstraintLayout>
 </layout>
 

@@ -109,7 +109,7 @@
             <com.zxzx74147.devlib.widget.ZXImageView
                 android:id="@+id/activity"
                 android:layout_width="@dimen/default_gap_72"
-                android:layout_height="@dimen/default_gap_48"
+                android:layout_height="@dimen/default_gap_72"
                 android:layout_marginBottom="@dimen/default_gap_72"
                 android:layout_marginRight="@dimen/default_gap_32"
                 android:background="@null"

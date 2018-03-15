@@ -98,6 +98,7 @@ public class ProfileFragment extends BaseDialogFragment {
                         ProfileBusStation.startMessageCenter(getActivity());
                         break;
                     case 3:
+                        MainBusStation.startAbout(getActivity());
                         break;
                 }
             }

@@ -16,6 +16,10 @@
             name="userUni"
             type="com.zxzx74147.profile.data.UserUniData" />
 
+        <variable
+            name="user"
+            type="com.zxzx74147.devlib.data.UserData" />
+
 
     </data>
 
@@ -23,15 +27,68 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!--<com.zxzx74147.stock.widget.GoodListWidget-->
+            <!--android:id="@+id/goodList"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="@dimen/default_gap_16"-->
+            <!--android:background="@color/tran"-->
+            <!--android:maxHeight="@dimen/default_gap_400"-->
+            <!--android:paddingTop="@dimen/default_gap_16"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent" />-->
+
+
+        <!--<ImageButton-->
+            <!--android:id="@+id/good_switch"-->
+            <!--android:layout_width="@dimen/default_gap_48"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="@dimen/default_gap_44"-->
+            <!--android:background="@null"-->
+            <!--android:gravity="center"-->
+            <!--android:src="@drawable/selector_home_icon_quotes"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="@dimen/default_size_22"-->
+            <!--android:visibility="gone"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/goodList"-->
+            <!--app:layout_constraintStart_toStartOf="parent" />-->
+
+        <ImageButton
+            android:id="@+id/show_list"
+            android:layout_width="@dimen/default_gap_48"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_gap_44"
+            android:layout_marginBottom="@dimen/default_gap_44"
+            android:background="@null"
+            android:drawablePadding="@dimen/default_gap_10"
+            android:gravity="center"
+            android:src="@drawable/selector_home_icon_conventional"
+            android:textColor="@color/white"
+            android:textSize="@dimen/default_size_22"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
         <android.support.constraint.ConstraintLayout
             android:id="@+id/all_item"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/goodList"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <include
+                android:id="@+id/header"
+                layout="@layout/layout_live_head"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_gap_112"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:live='@{live}'
+                app:user='@{user}' />
 
             <FrameLayout
                 android:id="@+id/frameLayout"
@@ -149,6 +206,7 @@
                 android:id="@+id/tiny_trade"
                 layout="@layout/layout_tiny_trade"
                 android:layout_width="@dimen/default_gap_423"
+                android:translationZ="2dp"
                 android:layout_height="@dimen/default_gap_296"
                 android:layout_marginBottom="@dimen/default_gap_44"
                 android:visibility="gone"
@@ -157,11 +215,12 @@
 
 
             <include
-                android:id="@+id/exchange"
+                android:id="@+id/exchange_layout"
                 layout="@layout/layout_exchange"
+                android:translationZ="4dp"
                 android:layout_width="@dimen/default_gap_662"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/default_gap_144"
+                android:layout_height="@dimen/default_gap_512"
+                android:layout_marginTop="@dimen/default_gap_124"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -183,48 +242,7 @@
         </android.support.constraint.ConstraintLayout>
 
 
-        <com.zxzx74147.stock.widget.GoodListWidget
-            android:id="@+id/goodList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_gap_16"
-            android:background="@color/tran"
-            android:maxHeight="@dimen/default_gap_400"
-            android:paddingTop="@dimen/default_gap_16"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
-
-        <ImageButton
-            android:id="@+id/good_switch"
-            android:layout_width="@dimen/default_gap_48"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/default_gap_44"
-            android:background="@null"
-            android:gravity="center"
-            android:src="@drawable/selector_home_icon_quotes"
-            android:textColor="@color/white"
-            android:textSize="@dimen/default_size_22"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/goodList"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <ImageButton
-            android:id="@+id/show_list"
-            android:layout_width="@dimen/default_gap_48"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/default_gap_44"
-            android:layout_marginBottom="@dimen/default_gap_44"
-            android:background="@null"
-            android:drawablePadding="@dimen/default_gap_10"
-            android:gravity="center"
-            android:src="@drawable/selector_home_icon_conventional"
-            android:textColor="@color/white"
-            android:textSize="@dimen/default_size_22"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/good_switch"
-            app:layout_constraintStart_toStartOf="parent"/>
     </android.support.constraint.ConstraintLayout>
 </layout>
 

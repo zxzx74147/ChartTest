@@ -7,6 +7,7 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
@@ -34,9 +35,11 @@ import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.devlib.data.DialogItem;
 import com.zxzx74147.devlib.data.IntentData;
 import com.zxzx74147.devlib.data.UniApiData;
+import com.zxzx74147.devlib.data.UserData;
 import com.zxzx74147.devlib.data.WheelSelectorData;
 import com.zxzx74147.devlib.fragment.CommonFragmentDialog;
 import com.zxzx74147.devlib.fragment.CommonWheelSelectorDialog;
+import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.modules.account.UserViewModel;
 import com.zxzx74147.devlib.modules.busstation.StockBusStation;
 import com.zxzx74147.devlib.network.NetworkApi;
@@ -49,6 +52,7 @@ import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.devlib.widget.CommonRecyclerViewAdapter;
+import com.zxzx74147.live.data.Live;
 import com.zxzx74147.live.data.LiveMsgListData;
 import com.zxzx74147.live.data.LiveMsgListLiveData;
 import com.zxzx74147.live.data.Msg;
@@ -65,15 +69,29 @@ import com.zxzx74147.stock.util.FailDealUtil;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by zhengxin on 2018/3/10.
  */
 
 public class LayoutLiveNormalLand extends FrameLayout {
+
+
+    @BindingAdapter({"live"})
+    public static void loadImage(LayoutLiveNormalLand view, Live live) {
+        view.setLive(live);
+    }
+
+    @BindingAdapter({"user"})
+    public static void loadImage(LayoutLiveNormalLand view, UserData user) {
+        view.setUserData(user);
+    }
 
 
     private LayoutLiveNormalLandBinding mBingding = null;
@@ -126,24 +144,24 @@ public class LayoutLiveNormalLand extends FrameLayout {
         }
     };
 
-    private void showGoodList(){
-        if(mBingding.goodList.getVisibility()==View.GONE) {
-            ViewUtil.showView(mBingding.goodList, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_up));
-        }
-
-        if(mBingding.goodSwitch.getVisibility()==View.VISIBLE) {
-            ViewUtil.hideView(mBingding.goodSwitch, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_alpha_out));
-        }
-    }
+//    private void showGoodList(){
+//        if(mBingding.goodList.getVisibility()==View.GONE) {
+//            ViewUtil.showView(mBingding.goodList, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_up));
+//        }
+//
+//        if(mBingding.goodSwitch.getVisibility()==View.VISIBLE) {
+//            ViewUtil.hideView(mBingding.goodSwitch, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_alpha_out));
+//        }
+//    }
 
     private void showList(){
         if(mBingding.allItem.getVisibility()==View.GONE) {
             ViewUtil.showView(mBingding.allItem, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_up));
         }
 
-        if(mBingding.goodSwitch.getVisibility()==View.VISIBLE) {
-            ViewUtil.hideView(mBingding.goodSwitch, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_alpha_out));
-        }
+//        if(mBingding.goodSwitch.getVisibility()==View.VISIBLE) {
+//            ViewUtil.hideView(mBingding.goodSwitch, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_alpha_out));
+//        }
 
         if(mBingding.showList.getVisibility()==View.VISIBLE) {
             ViewUtil.hideView(mBingding.showList, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_alpha_out));
@@ -155,12 +173,12 @@ public class LayoutLiveNormalLand extends FrameLayout {
             ViewUtil.hideView(mBingding.allItem, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_down));
         }
 
-        if(mBingding.goodList.getVisibility()==View.VISIBLE) {
-            ViewUtil.hideView(mBingding.goodList, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_down));
-        }
-        if(mBingding.goodSwitch.getVisibility()==View.GONE) {
-            ViewUtil.showView(mBingding.goodSwitch, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_alpha_in));
-        }
+//        if(mBingding.goodList.getVisibility()==View.VISIBLE) {
+//            ViewUtil.hideView(mBingding.goodList, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_down));
+//        }
+//        if(mBingding.goodSwitch.getVisibility()==View.GONE) {
+//            ViewUtil.showView(mBingding.goodSwitch, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_alpha_in));
+//        }
 
         if(mBingding.showList.getVisibility()==View.GONE) {
             ViewUtil.showView(mBingding.showList, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_alpha_in));
@@ -172,13 +190,13 @@ public class LayoutLiveNormalLand extends FrameLayout {
             ViewUtil.showView(mBingding.allItem, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_up));
         }
 
-        if(mBingding.goodList.getVisibility()==View.GONE) {
-            ViewUtil.showView(mBingding.goodList, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_up));
-        }
-
-        if(mBingding.goodSwitch.getVisibility()==View.VISIBLE) {
-            ViewUtil.hideView(mBingding.goodSwitch, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_alpha_out));
-        }
+//        if(mBingding.goodList.getVisibility()==View.GONE) {
+//            ViewUtil.showView(mBingding.goodList, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_up));
+//        }
+//
+//        if(mBingding.goodSwitch.getVisibility()==View.VISIBLE) {
+//            ViewUtil.hideView(mBingding.goodSwitch, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_alpha_out));
+//        }
 
         if(mBingding.showList.getVisibility()==View.VISIBLE) {
             ViewUtil.hideView(mBingding.showList, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_alpha_out));
@@ -236,12 +254,12 @@ public class LayoutLiveNormalLand extends FrameLayout {
         mBingding.list.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter.setMultiTypeDelegate(new CommonMultiTypeDelegate());
         mBingding.list.setAdapter(mAdapter);
-        mBingding.goodList.setProvider(ViewModelProviders.of((FragmentActivity) getContext()));
-        mBingding.goodList.setLifeCircle((FragmentActivity) getContext());
+//        mBingding.goodList.setProvider(ViewModelProviders.of((FragmentActivity) getContext()));
+//        mBingding.goodList.setLifeCircle((FragmentActivity) getContext());
         mBingding.bubble.setDefaultDrawableList();
-        mBingding.goodList.setCallback(mCallback);
+//        mBingding.goodList.setCallback(mCallback);
         mGestureDetector = new GestureDetectorCompat(getContext(), mOnGestureListener);
-
+        mBingding.setUserUni(AccountManager.sharedInstance().getUserUni());
 
         mMsgViewModel.getLiveMsgListLiveData().observe((BaseActivity) getContext(), liveMsgListData -> {
             if (liveMsgListData.hasError()) {
@@ -378,6 +396,23 @@ public class LayoutLiveNormalLand extends FrameLayout {
             doLike();
         });
 
+        Observable.just("").delay(200, TimeUnit.MILLISECONDS).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(s -> {
+            RxView.clicks(mBingding.header.assetTotal).subscribe(v->{
+//                if(mBingding.exchange.rootView.getVisibility()==View.GONE){
+//                    mBingding.exchange.rootView.setVisibility(View.VISIBLE);
+//                }else if(mBingding.exchange.rootView.getVisibility()==View.VISIBLE){
+//                    mBingding.exchange.rootView.setVisibility(View.GONE);
+//                }
+                if(mBingding.exchangeLayout.rootView.getVisibility()==View.GONE){
+                    mBingding.exchangeLayout.rootView.setVisibility(View.VISIBLE);
+                }else if(mBingding.exchangeLayout.rootView.getVisibility()==View.VISIBLE){
+                    mBingding.exchangeLayout.rootView.setVisibility(View.GONE);
+                }
+            });
+        });
+
+
 
         RxView.clicks(mBingding.tinyTrade.goodLayout).subscribe(v->{
 
@@ -422,9 +457,9 @@ public class LayoutLiveNormalLand extends FrameLayout {
         RxView.clicks(mBingding.showList).subscribe(v -> {
             showList();
         });
-        RxView.clicks(mBingding.goodSwitch).subscribe(v -> {
-            showGoodList();
-        });
+//        RxView.clicks(mBingding.goodSwitch).subscribe(v -> {
+//            showGoodList();
+//        });
 
 
     }
@@ -550,6 +585,14 @@ public class LayoutLiveNormalLand extends FrameLayout {
         result.setInterpolator(new LinearInterpolator());
 
         return result;
+    }
+
+    public void setLive(Live live) {
+        mBingding.setLive(live);
+    }
+
+    public void setUserData(UserData user) {
+        mBingding.setUser(user);
     }
 
 }

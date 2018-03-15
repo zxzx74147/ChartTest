@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_grey"
+
+        android:paddingBottom="0dp"
+        android:paddingTop="0dp">
+
+        <include
+
+            android:id="@+id/title"
+            layout="@layout/common_title"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/default_gap_100"
+            android:layout_marginEnd="8dp"
+            app:title="@{@string/about_us}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:layout_width="@dimen/default_gap_200"
+            android:layout_height="@dimen/default_gap_200"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/default_gap_200"
+            app:layout_constraintTop_toBottomOf="@+id/title"  />
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

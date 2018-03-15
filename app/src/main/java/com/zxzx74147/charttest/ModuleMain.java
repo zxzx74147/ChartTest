@@ -78,6 +78,8 @@ public class ModuleMain {
             MainActivity.startMainActivity(event.context);
         }else  if (event.id == MainBusStation.BUS_ID_MAIN_START_UNICORN){
             UniCornModule.startUnicorn(event.context);
+        }else  if (event.id == MainBusStation.BUS_ID_MAIN_START_MAIN){
+            ZXActivityJumpHelper.startActivity(event.context,AboutActivity.class);
         }
 
 
