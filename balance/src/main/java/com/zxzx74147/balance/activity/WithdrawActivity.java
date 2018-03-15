@@ -12,6 +12,7 @@ import com.zxzx74147.balance.data.Bank;
 import com.zxzx74147.balance.data.BankCard;
 import com.zxzx74147.balance.data.BankCardData;
 import com.zxzx74147.balance.data.BankListData;
+import com.zxzx74147.balance.data.WithdrawData;
 import com.zxzx74147.balance.databinding.ActivityWithdrawBinding;
 import com.zxzx74147.balance.fragment.BindCorfirmFragment;
 import com.zxzx74147.balance.storage.BankStorage;
@@ -199,7 +200,7 @@ public class WithdrawActivity extends BaseActivity {
             ToastUtil.showToast(WithdrawActivity.this,"最多提现"+AccountManager.sharedInstance().getUser().balance);
             return;
         }
-        NetworkApi.ApiSubscribe(mWithdrawStorage.withdrawCase(mBinding.getBankCard().bankCardId, (int) (amount*100)), withdrawData -> {
+        NetworkApi.ApiSubscribe(this,mWithdrawStorage.withdrawCase(mBinding.getBankCard().bankCardId, (int) (amount*100)), true,withdrawData -> {
             if(withdrawData.needAuth!=0){
                 ProfileBusStation.startProfileAuth(this);
                 return;
@@ -223,7 +224,7 @@ public class WithdrawActivity extends BaseActivity {
             }
             ToastUtil.showToast(WithdrawActivity.this,R.string.withdraw_succ);
             finish();
-        });
+        },WithdrawData.class);
     }
 
     private void requestVcode() {
@@ -257,7 +258,7 @@ public class WithdrawActivity extends BaseActivity {
     }
 
     private void bindCard(BankCard card) {
-        NetworkApi.ApiSubscribe(mBankStorage.bindAdd(card.bank,card.cardNo,card.name,mBinding.withdrawBank.vcode.getText().toString()), bankCardData -> {
+        NetworkApi.ApiSubscribe(this,mBankStorage.bindAdd(card.bank,card.cardNo,card.name,mBinding.withdrawBank.vcode.getText().toString()),true, bankCardData -> {
             if(bankCardData.hasError()){
                 return;
             }
@@ -278,7 +279,7 @@ public class WithdrawActivity extends BaseActivity {
                 }
             });
 
-        });
+        },BankCardData.class);
 
 
     }

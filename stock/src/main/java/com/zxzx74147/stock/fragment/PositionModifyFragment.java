@@ -136,7 +136,7 @@ public class PositionModifyFragment extends BaseDialogFragment {
         int limit = FormatUtil.getPureNum(mBinding.buyLimitValue.getText().toString());
         String stopStr = stop==0? "":String.valueOf(stop);
         String limitStr = limit==0? "":String.valueOf(limit);
-        NetworkApi.ApiSubscribe(mTradeStorage.positionModify(mBinding.getData().positionId, limitStr, stopStr, mBinding.checkDeffer.isChecked() ? 1 : 0), new Consumer<PositionData>() {
+        NetworkApi.ApiSubscribe(getActivity(),mTradeStorage.positionModify(mBinding.getData().positionId, limitStr, stopStr, mBinding.checkDeffer.isChecked() ? 1 : 0),true, new Consumer<PositionData>() {
             @Override
             public void accept(PositionData machPositionData) throws Exception {
                 if(machPositionData.hasError()){
@@ -149,7 +149,7 @@ public class PositionModifyFragment extends BaseDialogFragment {
                 ToastUtil.showToast(getActivity(),getResources().getString(R.string.succ));
                 dismiss();
             }
-        });
+        },PositionData.class);
     }
 
 }
