@@ -84,6 +84,7 @@
     <string name="format_stop_none">止损点: 无</string>
     <string name="format_point">%.0f点</string>
     <string name="format_voucher_amount">%.0f元券%d张</string>
+    <string name="format_label">%s:%.1f</string>
     <string name="close_position">平仓</string>
 
     <string name="modify">修改</string>

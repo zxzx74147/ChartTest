@@ -234,6 +234,11 @@ public class ChartUtil {
         chart.setMarker(leftMarkerView, hMarkerView);
     }
 
+    public static void setMarkerView2(MyCombinedChart chart) {
+        MyBottomMarkerView hMarkerView = new MyBottomMarkerView(chart.getContext(), R.layout.mymarkerview);
+        chart.setMarker(null, hMarkerView);
+    }
+
     public static void setChart(CombinedChart chart) {
 
 

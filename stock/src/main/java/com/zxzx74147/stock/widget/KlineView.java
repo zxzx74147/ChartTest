@@ -61,6 +61,7 @@ public class KlineView extends LinearLayout {
         ChartUtil.setChart(mBinding.kline2);
         ChartUtil.showHighline(mBinding.kline, mBinding.kline2);
         ChartUtil.setMarkerView(mBinding.kline);
+        ChartUtil.setMarkerView2(mBinding.kline2);
 
 //        ChartUtil.showHighline();
         mBinding.kline.setExtraBottomOffset(3);

@@ -2,11 +2,20 @@ package com.github.mikephil.charting.mychart;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import com.github.mikephil.charting.charts.CombinedChart;
+import com.github.mikephil.charting.data.BarLineScatterCandleBubbleData;
 import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.highlight.Highlight;
+import com.zxzx74147.devlib.DevLib;
+import com.zxzx74147.stock.R;
+
+import java.util.List;
 
 /**
  * Created by loro on 2017/2/8.
@@ -15,6 +24,9 @@ public class MyCombinedChart extends CombinedChart {
     private MyLeftMarkerView myMarkerViewLeft;
 //    private MyHMarkerView myMarkerViewH;
     private MyBottomMarkerView myBottomMarkerView;
+    private Paint mPaint = new Paint();
+    private int top = getResources().getDimensionPixelSize(R.dimen.default_gap_5);
+    private static String FORMAT_LABEL=DevLib.getApp().getString(R.string.format_label);
 //    private DataParse minuteHelper;
 
     private boolean mDrawMarkerViews =true;
@@ -34,6 +46,7 @@ public class MyCombinedChart extends CombinedChart {
     public void setMarker(MyLeftMarkerView markerLeft, MyBottomMarkerView markerBottom ) {
         this.myMarkerViewLeft = markerLeft;
         this.myBottomMarkerView = markerBottom;
+        mPaint.setTextSize(getResources().getDimensionPixelSize(R.dimen.default_size_20));
 //        this.minuteHelper = minuteHelper;
     }
 
@@ -69,6 +82,28 @@ public class MyCombinedChart extends CombinedChart {
                     : ((mData == null ? 0.f : mData.getXMax()) - 1.f);
             if (xIndex <= deltaX && xIndex <= deltaX * mAnimator.getPhaseX()) {
                 Entry e = mData.getEntryForHighlight(mIndicesToHighlight[i]);
+                List<BarLineScatterCandleBubbleData> alldata  = mData.getAllData();
+                for(BarLineScatterCandleBubbleData bubbleData:alldata){
+                    int length = 0;
+                    if(bubbleData instanceof LineData){
+
+                        for(Object setObj: bubbleData.getDataSets()){
+                            LineDataSet set = (LineDataSet) setObj;
+                            Log.e("Draw","index"+mIndicesToHighlight[i].getDataIndex());
+                            int index = (int) (set.getValues().size()-(mData.getXMax()-mIndicesToHighlight[i].getX()))-1;
+                            if(index<0){
+                                continue;
+                            }
+                            Entry eD = set.getValues().get(index);
+                            mPaint.setColor(set.getColor());
+                            if(eD!=null){
+                                String context = String.format(FORMAT_LABEL,set.getLabel(),eD.getY());
+                                canvas.drawText(context, mViewPortHandler.contentLeft()+length, mViewPortHandler.contentTop()+top+10,mPaint);
+                                length+=mPaint.measureText(context)+10;
+                            }
+                        }
+                    }
+                }
                 // make sure entry not null
                 if (e == null ||( (int)e.getX()) != mIndicesToHighlight[i].getX())
                     continue;

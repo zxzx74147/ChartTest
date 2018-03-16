@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content" />
             <TextView
                 android:layout_width="wrap_content"
-                android:text="@{@string/format_sign_02(userUniData.user.grossProfit)}"
+                android:text="@{@string/format_01_sign(userUniData.user.grossProfit)}"
                 android:layout_marginTop="@dimen/default_gap_10"
                 android:textSize="@dimen/default_size_30"
                 android:textColor="@{userUniData.user.grossProfit>0? @color/text_red:@color/green}"
