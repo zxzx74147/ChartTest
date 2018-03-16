@@ -55,7 +55,7 @@ public class MsgSpanUtil {
         if (msg.content == null) {
             return new SpannableString("");
         }
-        String s1 = "盈利播报 "+msg.nickName+"盈利";
+        String s1 = "盈利播报 "+msg.content;
         String s2 = msg.profitNum;
         SpannableString result = new SpannableString(s1+s2);
         result.setSpan(new ForegroundColorSpan(ColorUtil.getColor(R.color.yello)), 0, s1.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
