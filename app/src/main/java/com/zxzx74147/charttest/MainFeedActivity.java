@@ -5,16 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.GestureDetectorCompat;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.widget.ImageView;
 
 import com.jakewharton.rxbinding2.view.RxView;
-import com.zxzx74147.balance.activity.WithdrawActivity;
-import com.zxzx74147.charttest.databinding.ActivityMainBinding;
 import com.zxzx74147.charttest.databinding.ActivityMainFeedBinding;
 import com.zxzx74147.devlib.base.BaseActivity;
 import com.zxzx74147.devlib.callback.CommonCallback;
@@ -26,15 +21,18 @@ import com.zxzx74147.devlib.modules.account.UserViewModel;
 import com.zxzx74147.devlib.modules.busstation.LiveBusStation;
 import com.zxzx74147.devlib.modules.busstation.MainBusStation;
 import com.zxzx74147.devlib.modules.sys.SysInitManager;
-import com.zxzx74147.devlib.utils.DisplayUtil;
+import com.zxzx74147.devlib.network.NetworkApi;
+import com.zxzx74147.devlib.network.RetrofitClient;
+import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
-import com.zxzx74147.devlib.widget.CommonLoading;
-import com.zxzx74147.devlib.widget.CommonProgressDialog;
-import com.zxzx74147.live.fragments.FeedFragment;
-import com.zxzx74147.live.fragments.LiveListFragment;
+import com.zxzx74147.live.data.HomeData;
+import com.zxzx74147.live.data.Live;
+import com.zxzx74147.live.stroage.LiveStorage;
 import com.zxzx74147.stock.data.GoodType;
 import com.zxzx74147.stock.fragment.StockFragment;
+
+import io.reactivex.functions.Consumer;
 
 public class MainFeedActivity extends BaseActivity {
 
@@ -70,9 +68,10 @@ public class MainFeedActivity extends BaseActivity {
 
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            if(velocityX<0){
-                if(SysInitManager.sharedInstance().getSysInitData().swich.liveOpen!=0){
-                    MainBusStation.toLive(MainFeedActivity.this);
+            if (velocityX < 0) {
+                if (SysInitManager.sharedInstance().getSysInitData().swich.liveOpen != 0) {
+//                    MainBusStation.toLive(MainFeedActivity.this);
+                    checkLive(MainFeedActivity.this);
                 }
             }
             return true;
@@ -84,7 +83,6 @@ public class MainFeedActivity extends BaseActivity {
         this.mGestureDetector.onTouchEvent(event);
         return super.dispatchTouchEvent(event);
     }
-
 
 
     public static void startMainActivity(Context context) {
@@ -108,7 +106,7 @@ public class MainFeedActivity extends BaseActivity {
 
     private CommonCallback<GoodType> mCallback = item -> {
         StockFragment fragment = StockFragment.newInstance(item);
-        fragment.show(getSupportFragmentManager(),fragment.getTag());
+        fragment.show(getSupportFragmentManager(), fragment.getTag());
 
 //        ZXFragmentJumpHelper.startFragment(this, ProfileFragment.class, null);
     };
@@ -119,7 +117,7 @@ public class MainFeedActivity extends BaseActivity {
 //        mHeaderBinding =(LayoutLiveHeadBinding)mBinding.headLayout;
 //        RxView.clicks(mBinding.headLayout.assetTotal).subscribe(o -> ZXFragmentJumpHelper.startFragment(MainActivity.this, ProfileFragment.class,null));
         mGestureDetector = new GestureDetectorCompat(this, mOnGestureListener);
-        RxView.clicks(mBinding.sendFeed).subscribe(o->{
+        RxView.clicks(mBinding.sendFeed).subscribe(o -> {
             DialogItem item = new DialogItem();
             item.title = getResources().getString(R.string.send_remind);
             item.cancel = null;
@@ -135,20 +133,39 @@ public class MainFeedActivity extends BaseActivity {
         });
 
 
-
     }
 
     private void initData() {
         mUserViewModel = ViewModelProviders.of(MainFeedActivity.this).get(UserViewModel.class);
         mUserViewModel.getUserUniLiveData().observe(MainFeedActivity.this, userUniData -> {
-            if(userUniData.hasError()){
-                return ;
+            if (userUniData.hasError()) {
+                return;
             }
             mBinding.setUser(userUniData.user);
         });
     }
 
-
+    public static void checkLive(Context context) {
+        LiveStorage mStorage = RetrofitClient.getClient().create(LiveStorage.class);
+        NetworkApi.ApiSubscribe(mStorage.roomGetList(), new Consumer<HomeData>() {
+            @Override
+            public void accept(HomeData homeData) throws Exception {
+                if (homeData.hasError()) {
+                    ToastUtil.showToast(context, homeData.error.usermsg);
+                    return;
+                }
+                if (homeData.liveList != null) {
+                    for (Live live : homeData.liveList.live) {
+                        if (live.status == 2) {
+                            LiveBusStation.startLive(context, live);
+                            return;
+                        }
+                    }
+                }
+                MainBusStation.toLive(context);
+            }
+        });
+    }
 
 
 }

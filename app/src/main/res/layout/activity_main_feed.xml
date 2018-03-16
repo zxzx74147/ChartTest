@@ -12,6 +12,7 @@
         <import type="com.zxzx74147.devlib.modules.busstation.MainBusStation"/>
         <import type="com.zxzx74147.devlib.modules.busstation.ProfileBusStation"/>
         <import type="com.zxzx74147.devlib.modules.sys.SysInitManager"/>
+        <import type="com.zxzx74147.charttest.MainFeedActivity"/>
         <import type="com.zxzx74147.devlib.utils.WebviewUtil"/>
         <import type="android.view.View"/>
 
@@ -32,7 +33,7 @@
                 android:visibility="@{SysInitManager.sharedInstance().getSysInitData().swich.liveOpen==0? View.GONE:View.VISIBLE}"
                 android:id="@+id/to_live"
                 android:layout_width="wrap_content"
-                android:onClick="@{v->{MainBusStation.toLive(context)}}"
+                android:onClick="@{v->{MainFeedActivity.checkLive(context)}}"
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:paddingLeft="@dimen/default_gap_44"
