@@ -3,6 +3,7 @@ package com.github.mikephil.charting.mychart;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 
@@ -89,14 +90,14 @@ public class MyCombinedChart extends CombinedChart {
 
                         for(Object setObj: bubbleData.getDataSets()){
                             LineDataSet set = (LineDataSet) setObj;
-                            Log.e("Draw","index"+mIndicesToHighlight[i].getDataIndex());
+//                            Log.e("Draw","index"+mIndicesToHighlight[i].getDataIndex());
                             int index = (int) (set.getValues().size()-(mData.getXMax()-mIndicesToHighlight[i].getX()))-1;
                             if(index<0){
                                 continue;
                             }
                             Entry eD = set.getValues().get(index);
                             mPaint.setColor(set.getColor());
-                            if(eD!=null){
+                            if(eD!=null&& !TextUtils.isEmpty(set.getLabel())){
                                 String context = String.format(FORMAT_LABEL,set.getLabel(),eD.getY());
                                 canvas.drawText(context, mViewPortHandler.contentLeft()+length, mViewPortHandler.contentTop()+top+10,mPaint);
                                 length+=mPaint.measureText(context)+10;

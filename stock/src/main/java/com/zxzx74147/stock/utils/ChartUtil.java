@@ -210,8 +210,6 @@ public class ChartUtil {
         set.setDrawValues(false);
         set.setLineWidth(1f);
         set.setDrawCircles(false);
-        set.setDrawValues(false);
-        set.setDrawIcons(false);
         set.setHighlightLineWidth(1f);
         set.setColor(color);
         set.setAxisDependency(YAxis.AxisDependency.RIGHT);
@@ -235,8 +233,8 @@ public class ChartUtil {
     }
 
     public static void setMarkerView2(MyCombinedChart chart) {
-        MyBottomMarkerView hMarkerView = new MyBottomMarkerView(chart.getContext(), R.layout.mymarkerview);
-        chart.setMarker(null, hMarkerView);
+//        MyBottomMarkerView hMarkerView = new MyBottomMarkerView(chart.getContext(), R.layout.mymarkerview);
+        chart.setMarker(null, null);
     }
 
     public static void setChart(CombinedChart chart) {
@@ -408,8 +406,6 @@ public class ChartUtil {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
                 Log.i("showHighline", "" + h.getX());
-//                Highlight highlight = new Highlight(h.getX(), h.getY(),h.getXPx(),h.getYPx(), h.getDataIndex(),YAxis.AxisDependency.RIGHT);
-//                Highlight highlight  = chart2.getHighlightByTouchPoint(h.getX(), 1);
                 Highlight highlight = new Highlight(h.getX(), h.getY(), h.getXPx(), h.getYPx(), h.getDataSetIndex(), YAxis.AxisDependency.RIGHT);
                 highlight.setDataIndex(h.getDataIndex());
 
@@ -419,23 +415,37 @@ public class ChartUtil {
 
                 Highlight highlight2 = new Highlight(h.getX(), h.getY(), h.getXPx(), h.getYPx(), h.getDataSetIndex(), YAxis.AxisDependency.RIGHT);
                 highlight2.setDataIndex(h.getDataIndex());
-                highlight2.setDraw(h.getDrawX(), 0);
+                highlight2.setDraw(h.getDrawX(), h.getDrawY());
 
                 chart2.highlightValues(new Highlight[]{highlight2});
-//                Highlight highlight2 = new Highlight(h.getX(), h.getY(), h.getXPx(), h.getYPx(), h.getDataSetIndex(), YAxis.AxisDependency.RIGHT);
-//                highlight2.setDraw(h.getDrawX(), h.getDrawY());
-//                highlight2.setDataIndex(h.getDataIndex());
-//                float touchY2 = h.getTouchY() - mChartKline.getHeight() - mChartVolume.getHeight();
-//                Highlight h2 = mChartCharts.getHighlightByTouchPoint(h.getXIndex(), touchY2);
-//                highlight2.setTouchY(touchY2);
-//                if (null == h2) {
-//                    highlight2.setTouchYValue(0);
-//                } else {
-//                    highlight2.setTouchYValue(h2.getTouchYValue());
-//                }
+            }
 
 
-//                updateText(e.getXIndex());
+            @Override
+            public void onNothingSelected() {
+                chart.highlightValue(null);
+                chart2.highlightValue(null);
+
+            }
+        });
+
+        chart2.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(Entry e, Highlight h) {
+                Log.i("showHighline", "" + h.getX());
+                Highlight highlight = new Highlight(h.getX(), h.getY(), h.getXPx(), h.getYPx(), h.getDataSetIndex(), YAxis.AxisDependency.RIGHT);
+                highlight.setDataIndex(h.getDataIndex());
+
+                highlight.setDraw(h.getDrawX(), h.getDrawY());
+
+                chart2.highlightValue(h);
+
+                Highlight highlight2 = new Highlight(h.getX(), h.getY(), h.getXPx(), h.getYPx(), h.getDataSetIndex(), YAxis.AxisDependency.RIGHT);
+                highlight2.setDataIndex(h.getDataIndex());
+                highlight2.setDraw(h.getDrawX(), h.getDrawY());
+
+                chart.highlightValues(new Highlight[]{highlight2});
+
             }
 
 

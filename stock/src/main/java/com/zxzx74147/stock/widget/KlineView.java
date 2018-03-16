@@ -295,7 +295,7 @@ public class KlineView extends LinearLayout {
     private void setReadTime() {
         CombinedData combinedData = new CombinedData();
         ArrayList<ILineDataSet> sets = new ArrayList<>();
-        LineDataSet lineK = new LineDataSet(mDataParse.getReadTime(), "realtime");
+        LineDataSet lineK = new LineDataSet(mDataParse.getReadTime(), "");
         ChartUtil.setupRealTimeY(mBinding.klineRealtime, mDataParse.getReadTime());
         ChartUtil.setLineDataleSet(lineK, getResources().getColor(R.color.stock_kline_realtime));
         sets.add(lineK);
