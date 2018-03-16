@@ -581,7 +581,7 @@ public class LayoutLiveNormalLand extends FrameLayout {
         int length = SCREEN_WIDTH + view.getRootView().getMeasuredWidth();
         result = ObjectAnimator
                 .ofFloat(view, "translationX", SCREEN_WIDTH, 0)//
-                .setDuration(3000);
+                .setDuration(2000);
         result.setInterpolator(new LinearInterpolator());
 
         return result;

@@ -93,7 +93,9 @@ public class LiveListFragment extends BaseFragment {
         mAdapter.loadMoreComplete();
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             Live live = (Live) adapter.getItem(position);
-            startLive(live);
+            if(live.status==2) {
+                startLive(live);
+            }
         });
     }
 
