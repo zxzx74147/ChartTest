@@ -56,7 +56,7 @@ public class MsgSpanUtil {
             return new SpannableString("");
         }
         String s1 = "盈利播报 "+msg.nickName+"盈利";
-        String s2 = String.valueOf(msg.profitNum)+"元";
+        String s2 = msg.profitNum;
         SpannableString result = new SpannableString(s1+s2);
         result.setSpan(new ForegroundColorSpan(ColorUtil.getColor(R.color.yello)), 0, s1.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         result.setSpan(new ForegroundColorSpan(ColorUtil.getColor(R.color.red)), s1.length(),s1.length()+s2.length(),  Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);

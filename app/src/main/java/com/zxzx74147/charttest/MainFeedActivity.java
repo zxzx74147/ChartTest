@@ -7,6 +7,9 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.GestureDetectorCompat;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.widget.ImageView;
 
 import com.jakewharton.rxbinding2.view.RxView;
@@ -20,6 +23,10 @@ import com.zxzx74147.devlib.data.IntentData;
 import com.zxzx74147.devlib.fragment.CommonFragmentDialog;
 import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.modules.account.UserViewModel;
+import com.zxzx74147.devlib.modules.busstation.LiveBusStation;
+import com.zxzx74147.devlib.modules.busstation.MainBusStation;
+import com.zxzx74147.devlib.modules.sys.SysInitManager;
+import com.zxzx74147.devlib.utils.DisplayUtil;
 import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
 import com.zxzx74147.devlib.widget.CommonLoading;
@@ -33,6 +40,51 @@ public class MainFeedActivity extends BaseActivity {
 
     private ActivityMainFeedBinding mBinding = null;
     private UserViewModel mUserViewModel = null;
+
+    private GestureDetectorCompat mGestureDetector;
+    private GestureDetector.OnGestureListener mOnGestureListener = new GestureDetector.OnGestureListener() {
+        @Override
+        public boolean onDown(MotionEvent e) {
+            return false;
+        }
+
+        @Override
+        public void onShowPress(MotionEvent e) {
+
+        }
+
+        @Override
+        public boolean onSingleTapUp(MotionEvent e) {
+            return false;
+        }
+
+        @Override
+        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+            return false;
+        }
+
+        @Override
+        public void onLongPress(MotionEvent e) {
+
+        }
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            if(velocityX<0){
+                if(SysInitManager.sharedInstance().getSysInitData().swich.liveOpen!=0){
+                    MainBusStation.toLive(MainFeedActivity.this);
+                }
+            }
+            return true;
+        }
+    };
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        this.mGestureDetector.onTouchEvent(event);
+        return super.dispatchTouchEvent(event);
+    }
+
 
 
     public static void startMainActivity(Context context) {
@@ -66,7 +118,7 @@ public class MainFeedActivity extends BaseActivity {
 //        mHeaderBinding= mBinding.headLayout;
 //        mHeaderBinding =(LayoutLiveHeadBinding)mBinding.headLayout;
 //        RxView.clicks(mBinding.headLayout.assetTotal).subscribe(o -> ZXFragmentJumpHelper.startFragment(MainActivity.this, ProfileFragment.class,null));
-
+        mGestureDetector = new GestureDetectorCompat(this, mOnGestureListener);
         RxView.clicks(mBinding.sendFeed).subscribe(o->{
             DialogItem item = new DialogItem();
             item.title = getResources().getString(R.string.send_remind);

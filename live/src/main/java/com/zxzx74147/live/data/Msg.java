@@ -17,5 +17,5 @@ public class Msg implements Serializable {
     public int type;   //消息类型(1:文字消息，2:盈利文字消息，3:盈利弹幕消息)
     public String nickName;     //用户昵称
     public String content;     //文字内容
-    public int profitNum;
+    public String profitNum;
 }
