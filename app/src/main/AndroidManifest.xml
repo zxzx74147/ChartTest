@@ -38,14 +38,16 @@
             android:name="UMENG_CHANNEL"
             android:value="main" />
 
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".MainFeedActivity"
-            android:launchMode="singleInstance"></activity>
+            android:screenOrientation="portrait"/>
 
 
-        <activity android:name=".LauncherActivity">
+        <activity android:name=".LauncherActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -59,7 +61,8 @@
 
         <activity
             android:name=".AboutActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            />
 
         <receiver android:name=".push.AliPushReceiver">
             <intent-filter>

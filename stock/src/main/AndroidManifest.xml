@@ -3,8 +3,10 @@
     package="com.zxzx74147.stock">
 
     <application>
-        <activity android:name=".activity.StockActivity" />
-        <activity android:name=".activity.TradeListActivity" />
+        <activity android:name=".activity.StockActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.TradeListActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

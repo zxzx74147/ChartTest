@@ -33,7 +33,7 @@ public class BaseActivity extends SupportActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         mLoading = new CommonLoading(this);
         myObserver = new MyObserver(this, getLifecycle());
         mCallback = ZXActivityJumpHelper.getCallBack();

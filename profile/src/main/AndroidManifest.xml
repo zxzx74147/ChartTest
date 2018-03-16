@@ -3,11 +3,16 @@
     package="com.zxzx74147.profile">
 
     <application>
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".activity.LoginPhoneActivity"></activity>
-        <activity android:name=".activity.MessageCenterActivity"></activity>
-        <activity android:name=".activity.MessageActivity"></activity>
-        <activity android:name=".activity.AuthActivity" />
+        <activity android:name=".ProfileActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.LoginPhoneActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.MessageCenterActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.MessageActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.AuthActivity"
+            android:screenOrientation="portrait"/>
 
     </application>
 

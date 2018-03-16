@@ -49,6 +49,7 @@ public class LiveActivity extends BaseActivity {
         initData();
         initView();
         initVideo();
+        mIsRequestRotate = false;
     }
 
     @Override
@@ -130,6 +131,9 @@ public class LiveActivity extends BaseActivity {
 //            }
 //        });
 
+        if (mIsRequestRotate) {
+            return;
+        }
         NetworkApi.ApiSubscribe(mLiveStorage.roomJoin(mLive.liveId), uniApiData -> {
             if (uniApiData.hasError()) {
                 ToastUtil.showToast(LiveActivity.this, uniApiData.error.usermsg);

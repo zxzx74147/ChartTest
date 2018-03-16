@@ -3,9 +3,12 @@
     package="com.zxzx74147.balance">
 
     <application>
-        <activity android:name=".activity.DepositListActivity" />
-        <activity android:name=".activity.BankListActivity"/>
-        <activity android:name=".activity.WithdrawActivity"/>
+        <activity android:name=".activity.DepositListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.BankListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.WithdrawActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
