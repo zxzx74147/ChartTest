@@ -51,7 +51,15 @@ public class WebviewUtil {
 
         @Override
         public void onLoadResource(String url) {
-            super.onLoadResource(url);
+
+
+            if (url == null) return ;
+
+                if(!url.startsWith("http://") && !url.startsWith("https://")){
+                    super.onLoadResource(url);
+                    return;
+                }
+
         }
 
         @Override

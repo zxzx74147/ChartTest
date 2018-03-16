@@ -38,7 +38,6 @@ public class LiveListFragment extends BaseFragment {
 
     private List<Live> mData = new LinkedList<>();
     private CommonRecyclerViewAdapter<Live> mAdapter = null;
-    private boolean mChecked = false;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -117,15 +116,7 @@ public class LiveListFragment extends BaseFragment {
                     mData.clear();
                     mData.addAll(homeData.liveList.live);
                     mAdapter.notifyDataSetChanged();
-                    if(!mChecked){
-                        mChecked = true;
-                        for(Live live:homeData.liveList.live){
-                            if(live.status==2){
-                                LiveBusStation.startLive(getContext(),live);
-                                break;
-                            }
-                        }
-                    }
+
                 }
             }
         });
