@@ -413,9 +413,10 @@ public class ChartUtil {
 
                 chart.highlightValue(h);
 
-                Highlight highlight2 = new Highlight(h.getX(), h.getY(), h.getXPx(), h.getYPx(), h.getDataSetIndex(), YAxis.AxisDependency.RIGHT);
-                highlight2.setDataIndex(h.getDataIndex());
-                highlight2.setDraw(h.getDrawX(), h.getDrawY());
+                Highlight highlight2 = chart2.getHighlightByTouchPoint( h.getXPx(),1);
+//                Highlight highlight2 = new Highlight(h.getX(), h.getY(), h.getXPx(), h.getYPx(), h.getDataSetIndex(), YAxis.AxisDependency.RIGHT);
+//                highlight2.setDataIndex(h.getDataIndex());
+//                highlight2.setDraw(h.getDrawX(), h.getDrawY());
 
                 chart2.highlightValues(new Highlight[]{highlight2});
             }
@@ -433,16 +434,12 @@ public class ChartUtil {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
                 Log.i("showHighline", "" + h.getX());
-                Highlight highlight = new Highlight(h.getX(), h.getY(), h.getXPx(), h.getYPx(), h.getDataSetIndex(), YAxis.AxisDependency.RIGHT);
-                highlight.setDataIndex(h.getDataIndex());
-
-                highlight.setDraw(h.getDrawX(), h.getDrawY());
 
                 chart2.highlightValue(h);
-
-                Highlight highlight2 = new Highlight(h.getX(), h.getY(), h.getXPx(), h.getYPx(), h.getDataSetIndex(), YAxis.AxisDependency.RIGHT);
-                highlight2.setDataIndex(h.getDataIndex());
-                highlight2.setDraw(h.getDrawX(), h.getDrawY());
+                Highlight highlight2 = chart.getHighlightByTouchPoint( h.getXPx(),1);
+//                Highlight highlight2 = new Highlight(h.getX(), h.getY(), h.getXPx(), h.getYPx(), h.getDataSetIndex(), YAxis.AxisDependency.RIGHT);
+//                highlight2.setDataIndex(h.getDataIndex());
+//                highlight2.setDraw(h.getDrawX(), h.getDrawY());
 
                 chart.highlightValues(new Highlight[]{highlight2});
 

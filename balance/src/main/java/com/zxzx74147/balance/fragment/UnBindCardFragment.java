@@ -86,7 +86,7 @@ public class UnBindCardFragment extends BaseDialogFragment {
             return;
         }
 
-        NetworkApi.ApiSubscribe(mStorage.bindRemove(mBinding.getData().bankCardId,vcode), new Consumer<UniApiData>() {
+        NetworkApi.ApiSubscribe(getActivity(),mStorage.bindRemove(mBinding.getData().bankCardId,vcode),true, new Consumer<UniApiData>() {
 
             @Override
             public void accept(UniApiData uniApiData) throws Exception {
@@ -114,7 +114,7 @@ public class UnBindCardFragment extends BaseDialogFragment {
                     }
                 });
             }
-        });
+        },UniApiData.class);
 
     }
 
