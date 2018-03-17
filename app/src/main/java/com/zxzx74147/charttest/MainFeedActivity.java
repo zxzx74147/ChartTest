@@ -20,9 +20,11 @@ import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.modules.account.UserViewModel;
 import com.zxzx74147.devlib.modules.busstation.LiveBusStation;
 import com.zxzx74147.devlib.modules.busstation.MainBusStation;
+import com.zxzx74147.devlib.modules.busstation.ProfileBusStation;
 import com.zxzx74147.devlib.modules.sys.SysInitManager;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
+import com.zxzx74147.devlib.utils.DisplayUtil;
 import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
@@ -68,7 +70,7 @@ public class MainFeedActivity extends BaseActivity {
 
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            if (velocityX < 0) {
+            if (velocityX < 0&&Math.abs(velocityX)>Math.abs(velocityY)) {
                 if (SysInitManager.sharedInstance().getSysInitData().swich.liveOpen != 0) {
 //                    MainBusStation.toLive(MainFeedActivity.this);
                     checkLive(MainFeedActivity.this);
@@ -80,7 +82,9 @@ public class MainFeedActivity extends BaseActivity {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        this.mGestureDetector.onTouchEvent(event);
+        if(event.getY()< DisplayUtil.getDisplayMetrics().heightPixels*3/4) {
+            this.mGestureDetector.onTouchEvent(event);
+        }
         return super.dispatchTouchEvent(event);
     }
 
@@ -107,6 +111,8 @@ public class MainFeedActivity extends BaseActivity {
     private CommonCallback<GoodType> mCallback = item -> {
         StockFragment fragment = StockFragment.newInstance(item);
         fragment.show(getSupportFragmentManager(), fragment.getTag());
+
+//        ProfileBusStation.startTradePasswordMotify(this);
 
 //        ZXFragmentJumpHelper.startFragment(this, ProfileFragment.class, null);
     };

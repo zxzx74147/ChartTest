@@ -28,8 +28,8 @@ public class RetrofitClient {
 
     static{
         OkHttpClient.Builder builder = new OkHttpClient().newBuilder();
-        builder.readTimeout(10, TimeUnit.SECONDS);
-        builder.connectTimeout(5, TimeUnit.SECONDS);
+        builder.readTimeout(15, TimeUnit.SECONDS);
+        builder.connectTimeout(7, TimeUnit.SECONDS);
         builder.addInterceptor(chain -> {
             Request request = chain.request().newBuilder().addHeader("User-Agent", NetworkConfig.UA).build();
             if(!TextUtils.isEmpty(AccountManager.sharedInstance().getUid())) {

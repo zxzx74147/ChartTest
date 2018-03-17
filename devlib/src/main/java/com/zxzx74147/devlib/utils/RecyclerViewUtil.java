@@ -52,11 +52,11 @@ public class RecyclerViewUtil {
 
                     @Override
                     public void onNext(Object o) {
+                        mRecyclerRefreshLayout.setRefreshing(false);
                         if (((UniApiData) o).hasError()) {
                             ToastUtil.showToast(mRecyclerView.getContext(), ((UniApiData) o).error.usermsg);
                             return;
                         }
-                        mRecyclerRefreshLayout.setRefreshing(false);
                         IBaseListDataHolder<T> iBaseListDataHolder = (IBaseListDataHolder<T>) o;
                         if (iBaseListDataHolder.getListData() == null) {
                             return;

@@ -14,11 +14,24 @@ import java.security.interfaces.RSAPublicKey;
 
 public class RsaPare {
 
-    public RSAPublicKey mPublicKey = null;
-    public RSAPrivateKey mPrivateKey = null;
+    private  RSAPublicKey mPublicKey = null;
+    private  RSAPrivateKey mPrivateKey = null;
+    private static RsaPare mInstance = new RsaPare();
 
     private RsaPare(){
+        init();
+    }
 
+    public static RsaPare sharedInstance(){
+        return mInstance;
+    }
+
+    public  final RSAPublicKey getPublicKey(){
+        return mPublicKey;
+    }
+
+    public final RSAPrivateKey getPrivateKey(){
+        return mPrivateKey;
     }
 
     public boolean init(){

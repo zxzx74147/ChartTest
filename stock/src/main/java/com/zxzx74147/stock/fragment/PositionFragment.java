@@ -5,7 +5,6 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,7 +14,6 @@ import android.view.ViewGroup;
 import com.dinuscxj.refresh.MaterialDragDistanceConverter;
 import com.dinuscxj.refresh.RecyclerRefreshLayout;
 import com.jakewharton.rxbinding2.support.design.widget.RxTabLayout;
-import com.jakewharton.rxbinding2.support.design.widget.TabLayoutSelectionEvent;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.zxzx74147.devlib.BR;
 import com.zxzx74147.devlib.DevLib;
@@ -59,7 +57,6 @@ import java.util.LinkedList;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 
 /**
  */
@@ -99,49 +96,49 @@ public class PositionFragment extends BaseDialogFragment {
     }
 
     private void refresh(UserUniData userdata) {
-        ViewUtil.changeTabs(((ViewGroup)mBinding.tabLayout2.getChildAt(0)).getChildAt(0),String.format(getString(R.string.format_my_position), userdata.positionList.num));
-        ViewUtil.changeTabs(((ViewGroup)mBinding.tabLayout2.getChildAt(0)).getChildAt(1),String.format(getString(R.string.format_my_machposition), userdata.machPositionList.num));
+        ViewUtil.changeTabs(((ViewGroup) mBinding.tabLayout2.getChildAt(0)).getChildAt(0), String.format(getString(R.string.format_my_position), userdata.positionList.num));
+        ViewUtil.changeTabs(((ViewGroup) mBinding.tabLayout2.getChildAt(0)).getChildAt(1), String.format(getString(R.string.format_my_machposition), userdata.machPositionList.num));
 
     }
 
 
     private void initView() {
         mPositionAdapter = new CommonRecyclerViewAdapter<>(new LinkedList<>());
-        mMachAdapter = new CommonRecyclerViewAdapter(new LinkedList<>()){
+        mMachAdapter = new CommonRecyclerViewAdapter(new LinkedList<>()) {
             @Override
             protected void convert(BaseBindingViewHolder helper, Object item) {
                 ViewDataBinding itemCommonBinding = helper.mBinding;
                 itemCommonBinding.setVariable(BR.data, item);
-                if(itemCommonBinding instanceof ItemMachpositionBinding){
+                if (itemCommonBinding instanceof ItemMachpositionBinding) {
                     ItemMachpositionBinding binding = (ItemMachpositionBinding) itemCommonBinding;
                     binding.setDeleteCallback(mDeleteCallback);
                     binding.setMotifyCallback(mMotifyCallback);
                 }
             }
         };
-        CommonMultiTypeDelegate delegate = new CommonMultiTypeDelegate(){
+        CommonMultiTypeDelegate delegate = new CommonMultiTypeDelegate() {
             @Override
             protected int getItemType(Object o) {
-                if(o instanceof MachPosition){
+                if (o instanceof MachPosition) {
                     MachPosition mach = (MachPosition) o;
-                    if(mach.status==0){
+                    if (mach.status == 0) {
                         return R.layout.item_machposition;
                     }
                     return R.layout.item_machposition_his;
-                }else if(o instanceof String){
+                } else if (o instanceof String) {
                     return R.layout.item_his_title;
                 }
                 return super.getItemType(o);
             }
         };
-        delegate.registerItemType(R.layout.item_his_title,R.layout.item_his_title);
-        delegate.registerItemType(R.layout.item_machposition,R.layout.item_machposition);
-        delegate.registerItemType(R.layout.item_machposition_his,R.layout.item_machposition_his);
+        delegate.registerItemType(R.layout.item_his_title, R.layout.item_his_title);
+        delegate.registerItemType(R.layout.item_machposition, R.layout.item_machposition);
+        delegate.registerItemType(R.layout.item_machposition_his, R.layout.item_machposition_his);
         mPositionAdapter.setMultiTypeDelegate(delegate);
         mMachAdapter.setMultiTypeDelegate(delegate);
 
-        mPositionAdapter.setCommonEmptyView(getActivity(),R.string.no_position);
-        mMachAdapter.setCommonEmptyView(getActivity(),R.string.no_machposition);
+        mPositionAdapter.setCommonEmptyView(getActivity(), R.string.no_position);
+        mMachAdapter.setCommonEmptyView(getActivity(), R.string.no_machposition);
 
         LinearLayoutManager lm = new LinearLayoutManager(getContext());
         lm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -177,11 +174,11 @@ public class PositionFragment extends BaseDialogFragment {
         mPositionAdapter.addHeaderView(mLayoutPositionHeaderBinding.getRoot());
         mLayoutPositionHeaderBinding.setUserUniData(AccountManager.sharedInstance().getUserUni());
 
-        RxView.clicks(mMachpositionHeaderBinding.expand).subscribe(o->{
-            if(mMachpositionHeaderBinding.content.getMaxLines()==2){
+        RxView.clicks(mMachpositionHeaderBinding.expand).subscribe(o -> {
+            if (mMachpositionHeaderBinding.content.getMaxLines() == 2) {
                 mMachpositionHeaderBinding.content.setMaxLines(100);
                 mMachpositionHeaderBinding.expand.setText(R.string.pack_up);
-            }else{
+            } else {
                 mMachpositionHeaderBinding.content.setMaxLines(2);
                 mMachpositionHeaderBinding.expand.setText(R.string.expanc);
             }
@@ -209,7 +206,7 @@ public class PositionFragment extends BaseDialogFragment {
         }
     };
 
-    private void startMotify(MachPosition machPosition){
+    private void startMotify(MachPosition machPosition) {
         TradeFragment fragment = TradeFragment.newInstance(machPosition);
         ZXFragmentJumpHelper.startFragment(getActivity(), fragment, new CommonCallback() {
             @Override
@@ -226,7 +223,7 @@ public class PositionFragment extends BaseDialogFragment {
 
     }
 
-    private void startDelete(MachPosition machPosition){
+    private void startDelete(MachPosition machPosition) {
 
         DialogItem item = new DialogItem();
         item.title = getResources().getString(R.string.delete_machposition);
@@ -235,10 +232,10 @@ public class PositionFragment extends BaseDialogFragment {
         ZXFragmentJumpHelper.startFragment(getActivity(), dialog, new CommonCallback() {
             @Override
             public void callback(Object item) {
-                if(item!=null){
-                    NetworkApi.ApiSubscribe(mTradeStorage.machpositionCancel(machPosition.machPositionId),o->{
-                        if(o.hasError()){
-                            ToastUtil.showToast(getActivity(),o.error.usermsg);
+                if (item != null) {
+                    NetworkApi.ApiSubscribe(mTradeStorage.machpositionCancel(machPosition.machPositionId), o -> {
+                        if (o.hasError()) {
+                            ToastUtil.showToast(getActivity(), o.error.usermsg);
                             return;
                         }
                         setupRecyclerViewMachPosition(mBinding.refreshLayout, mBinding.list, mMachAdapter, new CommonListRequestCallback<MachPosition>() {
@@ -259,14 +256,13 @@ public class PositionFragment extends BaseDialogFragment {
     }
 
 
-
-    public  void setupRecyclerViewMachPosition(RecyclerRefreshLayout mRecyclerRefreshLayout, RecyclerView mRecyclerView, CommonRecyclerViewAdapter adapter, CommonListRequestCallback callback) {
+    public void setupRecyclerViewMachPosition(RecyclerRefreshLayout mRecyclerRefreshLayout, RecyclerView mRecyclerView, CommonRecyclerViewAdapter adapter, CommonListRequestCallback callback) {
         final Disposable[] refreshDisposable = {null};
         final Disposable[] loadMoreDisposable = {null};
         final BaseListData[] lastData = {null};
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
                 DevLib.getApp().getResources().getDimensionPixelSize(com.zxzx74147.devlib.R.dimen.default_gap_50), DevLib.getApp().getResources().getDimensionPixelSize(com.zxzx74147.devlib.R.dimen.default_gap_50));
-        mRecyclerRefreshLayout.setRefreshView(new CommonRefreshView(mRecyclerRefreshLayout.getContext()),layoutParams);
+        mRecyclerRefreshLayout.setRefreshView(new CommonRefreshView(mRecyclerRefreshLayout.getContext()), layoutParams);
         mRecyclerRefreshLayout.setDragDistanceConverter(new MaterialDragDistanceConverter());
 //        mRecyclerView.post(new Runnable() {
 //            @Override
@@ -299,12 +295,12 @@ public class PositionFragment extends BaseDialogFragment {
                             return;
                         }
                         MachPositionList list = AccountManager.sharedInstance().getUserUni().machPositionList;
-                        if(list!=null&&list.num>0&&iBaseListDataHolder.getListData()!=null){
-                            iBaseListDataHolder.getListData().getListItems().addAll(0,list.getListItems());
+                        if (list != null && list.num > 0 && iBaseListDataHolder.getListData() != null) {
+                            iBaseListDataHolder.getListData().getListItems().addAll(0, list.getListItems());
 
                         }
-                        if(iBaseListDataHolder.getListData().num>0){
-                            iBaseListDataHolder.getListData().getListItems().add(list.num,"");
+                        if (iBaseListDataHolder.getListData().num > 0) {
+                            iBaseListDataHolder.getListData().getListItems().add(list.num, "");
                         }
                         lastData[0] = iBaseListDataHolder.getListData();
                         adapter.setNewData(iBaseListDataHolder.getListData().getListItems());
@@ -340,7 +336,7 @@ public class PositionFragment extends BaseDialogFragment {
             if (lastData[0] == null) {
                 return;
             }
-            NetworkApi.ApiSubscribe(ViewUtil.getLivecircle(mRecyclerView),callback.getObserverble(lastData[0]), new Observer<UniApiData>() {
+            NetworkApi.ApiSubscribe(ViewUtil.getLivecircle(mRecyclerView), callback.getObserverble(lastData[0]), new Observer<UniApiData>() {
                 @Override
                 public void onSubscribe(Disposable d) {
                     refreshDisposable[0] = d;
@@ -352,7 +348,7 @@ public class PositionFragment extends BaseDialogFragment {
 
                 @Override
                 public void onNext(UniApiData o) {
-                    if (((UniApiData) o).hasError()) {
+                    if (o.hasError()) {
                         ToastUtil.showToast(mRecyclerView.getContext(), ((UniApiData) o).error.usermsg);
                         return;
                     }

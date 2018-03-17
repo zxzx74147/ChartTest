@@ -54,6 +54,9 @@
     <string name="vocher_get_succ">领取成功</string>
 
     <string name="format_auth_state">实名认证（%s）</string>
+    <string name="reset_password">重置交易密码</string>
+    <string name="account_with_quote">账号：</string>
+    <string name="vcode_input">输入验证码</string>
 
 
     <array name="profile_list">

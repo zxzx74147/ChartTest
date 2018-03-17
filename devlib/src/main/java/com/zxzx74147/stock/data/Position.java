@@ -56,7 +56,7 @@ public class Position implements Serializable {
     }
 
     public String getBuyMethodStr() {
-        if(couponCost!=0){
+        if(isVoucher!=0){
             return DevLib.getApp().getString(R.string.buy_method_red);
         }
         return DevLib.getApp().getString(R.string.buy_method_money);

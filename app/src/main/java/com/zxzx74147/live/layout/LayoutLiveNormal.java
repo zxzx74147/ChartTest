@@ -134,17 +134,7 @@ public class LayoutLiveNormal extends FrameLayout {
     }
 
     private void showList(){
-        if(mBingding.allItem.getVisibility()==View.GONE) {
-            ViewUtil.showView(mBingding.allItem, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_up));
-        }
-
-        if(mBingding.goodSwitch.getVisibility()==View.VISIBLE) {
-            ViewUtil.hideView(mBingding.goodSwitch, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_alpha_out));
-        }
-
-        if(mBingding.showList.getVisibility()==View.VISIBLE) {
-            ViewUtil.hideView(mBingding.showList, AnimationUtils.loadAnimation(getContext(), R.anim.dialog_alpha_out));
-        }
+        showAll();
     }
 
     private void hideAll(){

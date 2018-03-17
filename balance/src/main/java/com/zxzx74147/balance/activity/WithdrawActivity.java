@@ -228,7 +228,7 @@ public class WithdrawActivity extends BaseActivity {
     }
 
     private void requestVcode() {
-        NetworkApi.ApiSubscribe(mBankStorage.bindVCode(), new Consumer<UniApiData>() {
+        NetworkApi.ApiSubscribe(this,mBankStorage.bindVCode(),true, new Consumer<UniApiData>() {
 
             @Override
             public void accept(UniApiData uniApiData) throws Exception {
@@ -250,7 +250,7 @@ public class WithdrawActivity extends BaseActivity {
                 });
 
             }
-        });
+        },UniApiData.class);
     }
 
     public void refresh(){
@@ -260,6 +260,7 @@ public class WithdrawActivity extends BaseActivity {
     private void bindCard(BankCard card) {
         NetworkApi.ApiSubscribe(this,mBankStorage.bindAdd(card.bank,card.cardNo,card.name,mBinding.withdrawBank.vcode.getText().toString()),true, bankCardData -> {
             if(bankCardData.hasError()){
+                ToastUtil.showToast(this,bankCardData.error.usermsg);
                 return;
             }
             mBinding.setBankCard(bankCardData.bankCard);

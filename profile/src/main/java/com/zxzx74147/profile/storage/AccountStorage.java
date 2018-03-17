@@ -43,6 +43,12 @@ public interface AccountStorage {
     @GET("/user/trades/password")
     Observable<UserUniData> tradePassword(@Query("passwd") String passwd);
 
+    @GET("/user/trades/modify")
+    Observable<UserUniData> tradePasswordModify(@Query("passwd") String passwd,@Query("vcode") String vcode);
+
+    @GET("/user/trades/getvcode")
+    Observable<UniApiData> tradePasswordVcode();
+
     @GET("/user/trades/login")
     Observable<UserUniData> tradeLogin(@Query("passwd") String passwd);
 

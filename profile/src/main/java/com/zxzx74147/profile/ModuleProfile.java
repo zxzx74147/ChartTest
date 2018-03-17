@@ -17,6 +17,7 @@ import com.zxzx74147.profile.data.Message;
 import com.zxzx74147.profile.data.Voucher;
 import com.zxzx74147.profile.fragment.LogoutFragment;
 import com.zxzx74147.profile.fragment.PasswordInputFragment;
+import com.zxzx74147.profile.fragment.PasswordResetFragment;
 import com.zxzx74147.profile.fragment.PasswordSetFragment;
 import com.zxzx74147.profile.fragment.ProfileEditFragment;
 import com.zxzx74147.profile.fragment.ProfileFragment;
@@ -72,6 +73,8 @@ public class ModuleProfile {
             fragment.show((ViewUtil.getFragmentActivity(event.context)).getSupportFragmentManager(), fragment.getTag());
         }else if (event.id == ProfileBusStation.BUS_ID_PROFILE_AUTH) {
             ZXActivityJumpHelper.startActivity(event.context,AuthActivity.class);
+        }else if(event.id == ProfileBusStation.BUS_ID_PROFILE_RESET_TRADE_PASSWORD){
+            ZXFragmentJumpHelper.startFragment(event.context, PasswordResetFragment.class, null);
         }
 
 

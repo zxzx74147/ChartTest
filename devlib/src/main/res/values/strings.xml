@@ -2,7 +2,9 @@
     <string name="app_name">devlib</string>
     <string name="network_host_stock">none</string>
     <string name="network_host">none</string>
-    <string name="network_UA">Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36</string>
+    <!--<string name="network_UA">Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36</string>-->
+
+    <string name="network_UA">Android</string>
     <string name="phone_number">手机号</string>
     <string name="vcode">验证码</string>
     <string name="start">开始</string>
@@ -36,7 +38,7 @@
     <string name="loading">加载中...</string>
     <string name="format_input">yyyy-MM-dd\'T\'HH:mm:ss</string>
     <string name="format_MMDD_HHMM">MM/dd HH:mm</string>
-    <string name="format_YYYYMMDD_HHMM">YYYY/MM/dd HH:mm</string>
+    <string name="format_YYYYMMDD_HHMM">yyyy/MM/dd HH:mm</string>
     <string name="format_HHMM">HH:mm</string>
     <string name="format_YYYYMMDD">YYYY-MM-dd</string>
     <string name="just_now">刚刚</string>

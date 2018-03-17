@@ -16,7 +16,6 @@ public class Live implements Serializable {
     private static DateFormat DATE_FORMAT_FULL = new SimpleDateFormat("MM-dd HH:mm");
     public long liveId;
     public int status;
-    public int num;
     public String timeTitle;
     public RtmpList rtmpList;
     public TeacherList teacherList;

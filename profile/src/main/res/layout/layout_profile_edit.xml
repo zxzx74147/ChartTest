@@ -69,6 +69,7 @@
             android:minWidth="@dimen/default_gap_220"
             android:text="@{user.nickName}"
             android:textColor="@color/text_black"
+            android:gravity="right|center_vertical"
             android:textSize="@dimen/default_size_34"
             app:layout_constraintBottom_toBottomOf="@+id/textView12"
             app:layout_constraintEnd_toEndOf="parent" />
