@@ -269,4 +269,9 @@ public class CombinedChart extends BarLineChartBase<CombinedData> implements Com
         }
     }
 
+    @Override
+    protected void autoScale() {
+        super.autoScale();
+    }
+
 }

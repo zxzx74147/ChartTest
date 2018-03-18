@@ -220,8 +220,8 @@ public class KlineView extends LinearLayout {
         setKData(combinedData);
         ArrayList<ILineDataSet> sets = new ArrayList<>();
         LineDataSet bollD = new LineDataSet(mDataParse.getBollDataDN(), "LOWER");
-        LineDataSet bollU = new LineDataSet(mDataParse.getBollDataUP(), "UPPER");
         LineDataSet bollM = new LineDataSet(mDataParse.getBollDataMB(), "MID");
+        LineDataSet bollU = new LineDataSet(mDataParse.getBollDataUP(), "UPPER");
         ChartUtil.setLineDataleSet(bollD, getResources().getColor(R.color.stock_kline_ma5));
         ChartUtil.setLineDataleSet(bollU, getResources().getColor(R.color.stock_kline_ma10));
         ChartUtil.setLineDataleSet(bollM, getResources().getColor(R.color.stock_kline_ma20));
@@ -245,7 +245,7 @@ public class KlineView extends LinearLayout {
 
         ArrayList<ILineDataSet> sets = new ArrayList<>();
         LineDataSet lineDea = new LineDataSet(mDataParse.getDeaData(), "DEA");
-        LineDataSet lineDif = new LineDataSet(mDataParse.getDeaData(), "DIF");
+        LineDataSet lineDif = new LineDataSet(mDataParse.getDifData(), "DIF");
         ChartUtil.setLineDataleSet(lineDea, getResources().getColor(R.color.stock_kline_dea), true);
         ChartUtil.setLineDataleSet(lineDif, getResources().getColor(R.color.stock_kline_dif), true);
         sets.add(lineDea);

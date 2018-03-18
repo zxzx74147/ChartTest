@@ -51,6 +51,7 @@ public class StockWidget extends FrameLayout implements IViewModelHolder {
         mPriceViewModel.getReadTimeLiveData().setGood(good);
         mBinding.setPrice(good.price);
         try {
+            mBinding.klineview.setLoading();
             RxTabLayout.select(mBinding.tabLayout).accept(1);
         } catch (Exception e) {
             e.printStackTrace();

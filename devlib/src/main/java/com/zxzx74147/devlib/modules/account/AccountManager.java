@@ -23,7 +23,7 @@ import io.reactivex.functions.Consumer;
 public class AccountManager {
     private static final String TAG = AccountManager.class.getSimpleName();
     private static final String KEY = "ACCOUNT_USER";
-    private static final String KEY_MSG_ID = "KEY_MSG_ID1";
+    private static final String KEY_MSG_ID = "KEY_MSG_ID2";
 
     private static final AccountManager mInstance = new AccountManager();
     private UserData mUser = null;

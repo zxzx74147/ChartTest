@@ -39,8 +39,19 @@ public class MainActivity extends BaseActivity {
     private CommonCallback<GoodType> mCallback = item -> {
         StockFragment fragment = StockFragment.newInstance(item);
         fragment.show(getSupportFragmentManager(), fragment.getTag());
+//        Live live = new Live();
+//        live.liveId=4;
+//        live.status=2;
+//        live.rtmpList = new RtmpList();
+//        live.rtmpList.num=1;
+//        live.rtmpList.rtmp=new LinkedList<>();
+//        Rtmp rtmp = new Rtmp();
+//        rtmp.url="abd";
+//        live.rtmpList.rtmp.add(rtmp);
+//        live.teacherList= new TeacherList();
+//        live.teacherList.teacher = new LinkedList<>();
+//        LiveBusStation.startLive(this,live);
 
-//        ZXFragmentJumpHelper.startFragment(this, ProfileFragment.class, null);
     };
 
     private void initView() {

@@ -276,7 +276,8 @@ public class ChartUtil {
         axisRKline.setGridLineWidth(1f);
         axisRKline.setTextColor(DevLib.getApp().getResources().getColor(R.color.text_light_grey));
         axisRKline.setLabelCount(5, true); //第一个参数是Y轴坐标的个数，第二个参数是 是否不均匀分布，true是不均匀分布
-        axisRKline.setSpaceTop(0);//距离顶部留白
+        axisRKline.setSpaceTop(DevLib.getApp().getResources().getDimensionPixelOffset(R.dimen.default_gap_20));//距离顶部留白
+        axisRKline.setSpaceBottom(DevLib.getApp().getResources().getDimensionPixelOffset(R.dimen.default_gap_20));//距离顶部留白
 
 
         YAxis axisRightKline = chart.getAxisLeft();

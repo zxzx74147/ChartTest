@@ -184,9 +184,10 @@ public class FeedReplyFragment extends BaseFragment {
                     ToastUtil.showToast(getActivity(), replyData.error.usermsg);
                     return;
                 }
-                mAdapter.addData(replyData.reply);
+                ToastUtil.showToast(getActivity(), "回复成功");
+                mAdapter.addData(0,replyData.reply);
                 mBinding.replyEidt.setText("");
-                mBinding.list.scrollToButtom();
+//                mBinding.list.scrollToButtom();
                 ViewUtil.hideSoftPad(mBinding.replyEidt);
 
             }

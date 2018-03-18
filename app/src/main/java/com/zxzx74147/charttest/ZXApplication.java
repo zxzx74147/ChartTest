@@ -31,6 +31,6 @@ public class ZXApplication extends MultiDexApplication {
         ModuleBalance.init(this);
         UniCornModule.init(this);
 
-//        Fabric.with(this, new Crashlytics());
+        Fabric.with(this, new Crashlytics());
     }
 }
