@@ -20,7 +20,9 @@ import com.zxzx74147.devlib.base.BaseBindingViewHolder;
 import com.zxzx74147.devlib.base.BaseFragment;
 import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.devlib.data.BaseListData;
+import com.zxzx74147.devlib.data.DialogItem;
 import com.zxzx74147.devlib.data.IntentData;
+import com.zxzx74147.devlib.fragment.CommonFragmentDialog;
 import com.zxzx74147.devlib.interfaces.CommonListRequestCallback;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
@@ -28,6 +30,7 @@ import com.zxzx74147.devlib.utils.RecyclerViewUtil;
 import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
+import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.devlib.widget.CommonRecyclerViewAdapter;
 import com.zxzx74147.devlib.widget.RecycleViewDivider;
@@ -107,7 +110,21 @@ public class FeedReplyFragment extends BaseFragment {
                 replyBinding.setDeleteCallback(new CommonCallback<Reply>() {
                     @Override
                     public void callback(Reply reply) {
-                        doDelete(reply);
+                        DialogItem item = new DialogItem();
+                        item.title = getResources().getString(R.string.delete_verify);
+
+                        item.obj = reply;
+                        CommonFragmentDialog dialog = CommonFragmentDialog.newInstance(new IntentData<>(item));
+                        ZXFragmentJumpHelper.startFragment(getActivity(), dialog, new CommonCallback() {
+                            @Override
+                            public void callback(Object item) {
+                                if(item!=null) {
+                                    doDelete(reply);
+                                }
+                                return;
+                            }
+                        });
+
                     }
 
 

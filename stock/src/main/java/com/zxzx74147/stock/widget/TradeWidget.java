@@ -243,7 +243,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             mBinding.downPer.setText((100 - upPer) + "%人选择");
         }
 
-
+        mBinding.price.setText("");
         mBinding.setType(mType);
         mBinding.setAmount(1);
         mBinding.listType.removeAllTabs();

@@ -117,7 +117,7 @@ public class ProfileEditFragment extends BaseDialogFragment {
 
         RxView.clicks(mBinding.portrait).subscribe(v -> {
             DialogItem dialogItem = new DialogItem();
-            dialogItem.title = getString(R.string.select);
+            dialogItem.title = getString(R.string.select_portrait);
             dialogItem.items = new String[]{getString(R.string.take_photo), getString(R.string.gallery)};
             CommonItemSelectorDialog dialog = CommonItemSelectorDialog.newInstance(new IntentData(dialogItem));
             ZXFragmentJumpHelper.startFragment(getContext(), dialog, new CommonCallback() {

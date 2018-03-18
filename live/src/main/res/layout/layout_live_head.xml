@@ -80,7 +80,7 @@
 
         <TextView
             android:id="@+id/asset_total"
-
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/default_gap_64"
             android:layout_alignParentEnd="true"

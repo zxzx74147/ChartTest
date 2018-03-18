@@ -71,6 +71,8 @@
     <string name="withdraw_time_remind">24小时内到账</string>
     <string name="select_pay_method">请选择支付方式</string>
 
+    <string name="bank_list">支持银行</string>
+
 
     <!--<item name="recharge_wechat_drawable">@drawable/pay_weixin</item>-->
     <!--<item name="recharge_wechat_drawable">@drawable/pay_zhifubao</item>-->

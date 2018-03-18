@@ -105,6 +105,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:textColor="@color/text_grey"
+                android:visibility="gone"
                 android:textSize="@dimen/default_size_26"
                 android:text="@string/write_comment"
                 android:layout_height="wrap_content" />

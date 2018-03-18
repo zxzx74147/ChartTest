@@ -29,6 +29,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+        <ImageView
+            android:id="@id/close"
+            android:src="@drawable/live_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="@dimen/default_gap_44"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
         <android.support.constraint.ConstraintLayout
             android:id="@+id/all_item"
             android:layout_width="0dp"

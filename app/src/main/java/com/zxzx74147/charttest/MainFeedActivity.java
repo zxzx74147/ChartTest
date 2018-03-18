@@ -148,6 +148,7 @@ public class MainFeedActivity extends BaseActivity {
             if (userUniData.hasError()) {
                 return;
             }
+            mBinding.setUserUni(userUniData);
             mBinding.setUser(userUniData.user);
         });
     }

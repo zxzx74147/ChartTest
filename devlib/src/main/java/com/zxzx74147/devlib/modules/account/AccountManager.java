@@ -4,6 +4,7 @@ import com.zxzx74147.devlib.data.UserData;
 import com.zxzx74147.devlib.kvstore.KVStore;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
+import com.zxzx74147.devlib.utils.SharedPreferenceHelper;
 import com.zxzx74147.profile.data.UserUniData;
 
 import java.util.LinkedList;
@@ -22,9 +23,12 @@ import io.reactivex.functions.Consumer;
 public class AccountManager {
     private static final String TAG = AccountManager.class.getSimpleName();
     private static final String KEY = "ACCOUNT_USER";
+    private static final String KEY_MSG_ID = "KEY_MSG_ID";
+
     private static final AccountManager mInstance = new AccountManager();
     private UserData mUser = null;
     private UserUniData mUserUniData = null;
+    private int mLastReadMessageID=0;
 
     private UserStorage mUserStorage = RetrofitClient.getClient().create(UserStorage.class);
     private static final int PERIOD = 1000 * 10;
@@ -36,6 +40,7 @@ public class AccountManager {
 
     private AccountManager() {
         mUser = KVStore.get(KEY, UserData.class);
+        mLastReadMessageID = SharedPreferenceHelper.getInt(KEY_MSG_ID,0);
     }
 
     public static AccountManager sharedInstance() {
@@ -150,9 +155,15 @@ public class AccountManager {
                 }
                 mUserUniData = userUniData;
                 saveUser(userUniData.user);
+                mUser.unreadNum = mUserUniData.lastMsgCenterId-mLastReadMessageID;
+                mUser.unreadNum = Math.max(mUser.unreadNum ,0);
             }
         });
+    }
 
+    public void markMessageRead(){
+        SharedPreferenceHelper.saveInt(KEY_MSG_ID,mUserUniData.lastMsgCenterId);
+        mLastReadMessageID =mUserUniData.lastMsgCenterId;
     }
 
 

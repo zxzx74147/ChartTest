@@ -9,7 +9,7 @@
     <string name="login_vcode">点此获取</string>
 
     <string name="profile_motify_remind">查看并编辑个人资料</string>
-    <string name="exchange1">中金所</string>
+    <string name="exchange1">长江国际</string>
     <string name="asset_total">总资产(元)</string>
     <string name="asset_balance">可用余额(元)</string>
     <string name="asset_hold">持仓资产(元)</string>
@@ -59,6 +59,7 @@
     <string name="vcode_input">输入验证码</string>
     <string name="unread_num">%d个未读</string>
     <string name="mark_read">标记为已读</string>
+    <string name="select_portrait">选择头像</string>
 
 
     <array name="profile_list">

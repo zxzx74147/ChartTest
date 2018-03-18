@@ -3,14 +3,18 @@ package com.zxzx74147.profile.activity;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.SparseArray;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.jakewharton.rxbinding2.view.RxView;
 import com.zxzx74147.devlib.base.BaseActivity;
 import com.zxzx74147.devlib.data.BaseListData;
 import com.zxzx74147.devlib.data.IntentData;
 import com.zxzx74147.devlib.interfaces.CommonListRequestCallback;
+import com.zxzx74147.devlib.kvstore.KVStore;
+import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.devlib.utils.RecyclerViewUtil;
 import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
@@ -24,12 +28,35 @@ import com.zxzx74147.profile.databinding.ActivityMessageCenterBinding;
 import com.zxzx74147.profile.storage.MessageCenterStorage;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 
 import io.reactivex.Observable;
 
 public class MessageCenterActivity extends BaseActivity {
     private static final String TAG = MessageCenterActivity.class.getSimpleName();
+    private static HashSet<Integer> mReadTable = new HashSet<>();
+    private static final String READ_TABLE = "READ_TABLE";
+    static{
+        mReadTable = KVStore.get(READ_TABLE,HashSet.class);
+        if(mReadTable==null){
+            mReadTable = new HashSet<>();
+        }
+    }
+
+    public static boolean isRead(int id){
+        if(mReadTable.contains(id)){
+            return true;
+        }
+        return false;
+    }
+
+    public static void markRead(int id){
+        mReadTable.add(id);
+        KVStore.put(READ_TABLE,mReadTable);
+    }
 
 
     private ActivityMessageCenterBinding mBinding = null;
@@ -40,21 +67,48 @@ public class MessageCenterActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_message_center);
+        mBinding.setNum(0);
         initView();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAdapter.notifyDataSetChanged();
+    }
+
     private void initView() {
+        AccountManager.sharedInstance().markMessageRead();
         mBinding.list.addItemDecoration(new RecycleViewDivider(this, LinearLayout.HORIZONTAL,
                 getResources().getDimensionPixelOffset(R.dimen.default_gap_24), getResources().getColor(R.color.tran)));
-        mAdapter = new CommonRecyclerViewAdapter<Message>(new LinkedList<>());
+        mAdapter = new CommonRecyclerViewAdapter<Message>(new LinkedList<>()){
+            public void setNewData(List<Message> data) {
+                super.setNewData(data);
+                int count = 0;
+                for(Message msg:data){
+                    if(!isRead(msg.msgId)){
+                        count++;
+                    }
+                }
+                mBinding.setNum(count);
+
+            }
+        };
         mBinding.list.setLayoutManager(new LinearLayoutManager(this));
         mAdapter.setMultiTypeDelegate(new CommonMultiTypeDelegate());
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ZXActivityJumpHelper.startActivity(MessageCenterActivity.this,MessageActivity.class,new IntentData((Serializable) adapter.getItem(position)));
+                Message msg = (Message) adapter.getItem(position);
+                markRead(msg.msgId);
+                ZXActivityJumpHelper.startActivity(MessageCenterActivity.this,MessageActivity.class,new IntentData(msg));
             }
+        });
+
+        RxView.clicks(mBinding.markRead).subscribe(v->{
+            markAllRead();
         });
 
 
@@ -69,6 +123,14 @@ public class MessageCenterActivity extends BaseActivity {
             }
         });
 
+    }
+
+    private void markAllRead(){
+       for(Message msg :mAdapter.getData()){
+           markRead(msg.msgId);
+       }
+       mBinding.setNum(0);
+       mAdapter.notifyDataSetChanged();
     }
 
 
