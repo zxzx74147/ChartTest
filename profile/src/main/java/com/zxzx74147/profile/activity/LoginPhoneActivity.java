@@ -27,6 +27,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
@@ -36,12 +37,21 @@ public class LoginPhoneActivity extends BaseActivity {
     private ActivityLoginPhoneBinding mBinding = null;
     private boolean mIsCountDonw = false;
     private AccountStorage mStockStorage = RetrofitClient.getClient().create(AccountStorage.class);
+    private Disposable mDisposable = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_login_phone);
         init();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mDisposable != null) {
+            mDisposable.dispose();
+        }
     }
 
     private void init() {
@@ -105,7 +115,10 @@ public class LoginPhoneActivity extends BaseActivity {
 
                 final long count = 60;
                 ViewUtil.showSoftPad(mBinding.layoutRegist.vcode);
-                Observable.interval(0, 1, TimeUnit.SECONDS).take(count + 1).map(aLong -> count - aLong).doOnSubscribe(disposable -> mIsCountDonw = true).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(t -> {
+                Observable.interval(0, 1, TimeUnit.SECONDS).take(count + 1).map(aLong -> count - aLong).doOnSubscribe(disposable -> {
+                    mDisposable = disposable;
+                    mIsCountDonw = true;
+                }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(t -> {
                     if (t <= 0) {
                         mIsCountDonw = false;
                         checkPhoneNum(mBinding.layoutRegist.phoneNumber.getText());

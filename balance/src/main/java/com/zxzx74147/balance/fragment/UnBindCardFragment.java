@@ -17,10 +17,8 @@ import com.zxzx74147.devlib.base.BaseDialogFragment;
 import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.devlib.data.IntentData;
 import com.zxzx74147.devlib.data.UniApiData;
-import com.zxzx74147.devlib.fragment.CommonFragmentDialog;
 import com.zxzx74147.devlib.fragment.CommonInfoDialog;
 import com.zxzx74147.devlib.modules.account.AccountManager;
-import com.zxzx74147.devlib.modules.busstation.BalanceBusStation;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.devlib.utils.ToastUtil;
@@ -32,6 +30,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
@@ -42,6 +41,7 @@ public class UnBindCardFragment extends BaseDialogFragment {
     private FragmentUnbindBankBinding mBinding = null;
     private boolean mIsCountDonw = false;
     private BankStorage mStorage = RetrofitClient.getClient().create(BankStorage.class);
+    private Disposable mDisposable = null;
 
     public static UnBindCardFragment newInstance(IntentData<BankCard> intentData) {
         UnBindCardFragment fragment = new UnBindCardFragment();
@@ -63,9 +63,17 @@ public class UnBindCardFragment extends BaseDialogFragment {
         return mBinding.getRoot();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mDisposable != null) {
+            mDisposable.dispose();
+        }
+    }
+
     private void initView() {
 
-        RxView.clicks(mBinding.unbind).subscribe(o->{
+        RxView.clicks(mBinding.unbind).subscribe(o -> {
             doUnbind();
         });
 
@@ -78,15 +86,14 @@ public class UnBindCardFragment extends BaseDialogFragment {
     }
 
 
-
-    private void doUnbind(){
+    private void doUnbind() {
         String vcode = mBinding.vcode.getText().toString();
-        if(TextUtils.isEmpty(vcode)){
-            ToastUtil.showToast(getActivity(),"请填写验证码");
+        if (TextUtils.isEmpty(vcode)) {
+            ToastUtil.showToast(getActivity(), "请填写验证码");
             return;
         }
 
-        NetworkApi.ApiSubscribe(getActivity(),mStorage.bindRemove(mBinding.getData().bankCardId,vcode),true, new Consumer<UniApiData>() {
+        NetworkApi.ApiSubscribe(getActivity(), mStorage.bindRemove(mBinding.getData().bankCardId, vcode), true, new Consumer<UniApiData>() {
 
             @Override
             public void accept(UniApiData uniApiData) throws Exception {
@@ -109,12 +116,12 @@ public class UnBindCardFragment extends BaseDialogFragment {
                 ZXFragmentJumpHelper.startFragment(getActivity(), dialog, new CommonCallback() {
                     @Override
                     public void callback(Object item) {
-                        ((WithdrawActivity)getActivity()).refresh();
+                        ((WithdrawActivity) getActivity()).refresh();
                         dismiss();
                     }
                 });
             }
-        },UniApiData.class);
+        }, UniApiData.class);
 
     }
 
@@ -131,7 +138,10 @@ public class UnBindCardFragment extends BaseDialogFragment {
                 }
                 ViewUtil.showSoftPad(mBinding.vcode);
                 final long count = 60;
-                Observable.interval(0, 1, TimeUnit.SECONDS).take(count + 1).map(aLong -> count - aLong).doOnSubscribe(disposable -> mIsCountDonw = true).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(t -> {
+                Observable.interval(0, 1, TimeUnit.SECONDS).take(count + 1).map(aLong -> count - aLong).doOnSubscribe(disposable -> {
+                    mDisposable = disposable;
+                    mIsCountDonw = true;
+                }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(t -> {
                     if (t <= 0) {
                         mIsCountDonw = false;
                     } else {

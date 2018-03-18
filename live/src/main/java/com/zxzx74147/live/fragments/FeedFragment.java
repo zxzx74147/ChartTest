@@ -43,7 +43,7 @@ public class FeedFragment extends BaseFragment {
 
     private FragmentFeedBinding mBinding = null;
     private CommonRecyclerViewAdapter<Text> mAdapter = null;
-    private FeedStorage mFeedStorage = RetrofitClient.getClient().create(FeedStorage.class);
+    private FeedStorage mFeedStorage = RetrofitClient.getRSAClient().create(FeedStorage.class);
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -129,7 +129,7 @@ public class FeedFragment extends BaseFragment {
                 }
                 text.loveNum = likeData.loveNum;
                 text.isLove = text.isLove==0? 1:0;
-                mAdapter.notifyDataSetChanged();
+                mAdapter.notifyItemChanged(text);
             }
         });
     }

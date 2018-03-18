@@ -238,7 +238,7 @@ public class ChartUtil {
 
     public static void setChart(CombinedChart chart) {
 
-
+        chart.setDoubleTapToZoomEnabled(false);
         chart.setScaleEnabled(true);//启用图表缩放事件
         chart.setDrawBorders(true);//是否绘制边线
         chart.setBorderWidth(1);//边线宽度，单位dp

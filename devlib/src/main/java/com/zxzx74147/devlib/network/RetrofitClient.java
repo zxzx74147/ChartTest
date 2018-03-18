@@ -24,6 +24,7 @@ public class RetrofitClient {
     private static final String TAG = RetrofitClient.class.getSimpleName();
     private static Retrofit mStockRetrofit;
     private static Retrofit mRetrofit;
+    private static Retrofit mRSARetrofit;
     private RetrofitClient(){
     }
 
@@ -50,7 +51,7 @@ public class RetrofitClient {
                 .client(client)
                 .build();
 
-        builder.addInterceptor(new RsaInterceptor());
+
         client = builder.build();
         mRetrofit= new Retrofit.Builder()
                 .baseUrl(NetworkConfig.HOST)
@@ -58,10 +59,24 @@ public class RetrofitClient {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)
                 .build();
+
+        builder.addInterceptor(new RsaInterceptor());
+        client = builder.build();
+        mRSARetrofit= new Retrofit.Builder()
+                .baseUrl(NetworkConfig.HOST)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(client)
+                .build();
+
     }
 
     public static Retrofit getClient(){
         return mRetrofit;
+    }
+
+    public static Retrofit getRSAClient(){
+        return mRSARetrofit;
     }
 
     public static Retrofit getStockClient(){

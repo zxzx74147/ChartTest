@@ -17,7 +17,7 @@ public class FormatUtil {
 
     public  static List<String> POINT_LIST = null;
     static {
-        POINT_LIST = new ArrayList<>(100);
+        POINT_LIST = new ArrayList<>(50);
         POINT_LIST.add("无");
         for(int i=1;i<100;i++){
             POINT_LIST.add(i+"点");

@@ -163,6 +163,7 @@ public class IjkVideoViewHolder implements MediaController.MediaPlayerControl {
 
     public void setTextureRender(TextureRenderView renderView){
         if (mMediaPlayer != null) {
+
             renderView.getSurfaceHolder().bindToMediaPlayer(mMediaPlayer);
             renderView.setVideoSize(mMediaPlayer.getVideoWidth(), mMediaPlayer.getVideoHeight());
             renderView.setVideoSampleAspectRatio(mMediaPlayer.getVideoSarNum(), mMediaPlayer.getVideoSarDen());

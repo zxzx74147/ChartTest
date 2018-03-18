@@ -69,7 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/foget_pass"
-            android:paddingLeft="@dimen/default_gap_100"
+            android:paddingLeft="@dimen/default_gap_44"
             android:paddingTop="@dimen/default_gap_20"
             android:onClick="@{v->ProfileBusStation.startTradePasswordMotify(context)}"
             android:textColor="@color/text_black"

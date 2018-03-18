@@ -10,4 +10,5 @@ import java.io.Serializable;
 
 public class MachPositionData extends UniApiData implements Serializable{
     public MachPosition machPosition;
+    public Fail failed;
 }

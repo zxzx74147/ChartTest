@@ -28,6 +28,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
@@ -38,6 +39,7 @@ public class PasswordResetFragment extends BaseDialogFragment {
     private LayoutResetPasswordBinding mBinding = null;
     private AccountStorage mStorage = RetrofitClient.getClient().create(AccountStorage.class);
     private boolean mIsCountDonw = false;
+    private Disposable mDisposable;
 
     public static PasswordResetFragment newInstance() {
         PasswordResetFragment fragment = new PasswordResetFragment();
@@ -51,6 +53,14 @@ public class PasswordResetFragment extends BaseDialogFragment {
         mBinding.setUser(AccountManager.sharedInstance().getUser());
         initView();
         return mBinding.getRoot();
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        if(mDisposable!=null) {
+            mDisposable.dispose();
+        }
     }
 
     private void initView() {
@@ -134,12 +144,12 @@ public class PasswordResetFragment extends BaseDialogFragment {
 
                 final long count = 60;
                 ViewUtil.showSoftPad(mBinding.vcode);
-                Observable.interval(0, 1, TimeUnit.SECONDS).take(count + 1).map(aLong -> count - aLong).doOnSubscribe(disposable -> mIsCountDonw = true).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(t -> {
+                Observable.interval(0, 1, TimeUnit.SECONDS).take(count + 1).map(aLong -> count - aLong).doOnSubscribe(disposable -> {mIsCountDonw = true;mDisposable = disposable;}).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(t -> {
                     if (t <= 0) {
                         mIsCountDonw = false;
                         mBinding.vcodeRemind.setTextColor(getResources().getColor(R.color.text_blue));
                     } else {
-                        String format = getResources().getString(R.string.vcode_countdown);
+                        String format = getContext().getResources().getString(R.string.vcode_countdown);
                         mBinding.vcodeRemind.setText(String.format(format, t));
                         mBinding.vcodeRemind.setTextColor(getResources().getColor(R.color.text_light_grey));
 

@@ -146,6 +146,7 @@ public class RsaUtil {
             // cipher= Cipher.getInstance("RSA", new BouncyCastleProvider());
             cipher.init(Cipher.ENCRYPT_MODE, publicKey);
             byte[] output = cipher.doFinal(plainTextData.getBytes("UTF-8"));
+            return Base64.encodeToString(output,Base64.DEFAULT);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
 //            throw new Exception("无此加密算法");
@@ -167,7 +168,7 @@ public class RsaUtil {
                  return null;
     }
 
-    public static byte[] decrypt(RSAPrivateKey privateKey, byte[] cipherData)
+    public static String decrypt(RSAPrivateKey privateKey, byte[] cipherData)
             throws Exception {
         if (privateKey == null) {
             throw new Exception("解密私钥为空, 请设置");
@@ -179,7 +180,7 @@ public class RsaUtil {
             // cipher= Cipher.getInstance("RSA", new BouncyCastleProvider());
             cipher.init(Cipher.DECRYPT_MODE, privateKey);
             byte[] output = cipher.doFinal(cipherData);
-            return output;
+            return Base64.encodeToString(output,Base64.DEFAULT);
         } catch (NoSuchAlgorithmException e) {
             throw new Exception("无此解密算法");
         } catch (NoSuchPaddingException e) {

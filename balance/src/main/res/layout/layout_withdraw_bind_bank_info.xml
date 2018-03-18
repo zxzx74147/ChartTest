@@ -133,7 +133,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/hint_card_bank"
-            android:padding="@dimen/default_size_24"
+            android:padding="@dimen/default_size_15"
             android:textColor="@color/text_black"
             android:textColorHint="@color/text_light_grey"
             android:text="@{user.phone}"
@@ -164,6 +164,8 @@
                 android:layout_weight="1"
                 android:background="@color/tran"
                 android:inputType="number"
+                android:textColorHint="@color/text_light_grey"
+                android:hint="@string/vcode_remind"
                 android:textColor="@color/text_black"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="@dimen/default_size_30" />

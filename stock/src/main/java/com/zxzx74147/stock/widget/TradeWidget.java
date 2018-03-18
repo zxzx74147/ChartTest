@@ -301,9 +301,9 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             Observable<MachPositionData> observable = mTradeStorage.machpositionModify(mMachPosition.machPositionId, mSelectGood.goodsId, mType - 2, mAmount, price, limitStr, stopStr, "100", 1);
             NetworkApi.ApiSubscribe(ViewUtil.getLivecirceOwer(this),observable,true, machPositionData -> {
                 if (machPositionData.hasError()) {
-//                    if (FailDealUtil.dealFail(getContext(), machPositionData.failed)) {
-//                        return;
-//                    }
+                    if (FailDealUtil.dealFail(getContext(), machPositionData.failed)) {
+                        return;
+                    }
                     ToastUtil.showToast(getContext(), machPositionData.error.usermsg);
                     return;
                 }
@@ -397,9 +397,9 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             Observable<MachPositionData> observable = mTradeStorage.machpositionOpen(mSelectGood.goodsId, mType - 2, mAmount, price, limitStr, stopStr, "100", 1);
             NetworkApi.ApiSubscribe(ViewUtil.getLivecirceOwer(this),observable, true,machPositionData -> {
                 if (machPositionData.hasError()) {
-//                    if (FailDealUtil.dealFail(getContext(), machPositionData.failed)) {
-//                        return;
-//                    }
+                    if (FailDealUtil.dealFail(getContext(), machPositionData.failed)) {
+                        return;
+                    }
                     ToastUtil.showToast(getContext(), machPositionData.error.usermsg);
                     return;
                 }

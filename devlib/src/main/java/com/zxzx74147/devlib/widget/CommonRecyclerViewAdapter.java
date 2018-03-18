@@ -66,4 +66,11 @@ public class CommonRecyclerViewAdapter<T> extends BaseQuickAdapter<T, BaseBindin
         super.setNewData(data);
 
     }
+
+    public void notifyItemChanged(T obj){
+        int positon = mData.indexOf(obj);
+        if(positon>=0){
+            notifyItemChanged(positon);
+        }
+    }
 }

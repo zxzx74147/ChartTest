@@ -66,7 +66,7 @@ public class PasswordInputFragment extends BaseDialogFragment {
 
             NetworkApi.ApiSubscribe(mStorage.tradeLogin(p1), userUniData -> {
                 if(userUniData.hasError()){
-
+                    ToastUtil.showToast(getActivity(),userUniData.error.usermsg);
                     return;
                 }
                 AccountManager.sharedInstance().saveUser(userUniData.user);

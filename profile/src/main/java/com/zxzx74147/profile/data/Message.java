@@ -22,14 +22,15 @@ public class Message implements Serializable{
     @SerializedName("abstract")
     @Expose
     public String abs;     //摘要
+    public String title;
     public String content;     //正文
-    public int createTime;   //时间
+    public String createTime;   //时间
 
-    public Spannable getUnreadAbs(){
+    public Spannable getUnreadTitle(){
 
         ImageSpan imageSpan = new ImageSpan(DevLib.getApp(), R.drawable.rect_round_red_point, DynamicDrawableSpan.ALIGN_BASELINE);
 //        imageSpan.
-        SpannableString spannableString = new SpannableString("  "+abs);
+        SpannableString spannableString = new SpannableString("  "+title);
         spannableString.setSpan(imageSpan,0,1,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return spannableString;
     }

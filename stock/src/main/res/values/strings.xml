@@ -58,7 +58,7 @@
     <string name="none">无</string>
     <string name="format_cost">%.1f元</string>
     <string name="format_defer">%.1f元/天</string>
-    <string name="format_trade_amount">共%.1f%s，涨1个点可赚%.2f元，%.1f点回本</string>
+    <string name="format_trade_amount">共%.1f%s，涨1个点可赚%.2f元。</string>
     <string name="total">总价(元)</string>
     <string name="total_asset">总资产(元)</string>
     <string name="left_asset">可用余额(元)</string>

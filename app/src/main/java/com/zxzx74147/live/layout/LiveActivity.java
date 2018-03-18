@@ -4,8 +4,10 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
+import android.graphics.Matrix;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.zxzx74147.charttest.R;
@@ -15,6 +17,7 @@ import com.zxzx74147.devlib.data.UniApiData;
 import com.zxzx74147.devlib.modules.account.UserViewModel;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
+import com.zxzx74147.devlib.utils.DisplayUtil;
 import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.live.data.Live;
 import com.zxzx74147.live.media.IjkVideoViewHolder;
@@ -58,6 +61,27 @@ public class LiveActivity extends BaseActivity {
     }
 
     private void initView() {
+//        Matrix matrix = new Matrix();
+//        matrix.reset();
+//        matrix.setScale(-1,1, DisplayUtil.getDisplayMetrics().widthPixels/2,0);
+        mBinding.video2.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                Matrix matrix = new Matrix();
+                matrix.reset();
+                matrix.setScale(-1,1, (right-left)/2,0);
+                mBinding.video2.setTransform(matrix);
+            }
+        });
+        mBinding.video1.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                Matrix matrix = new Matrix();
+                matrix.reset();
+                matrix.setScale(-1,1, (right-left)/2,0);
+                mBinding.video1.setTransform(matrix);
+            }
+        });
         switch (this.getResources().getConfiguration().orientation) {
             case Configuration.ORIENTATION_PORTRAIT:
                 RxView.clicks(mBinding.video2).subscribe(v -> {
@@ -106,6 +130,8 @@ public class LiveActivity extends BaseActivity {
             mVideoHolder2.setVideoPath(mLive.rtmpList.rtmp.get(1).url);
 //            mVideoHolder2.setVideoPath(RTMP_HKS);
             mVideoHolder2.start();
+        }else{
+            mBinding.video2.setVisibility(View.GONE);
         }
     }
 

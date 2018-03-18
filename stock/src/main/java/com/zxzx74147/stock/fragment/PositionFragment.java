@@ -51,6 +51,7 @@ import com.zxzx74147.stock.databinding.ItemMachpositionBinding;
 import com.zxzx74147.stock.databinding.ItemMachpositionHeaderBinding;
 import com.zxzx74147.stock.databinding.LayoutPositionHeaderBinding;
 import com.zxzx74147.stock.storage.TradesStorage;
+import com.zxzx74147.stock.util.FailDealUtil;
 
 import java.util.LinkedList;
 
@@ -235,6 +236,9 @@ public class PositionFragment extends BaseDialogFragment {
                 if (item != null) {
                     NetworkApi.ApiSubscribe(mTradeStorage.machpositionCancel(machPosition.machPositionId), o -> {
                         if (o.hasError()) {
+                            if(FailDealUtil.dealFail(getActivity(),o.failed)){
+                                return;
+                            }
                             ToastUtil.showToast(getActivity(), o.error.usermsg);
                             return;
                         }
