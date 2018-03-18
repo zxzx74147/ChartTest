@@ -25,7 +25,7 @@
 
             android:layout_width="match_parent"
             android:id="@+id/good_list"
-            android:layout_height="@dimen/default_gap_150"
+            android:layout_height="@dimen/default_gap_140"
             app:good="@{good}"
             android:layout_marginTop="@dimen/default_gap_16" />
 

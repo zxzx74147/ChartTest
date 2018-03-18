@@ -17,6 +17,7 @@
     <string name="format_02_sign">%+.2f</string>
     <string name="format_02_per">%.2f%</string>
     <string name="yuan">元</string>
+    <string name="to">-</string>
     <string name="none">无</string>
     <string name="yuan_sign">￥</string>
     <string name="format_yuan">%.2f元</string>

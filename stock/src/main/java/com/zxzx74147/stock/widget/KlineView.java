@@ -172,9 +172,9 @@ public class KlineView extends LinearLayout {
         CombinedData combinedData = new CombinedData();
         setKData(combinedData);
         ArrayList<ILineDataSet> sets = new ArrayList<>();
-        LineDataSet lineMA5 = new LineDataSet(mDataParse.getMa5DataL(), "ma5");
-        LineDataSet lineMA10 = new LineDataSet(mDataParse.getMa10DataL(), "ma10");
-        LineDataSet lineMA20 = new LineDataSet(mDataParse.getMa20DataL(), "ma20");
+        LineDataSet lineMA5 = new LineDataSet(mDataParse.getMa5DataL(), "MA5");
+        LineDataSet lineMA10 = new LineDataSet(mDataParse.getMa10DataL(), "MA10");
+        LineDataSet lineMA20 = new LineDataSet(mDataParse.getMa20DataL(), "MA20");
         ChartUtil.setLineDataleSet(lineMA5, getResources().getColor(R.color.stock_kline_ma5));
         ChartUtil.setLineDataleSet(lineMA10, getResources().getColor(R.color.stock_kline_ma10));
         ChartUtil.setLineDataleSet(lineMA20, getResources().getColor(R.color.stock_kline_ma20));
@@ -192,9 +192,9 @@ public class KlineView extends LinearLayout {
         CombinedData combinedData = new CombinedData();
         setKData(combinedData);
         ArrayList<ILineDataSet> sets = new ArrayList<>();
-        LineDataSet lineMA5 = new LineDataSet(mDataParse.getExpmaData5(), "ema5");
-        LineDataSet lineMA10 = new LineDataSet(mDataParse.getExpmaData10(), "ema10");
-        LineDataSet lineMA20 = new LineDataSet(mDataParse.getExpmaData20(), "ema20");
+        LineDataSet lineMA5 = new LineDataSet(mDataParse.getExpmaData5(), "EMA5");
+        LineDataSet lineMA10 = new LineDataSet(mDataParse.getExpmaData10(), "EMA10");
+        LineDataSet lineMA20 = new LineDataSet(mDataParse.getExpmaData20(), "EMA20");
         ChartUtil.setLineDataleSet(lineMA5, getResources().getColor(R.color.stock_kline_ma5));
         ChartUtil.setLineDataleSet(lineMA10, getResources().getColor(R.color.stock_kline_ma10));
         ChartUtil.setLineDataleSet(lineMA20, getResources().getColor(R.color.stock_kline_ma20));
@@ -237,8 +237,8 @@ public class KlineView extends LinearLayout {
         combinedData.setData(barData);
 
         ArrayList<ILineDataSet> sets = new ArrayList<>();
-        LineDataSet lineDea = new LineDataSet(mDataParse.getDeaData(), "dea");
-        LineDataSet lineDif = new LineDataSet(mDataParse.getDeaData(), "dif");
+        LineDataSet lineDea = new LineDataSet(mDataParse.getDeaData(), "DEA");
+        LineDataSet lineDif = new LineDataSet(mDataParse.getDeaData(), "DIF");
         ChartUtil.setLineDataleSet(lineDea, getResources().getColor(R.color.stock_kline_dea), true);
         ChartUtil.setLineDataleSet(lineDif, getResources().getColor(R.color.stock_kline_dif), true);
         sets.add(lineDea);
@@ -254,9 +254,9 @@ public class KlineView extends LinearLayout {
 
 
         ArrayList<ILineDataSet> sets = new ArrayList<>();
-        LineDataSet lineK = new LineDataSet(mDataParse.getkData(), "k");
-        LineDataSet lineD = new LineDataSet(mDataParse.getdData(), "d");
-        LineDataSet lineJ = new LineDataSet(mDataParse.getjData(), "j");
+        LineDataSet lineK = new LineDataSet(mDataParse.getkData(), "K");
+        LineDataSet lineD = new LineDataSet(mDataParse.getdData(), "D");
+        LineDataSet lineJ = new LineDataSet(mDataParse.getjData(), "J");
         ChartUtil.setLineDataleSet(lineK, getResources().getColor(R.color.stock_kline_dea), true);
         ChartUtil.setLineDataleSet(lineD, getResources().getColor(R.color.stock_kline_ma5), true);
         ChartUtil.setLineDataleSet(lineJ, getResources().getColor(R.color.stock_kline_dif), true);
@@ -274,9 +274,9 @@ public class KlineView extends LinearLayout {
         CombinedData combinedData = new CombinedData();
 
         ArrayList<ILineDataSet> sets = new ArrayList<>();
-        LineDataSet lineK = new LineDataSet(mDataParse.getRsiData6(), "rsi6");
-        LineDataSet lineD = new LineDataSet(mDataParse.getRsiData12(), "rsi12");
-        LineDataSet lineJ = new LineDataSet(mDataParse.getRsiData24(), "rsi21");
+        LineDataSet lineK = new LineDataSet(mDataParse.getRsiData6(), "RSI6");
+        LineDataSet lineD = new LineDataSet(mDataParse.getRsiData12(), "RSI12");
+        LineDataSet lineJ = new LineDataSet(mDataParse.getRsiData24(), "RSI21");
         ChartUtil.setLineDataleSet(lineK, getResources().getColor(R.color.stock_kline_dea), true);
         ChartUtil.setLineDataleSet(lineD, getResources().getColor(R.color.stock_kline_ma5), true);
         ChartUtil.setLineDataleSet(lineJ, getResources().getColor(R.color.stock_kline_dif), true);

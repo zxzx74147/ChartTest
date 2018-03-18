@@ -33,7 +33,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/reply_eidt"
+            app:layout_constraintBottom_toTopOf="@+id/div"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title">
@@ -45,11 +45,22 @@
         </com.dinuscxj.refresh.RecyclerRefreshLayout>
 
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:id="@+id/div"
+            android:layout_marginBottom="@dimen/default_gap_44"
+            app:layout_constraintBottom_toTopOf="@id/reply_eidt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            android:background="@color/div_default"/>
         <EditText
             android:id="@+id/reply_eidt"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_gap_44"
+            android:layout_marginTop="@dimen/default_gap_44"
             android:layout_marginEnd="@dimen/default_gap_44"
             android:layout_marginStart="@dimen/default_gap_44"
             android:background="@drawable/rect_round_stroke_grey"

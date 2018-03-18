@@ -1,6 +1,8 @@
 package com.zxzx74147.balance.fragment;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.text.Spannable;
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxCompoundButton;
 import com.zxzx74147.balance.R;
+import com.zxzx74147.balance.data.PayNewData;
 import com.zxzx74147.balance.data.PayRequest;
 import com.zxzx74147.balance.databinding.FragmentRechargeBinding;
 import com.zxzx74147.balance.storage.PayStorage;
@@ -20,8 +23,10 @@ import com.zxzx74147.devlib.base.BaseDialogFragment;
 import com.zxzx74147.devlib.data.DepositItem;
 import com.zxzx74147.devlib.data.IntentData;
 import com.zxzx74147.devlib.modules.sys.SysInitManager;
+import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.devlib.utils.ColorUtil;
+import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.devlib.widget.CommonRecyclerViewAdapter;
@@ -36,6 +41,7 @@ public class RechargeFragment extends BaseDialogFragment {
     private int amount = 1000;
     private FragmentRechargeBinding mBinding = null;
     private CommonRecyclerViewAdapter mAdapter = null;
+
     private List<DepositItem> mData = new LinkedList<>();
     private PayStorage mPayStorage = RetrofitClient.getClient().create(PayStorage.class);
 
@@ -112,19 +118,37 @@ public class RechargeFragment extends BaseDialogFragment {
         RxView.clicks(mBinding.alipayLayout).subscribe(v -> {
             mBinding.checkboxAli.setChecked(true);
         });
+
         RxView.clicks(mBinding.recharge).subscribe(o -> {
             IntentData<PayRequest> intent = new IntentData<>();
             PayRequest payRequest = new PayRequest();
             payRequest.amount = amount;
             intent.data = payRequest;
-            if (mBinding.checkboxWechat.isChecked()) {
+            if (mBinding.checkboxWechat.isChecked()&&mBinding.wechatLayout.getVisibility()==View.VISIBLE) {
                 payRequest.type = PayRequest.TYPE_WECHAT;
                 ZXFragmentJumpHelper.startFragment(getContext(), RechargeWechatFragment.class, intent);
-            } else if (mBinding.checkboxAli.isChecked()) {
-                payRequest.type = PayRequest.TYPE_ALIPAY;
-                ZXFragmentJumpHelper.startFragment(getContext(), RechargeWechatFragment.class, intent);
+            } else if (mBinding.checkboxAli.isChecked()&&mBinding.alipayLayout.getVisibility()==View.VISIBLE) {
+//                payRequest.type = PayRequest.TYPE_ALIPAY;
+//                ZXFragmentJumpHelper.startFragment(getContext(), RechargeWechatFragment.class, intent);
+                startAliPay(amount);
+            }else{
+                ToastUtil.showToast(getContext(),R.string.select_pay_method);
             }
         });
+    }
+
+    private void startAliPay(int amount){
+
+        NetworkApi.ApiSubscribe(getActivity(), mPayStorage.payAli(amount), true, payNewData -> {
+
+            if (payNewData.hasError()) {
+                ToastUtil.showToast(getActivity(),payNewData.error.usermsg);
+                return;
+            }
+            Intent in = new Intent(Intent.ACTION_VIEW, Uri.parse(payNewData.codeUrl));
+            startActivity(in);
+        }, PayNewData.class);
+
     }
 
 

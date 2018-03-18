@@ -15,14 +15,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:gravity="center"
         android:orientation="horizontal">
 
+        <ImageView
+            android:layout_width="@dimen/default_gap_30"
+            android:src="@drawable/live_pre"
+            android:layout_height="match_parent" />
         <TextView
             android:layout_width="0dip"
+            android:paddingTop="@dimen/default_gap_10"
+            android:paddingBottom="@dimen/default_gap_10"
             android:layout_height="wrap_content"
-            android:text='@{TimeUtil.getHHMMTime(data.startTime)+@string/plus+TimeUtil.getHHMMTime(data.endTime)}'
+            android:text='@{TimeUtil.getHHMMTime(data.startTime)+@string/to+TimeUtil.getHHMMTime(data.endTime)}'
             android:layout_weight="1" />
+        <View
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="1px"/>
 
         <ImageView
             android:layout_width="wrap_content"

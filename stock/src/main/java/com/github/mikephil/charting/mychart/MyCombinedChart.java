@@ -26,7 +26,7 @@ public class MyCombinedChart extends CombinedChart {
 //    private MyHMarkerView myMarkerViewH;
     private MyBottomMarkerView myBottomMarkerView;
     private Paint mPaint = new Paint();
-    private int top = getResources().getDimensionPixelSize(R.dimen.default_gap_5);
+    private int top = getResources().getDimensionPixelSize(R.dimen.default_gap_13);
     private static String FORMAT_LABEL=DevLib.getApp().getString(R.string.format_label);
 //    private DataParse minuteHelper;
 
@@ -85,7 +85,7 @@ public class MyCombinedChart extends CombinedChart {
                 Entry e = mData.getEntryForHighlight(mIndicesToHighlight[i]);
                 List<BarLineScatterCandleBubbleData> alldata  = mData.getAllData();
                 for(BarLineScatterCandleBubbleData bubbleData:alldata){
-                    int length = 0;
+                    int length = 15;
                     if(bubbleData instanceof LineData){
 
                         for(Object setObj: bubbleData.getDataSets()){
@@ -99,8 +99,8 @@ public class MyCombinedChart extends CombinedChart {
                             mPaint.setColor(set.getColor());
                             if(eD!=null&& !TextUtils.isEmpty(set.getLabel())){
                                 String context = String.format(FORMAT_LABEL,set.getLabel(),eD.getY());
-                                canvas.drawText(context, mViewPortHandler.contentLeft()+length, mViewPortHandler.contentTop()+top+13,mPaint);
-                                length+=mPaint.measureText(context)+1;
+                                canvas.drawText(context, mViewPortHandler.contentLeft()+length, mViewPortHandler.contentTop()+top,mPaint);
+                                length+=mPaint.measureText(context)+10;
                             }
                         }
                     }

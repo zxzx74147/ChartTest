@@ -52,6 +52,7 @@ public class CommonItemSelectorDialog extends BaseDialogFragment {
     private void initView() {
         IntentData<DialogItem> intentData = (IntentData<DialogItem>) getArguments().getSerializable(ZXActivityJumpHelper.INTENT_DATA);
         DialogItem dialogItem = intentData.data;
+        mBinding.setDialogItem(dialogItem);
 
         for(int i = 0;i<dialogItem.items.length;i++){
             String item=dialogItem.items[i];

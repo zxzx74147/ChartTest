@@ -70,6 +70,7 @@ public class ModuleMain {
             ZXActivityJumpHelper.startActivity(event.context,LauncherActivity.class);
             ((BaseActivity)event.context).finish();
         }else  if (event.id == LiveBusStation.BUS_ID_LIVE_VIEW){
+            ((Activity) event.context).overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_hold);
             ZXActivityJumpHelper.startActivity(event.context, LiveActivity.class,new IntentData((Serializable) event.data));
 
         }else  if (event.id == MainBusStation.BUS_ID_PUSH_SUCC){

@@ -22,7 +22,7 @@
         <android.support.constraint.ConstraintLayout
             android:id="@+id/kline_other"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@color/white"
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -211,52 +211,23 @@
 
             </FrameLayout>
 
-            <!--<com.github.mikephil.charting.charts.CombinedChart-->
-                <!--android:id="@+id/kline_realtime"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="0dp"-->
-                <!--app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--app:layout_constraintEnd_toEndOf="parent"-->
-                <!--app:layout_constraintStart_toStartOf="parent"-->
-                <!--app:layout_constraintTop_toTopOf="parent" />-->
+
 
 
         </android.support.constraint.ConstraintLayout>
 
 
-        <!--<com.github.mikephil.charting.charts.CombinedChart-->
-            <!--android:id="@+id/kline_realtime"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="0dp"-->
-            <!--app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--app:layout_constraintStart_toStartOf="parent"-->
-            <!--app:layout_constraintTop_toTopOf="parent" />-->
         <com.github.mikephil.charting.mychart.MyCombinedChart
             android:id="@+id/kline_realtime"
-            app:layout_constraintBottom_toBottomOf="@id/kline_other"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/kline_other"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <!--<FrameLayout-->
-            <!--android:id="@+id/kline_realtime_layout"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="0dp"-->
-            <!--app:layout_constraintBottom_toBottomOf="@id/kline_other"-->
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--app:layout_constraintStart_toStartOf="@id/kline_other"-->
-            <!--app:layout_constraintTop_toTopOf="parent">-->
 
-            <!--<com.github.mikephil.charting.charts.CombinedChart-->
-                <!--android:id="@+id/kline_realtime"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent" />-->
-
-        <!--</FrameLayout>-->
 
     </android.support.constraint.ConstraintLayout>
 </layout>

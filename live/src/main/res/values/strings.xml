@@ -35,7 +35,7 @@
     <string name="live_time_header">TA的直播预告</string>
     <string name="comment">评论</string>
     <string name="write_comment">写评论</string>
-    <string name="reply_remind">正面回馈和建设性的回复很重要</string>
+    <string name="reply_remind">评论…正面回馈和建设性的回复很重要</string>
     <string name="text_detail">观点详情</string>
     <string name="delete">删除</string>
     <string name="format_profit">盈利播报: %s盈利</string>

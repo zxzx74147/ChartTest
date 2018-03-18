@@ -94,6 +94,7 @@ dependencies {
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
     api 'com.dinuscxj:recyclerrefreshlayout:2.0.5'
     api 'com.squareup.retrofit2:retrofit:2.3.0'
+    api 'com.android.support:percent:27.1.0'
     api 'com.squareup.okhttp3:okhttp:3.9.1'
     api 'com.squareup.retrofit2:converter-gson:2.3.0'
     api 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'

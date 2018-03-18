@@ -125,7 +125,8 @@ public class MainFeedActivity extends BaseActivity {
         mGestureDetector = new GestureDetectorCompat(this, mOnGestureListener);
         RxView.clicks(mBinding.sendFeed).subscribe(o -> {
             DialogItem item = new DialogItem();
-            item.title = getResources().getString(R.string.send_remind);
+            item.title = getResources().getString(R.string.remind);
+            item.content=getResources().getString(R.string.send_remind);
             item.cancel = null;
             item.ok = getResources().getString(com.zxzx74147.balance.R.string.i_know);
             CommonFragmentDialog dialog = CommonFragmentDialog.newInstance(new IntentData<>(item));

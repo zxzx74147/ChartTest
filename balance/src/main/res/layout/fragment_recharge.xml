@@ -106,6 +106,7 @@
                 android:checked="true" />
         </LinearLayout>
 
+        <!---->
         <LinearLayout
             android:id="@+id/alipay_layout"
             android:visibility="@{swich.aliPay==0? View.GONE:View.VISIBLE}"

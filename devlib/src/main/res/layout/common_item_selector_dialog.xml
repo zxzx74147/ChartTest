@@ -23,6 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/default_gap_96"
             android:text="@{dialogItem.title}"
+            android:gravity="center"
             android:textColor="@color/text_light_grey"
             android:textSize="@dimen/default_size_30" />
 

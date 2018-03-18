@@ -9,10 +9,11 @@
             type="com.zxzx74147.stock.data.Price" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:background="@color/bg_grey">
 
         <RelativeLayout
@@ -45,6 +46,7 @@
 
             <TextView
 
+                android:id="@+id/textView42"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/current_price"
@@ -58,89 +60,89 @@
 
                 android:id="@+id/close_value"
                 android:layout_width="wrap_content"
-                android:text="@{@string/format_01(price.close)}"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/current_price"
-                android:textColor="@color/text_black"
                 android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/current_price"
+                android:text="@{@string/format_01(price.close)}"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/default_size_26" />
 
             <TextView
                 android:id="@+id/close_label"
                 android:layout_width="wrap_content"
-                android:layout_marginRight="@dimen/default_gap_5"
-                android:text="昨收"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/current_price"
-                android:textColor="@color/text_light_grey"
+                android:layout_marginRight="@dimen/default_gap_5"
                 android:layout_toLeftOf="@id/close_value"
+                android:text="昨收"
+                android:textColor="@color/text_light_grey"
                 android:textSize="@dimen/default_size_26" />
 
             <TextView
                 android:id="@+id/low_value"
                 android:layout_width="wrap_content"
-                android:text="@{@string/format_01(price.low)}"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/current_price"
-                android:textColor="@color/green"
                 android:layout_alignParentRight="true"
+                android:text="@{@string/format_01(price.low)}"
+                android:textColor="@color/green"
                 android:textSize="@dimen/default_size_26" />
 
             <TextView
                 android:id="@+id/low_label"
                 android:layout_width="wrap_content"
-                android:text="最低"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/default_gap_5"
                 android:layout_alignBottom="@+id/current_price"
-                android:textColor="@color/text_light_grey"
+                android:layout_marginRight="@dimen/default_gap_5"
                 android:layout_toLeftOf="@id/low_value"
+                android:text="最低"
+                android:textColor="@color/text_light_grey"
                 android:textSize="@dimen/default_size_26" />
 
 
             <TextView
 
                 android:id="@+id/open_value"
-                android:layout_marginRight="@dimen/default_gap_15"
                 android:layout_width="wrap_content"
-                android:text="@{@string/format_01(price.open)}"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/current_price"
-                android:textColor="@color/text_black"
+                android:layout_marginRight="@dimen/default_gap_15"
                 android:layout_toLeftOf="@id/close_label"
+                android:text="@{@string/format_01(price.open)}"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/default_size_26" />
 
             <TextView
                 android:id="@+id/open_label"
-                android:layout_marginRight="@dimen/default_gap_5"
                 android:layout_width="wrap_content"
-                android:text="今开"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/current_price"
-                android:textColor="@color/text_light_grey"
+                android:layout_marginRight="@dimen/default_gap_5"
                 android:layout_toLeftOf="@id/open_value"
+                android:text="今开"
+                android:textColor="@color/text_light_grey"
                 android:textSize="@dimen/default_size_26" />
 
             <TextView
-                android:layout_marginRight="@dimen/default_gap_15"
                 android:id="@+id/high_value"
                 android:layout_width="wrap_content"
-                android:text="@{@string/format_01(price.high)}"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/current_price"
-                android:textColor="@color/red"
+                android:layout_marginRight="@dimen/default_gap_15"
                 android:layout_toLeftOf="@id/low_label"
+                android:text="@{@string/format_01(price.high)}"
+                android:textColor="@color/red"
                 android:textSize="@dimen/default_size_26" />
 
             <TextView
                 android:id="@+id/high_label"
                 android:layout_width="wrap_content"
-                android:text="最高"
-                android:layout_marginRight="@dimen/default_gap_5"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/current_price"
-                android:textColor="@color/text_light_grey"
+                android:layout_marginRight="@dimen/default_gap_5"
                 android:layout_toLeftOf="@id/high_value"
+                android:text="最高"
+                android:textColor="@color/text_light_grey"
                 android:textSize="@dimen/default_size_26" />
 
         </RelativeLayout>
@@ -149,8 +151,8 @@
             android:id="@+id/tabLayout"
             style="@style/Stock1TabLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/default_gap_16"
+            android:layout_height="@dimen/default_gap_70"
+            android:layout_marginTop="@dimen/default_gap_12"
             android:background="@color/white"
             android:singleLine="true"
             app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
@@ -200,27 +202,29 @@
                 android:text="@string/stock_k_1d" />
 
             <!--<android.support.design.widget.TabItem-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:tag="@string/stock_k_1d_s"-->
-                <!--android:text="@string/stock_k_1d" />-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:tag="@string/stock_k_1d_s"-->
+            <!--android:text="@string/stock_k_1d" />-->
         </android.support.design.widget.TabLayout>
 
-        <FrameLayout
+        <com.zxzx74147.devlib.widget.RatioRelativeLayout
             android:id="@+id/chart"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tabLayout">
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:ratioWidth="750"
+            app:ratioHeight="554">
 
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/tabLayout"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
             <com.zxzx74147.stock.widget.KlineView
                 android:id="@+id/klineview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent" />
 
-        </FrameLayout>
+        </com.zxzx74147.devlib.widget.RatioRelativeLayout>
 
 
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
 </layout>

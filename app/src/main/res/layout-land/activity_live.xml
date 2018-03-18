@@ -39,6 +39,7 @@
             <com.zxzx74147.live.media.TextureRenderView
                 android:id="@+id/video1"
                 android:layout_width="wrap_content"
+                android:keepScreenOn="true"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical" />
         </FrameLayout>

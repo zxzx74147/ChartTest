@@ -14,17 +14,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="@dimen/default_gap_20"
+        android:paddingBottom="@dimen/default_gap_15"
         android:gravity="center"
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/default_gap_30"
             android:src="@drawable/live_notice"
             android:layout_marginRight="@dimen/default_gap_10"
-            android:layout_height="wrap_content" />
+            android:layout_height="@dimen/default_gap_30" />
         <TextView
             android:layout_width="0dip"
             android:textSize="@dimen/default_size_24"
+            android:layout_marginLeft="@dimen/default_gap_20"
             android:drawablePadding="@dimen/default_gap_10"
             android:layout_height="wrap_content"
             android:text="@string/live_time_header"

@@ -88,6 +88,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:live='@{live}'
+                app:liveDynamic='@{liveMsg.liveDynamic}'
                 app:user='@{user}' />
 
             <FrameLayout

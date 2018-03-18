@@ -10,4 +10,5 @@
     <string name="upgrade_button">升级此版本</string>
     <string name="unicorn_key">aeeac4bfbb8953094b728aee3332fba1</string>
     <string name="send_remind">注册使用2个月之后且盈利率>50%可以发表观点</string>
+    <string name="remind">提示</string>
 </resources>

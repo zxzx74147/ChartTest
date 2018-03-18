@@ -69,6 +69,7 @@
     <string name="unbind_fail_content">请联系客服 \n给您造成的不便，敬请谅解</string>
     <string name="withdraw_fee">手续费(元)</string>
     <string name="withdraw_time_remind">24小时内到账</string>
+    <string name="select_pay_method">请选择支付方式</string>
 
 
     <!--<item name="recharge_wechat_drawable">@drawable/pay_weixin</item>-->
