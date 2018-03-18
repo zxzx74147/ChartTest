@@ -19,6 +19,8 @@
         <variable
             name="user"
             type="com.zxzx74147.devlib.data.UserData" />
+        <import type="android.text.TextUtils"/>
+        <import type="android.view.View"/>
 
 
     </data>

@@ -21,6 +21,8 @@
         <import type="com.zxzx74147.devlib.modules.sys.SysInitManager" />
 
         <import type="com.zxzx74147.devlib.utils.WebviewUtil" />
+        <import type="android.text.TextUtils"/>
+        <import type="android.view.View"/>
 
 
     </data>
@@ -71,6 +73,7 @@
 
                 <com.zxzx74147.devlib.widget.CommonRecyclerView
                     android:id="@+id/list"
+                    android:layout_marginRight="@dimen/default_gap_250"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom" />
@@ -126,6 +129,7 @@
                 android:background="@null"
                 android:onClick="@{v->WebviewUtil.showWebActivity(context,SysInitManager.sharedInstance().getSysInitData().config.activityJumpUrl)}"
                 app:imageUrl="@{SysInitManager.sharedInstance().getSysInitData().config.activityIconUrl}"
+                android:visibility="@{TextUtils.isEmpty(SysInitManager.sharedInstance().getSysInitData().config.activityJumpUrl)? View.GONE:View.VISIBLE}"
                 app:layout_constraintBottom_toTopOf="@+id/coupons"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -203,7 +207,7 @@
             android:id="@+id/show_list"
             android:layout_width="@dimen/default_gap_48"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_gap_44"
+            android:paddingBottom="@dimen/default_gap_44"
             android:background="@null"
             android:layout_marginRight="@dimen/default_gap_44"
             android:drawablePadding="@dimen/default_gap_10"

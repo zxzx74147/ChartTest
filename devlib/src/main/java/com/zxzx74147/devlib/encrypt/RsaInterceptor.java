@@ -29,26 +29,37 @@ import retrofit2.Retrofit;
  */
 
 public class RsaInterceptor implements Interceptor {
+    private static final String TAG = RsaInterceptor.class.getSimpleName();
 
     private final Charset UTF8_CHARSET = Charset.forName("UTF-8");
+    static {
+        RsaPare.sharedInstance().init();
+    }
 
     @Override
     public Response intercept(Chain chain) throws IOException {
 
+
         Request request = chain.request();
-
-        RequestBody oldBody = request.body();
-        Buffer buffer = new Buffer();
-        oldBody.writeTo(buffer);
-        String strOldBody = buffer.readUtf8();
-        MediaType mediaType = MediaType.parse("text/plain; charset=utf-8");
-        String strNewBody = RsaUtil.encrypt(RsaPare.sharedInstance().getPublicKey(), strOldBody);
-        RequestBody body = RequestBody.create(mediaType, strNewBody);
-        HttpUrl url = request.url().newBuilder().addQueryParameter("format", "rsa").build();
-        request = request.newBuilder().header("Content-Type", body.contentType().toString()).header("Content-Length", String.valueOf(body.contentLength())).method(request.method(), body).url(url).build();
-
-
-
         return chain.proceed(request);
+//        if(request.url().toString().contains("init")){
+//            return chain.proceed(request);
+//        }
+//        RequestBody oldBody = request.body();
+//        Buffer buffer = new Buffer();
+//        oldBody.writeTo(buffer);
+//        String strOldBody = buffer.readUtf8();
+//        MediaType mediaType = MediaType.parse("text/plain; charset=utf-8");
+//        String strNewBody = RsaUtil.encrypt(RsaPare.sharedInstance().getPublicKey(), strOldBody);
+//        Log.i(TAG,"REQUEST OLD"+oldBody);
+//        Log.i(TAG,"REQUEST NEW"+strNewBody);
+//        RequestBody body = RequestBody.create(mediaType, strNewBody);
+//        HttpUrl url = request.url().newBuilder().addQueryParameter("format", "rsa").build();
+//        request = request.newBuilder().header("Content-Type", body.contentType().toString()).header("Content-Length", String.valueOf(body.contentLength())).method(request.method(), body).url(url).build();
+//        Response rsp = chain.proceed(request);
+//        rsp.body().bytes();
+
+
+//        return rsp;
     }
 }

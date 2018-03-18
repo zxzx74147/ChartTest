@@ -270,6 +270,7 @@ public class LayoutLiveNormalLand extends FrameLayout {
                 return;
             }
             mAdapter.setNewData(liveMsgListData.msgList.msg);
+            mBingding.list.scrollToButtom();
             mBingding.bubble.startAnimation(mBingding.bubble.getWidth() / 2, mBingding.bubble.getHeight() - getResources().getDimensionPixelSize(R.dimen.default_gap_100), 2);
 
             if(mBingding.profitLayout.rootView.getVisibility()==View.GONE) {

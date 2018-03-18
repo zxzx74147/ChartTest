@@ -28,11 +28,14 @@ public class CommonRecyclerView extends RecyclerView{
     }
 
     public void scrollToButtom(){
-        if(getAdapter()==null){
-            return;
-        }
 
-        int count = getAdapter().getItemCount();
-        smoothScrollToPosition(count);
+        postDelayed(() -> {
+            if(getAdapter()==null){
+                return;
+            }
+            int count = getAdapter().getItemCount();
+            smoothScrollToPosition(count);
+        },30);
+
     }
 }

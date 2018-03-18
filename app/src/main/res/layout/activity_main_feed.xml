@@ -19,6 +19,7 @@
         <import type="com.zxzx74147.charttest.MainFeedActivity"/>
         <import type="com.zxzx74147.devlib.utils.WebviewUtil"/>
         <import type="android.view.View"/>
+        <import type="android.text.TextUtils"/>
 
     </data>
 
@@ -156,6 +157,7 @@
             android:onClick="@{v->WebviewUtil.showWebActivity(context,SysInitManager.sharedInstance().getSysInitData().config.activityJumpUrl)}"
             app:imageUrl="@{SysInitManager.sharedInstance().getSysInitData().config.activityIconUrl}"
             android:background="@null"
+            android:visibility="@{TextUtils.isEmpty(SysInitManager.sharedInstance().getSysInitData().config.activityJumpUrl)? View.GONE:View.VISIBLE}"
             app:layout_constraintBottom_toTopOf="@+id/coupons"
             app:layout_constraintEnd_toEndOf="parent" />
     </android.support.constraint.ConstraintLayout>

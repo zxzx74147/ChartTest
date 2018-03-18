@@ -4,6 +4,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
+import com.zxzx74147.devlib.encrypt.RsaInterceptor;
 import com.zxzx74147.devlib.modules.account.AccountManager;
 
 import java.util.concurrent.TimeUnit;
@@ -48,6 +49,8 @@ public class RetrofitClient {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)
                 .build();
+
+        builder.addInterceptor(new RsaInterceptor());
         client = builder.build();
         mRetrofit= new Retrofit.Builder()
                 .baseUrl(NetworkConfig.HOST)
