@@ -14,6 +14,7 @@ import com.zxzx74147.profile.activity.AuthActivity;
 import com.zxzx74147.profile.activity.LoginPhoneActivity;
 import com.zxzx74147.profile.activity.MessageCenterActivity;
 import com.zxzx74147.profile.data.Message;
+import com.zxzx74147.profile.data.ProfileItem;
 import com.zxzx74147.profile.data.Voucher;
 import com.zxzx74147.profile.fragment.LogoutFragment;
 import com.zxzx74147.profile.fragment.PasswordInputFragment;
@@ -83,6 +84,7 @@ public class ModuleProfile {
     static {
         CommonMultiTypeDelegate.registDefaultViewType(Message.class, R.layout.item_message);
         CommonMultiTypeDelegate.registDefaultViewType(Voucher.class, R.layout.item_voucher);
+        CommonMultiTypeDelegate.registDefaultViewType(ProfileItem.class, R.layout.item_mine);
     }
 
     @BindingAdapter({"voucher_back"})

@@ -227,6 +227,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+        <include
+            android:id="@+id/loading"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            layout="@layout/common_progressbar"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
 
 
     </android.support.constraint.ConstraintLayout>

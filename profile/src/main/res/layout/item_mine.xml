@@ -5,7 +5,8 @@
 
         <variable
             name="data"
-            type="String" />
+            type="com.zxzx74147.profile.data.ProfileItem" />
+        <import type="android.view.View"/>
 
     </data>
 
@@ -19,13 +20,27 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_gap_30"
             android:layout_marginTop="@dimen/default_gap_30"
-            android:text="@{data}"
+            android:text="@{data.content}"
             android:textColor="@color/text_black"
             android:textSize="@dimen/default_size_30" />
 
         <View
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="1px"
-            android:background="#E4E4E4" />
+            android:layout_weight="1" />
+
+        <TextView
+            android:visibility="@{data.uread==0? View.GONE:View.VISIBLE}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rect_round_red"
+            android:paddingLeft="@dimen/default_gap_10"
+            android:paddingRight="@dimen/default_gap_10"
+            android:layout_gravity="center_vertical"
+            android:text="@{String.valueOf(data.uread)}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/default_size_30" />
+
+
     </LinearLayout>
 </layout>

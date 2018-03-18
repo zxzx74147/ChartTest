@@ -49,6 +49,7 @@ public class StockWidget extends FrameLayout implements IViewModelHolder {
     public void setGood(GoodType good) {
         mStockViewModel.getKLineData().setGood(good);
         mPriceViewModel.getReadTimeLiveData().setGood(good);
+        mBinding.setPrice(good.price);
         try {
             RxTabLayout.select(mBinding.tabLayout).accept(1);
         } catch (Exception e) {
@@ -67,6 +68,7 @@ public class StockWidget extends FrameLayout implements IViewModelHolder {
         RxTabLayout.selections(mBinding.tabLayout).subscribe(tab -> {
             if (mStockViewModel != null) {
                 mStockViewModel.getKLineData().setKType(tab.getPosition());
+                mBinding.klineview.setLoading();
             }
         });
     }

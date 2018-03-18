@@ -21,6 +21,7 @@ import com.zxzx74147.devlib.utils.WebviewUtil;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.devlib.widget.CommonRecyclerViewAdapter;
 import com.zxzx74147.profile.R;
+import com.zxzx74147.profile.data.ProfileItem;
 import com.zxzx74147.profile.data.UserUniData;
 import com.zxzx74147.profile.databinding.LayoutProfileBinding;
 
@@ -33,8 +34,8 @@ import java.util.List;
 public class ProfileFragment extends BaseDialogFragment {
 
     private LayoutProfileBinding mBinding = null;
-    private CommonRecyclerViewAdapter mAdapter = null;
-    private List<String> mData = new LinkedList<>();
+    private CommonRecyclerViewAdapter<ProfileItem> mAdapter = null;
+    private List<ProfileItem> mData = new LinkedList<>();
     private UserViewModel mUserModelView = null;
 
     public static ProfileFragment newInstance() {
@@ -71,18 +72,26 @@ public class ProfileFragment extends BaseDialogFragment {
     public void onResume() {
         super.onResume();
         AccountManager.sharedInstance().doRefresh();
+        mAdapter.notifyDataSetChanged();
     }
 
     private void initView() {
         mAdapter = new CommonRecyclerViewAdapter<>(mData);
         CommonMultiTypeDelegate temp = new CommonMultiTypeDelegate();
-        temp.registViewType(String.class, R.layout.item_mine);
         mAdapter.setMultiTypeDelegate(temp);
         mBinding.list.setAdapter(mAdapter);
         LinearLayoutManager lm = new LinearLayoutManager(getContext());
         mBinding.list.setLayoutManager(lm);
         String[] items = getResources().getStringArray(R.array.profile_list);
-        mData.addAll(Arrays.asList(items));
+        for(String item:items){
+            ProfileItem pItem = new ProfileItem();
+            pItem.content = item;
+            if(item.equals(getString(R.string.message_center))){
+                pItem.uread = AccountManager.sharedInstance().getUser().unreadNum;
+            }
+            mData.add(pItem);
+        }
+//        mData.addAll(Arrays.asList(items));
 
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -95,6 +104,7 @@ public class ProfileFragment extends BaseDialogFragment {
                         WebviewUtil.showWebActivity(getActivity(), SysInitManager.sharedInstance().getSysInitData().config.userGuideUrl);
                         break;
                     case 2:
+                        mAdapter.getItem(3).uread=0;
                         ProfileBusStation.startMessageCenter(getActivity());
                         break;
                     case 3:

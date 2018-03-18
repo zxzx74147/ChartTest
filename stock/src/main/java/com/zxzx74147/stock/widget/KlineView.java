@@ -87,6 +87,11 @@ public class KlineView extends LinearLayout {
         });
     }
 
+    public void setLoading(){
+        mBinding.klineRealtime.setVisibility(View.INVISIBLE);
+        mBinding.klineOther.setVisibility(INVISIBLE);
+        mBinding.loading.rootView.setVisibility(VISIBLE);
+    }
     public void setData(DataParse dataParse) {
         boolean needRefresh = false;
         if (mDataParse == null || mDataParse.mType != dataParse.mType) {
@@ -96,6 +101,7 @@ public class KlineView extends LinearLayout {
         refresh();
         mBinding.klineRealtime.setVisibility(View.GONE);
         mBinding.klineOther.setVisibility(VISIBLE);
+        mBinding.loading.rootView.setVisibility(GONE);
         if (needRefresh) {
             ChartUtil.fitData(mBinding.kline);
             ChartUtil.fitData(mBinding.kline2);
@@ -112,6 +118,7 @@ public class KlineView extends LinearLayout {
 
         mBinding.klineRealtime.setVisibility(View.VISIBLE);
         mBinding.klineOther.setVisibility(INVISIBLE);
+        mBinding.loading.rootView.setVisibility(GONE);
         if (needRefresh) {
             mBinding.klineRealtime.highlightValue(null);
         }
