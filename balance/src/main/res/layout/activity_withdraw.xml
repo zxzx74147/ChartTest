@@ -73,6 +73,7 @@
             layout="@layout/layout_withdraw_amouont"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_gap_60"
             android:layout_marginLeft="@dimen/default_gap_44"
             android:layout_marginRight="@dimen/default_gap_44"
             app:layout_constraintEnd_toEndOf="parent"
@@ -121,28 +122,23 @@
 
         </LinearLayout>
 
-        <View
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:id="@+id/space"
-            android:layout_marginTop="@dimen/default_gap_15"
-            android:background="@color/bg_grey"
-            app:layout_constraintTop_toBottomOf="@+id/withdraw_amount"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/default_gap_16"/>
+
 
         <include
             android:id="@+id/withdraw_bank"
             android:visibility="@{bankCard!=null? View.GONE:View.VISIBLE}"
             android:layout_marginLeft="@dimen/default_gap_44"
             android:layout_marginRight="@dimen/default_gap_44"
+            android:layout_marginTop="@dimen/default_gap_24"
             layout="@layout/layout_withdraw_bind_bank_info"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:user="@{user}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/space" />
+            app:layout_constraintTop_toBottomOf="@+id/withdraw_amount" />
+
+
 
         <Button
             android:id="@+id/submit"
@@ -151,7 +147,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/default_size_44"
             android:paddingRight="@dimen/default_size_44"
-            android:layout_marginTop="@dimen/default_gap_20"
+            android:layout_marginBottom="@dimen/default_gap_28"
             android:layout_marginLeft="@dimen/default_gap_44"
             android:layout_marginRight="@dimen/default_gap_44"
             android:text="@string/submit"
@@ -159,20 +155,22 @@
             android:textSize="@dimen/default_size_34"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/withdraw_bank"/>
+            app:layout_constraintBottom_toTopOf="@+id/remind3"/>
 
         <TextView
+            android:id="@+id/remind3"
 
             android:layout_width="0dp"
             android:layout_marginTop="@dimen/default_gap_15"
             android:layout_height="wrap_content"
             android:text="@string/withdraw_remind_mayi"
+            android:layout_marginBottom="@dimen/default_gap_65"
             android:gravity="center"
-            android:textColor="@color/text_dark_grey"
+            android:textColor="@color/text_light_grey"
             android:textSize="@dimen/default_size_26"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/submit"/>
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
 
     </android.support.constraint.ConstraintLayout>

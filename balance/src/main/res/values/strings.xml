@@ -72,6 +72,7 @@
     <string name="select_pay_method">请选择支付方式</string>
 
     <string name="bank_list">支持银行</string>
+    <string name="withdraw_remind2">如果您在绑定银行卡中碰到任何问题，请联系客服</string>
 
 
     <!--<item name="recharge_wechat_drawable">@drawable/pay_weixin</item>-->

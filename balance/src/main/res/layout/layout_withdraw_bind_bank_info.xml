@@ -21,6 +21,15 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.22" />
 
+        <View
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/space"
+            android:background="@color/bg_grey"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_gap_16"/>
+
         <TextView
             android:id="@+id/cardName"
             android:layout_width="0dp"
@@ -114,7 +123,6 @@
             android:id="@+id/bankName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/default_gap_32"
             android:drawableRight="@drawable/more1"
             android:hint="@string/hint_card_bank"
             android:inputType="number"
@@ -125,7 +133,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/space"
             />
 
         <TextView
@@ -213,6 +221,26 @@
             android:layout_height="1px"
             android:background="@color/div_default"
             app:layout_constraintTop_toBottomOf="@+id/editText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:layout_width="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/remind2"
+            android:paddingRight="@dimen/default_size_44"
+            android:layout_marginTop="@dimen/default_gap_20"
+            android:textColor="@color/text_light_grey"
+            android:text="@string/withdraw_remind2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_vcode"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/div_default"
+            app:layout_constraintTop_toBottomOf="@+id/layout_vcode"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
