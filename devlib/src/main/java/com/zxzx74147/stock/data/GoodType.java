@@ -1,21 +1,39 @@
 
 package com.zxzx74147.stock.data;
 
+import java.io.Closeable;
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 public class GoodType implements Serializable
 {
 
     public String goodsType;
-    public List<Good> goods = null;
+    public LinkedList<Good> goods = null;
     public String goodsTypeName;
     public Price price;
     public int buyUserNum;
     public int sellUserNum;
-    private final static long serialVersionUID = -3100535611730018923L;
 
     public boolean mIsSelect = false;
 
+    @Override
+    public GoodType clone() {
+
+//        try {
+//            return (GoodType) super.clone();
+//        } catch (CloneNotSupportedException e) {
+//            e.printStackTrace();
+//        }
+        GoodType type=  new GoodType();
+        type.goods = goods;
+        type.goodsType=goodsType;
+        type.goodsTypeName=goodsTypeName;
+        type.price=price;
+        type.buyUserNum=buyUserNum;
+        type.sellUserNum=sellUserNum;
+        return type;
+    }
 
 }

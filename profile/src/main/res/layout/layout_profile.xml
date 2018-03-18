@@ -50,6 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/profile_motify_remind"
+            android:layout_marginTop="@dimen/default_gap_15"
             android:textColor="@color/text_dark_grey"
             android:textSize="@dimen/default_size_26"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -74,7 +75,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="match_parent"
             android:layout_height="@dimen/default_gap_273"
-            android:layout_marginTop="@dimen/default_gap_52"
+            android:layout_marginTop="@dimen/default_gap_42"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/exchange" />

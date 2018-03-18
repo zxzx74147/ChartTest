@@ -57,6 +57,8 @@
     <string name="reset_password">重置交易密码</string>
     <string name="account_with_quote">账号：</string>
     <string name="vcode_input">输入验证码</string>
+    <string name="unread_num">%d个未读</string>
+    <string name="mark_read">标记为已读</string>
 
 
     <array name="profile_list">

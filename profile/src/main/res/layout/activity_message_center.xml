@@ -4,6 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="num"
+            type="Integer"/>
 
     </data>
 
@@ -23,6 +26,33 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <TextView
+            android:id="@+id/unread"
+            android:textColor="@color/text_light_grey"
+            android:textSize="@dimen/default_size_26"
+            android:text="@{@string/unread_num(num)}"
+            android:layout_marginTop="@dimen/default_gap_23"
+            android:layout_marginLeft="@dimen/default_gap_32"
+            android:layout_marginBottom="@dimen/default_gap_23"
+            android:layout_width="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/mark_read"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/default_size_26"
+            android:text="@string/mark_read"
+            android:layout_marginTop="@dimen/default_gap_23"
+            android:layout_marginRight="@dimen/default_gap_32"
+            android:layout_marginBottom="@dimen/default_gap_23"
+            android:layout_width="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/unread"
+            app:layout_constraintTop_toTopOf="@+id/unread"
+            android:layout_height="wrap_content" />
+
 
         <com.dinuscxj.refresh.RecyclerRefreshLayout
             android:id="@+id/refresh_layout"
@@ -34,7 +64,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title">
+            app:layout_constraintTop_toBottomOf="@+id/unread">
 
             <com.zxzx74147.devlib.widget.CommonRecyclerView
                 android:id="@+id/list"

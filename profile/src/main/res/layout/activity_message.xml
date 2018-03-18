@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/default_gap_80"
                     android:text="@{data.content}"
-                    android:textColor="@color/text_light_grey"
+                    android:textColor="@color/text_dark_grey"
                     android:textSize="@dimen/default_size_30" />
 
 

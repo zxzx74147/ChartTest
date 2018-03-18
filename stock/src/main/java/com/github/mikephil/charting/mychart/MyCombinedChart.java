@@ -99,8 +99,8 @@ public class MyCombinedChart extends CombinedChart {
                             mPaint.setColor(set.getColor());
                             if(eD!=null&& !TextUtils.isEmpty(set.getLabel())){
                                 String context = String.format(FORMAT_LABEL,set.getLabel(),eD.getY());
-                                canvas.drawText(context, mViewPortHandler.contentLeft()+length, mViewPortHandler.contentTop()+top+11,mPaint);
-                                length+=mPaint.measureText(context)+10;
+                                canvas.drawText(context, mViewPortHandler.contentLeft()+length, mViewPortHandler.contentTop()+top+13,mPaint);
+                                length+=mPaint.measureText(context)+1;
                             }
                         }
                     }

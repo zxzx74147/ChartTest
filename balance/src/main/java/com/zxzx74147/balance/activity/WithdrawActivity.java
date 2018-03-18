@@ -228,7 +228,7 @@ public class WithdrawActivity extends BaseActivity {
     }
 
     private void requestVcode() {
-        NetworkApi.ApiSubscribe(this,mBankStorage.bindVCode(),true, new Consumer<UniApiData>() {
+        NetworkApi.ApiSubscribe(this,mBankStorage.bindVCode(),false, new Consumer<UniApiData>() {
 
             @Override
             public void accept(UniApiData uniApiData) throws Exception {

@@ -193,9 +193,8 @@ public class ChartUtil {
         set.setNeutralColor(DevLib.getApp().getResources().getColor(R.color.stock_grey));//设置开盘价等于收盘价的颜色
         set.setShadowColorSameAsCandle(true);
         set.setHighlightLineWidth(1f);
-        set.setHighLightColor(DevLib.getApp().getResources().getColor(R.color.text_black));
+        set.setHighLightColor(DevLib.getApp().getResources().getColor(R.color.stock_highlight));
         set.setDrawValues(false);
-        set.setValueTextColor(DevLib.getApp().getResources().getColor(R.color.text_black));
 
     }
 
@@ -206,7 +205,7 @@ public class ChartUtil {
     public static void setLineDataleSet(LineDataSet set, int color,boolean highlight) {
         set.setHighlightEnabled(highlight);
         set.setDrawHorizontalHighlightIndicator(false);
-        set.setHighLightColor(DevLib.getApp().getResources().getColor(R.color.text_black));
+        set.setHighLightColor(DevLib.getApp().getResources().getColor(R.color.stock_highlight));
         set.setDrawValues(false);
         set.setLineWidth(1f);
         set.setDrawCircles(false);

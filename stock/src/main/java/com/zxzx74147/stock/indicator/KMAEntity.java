@@ -34,16 +34,32 @@ public class KMAEntity {
         int index = n - 1;
         if (kLineBeen != null && kLineBeen.size() > 0) {
             for (int i = 0; i < kLineBeen.size(); i++) {
-                if (i >= index) {
-                    ma = getSum(i - index, i, kLineBeen) / n;
-                } else {
-                    ma = defult;
-                }
+                ma = getAvg(i - index, i,n, kLineBeen);
+//                if (i >= index) {
+//                    ma = getSum(i - index, i, kLineBeen) / n;
+//                } else {
+//                    ma = defult;
+//                }
                 MAs.add(ma);
             }
         }
     }
 
+    private static float getAvg(Integer a, Integer b, int n,ArrayList<KLineBean> datas) {
+        float sum = 0;
+        if(a<0){
+            n+=a;
+            a=0;
+        }
+        for (int i = a; i <= b; i++) {
+            sum += datas.get(i).close;
+        }
+        if(n!=0){
+            return sum/n;
+        }
+        return datas.get(0).close;
+//        return sum;
+    }
 
     private static float getSum(Integer a, Integer b, ArrayList<KLineBean> datas) {
         float sum = 0;

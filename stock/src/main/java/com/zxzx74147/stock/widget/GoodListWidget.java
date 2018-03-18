@@ -145,10 +145,11 @@ public class GoodListWidget extends RelativeLayout implements IViewModelHolder {
             }
 
             mData.clear();
-            if (userUniData.goodsTypeList == null) {
+            if (userUniData.goodsTypeList == null||userUniData.goodsTypeList.goodType==null) {
                 return;
             }
-            mData.addAll(userUniData.goodsTypeList.goodType);
+            for(GoodType type:userUniData.goodsTypeList.goodType)
+                mData.add(type.clone());
             refreshData();
 
         });

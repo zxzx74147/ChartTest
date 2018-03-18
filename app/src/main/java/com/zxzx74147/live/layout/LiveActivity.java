@@ -103,7 +103,7 @@ public class LiveActivity extends BaseActivity {
         }
 
         if (mLive.rtmpList.rtmp.size() > 1) {
-            mVideoHolder1.setVideoPath(mLive.rtmpList.rtmp.get(1).url);
+            mVideoHolder2.setVideoPath(mLive.rtmpList.rtmp.get(1).url);
 //            mVideoHolder2.setVideoPath(RTMP_HKS);
             mVideoHolder2.start();
         }

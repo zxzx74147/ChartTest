@@ -212,9 +212,9 @@ public class KlineView extends LinearLayout {
         CombinedData combinedData = new CombinedData();
         setKData(combinedData);
         ArrayList<ILineDataSet> sets = new ArrayList<>();
-        LineDataSet bollD = new LineDataSet(mDataParse.getBollDataDN(), "boll_d");
-        LineDataSet bollU = new LineDataSet(mDataParse.getBollDataUP(), "boll_u");
-        LineDataSet bollM = new LineDataSet(mDataParse.getBollDataMB(), "boll_m");
+        LineDataSet bollD = new LineDataSet(mDataParse.getBollDataDN(), "LOWER");
+        LineDataSet bollU = new LineDataSet(mDataParse.getBollDataUP(), "UPPER");
+        LineDataSet bollM = new LineDataSet(mDataParse.getBollDataMB(), "MID");
         ChartUtil.setLineDataleSet(bollD, getResources().getColor(R.color.stock_kline_ma5));
         ChartUtil.setLineDataleSet(bollU, getResources().getColor(R.color.stock_kline_ma10));
         ChartUtil.setLineDataleSet(bollM, getResources().getColor(R.color.stock_kline_ma20));

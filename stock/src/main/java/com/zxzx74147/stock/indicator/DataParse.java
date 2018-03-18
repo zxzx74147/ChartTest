@@ -203,13 +203,21 @@ public class DataParse {
         KMAEntity kmaEntity20 = new KMAEntity(datas, 20);
         KMAEntity kmaEntity30 = new KMAEntity(datas, 30);
         for (int i = 0; i < kmaEntity5.getMAs().size(); i++) {
-            if (i >= 5)
+//            if (i >= 5)
+//                ma5DataL.add(new Entry(i, kmaEntity5.getMAs().get(i)));
+//            if (i >= 10)
+//                ma10DataL.add(new Entry(i, kmaEntity10.getMAs().get(i)));
+//            if (i >= 20)
+//                ma20DataL.add(new Entry(i, kmaEntity20.getMAs().get(i)));
+//            if (i >= 30)
+//                ma30DataL.add(new Entry(i, kmaEntity30.getMAs().get(i)));
+//            if (i >= 5)
                 ma5DataL.add(new Entry(i, kmaEntity5.getMAs().get(i)));
-            if (i >= 10)
+//            if (i >= 10)
                 ma10DataL.add(new Entry(i, kmaEntity10.getMAs().get(i)));
-            if (i >= 20)
+//            if (i >= 20)
                 ma20DataL.add(new Entry(i, kmaEntity20.getMAs().get(i)));
-            if (i >= 30)
+//            if (i >= 30)
                 ma30DataL.add(new Entry(i, kmaEntity30.getMAs().get(i)));
         }
 
@@ -330,20 +338,51 @@ public class DataParse {
      * @param datas
      */
     public void initBOLL(ArrayList<KLineBean> datas) {
-        BOLLEntity bollEntity = new BOLLEntity(datas, 20);
 
-        barDatasBOLL = new ArrayList<>();
-        bollDataUP = new ArrayList<>();
-        bollDataMB = new ArrayList<>();
-        bollDataDN = new ArrayList<>();
-        for (int i = 20 - 1; i < bollEntity.getUPs().size(); i++) {
-            barDatasBOLL.add(new BarEntry(0, i));
-            bollDataUP.add(new Entry(i, bollEntity.getUPs().get(i), datas.get(i)));
+        for (int i = 0; i < datas.size(); i++) {
+            KLineBean entry = datas.get(i);
 
-            bollDataMB.add(new Entry(i, bollEntity.getMBs().get(i), datas.get(i)));
+            if (i == 0) {
+                bollDataMB.add(new Entry(i, entry.close, datas.get(i)));
+                bollDataUP.add(new Entry(i, Float.NaN, datas.get(i)));
+                bollDataDN.add(new Entry(i, Float.NaN, datas.get(i)));
+            } else {
+                int n = 20;
+                if (i < 20) {
+                    n = i + 1;
+                }
 
-            bollDataDN.add(new Entry(i, bollEntity.getDNs().get(i), datas.get(i)));
+                float md = 0;
+                for (int j = i - n + 1; j <= i; j++) {
+                    float c = datas.get(j).close;
+                    float m = ma20DataL.get(i).getY();
+                    float value = c - m;
+                    md += value * value;
+                }
+
+                md = md / (n - 1);
+                md = (float) Math.sqrt(md);
+
+                bollDataMB.add(new Entry(i, ma20DataL.get(i).getY(), datas.get(i)));
+                bollDataUP.add(new Entry(i, ma20DataL.get(i).getY() + 2f * md, datas.get(i)));
+                bollDataDN.add(new Entry(i, ma20DataL.get(i).getY()- 2f * md, datas.get(i)));
+            }
         }
+
+
+//        BOLLEntity bollEntity = new BOLLEntity(datas, 20);
+//
+//        barDatasBOLL = new ArrayList<>();
+//        bollDataUP = new ArrayList<>();
+//        bollDataMB = new ArrayList<>();
+//        bollDataDN = new ArrayList<>();
+////        for (int i = 20 - 1; i < bollEntity.getUPs().size(); i++) {
+//            for (int i = 0; i < bollEntity.getUPs().size(); i++) {
+//            barDatasBOLL.add(new BarEntry(0, i));
+//            bollDataUP.add(new Entry(i, bollEntity.getUPs().get(i), datas.get(i)));
+//            bollDataMB.add(new Entry(i, bollEntity.getMBs().get(i), datas.get(i)));
+//            bollDataDN.add(new Entry(i, bollEntity.getDNs().get(i), datas.get(i)));
+//        }
 
     }
 
