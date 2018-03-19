@@ -11,12 +11,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.jakewharton.rxbinding2.view.RxView;
 import com.zxzx74147.devlib.base.BaseDialogFragment;
 import com.zxzx74147.devlib.data.IntentData;
+import com.zxzx74147.devlib.fragment.CommonInfoDialog;
 import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.modules.account.UserViewModel;
 import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
+import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
 import com.zxzx74147.profile.data.UserUniData;
 import com.zxzx74147.stock.R;
 import com.zxzx74147.stock.data.GoodType;
@@ -88,7 +91,10 @@ public class TradeFragment extends BaseDialogFragment {
 
         mBinding.goodList.setCallback(item -> mBinding.setGood(item));
         onLazyInitView(savedInstanceState);
-
+        RxView.clicks(mBinding.machRemind).subscribe(v -> {
+            CommonInfoDialog dialog = CommonInfoDialog.newInstance(new IntentData<Integer>(R.layout.info_mach));
+            ZXFragmentJumpHelper.startFragment(getContext(), dialog, null);
+        });
         return mBinding.getRoot();
     }
 

@@ -198,10 +198,22 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             onVucherChecked(isChecked);
         });
 
-        RxView.clicks(mBinding.machRemind).subscribe(v -> {
-            CommonInfoDialog dialog = CommonInfoDialog.newInstance(new IntentData<Integer>(R.layout.info_mach));
-            ZXFragmentJumpHelper.startFragment(getContext(), dialog, null);
-        });
+//        RxView.clicks(mBinding.machRemind).subscribe(v -> {
+//            int offset = FormatUtil.getPureNum(mBinding.machRemind.getText().toString());
+//            WheelSelectorData data = new WheelSelectorData();
+//            data.items = FormatUtil.POINT_LIST;
+//            data.offset = offset;
+//            CommonWheelSelectorDialog dialog = CommonWheelSelectorDialog.newInstance(new IntentData<>(data));
+//            ZXFragmentJumpHelper.startFragment(getContext(), dialog, new CommonCallback() {
+//                @Override
+//                public void callback(Object item) {
+//                    if (item == null) {
+//                        return;
+//                    }
+//                    mBinding.buyStopValue.setText(data.items.get((Integer) item));
+//                }
+//            });
+//        });
 
 
     }
@@ -298,7 +310,8 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                 ToastUtil.showToast(getContext(), R.string.mach_price_remind);
                 return;
             }
-            Observable<MachPositionData> observable = mTradeStorage.machpositionModify(mMachPosition.machPositionId, mSelectGood.goodsId, mType - 2, mAmount, price, limitStr, stopStr, "100", 1);
+            float error = FormatUtil.getPureFloatNum(mBinding.machRemind.getText().toString());
+            Observable<MachPositionData> observable = mTradeStorage.machpositionModify(mMachPosition.machPositionId, mSelectGood.goodsId, mType - 2, mAmount, price, limitStr, stopStr, String.valueOf(error),1);
             NetworkApi.ApiSubscribe(ViewUtil.getLivecirceOwer(this),observable,true, machPositionData -> {
                 if (machPositionData.hasError()) {
                     if (FailDealUtil.dealFail(getContext(), machPositionData.failed)) {
@@ -376,7 +389,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                     public void callback(Object item) {
                         //TODO
                         if (item == null) {
-                            StockBusStation.viewPosition(getContext(),1);
+                            StockBusStation.viewPosition(getContext());
                         } else {
                             ;
                         }
@@ -394,7 +407,8 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                 ToastUtil.showToast(getContext(), R.string.mach_price_remind);
                 return;
             }
-            Observable<MachPositionData> observable = mTradeStorage.machpositionOpen(mSelectGood.goodsId, mType - 2, mAmount, price, limitStr, stopStr, "100", 1);
+            float error = FormatUtil.getPureFloatNum(mBinding.machRemind.getText().toString());
+            Observable<MachPositionData> observable = mTradeStorage.machpositionOpen(mSelectGood.goodsId, mType - 2, mAmount, price, limitStr, stopStr, String.valueOf(error), 1);
             NetworkApi.ApiSubscribe(ViewUtil.getLivecirceOwer(this),observable, true,machPositionData -> {
                 if (machPositionData.hasError()) {
                     if (FailDealUtil.dealFail(getContext(), machPositionData.failed)) {
@@ -406,7 +420,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                 DialogItem dialogItem = new DialogItem();
                 dialogItem.title = getResources().getString(R.string.machposition_open_succ);
                 dialogItem.content = null;
-                dialogItem.cancel = getResources().getString(R.string.position_view);
+                dialogItem.cancel = getResources().getString(R.string.machposition_view);
                 dialogItem.cancel = getResources().getString(R.string.continu_trade);
                 CommonFragmentDialog fragmentDialog = CommonFragmentDialog.newInstance(new IntentData<>(dialogItem));
                 ZXFragmentJumpHelper.startFragment(getContext(), fragmentDialog, new CommonCallback() {
@@ -468,6 +482,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             mBinding.balance.setChecked(true);
             return;
         }
+
         mBinding.voucher.setVisibility(View.VISIBLE);
         String text = String.format(getResources().getString(R.string.format_voucher_amount), mSelectGood.depositFee, validVochers.size());
         mBinding.voucher.setText(text);
@@ -501,6 +516,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
         postDelayed(new Runnable() {
             @Override
             public void run() {
+                mBinding.machRemind.setText(String.format("%.0f",mMachPosition.error));
                 mBinding.price.setText(String.valueOf(machPosition.price));
                 mBinding.buyLimitValue.setText(String.format("%.0f点", machPosition.limit));
                 mBinding.buyStopValue.setText(String.format("%.0f点", machPosition.stop));

@@ -65,6 +65,7 @@
     <string name="buy_stock">下单</string>
     <string name="trade_succ">恭喜您建仓成功</string>
     <string name="position_view">查看持仓</string>
+    <string name="machposition_view">查看挂单</string>
     <string name="continu_trade">继续交易</string>
     <string name="format_my_position">我的持仓(%d)</string>
     <string name="format_my_machposition">我的挂单(%d)</string>
@@ -123,15 +124,17 @@
 
 
     <string name="mach_price_remind">请输入挂单价</string>
-    <string name="mach_price_mistake_remind">允许成交价于挂单价上下100点的误差</string>
+    <string name="mach_price_mistake_remind1">允许成交价于挂单价上下</string>
+    <string name="mach_price_mistake_remind2">100</string>
+    <string name="mach_price_mistake_remind3">点的误差</string>
     <string name="undo">撤销</string>
     <string name="mach_remind">1. 挂单后不会冻结建仓所需资金或代金券，请确保挂单触发时账户内有足够的资金余额和代金券用于建仓；\n\n 2. 同一品种在同一价格上只能挂一单；\n\n 3. 挂单的有效期为3个交易日，例如周二挂单，则周四休市后挂单自动失效。</string>
     <string name="expanc">展开</string>
     <string name="pack_up">收起</string>
     <string name="deffer_list_title">持仓过夜费</string>
     <string name="mach_position_help">挂单帮助</string>
-    <string name="no_position">暂无持仓</string>
-    <string name="no_machposition">暂无挂单</string>
+    <string name="no_position">暂无持仓记录，去建仓</string>
+    <string name="no_machposition">当前暂无挂单</string>
     <string name="gross_profit">浮动盈亏（元）</string>
     <string name="machposition_motify_succ">修改挂单成功</string>
     <string name="machposition_his_title">— 历史挂单记录 —</string>

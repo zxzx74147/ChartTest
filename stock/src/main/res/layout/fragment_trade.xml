@@ -21,6 +21,8 @@
             name="fragment"
             type="TradeFragment"/>
 
+        <import type="android.view.View"/>
+
     </data>
 
     <!--<android.support.v4.widget.NestedScrollView-->
@@ -44,6 +46,17 @@
             android:textSize="@dimen/default_size_54"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/mach_remind"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="@dimen/default_gap_26"
+            android:visibility="@{type==TradeFragment.TYPE_POSITION_BUY_DOWN||type==TradeFragment.TYPE_POSITION_BUY_UP? View.GONE:View.VISIBLE}"
+            android:src="@drawable/icon_explanation"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toTopOf="@+id/textView"
+            app:layout_constraintBottom_toBottomOf="@+id/textView"
+            android:layout_height="wrap_content" />
 
         <ImageButton
             android:id="@+id/close"

@@ -48,7 +48,7 @@
     <string name="auth_remind2">请填写实名认证信息，且实名认证姓名需与提现银行卡户 名一致</string>
     <string name="auth_remind3">蚂蚁投资承诺您的信息安全</string>
     <string name="logout_remind">确定退出该账号？</string>
-    <string name="no_vochers">您还没有代金券</string>
+    <string name="no_vochers">暂无代金券</string>
     <string name="format_voucher_price">限%.0f元/手使用</string>
     <string name="my_vocher_unget">可领代金券</string>
     <string name="vocher_get_succ">领取成功</string>

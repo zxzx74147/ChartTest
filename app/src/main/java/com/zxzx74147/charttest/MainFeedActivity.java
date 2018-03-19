@@ -42,9 +42,11 @@ public class MainFeedActivity extends BaseActivity {
     private UserViewModel mUserViewModel = null;
 
     private GestureDetectorCompat mGestureDetector;
+    private MotionEvent mLastOnDownEvent = null;
     private GestureDetector.OnGestureListener mOnGestureListener = new GestureDetector.OnGestureListener() {
         @Override
         public boolean onDown(MotionEvent e) {
+            mLastOnDownEvent = e;
             return false;
         }
 
@@ -70,9 +72,14 @@ public class MainFeedActivity extends BaseActivity {
 
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            if (velocityX < 0&&Math.abs(velocityX)>Math.abs(velocityY)) {
+            if(e1==null){
+                e1 = mLastOnDownEvent;
+            }
+            if(e1==null||e2==null){
+                return true;
+            }
+            if (velocityX < 0&&Math.abs(e1.getX()-e2.getX())>2*Math.abs(e1.getY()-e2.getY())) {
                 if (SysInitManager.sharedInstance().getSysInitData().swich.liveOpen != 0) {
-//                    MainBusStation.toLive(MainFeedActivity.this);
                     checkLive(MainFeedActivity.this);
                 }
             }

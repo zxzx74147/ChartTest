@@ -9,6 +9,7 @@ import android.support.annotation.CallSuper;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -21,7 +22,11 @@ import android.view.animation.Animation;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.zxzx74147.devlib.R;
 import com.zxzx74147.devlib.callback.CommonCallback;
+import com.zxzx74147.devlib.fragment.CommonFragmentDialog;
+import com.zxzx74147.devlib.fragment.CommonInfoDialog;
 import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
+
+import java.util.List;
 
 import me.yokeyword.fragmentation.ExtraTransaction;
 import me.yokeyword.fragmentation.ISupportFragment;
@@ -59,6 +64,22 @@ public class BaseDialogFragment extends DialogFragment implements ISupportFragme
         super.onAttach(activity);
         mDelegate.onAttach(activity);
         _mActivity = mDelegate.getActivity();
+
+        List<Fragment> fragments=_mActivity.getSupportFragmentManager().getFragments();
+
+        for(Fragment fragment:fragments){
+            if(fragment.getClass().equals(this.getClass())){
+                if(fragment.getClass()== CommonFragmentDialog.class){
+                    return;
+                }
+                if(fragment.getClass()== CommonInfoDialog.class){
+                    return;
+                }
+                if(fragment!=this) {
+                    ((DialogFragment) fragment).dismiss();
+                }
+            }
+        }
     }
 
     @Override
@@ -384,6 +405,7 @@ public class BaseDialogFragment extends DialogFragment implements ISupportFragme
         WindowManager.LayoutParams params = window.getAttributes();
         params.gravity = Gravity.BOTTOM;
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
+        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
         window.setAttributes(params);
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         window.setWindowAnimations(R.style.dialogWindowAnim);

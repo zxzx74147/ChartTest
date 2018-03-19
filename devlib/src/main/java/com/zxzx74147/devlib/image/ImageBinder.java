@@ -25,6 +25,9 @@ public class ImageBinder {
     @BindingAdapter({"imageAnim"})
     public static void loadImage(ImageView view, Drawable resource) {
         view.setImageDrawable(resource);
+        if(resource==null){
+            return;
+        }
         if (view.getDrawable() instanceof AnimationDrawable) {
             final AnimationDrawable animationDrawable = (AnimationDrawable) view.getDrawable();
             view.post(() -> animationDrawable.start());

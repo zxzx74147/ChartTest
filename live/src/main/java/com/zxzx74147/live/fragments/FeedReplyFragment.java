@@ -154,6 +154,7 @@ public class FeedReplyFragment extends BaseFragment {
                 }
             }
         });
+        mBinding.refreshLayout.setRefreshing(false);
 
     }
 

@@ -4,7 +4,9 @@ import android.app.Application;
 
 import com.zxzx74147.devlib.data.IntentData;
 import com.zxzx74147.devlib.data.MessageEvent;
+import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.modules.busstation.StockBusStation;
+import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
@@ -55,6 +57,10 @@ public class ModuleStock {
             IntentData intent = new IntentData();
             intent.type = event.type;
             PositionFragment fragment = PositionFragment.newInstance(intent);
+            if(AccountManager.sharedInstance().getUserUni()==null){
+                ToastUtil.showToast(event.context,"加载中，请稍候");
+                return;
+            }
             fragment.show((ViewUtil.getFragmentActivity(event.context)).getSupportFragmentManager(), fragment.getTag());
         }
         else if (event.id == StockBusStation.BUS_ID_VIEW_TRADE) {

@@ -85,9 +85,11 @@ public class LayoutLiveNormal extends FrameLayout {
     private boolean mIsTouchint = false;
     private KeyboardStatusDetector mDetector = new KeyboardStatusDetector();
     private GestureDetectorCompat mGestureDetector;
+    private MotionEvent mLastOnDownEvent = null;
     private GestureDetector.OnGestureListener mOnGestureListener = new GestureDetector.OnGestureListener() {
         @Override
         public boolean onDown(MotionEvent e) {
+            mLastOnDownEvent = e;
             return false;
         }
 

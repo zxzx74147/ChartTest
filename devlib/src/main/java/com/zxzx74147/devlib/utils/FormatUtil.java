@@ -16,7 +16,14 @@ public class FormatUtil {
     private static Pattern P_PURE_NUMBER_FLOAT = Pattern.compile("[^0-9.]");
 
     public  static List<String> POINT_LIST = null;
+    public  static List<String> ERROR_LIST = null;
     static {
+        POINT_LIST = new ArrayList<>(50);
+        POINT_LIST.add("无");
+        for(int i=1;i<100;i++){
+            POINT_LIST.add(i+"点");
+        }
+
         POINT_LIST = new ArrayList<>(50);
         POINT_LIST.add("无");
         for(int i=1;i<100;i++){

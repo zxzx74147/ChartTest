@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -19,7 +19,7 @@
 
         <variable
             name="type"
-            type="Integer"/>
+            type="Integer" />
 
         <variable
             name="total"
@@ -30,10 +30,11 @@
             type="Integer" />
 
         <variable
-            type="Boolean"
-            name="voucher"/>
+            name="voucher"
+            type="Boolean" />
 
         <import type="com.zxzx74147.stock.fragment.TradeFragment" />
+
         <import type="android.view.View" />
 
         <import type="com.zxzx74147.devlib.modules.busstation.BalanceBusStation" />
@@ -162,16 +163,47 @@
                             android:textColorHint="@color/text_light_grey"
                             android:textSize="@dimen/default_size_30" />
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/default_gap_24"
-                            android:id="@+id/mach_remind"
-                            android:drawablePadding="@dimen/default_gap_10"
-                            android:drawableRight="@drawable/icon_explanation"
-                            android:gravity="center_vertical"
-                            android:text="@string/mach_price_mistake_remind"
-                            android:textColor="@color/text_light_grey" />
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/default_gap_24"
+                                android:drawablePadding="@dimen/default_gap_10"
+                                android:gravity="center_vertical"
+                                android:text="@string/mach_price_mistake_remind1"
+                                android:textColor="@color/text_light_grey"
+                                android:textSize="@dimen/default_size_26" />
+
+
+                            <EditText
+                                android:id="@+id/mach_remind"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/default_gap_24"
+                                android:background="@drawable/rect_round_stroke_grey"
+                                android:drawablePadding="@dimen/default_gap_10"
+                                android:gravity="center_vertical"
+                                android:inputType="number"
+                                android:paddingLeft="@dimen/default_gap_10"
+                                android:paddingRight="@dimen/default_gap_10"
+                                android:text="@string/mach_price_mistake_remind2"
+                                android:textColor="@color/text_light_grey"
+                                android:textSize="@dimen/default_size_26" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/default_gap_24"
+                                android:drawablePadding="@dimen/default_gap_10"
+                                android:gravity="center_vertical"
+                                android:text="@string/mach_price_mistake_remind3"
+                                android:textColor="@color/text_light_grey"
+                                android:textSize="@dimen/default_size_26" />
+                        </LinearLayout>
                     </LinearLayout>
 
 
@@ -253,8 +285,8 @@
                         android:id="@+id/balance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:checked="true"
                         android:button="@drawable/radio_red"
+                        android:checked="true"
                         android:gravity="center_vertical"
                         android:text='@{@string/format_left(user.balance)}'
                         android:textColor="@color/text_black"
@@ -271,16 +303,16 @@
                         android:textSize="@dimen/default_size_26" />
 
                     <View
-                        android:layout_weight="1"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
 
                     <android.support.v7.widget.AppCompatCheckBox
                         android:id="@+id/voucher"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:checked="false"
                         android:button="@drawable/radio_red"
+                        android:checked="false"
                         android:gravity="center_vertical"
                         android:textColor="@color/text_black"
                         android:textSize="@dimen/default_size_26" />

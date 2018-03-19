@@ -41,8 +41,8 @@
                 android:onClick="@{v->{MainFeedActivity.checkLive(context)}}"
                 android:layout_height="match_parent"
                 android:background="@null"
-                android:paddingLeft="@dimen/default_gap_44"
-                android:src="@{userUni.isLiving==0? @drawable/selector_home_live_normal:@drawable/home_live}" />
+                app:imageAnim="@{userUni.isLiving==0? @drawable/selector_home_live_normal:@drawable/home_live}"
+                android:paddingLeft="@dimen/default_gap_44" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -117,7 +117,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:layout_marginBottom="@dimen/default_gap_16"
+            android:paddingBottom="@dimen/default_gap_16"
             android:background="@color/bg_grey"
             android:paddingTop="@dimen/default_gap_16"
             app:layout_constraintBottom_toBottomOf="parent"
