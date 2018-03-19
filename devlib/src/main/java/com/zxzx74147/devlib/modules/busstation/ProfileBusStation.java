@@ -2,9 +2,12 @@ package com.zxzx74147.devlib.modules.busstation;
 
 import android.content.Context;
 
+import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.devlib.data.MessageEvent;
 
 import org.greenrobot.eventbus.EventBus;
+
+import javax.security.auth.callback.Callback;
 
 /**
  * Created by zhengxin on 2018/2/12.
@@ -35,6 +38,12 @@ public class ProfileBusStation {
 
     public static void startLogin(Context context) {
         MessageEvent event = new MessageEvent<>(BUS_ID_PROFILE_LOGIN, context);
+        EventBus.getDefault().post(event);
+    }
+
+    public static void startLogin(Context context, CommonCallback callback) {
+        MessageEvent event = new MessageEvent<>(BUS_ID_PROFILE_LOGIN, context);
+        event.callback = callback;
         EventBus.getDefault().post(event);
     }
 

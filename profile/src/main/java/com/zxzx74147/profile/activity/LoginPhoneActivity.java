@@ -154,6 +154,9 @@ public class LoginPhoneActivity extends BaseActivity {
                 }
                 AccountManager.sharedInstance().saveUser(userUniData.user);
                 MainBusStation.startMain(LoginPhoneActivity.this);
+                if(mCallback!=null){
+                    mCallback.callback(userUniData);
+                }
                 finish();
             }
         },UserUniData.class);

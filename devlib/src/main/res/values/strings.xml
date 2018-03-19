@@ -50,5 +50,7 @@
 
     <string name="wx_appid">wx8f763f88fcd1bd9b</string>
     <string name="vcode_remind">请输入验证码</string>
+    <string name="no_network">网络不给力，检查网络再试试</string>
+    <string name="try_refresh">刷新</string>
 
 </resources>

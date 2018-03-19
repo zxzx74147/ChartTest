@@ -50,7 +50,7 @@ public class LauncherActivity extends BaseActivity {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_launcher);
         sysInit();
 
-        Observable.just("").delay(10, TimeUnit.MILLISECONDS).subscribeOn(Schedulers.io())
+        Observable.just("").delay(50, TimeUnit.MILLISECONDS).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(s -> {
             float y = mBinding.logo.getTop() + mBinding.logo.getHeight() - mBinding.launcherApp.getTop() + getResources().getDimensionPixelOffset(R.dimen.default_gap_80);
             AnimationUtil.translationView(mBinding.launcherApp, 0, y);
@@ -78,8 +78,12 @@ public class LauncherActivity extends BaseActivity {
             loginWechat();
         });
         RxView.clicks(mBinding.loginPhone).subscribe(v -> {
-            ProfileBusStation.startLogin(this);
-            finish();
+            ProfileBusStation.startLogin(this, item -> {
+                if(item!=null){
+                    finish();
+                }
+            });
+//            finish();
         });
     }
 
@@ -102,7 +106,7 @@ public class LauncherActivity extends BaseActivity {
         String token = KVStore.getString("push_id");
         SysStorage mStorage = RetrofitClient.getClient().create(SysStorage.class);
         Observable<SysInitData> initObser = mStorage.sysInit("main", DeviceIDMananger.sharedInstance().getDeviceID(), token, "", PackageInfoMananger.sharedInstance().getVersionInfo().getVersonName());
-        NetworkApi.ApiSubscribe(initObser, sysInit -> {
+        NetworkApi.ApiSubscribe(this,initObser, sysInit -> {
             if (sysInit.hasError()) {
                 ToastUtil.showToast(LauncherActivity.this, sysInit.error.usermsg);
                 return;
@@ -125,7 +129,7 @@ public class LauncherActivity extends BaseActivity {
                     showLoginButton();
                 }
             }
-        });
+        },SysInitData.class);
     }
 
     private boolean dealUpgrade(Upgrade upgrade) {

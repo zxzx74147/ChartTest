@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/remind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:drawablePadding="@dimen/default_gap_50"
+            android:gravity="center"
+            android:drawableTop="@drawable/no_network"
+            android:textSize="@dimen/default_gap_30"
+            android:textColor="@color/text_light_grey"
+            android:text="@string/no_network" />
+
+        <Button
+            android:id="@+id/refresh"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/remind"
+            android:layout_width="@dimen/default_gap_170"
+            android:textSize="@dimen/default_size_30"
+            android:layout_marginTop="@dimen/default_gap_32"
+            android:textColor="@color/text_black"
+            android:text="@string/try_refresh"
+            android:background="@drawable/rect_round_grey"
+            android:layout_height="@dimen/default_gap_72" />
+
+
+    </RelativeLayout>
+</layout>

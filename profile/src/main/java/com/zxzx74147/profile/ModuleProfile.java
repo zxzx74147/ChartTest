@@ -1,5 +1,6 @@
 package com.zxzx74147.profile;
 
+import android.app.Activity;
 import android.app.Application;
 import android.databinding.BindingAdapter;
 import android.view.View;
@@ -55,7 +56,8 @@ public class ModuleProfile {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(MessageEvent event) {
         if (event.id == ProfileBusStation.BUS_ID_PROFILE_LOGIN) {
-            ZXActivityJumpHelper.startActivity(event.context, LoginPhoneActivity.class);
+
+            ZXActivityJumpHelper.startActivityWithCallback((Activity) event.context, LoginPhoneActivity.class,event.callback);
         } else if (event.id == ProfileBusStation.BUS_ID_PROFILE_DETAIL) {
             ZXFragmentJumpHelper.startFragment(event.context, ProfileFragment.class, null);
         } else if (event.id == ProfileBusStation.BUS_ID_PROFILE_SET_TRADE_PASSWORD) {
