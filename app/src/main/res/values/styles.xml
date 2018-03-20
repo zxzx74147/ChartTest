@@ -10,4 +10,10 @@
         <item name="android:windowBackground">@color/tran</item>
     </style>
 
+    <style name="LaunchStyle" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+
 </resources>

@@ -25,6 +25,7 @@ public class Message implements Serializable{
     public String title;
     public String content;     //正文
     public String createTime;   //时间
+    public String bottom;
 
     public Spannable getUnreadTitle(){
 

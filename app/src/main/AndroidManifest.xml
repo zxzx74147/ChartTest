@@ -14,11 +14,11 @@
         <meta-data
             android:name="api_version"
             android:value="1.0.0">
-
-
-
-
         </meta-data>
+
+        <meta-data
+            android:name="app_version"
+            android:value="1.0.0(Build_2018032001)" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
@@ -34,6 +34,8 @@
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="5a9668fba40fa3717e00025a" />
+
+
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="main" />
@@ -47,6 +49,7 @@
 
 
         <activity android:name=".LauncherActivity"
+            android:theme="@style/LaunchStyle"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

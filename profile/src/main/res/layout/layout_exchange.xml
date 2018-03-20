@@ -97,7 +97,7 @@
             android:onClick="@{()->StockBusStation.viewPosition(context)}"
             android:drawablePadding="@dimen/default_gap_20"
             android:drawableRight="@drawable/more1"
-            android:text="@string/asset_hold"
+            android:text="@string/gross_profit"
             app:layout_constraintStart_toStartOf="@+id/textView3"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -106,7 +106,8 @@
             style="@style/content_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text='@{@string/format_02(userUni.positionList.openCost)}'
+            android:text="@{@string/format_02_sign(userUni.user.grossProfit)}"
+            android:textColor="@{userUni.user.grossProfit>0? @color/text_red:@color/green}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView6"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />

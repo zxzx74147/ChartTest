@@ -88,6 +88,9 @@ public class PositionModifyFragment extends BaseDialogFragment {
         });
 
         RxView.clicks(mBinding.buyStopValue).subscribe(a -> {
+            if(mBinding.getData().isVoucher!=0){
+                return;
+            }
             int offset = FormatUtil.getPureNum(mBinding.buyStopValue.getText().toString());
             WheelSelectorData data = new WheelSelectorData();
             data.items = FormatUtil.POINT_LIST;
@@ -105,6 +108,9 @@ public class PositionModifyFragment extends BaseDialogFragment {
         });
 
         RxView.clicks(mBinding.buyLimitValue).subscribe(a -> {
+            if(mBinding.getData().isVoucher!=0){
+                return;
+            }
             int offset = FormatUtil.getPureNum(mBinding.buyLimitValue.getText().toString());
             WheelSelectorData data = new WheelSelectorData();
             data.items = FormatUtil.POINT_LIST;

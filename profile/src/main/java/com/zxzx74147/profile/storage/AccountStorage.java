@@ -37,7 +37,7 @@ public interface AccountStorage {
     Observable<UniApiData> accountGetVCode(@Query("phone") String phone);
 
     @GET("/user/account/login")
-    Observable<UserUniData> acctountLogin(@Query("phone") String phone, @Query("vcode") String vcode, @Query("deviceId") String deviceId, @Query("version") String version);
+    Observable<UserUniData> acctountLogin(@Query("phone") String phone, @Query("vcode") String vcode, @Query("deviceId") String deviceId, @Query("version") String version,@Query("deviceType") String deviceType,@Query("channel") String channel,@Query("deviceToken") String deviceToken);
 
 
     @GET("/user/trades/password")
@@ -59,6 +59,10 @@ public interface AccountStorage {
 
     @GET("/user/simauth/apply")
     Observable<AuthApplyData> authApply(@Query("name") String name, @Query("identityNo") String identityNo);
+
+    @GET("/user/wechat/login")
+    Observable<UserUniData> wechatLogin(@Query("code") String phone, @Query("deviceId") String deviceId, @Query("version") String version,@Query("deviceType") String deviceType,@Query("channel") String channel,@Query("deviceToken") String deviceToken);
+
 
 
 

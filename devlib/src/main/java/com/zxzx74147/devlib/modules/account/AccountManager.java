@@ -31,7 +31,7 @@ public class AccountManager {
     private int mLastReadMessageID=0;
 
     private UserStorage mUserStorage = RetrofitClient.getClient().create(UserStorage.class);
-    private static final int PERIOD = 1000 * 10;
+    private static final int PERIOD = 1000 * 5;
     private Disposable mDisposable = null;
     private Timer mTimer = null;
     private boolean mIsActive = false;

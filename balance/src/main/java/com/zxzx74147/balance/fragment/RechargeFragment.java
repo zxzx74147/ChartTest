@@ -76,9 +76,14 @@ public class RechargeFragment extends BaseDialogFragment {
         Spannable strSpan = new SpannableString(str);
         strSpan.setSpan(new ForegroundColorSpan(ColorUtil.getColor(R.color.red)), start, start + dst.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         mBinding.textView2.setText(strSpan);
-
+        if (SysInitManager.sharedInstance().getSysInitData().depositItemList == null|| SysInitManager.sharedInstance().getSysInitData().depositItemList.depositItem==null) {
+            return;
+        }
         if (SysInitManager.sharedInstance().getSysInitData().depositItemList != null) {
             mData.addAll(SysInitManager.sharedInstance().getSysInitData().depositItemList.depositItem);
+        }
+        for(DepositItem item:mData){
+            item.mIsSelect = false;
         }
         amount = mData.get(0).amount;
         mData.get(0).mIsSelect = true;

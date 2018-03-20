@@ -26,6 +26,7 @@ import com.zxzx74147.stock.indicator.KLineBean;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -39,15 +40,51 @@ public class ChartUtil {
 
     private static SimpleDateFormat TIME_HHMM = new SimpleDateFormat("HH:mm");
 
+    private static SimpleDateFormat TIME_MMDD_HHMM = new SimpleDateFormat("MM/dd HH:mm");
+
+    private static Calendar CALENDER_NOW = Calendar.getInstance();
+
+    public static <T extends Entry> IAxisValueFormatter getAxisValueFormatterShowDay(List<T> data) {
+        IAxisValueFormatter formatter = (value, axis) -> {
+            int index = (int) value;
+            if (index < data.size()) {
+                KLineBean entry = (KLineBean) data.get(index).getData();
+                Date temp = null;
+                Date now = new Date();
+                CALENDER_NOW.setTime(now);
+                Calendar tempCalender = Calendar.getInstance();
+
+                try {
+                    temp = (TIME_PARSER.parse(entry.date));
+                    tempCalender.setTime(temp);
+                    if (tempCalender.get(Calendar.DAY_OF_YEAR) == CALENDER_NOW.get(Calendar.DAY_OF_YEAR)) {
+                        return TIME_HHMM.format(temp);
+                    }
+                    return TIME_MMDD_HHMM.format(temp);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+            return "";
+
+        };
+        return formatter;
+    }
+
+
+
     public static <T extends Entry> IAxisValueFormatter getAxisValueFormatter1m(List<T> data) {
         IAxisValueFormatter formatter = (value, axis) -> {
             int index = (int) value;
             if (index < data.size()) {
                 KLineBean entry = (KLineBean) data.get(index).getData();
                 Date temp = null;
+                Date now = new Date();
                 try {
                     temp = (TIME_PARSER.parse(entry.date));
+//                    if(temp.getDay()==now.getDay()&&temp.getMonth()==now.getMonth()) {
                     return TIME_HHMM.format(temp);
+//                    }return TIME_MMDD_HHMM.format(temp);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -199,10 +236,10 @@ public class ChartUtil {
     }
 
     public static void setLineDataleSet(LineDataSet set, int color) {
-        setLineDataleSet(set, color,false);
+        setLineDataleSet(set, color, false);
     }
 
-    public static void setLineDataleSet(LineDataSet set, int color,boolean highlight) {
+    public static void setLineDataleSet(LineDataSet set, int color, boolean highlight) {
         set.setHighlightEnabled(highlight);
         set.setDrawHorizontalHighlightIndicator(false);
         set.setHighLightColor(DevLib.getApp().getResources().getColor(R.color.stock_highlight));
@@ -413,7 +450,7 @@ public class ChartUtil {
 
                 chart.highlightValue(h);
 
-                Highlight highlight2 = chart2.getHighlightByTouchPoint( h.getXPx(),1);
+                Highlight highlight2 = chart2.getHighlightByTouchPoint(h.getXPx(), 1);
 //                Highlight highlight2 = new Highlight(h.getX(), h.getY(), h.getXPx(), h.getYPx(), h.getDataSetIndex(), YAxis.AxisDependency.RIGHT);
 //                highlight2.setDataIndex(h.getDataIndex());
 //                highlight2.setDraw(h.getDrawX(), h.getDrawY());
@@ -436,7 +473,7 @@ public class ChartUtil {
                 Log.i("showHighline", "" + h.getX());
 
                 chart2.highlightValue(h);
-                Highlight highlight2 = chart.getHighlightByTouchPoint( h.getXPx(),1);
+                Highlight highlight2 = chart.getHighlightByTouchPoint(h.getXPx(), 1);
 //                Highlight highlight2 = new Highlight(h.getX(), h.getY(), h.getXPx(), h.getYPx(), h.getDataSetIndex(), YAxis.AxisDependency.RIGHT);
 //                highlight2.setDataIndex(h.getDataIndex());
 //                highlight2.setDraw(h.getDrawX(), h.getDrawY());

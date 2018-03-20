@@ -37,6 +37,8 @@
             android:background="@drawable/rect_round_grey"
             android:padding="@dimen/default_gap_30"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_gap_44"
+            android:layout_marginRight="@dimen/default_gap_44"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />

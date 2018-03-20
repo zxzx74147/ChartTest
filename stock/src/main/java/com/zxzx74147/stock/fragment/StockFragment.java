@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.zxzx74147.devlib.base.BaseDialogFragment;
 import com.zxzx74147.devlib.callback.CommonCallback;
+import com.zxzx74147.devlib.modules.account.UserViewModel;
 import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
 import com.zxzx74147.stock.R;
@@ -20,6 +21,7 @@ import com.zxzx74147.stock.databinding.FragmentStockBinding;
 public class StockFragment extends BaseDialogFragment {
 
     private FragmentStockBinding mBinding = null;
+    private UserViewModel mModel = null;
 
     public static StockFragment newInstance(GoodType mGoodType) {
         StockFragment fragment = new StockFragment();
@@ -38,14 +40,31 @@ public class StockFragment extends BaseDialogFragment {
 
         mBinding.stock.setProvider(ViewModelProviders.of(this));
         mBinding.stock.setLifeCircle(this);
+        mModel = ViewModelProviders.of(this).get(UserViewModel.class);
 
         Bundle bundle = getArguments();
         GoodType good = (GoodType) bundle.getSerializable(ZXActivityJumpHelper.INTENT_DATA);
         mBinding.setGood(good);
         mBinding.goodList.setCallback(item -> mBinding.setGood(item));
-
+        initData();
 
         return mBinding.getRoot();
+    }
+
+    private void initData(){
+        mModel.getUserUniLiveData().observe(this, userUniData -> {
+            if(userUniData.hasError()){
+                return;
+            }
+            if(userUniData!=null&&userUniData.goodsTypeList!=null&&userUniData.goodsTypeList.goodType!=null) {
+                for(GoodType goodType:userUniData.goodsTypeList.goodType){
+                    if(goodType.goodsType.equals(mBinding.getGood().goodsType)){
+                        mBinding.setGood(goodType);
+                        break;
+                    }
+                }
+            }
+        });
     }
 
     public void  onDestroyView(){

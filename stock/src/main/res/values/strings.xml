@@ -135,7 +135,7 @@
     <string name="mach_position_help">挂单帮助</string>
     <string name="no_position">暂无持仓记录，去建仓</string>
     <string name="no_machposition">当前暂无挂单</string>
-    <string name="gross_profit">浮动盈亏（元）</string>
+
     <string name="machposition_motify_succ">修改挂单成功</string>
     <string name="machposition_his_title">— 历史挂单记录 —</string>
     <string name="delete_machposition">确定撤销挂单？</string>

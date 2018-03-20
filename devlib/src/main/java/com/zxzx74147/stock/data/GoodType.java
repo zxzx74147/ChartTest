@@ -19,6 +19,22 @@ public class GoodType implements Serializable
     public boolean mIsSelect = false;
 
     @Override
+    public boolean equals(Object goodType){
+        if(goodType==null){
+            return false;
+        }
+        if(!(goodType instanceof GoodType)){
+            return false;
+        }
+        if(((GoodType) goodType).goodsType==null){
+            return ((GoodType) goodType).goodsType==goodType;
+        }
+        if(((GoodType) goodType).goodsType.equals(goodsType)){
+            return true;
+        }
+        return false;
+    }
+    @Override
     public GoodType clone() {
 
 //        try {

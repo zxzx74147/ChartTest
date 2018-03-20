@@ -154,7 +154,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
         RxView.clicks(mBinding.buyStopValue).subscribe(a -> {
             int offset = FormatUtil.getPureNum(mBinding.buyStopValue.getText().toString());
             WheelSelectorData data = new WheelSelectorData();
-            data.items = FormatUtil.POINT_LIST;
+            data.items = FormatUtil.getPointCal(mSelectGood,mAmount);
             data.offset = offset;
             CommonWheelSelectorDialog dialog = CommonWheelSelectorDialog.newInstance(new IntentData<>(data));
             ZXFragmentJumpHelper.startFragment(getContext(), dialog, new CommonCallback() {
@@ -163,7 +163,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                     if (item == null) {
                         return;
                     }
-                    mBinding.buyStopValue.setText(data.items.get((Integer) item));
+                    mBinding.buyStopValue.setText(((Integer) item)+"点");
                 }
             });
         });
@@ -171,7 +171,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
         RxView.clicks(mBinding.buyLimitValue).subscribe(a -> {
             int offset = FormatUtil.getPureNum(mBinding.buyLimitValue.getText().toString());
             WheelSelectorData data = new WheelSelectorData();
-            data.items = FormatUtil.POINT_LIST;
+            data.items = FormatUtil.getPointCal(mSelectGood,mAmount);
             data.offset = offset;
             CommonWheelSelectorDialog dialog = CommonWheelSelectorDialog.newInstance(new IntentData<>(data));
             ZXFragmentJumpHelper.startFragment(getContext(), dialog, new CommonCallback() {
@@ -180,7 +180,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                     if (item == null) {
                         return;
                     }
-                    mBinding.buyLimitValue.setText(data.items.get((Integer) item));
+                    mBinding.buyLimitValue.setText(((Integer) item)+"点");
                 }
             });
         });
@@ -273,14 +273,14 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             mBinding.setGood(mSelectGood);
         }
 
-        for (int i = 1; i < 10; i++) {
+        for (int i = mSelectGood.minLot; i <= mSelectGood.maxLot; i++) {
             String temp = i + "手";
             TabLayout.Tab newTab = mBinding.listAmount.newTab();
             newTab.setText(temp);
             newTab.setTag(i);
             mBinding.listAmount.addTab(newTab);
         }
-        mAmount = 1;
+        mAmount = mSelectGood.minLot;
         refreshAmount();
 
         if (mType == TradeFragment.TYPE_MACH_POSITION_BUY_UP || mType == TradeFragment.TYPE_POSITION_BUY_UP) {

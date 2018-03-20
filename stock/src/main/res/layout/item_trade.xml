@@ -357,6 +357,7 @@
                 android:layout_height="wrap_content"
                 android:onClick="@{()->{StockBusStation.viewPositionDeffer(context,data)}}"
                 android:text="@{@string/format_cost(data.deferred)}"
+                android:drawableRight="@{data.deferred==0? null:@drawable/home_quotes_fall_grey}"
                 app:layout_constraintStart_toEndOf="@+id/textView33"
                 app:layout_constraintTop_toTopOf="@+id/textView33" />
 

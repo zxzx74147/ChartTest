@@ -63,6 +63,16 @@
                     android:textColor="@color/text_dark_grey"
                     android:textSize="@dimen/default_size_30" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:lineSpacingMultiplier="1.5"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_gap_121"
+                    android:text="@{data.bottom}"
+                    android:layout_gravity="right"
+                    android:textColor="@color/text_dark_grey"
+                    android:textSize="@dimen/default_size_30" />
+
 
             </LinearLayout>
         </ScrollView>

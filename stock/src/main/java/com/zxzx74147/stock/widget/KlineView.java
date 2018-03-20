@@ -173,6 +173,7 @@ public class KlineView extends LinearLayout {
 
         XAxis xAxis = mBinding.kline.getXAxis();
         xAxis.setValueFormatter(ChartUtil.getAxisValueFormatter1m(mDataParse.getCandleEntries()));
+        mBinding.kline.setAxisValueFormatter(ChartUtil.getAxisValueFormatterShowDay(mDataParse.getCandleEntries()));
     }
 
     private void setSMA() {

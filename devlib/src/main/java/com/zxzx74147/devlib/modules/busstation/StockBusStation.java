@@ -101,6 +101,9 @@ public class StockBusStation {
     }
 
     public static void viewPositionDeffer(Context context,Position position) {
+        if(position.deferred ==0||position.deferredList==null||position.deferredList.deferred==null){
+            return;
+        }
         MessageEvent event = new MessageEvent<>(BUS_ID_MACH_POSITION_DEFFER, context);
         event.data =position;
         EventBus.getDefault().post(event);

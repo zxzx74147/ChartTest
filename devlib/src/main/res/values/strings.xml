@@ -52,5 +52,6 @@
     <string name="vcode_remind">请输入验证码</string>
     <string name="no_network">网络不给力，检查网络再试试</string>
     <string name="try_refresh">刷新</string>
+    <string name="gross_profit">浮动盈亏（元）</string>
 
 </resources>

@@ -171,7 +171,7 @@ public class ViewUtil {
 
     }
 
-    public static void showSoftPad(TextView text){
+    public static void showSoftPad(EditText text){
         text.requestFocus();
         InputMethodManager imm = (InputMethodManager) text.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
 //隐藏软键盘 //
@@ -179,6 +179,7 @@ public class ViewUtil {
         text.postDelayed(new Runnable() {
             @Override
             public void run() {
+                text.setSelection(text.getText().length());
                 imm.showSoftInput(text, InputMethodManager.SHOW_IMPLICIT);
             }
         },150);

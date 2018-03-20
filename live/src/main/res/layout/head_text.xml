@@ -103,9 +103,10 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:id="@+id/write"
                 android:layout_width="wrap_content"
                 android:textColor="@color/text_grey"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:textSize="@dimen/default_size_26"
                 android:text="@string/write_comment"
                 android:layout_height="wrap_content" />

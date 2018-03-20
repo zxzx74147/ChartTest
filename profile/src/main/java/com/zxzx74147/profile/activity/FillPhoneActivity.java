@@ -23,6 +23,7 @@ import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.utils.WebviewUtil;
 import com.zxzx74147.profile.R;
 import com.zxzx74147.profile.data.UserUniData;
+import com.zxzx74147.profile.databinding.ActivityFillPhoneBinding;
 import com.zxzx74147.profile.databinding.ActivityLoginPhoneBinding;
 import com.zxzx74147.profile.storage.AccountStorage;
 
@@ -34,10 +35,10 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class LoginPhoneActivity extends BaseActivity {
-    private static final String TAG = LoginPhoneActivity.class.getSimpleName();
+public class FillPhoneActivity extends BaseActivity {
+    private static final String TAG = FillPhoneActivity.class.getSimpleName();
 
-    private ActivityLoginPhoneBinding mBinding = null;
+    private ActivityFillPhoneBinding mBinding = null;
     private boolean mIsCountDonw = false;
     private AccountStorage mStockStorage = RetrofitClient.getClient().create(AccountStorage.class);
     private Disposable mDisposable = null;
@@ -45,7 +46,7 @@ public class LoginPhoneActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_login_phone);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_fill_phone);
         init();
     }
 
@@ -58,10 +59,10 @@ public class LoginPhoneActivity extends BaseActivity {
     }
 
     private void init() {
-        RxView.clicks(mBinding.layoutRegist.enterDelete).subscribe(a -> {
-            mBinding.layoutRegist.phoneNumber.setText("");
+        RxView.clicks(mBinding.layoutFillPhone.enterDelete).subscribe(a -> {
+            mBinding.layoutFillPhone.phoneNumber.setText("");
         });
-        Observable<CharSequence> phoneNumberOb = RxTextView.textChanges(mBinding.layoutRegist.phoneNumber);
+        Observable<CharSequence> phoneNumberOb = RxTextView.textChanges(mBinding.layoutFillPhone.phoneNumber);
         phoneNumberOb.subscribe(charSequence -> {
             if (mIsCountDonw) {
                 return;
@@ -70,23 +71,21 @@ public class LoginPhoneActivity extends BaseActivity {
 
         });
 
-        RxView.clicks(mBinding.layoutRegist.start).subscribe(a -> {
+        RxView.clicks(mBinding.layoutFillPhone.start).subscribe(a -> {
             requestLogin();
         });
 
-        RxView.clicks(mBinding.layoutRegist.close).subscribe(a -> {
+        RxView.clicks(mBinding.layoutFillPhone.close).subscribe(a -> {
             finish();
         });
 
-        RxView.clicks(mBinding.layoutRegist.protocol).subscribe(a -> {
-            WebviewUtil.showWebActivity(this, SysInitManager.sharedInstance().getSysInitData().config.userProtocolUrl);
-        });
 
-        RxView.clicks(mBinding.layoutRegist.vcodeRemind).subscribe(a -> {
+
+        RxView.clicks(mBinding.layoutFillPhone.vcodeRemind).subscribe(a -> {
             if (mIsCountDonw) {
                 return;
             }
-            if (checkPhoneNum(mBinding.layoutRegist.phoneNumber.getText())) {
+            if (checkPhoneNum(mBinding.layoutFillPhone.phoneNumber.getText())) {
                 requestVcode();
             }
         });
@@ -95,40 +94,40 @@ public class LoginPhoneActivity extends BaseActivity {
     }
 
     private boolean checkPhoneNum(CharSequence charSequence) {
-        mBinding.layoutRegist.vcodeRemind.setText(R.string.login_vcode);
+        mBinding.layoutFillPhone.vcodeRemind.setText(R.string.login_vcode);
         if (charSequence.length() == 11) {
-            mBinding.layoutRegist.vcodeRemind.setTextColor(getResources().getColor(R.color.text_blue));
+            mBinding.layoutFillPhone.vcodeRemind.setTextColor(getResources().getColor(R.color.text_blue));
             return true;
         } else {
-            mBinding.layoutRegist.vcodeRemind.setTextColor(getResources().getColor(R.color.text_light_grey));
+            mBinding.layoutFillPhone.vcodeRemind.setTextColor(getResources().getColor(R.color.text_light_grey));
             return false;
         }
     }
 
     public void requestVcode() {
 
-        NetworkApi.ApiSubscribe(this,mStockStorage.accountGetVCode(mBinding.layoutRegist.phoneNumber.getText().toString()),false, new Consumer<UniApiData>() {
+        NetworkApi.ApiSubscribe(this,mStockStorage.accountGetVCode(mBinding.layoutFillPhone.phoneNumber.getText().toString()),false, new Consumer<UniApiData>() {
 
             @Override
             public void accept(UniApiData uniApiData) throws Exception {
                 if (uniApiData.hasError()) {
-                    ToastUtil.showToast(LoginPhoneActivity.this, uniApiData.error.usermsg);
+                    ToastUtil.showToast(FillPhoneActivity.this, uniApiData.error.usermsg);
                     return;
                 }
 
                 final long count = 60;
-                ViewUtil.showSoftPad(mBinding.layoutRegist.vcode);
+                ViewUtil.showSoftPad(mBinding.layoutFillPhone.vcode);
                 Observable.interval(0, 1, TimeUnit.SECONDS).take(count + 1).map(aLong -> count - aLong).doOnSubscribe(disposable -> {
                     mDisposable = disposable;
                     mIsCountDonw = true;
                 }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(t -> {
                     if (t <= 0) {
                         mIsCountDonw = false;
-                        checkPhoneNum(mBinding.layoutRegist.phoneNumber.getText());
+                        checkPhoneNum(mBinding.layoutFillPhone.phoneNumber.getText());
                     } else {
                         String format = getResources().getString(R.string.vcode_countdown);
-                        mBinding.layoutRegist.vcodeRemind.setText(String.format(format, t));
-                        mBinding.layoutRegist.vcodeRemind.setTextColor(getResources().getColor(R.color.text_light_grey));
+                        mBinding.layoutFillPhone.vcodeRemind.setText(String.format(format, t));
+                        mBinding.layoutFillPhone.vcodeRemind.setTextColor(getResources().getColor(R.color.text_light_grey));
 
                     }
                 });
@@ -139,26 +138,26 @@ public class LoginPhoneActivity extends BaseActivity {
     }
 
     public void requestLogin() {
-        if (!checkPhoneNum(mBinding.layoutRegist.phoneNumber.getText())) {
+        if (!checkPhoneNum(mBinding.layoutFillPhone.phoneNumber.getText())) {
             return;
         }
-        if (TextUtils.isEmpty(mBinding.layoutRegist.vcode.getText())) {
+        if (TextUtils.isEmpty(mBinding.layoutFillPhone.vcode.getText())) {
             return;
         }
         String token = KVStore.getString("push_id");
-        Observable<UserUniData> observable = mStockStorage.acctountLogin(mBinding.layoutRegist.phoneNumber.getText().toString(),
-                mBinding.layoutRegist.vcode.getText().toString(),
+        Observable<UserUniData> observable = mStockStorage.acctountLogin(mBinding.layoutFillPhone.phoneNumber.getText().toString(),
+                mBinding.layoutFillPhone.vcode.getText().toString(),
                 DeviceIDMananger.sharedInstance().getDeviceID(), PackageInfoMananger.sharedInstance().getVersionInfo().getVersonName()
         , Build.MODEL,  AnalyticsConfig.getChannel(getApplication()),token);
         NetworkApi.ApiSubscribe(this,observable, true,new Consumer<UserUniData>() {
             @Override
             public void accept(UserUniData userUniData) throws Exception {
                 if (userUniData.hasError()) {
-                    ToastUtil.showToast(LoginPhoneActivity.this, userUniData.error.usermsg);
+                    ToastUtil.showToast(FillPhoneActivity.this, userUniData.error.usermsg);
                     return;
                 }
                 AccountManager.sharedInstance().saveUser(userUniData.user);
-                MainBusStation.startMain(LoginPhoneActivity.this);
+                MainBusStation.startMain(FillPhoneActivity.this);
                 if(mCallback!=null){
                     mCallback.callback(userUniData);
                 }

@@ -34,6 +34,11 @@ android {
         ndk {
             abiFilters  "armeabi-v7a"
         }
+        manifestPlaceholders = [
+                //  替换成你的qq_id
+                qq_id: "123456789",
+                wx_appid:"wx8f763f88fcd1bd9b"
+        ]
     }
 
 

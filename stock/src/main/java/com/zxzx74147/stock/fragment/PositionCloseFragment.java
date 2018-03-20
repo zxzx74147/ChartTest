@@ -98,7 +98,9 @@ public class PositionCloseFragment extends BaseDialogFragment {
                     ToastUtil.showToast(getActivity(),machPositionData.error.usermsg);
                     return;
                 }
-
+                if(mCallback!=null){
+                    mCallback.callback(machPositionData);
+                }
                 ToastUtil.showToast(getActivity(),getResources().getString(R.string.succ));
                 dismiss();
             }

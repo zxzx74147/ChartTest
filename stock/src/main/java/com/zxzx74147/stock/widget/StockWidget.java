@@ -32,6 +32,7 @@ public class StockWidget extends FrameLayout implements IViewModelHolder {
     private StockViewModel mStockViewModel = null;
     private PriceViewModel mPriceViewModel = null;
     private DataParse mDataParse = new DataParse();
+    private GoodType mGoodType = null;
 
     public StockWidget(Context context) {
         this(context, null);
@@ -50,6 +51,12 @@ public class StockWidget extends FrameLayout implements IViewModelHolder {
         mStockViewModel.getKLineData().setGood(good);
         mPriceViewModel.getReadTimeLiveData().setGood(good);
         mBinding.setPrice(good.price);
+
+        if(good.equals(mGoodType)){
+            mGoodType = good;
+            return;
+        }
+        mGoodType = good;
         try {
             mBinding.klineview.setLoading();
             RxTabLayout.select(mBinding.tabLayout).accept(1);
@@ -102,12 +109,12 @@ public class StockWidget extends FrameLayout implements IViewModelHolder {
 
         });
 
-        mPriceViewModel.getReadTimeLiveData().observe(owner, realtime -> {
-            if (realtime.hasError()) {
-                return;
-            }
-            Price price = realtime.priceRealtimeList.priceRealtime.get(0);
-            mBinding.setPrice(price);
-        });
+//        mPriceViewModel.getReadTimeLiveData().observe(owner, realtime -> {
+//            if (realtime.hasError()) {
+//                return;
+//            }
+//            Price price = realtime.priceRealtimeList.priceRealtime.get(0);
+//            mBinding.setPrice(price);
+//        });
     }
 }

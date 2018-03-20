@@ -26,6 +26,7 @@ import android.widget.ImageView;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.jakewharton.rxbinding2.widget.TextViewEditorActionEvent;
+import com.zxzx74147.charttest.MainFeedActivity;
 import com.zxzx74147.charttest.R;
 import com.zxzx74147.charttest.databinding.LayoutLiveNormalBinding;
 import com.zxzx74147.devlib.base.BaseActivity;
@@ -33,6 +34,7 @@ import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.devlib.data.UniApiData;
 import com.zxzx74147.devlib.data.UserData;
 import com.zxzx74147.devlib.image.ImageLoader;
+import com.zxzx74147.devlib.modules.sys.SysInitManager;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.devlib.utils.DisplayUtil;
@@ -115,7 +117,18 @@ public class LayoutLiveNormal extends FrameLayout {
 
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            Log.d(TAG, "onFling: " + e1.toString() + e2.toString());
+            if(e1==null){
+                e1 = mLastOnDownEvent;
+            }
+            if(e2==null){
+                return true;
+            }
+            if (velocityX > 0&&Math.abs(e1.getX()-e2.getX())>2*Math.abs(e1.getY()-e2.getY())) {
+                if (SysInitManager.sharedInstance().getSysInitData().swich.liveOpen != 0) {
+                    ((Activity)getContext()).finish();
+                    return true;
+                }
+            }
             if(velocityY<0){
                 showAll();
             }else{

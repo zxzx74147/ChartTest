@@ -3,6 +3,7 @@ package com.zxzx74147.charttest;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import com.allenliu.versionchecklib.v2.AllenVersionChecker;
 import com.allenliu.versionchecklib.v2.builder.UIData;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
+import com.umeng.analytics.AnalyticsConfig;
 import com.zxzx74147.charttest.databinding.ActivityLauncherBinding;
 import com.zxzx74147.charttest.databinding.LayoutUpgradeBinding;
 import com.zxzx74147.devlib.DevLib;
@@ -29,13 +31,18 @@ import com.zxzx74147.devlib.os.DeviceIDMananger;
 import com.zxzx74147.devlib.os.PackageInfoMananger;
 import com.zxzx74147.devlib.utils.AnimationUtil;
 import com.zxzx74147.devlib.utils.ToastUtil;
+import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
 import com.zxzx74147.devlib.wxapi.WxApiHandler;
+import com.zxzx74147.profile.activity.FillPhoneActivity;
+import com.zxzx74147.profile.data.UserUniData;
+import com.zxzx74147.profile.storage.AccountStorage;
 import com.zxzx74147.profile.storage.SysStorage;
 
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class LauncherActivity extends BaseActivity {
@@ -43,7 +50,7 @@ public class LauncherActivity extends BaseActivity {
     private ActivityLauncherBinding mBinding = null;
     private boolean mIsSysInit = false;
     private boolean misAnimation = false;
-
+    private AccountStorage mStockStorage = RetrofitClient.getClient().create(AccountStorage.class);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +80,7 @@ public class LauncherActivity extends BaseActivity {
     private void showLoginButton() {
 
         AnimationUtil.showViewAlpha(mBinding.loginPhone);
-//        AnimationUtil.showViewAlpha(mBinding.loginWechat);
+        AnimationUtil.showViewAlpha(mBinding.loginWechat);
         RxView.clicks(mBinding.loginWechat).subscribe(v -> {
             loginWechat();
         });
@@ -92,6 +99,22 @@ public class LauncherActivity extends BaseActivity {
             @Override
             public void callback(SendAuth.Resp item) {
                 String code = item.code;
+                String token = KVStore.getString("push_id");
+                Observable<UserUniData> observable = mStockStorage.wechatLogin(code,DeviceIDMananger.sharedInstance().getDeviceID(), PackageInfoMananger.sharedInstance().getVersionInfo().getVersonName()
+                        , Build.MODEL,  AnalyticsConfig.getChannel(getApplication()),token);
+                NetworkApi.ApiSubscribe(LauncherActivity.this,observable, true,new Consumer<UserUniData>() {
+                    @Override
+                    public void accept(UserUniData userUniData) throws Exception {
+                        if (userUniData.hasError()) {
+                            ToastUtil.showToast(LauncherActivity.this, userUniData.error.usermsg);
+                            return;
+                        }
+                        AccountManager.sharedInstance().saveUser(userUniData.user);
+                        ZXActivityJumpHelper.startActivityWithCallback(LauncherActivity.this, FillPhoneActivity.class,o->{
+
+                        });
+                    }
+                },UserUniData.class);
             }
         });
     }
@@ -100,6 +123,8 @@ public class LauncherActivity extends BaseActivity {
         MainBusStation.startMain(this);
         finish();
 //        ZXActivityJumpHelper.startActivity(LauncherActivity.this, StockActivity.class);
+
+
     }
 
     private void sysInit() {
@@ -121,6 +146,10 @@ public class LauncherActivity extends BaseActivity {
 //            if (dealUpgrade(sysInit.upgrade)) {
 //                return;
 //            }
+            if(sysInit.needLogin!=0){
+                toLogin();
+                return;
+            }
             mIsSysInit = true;
             if (misAnimation) {
                 if (AccountManager.sharedInstance().isLogin()) {
@@ -130,6 +159,11 @@ public class LauncherActivity extends BaseActivity {
                 }
             }
         },SysInitData.class);
+    }
+
+    private void toLogin(){
+        AccountManager.sharedInstance().logout();
+        showLoginButton();
     }
 
     private boolean dealUpgrade(Upgrade upgrade) {

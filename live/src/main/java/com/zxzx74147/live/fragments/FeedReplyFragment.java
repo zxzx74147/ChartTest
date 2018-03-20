@@ -13,6 +13,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.LinearLayout;
 
 import com.jakewharton.rxbinding2.support.design.widget.RxTextInputLayout;
+import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.jakewharton.rxbinding2.widget.TextViewEditorActionEvent;
 import com.zxzx74147.devlib.BR;
@@ -131,6 +132,9 @@ public class FeedReplyFragment extends BaseFragment {
                 });
             }
         };
+        RxView.clicks(mHeadBinding.write).subscribe(v->{
+            ViewUtil.showSoftPad(mBinding.replyEidt);
+        });
         mAdapter.addHeaderView(mHeadBinding.getRoot());
         mBinding.list.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter.setMultiTypeDelegate(new CommonMultiTypeDelegate());

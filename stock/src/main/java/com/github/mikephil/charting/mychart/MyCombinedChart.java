@@ -5,13 +5,13 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
 
 import com.github.mikephil.charting.charts.CombinedChart;
 import com.github.mikephil.charting.data.BarLineScatterCandleBubbleData;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.zxzx74147.devlib.DevLib;
 import com.zxzx74147.stock.R;
@@ -23,14 +23,15 @@ import java.util.List;
  */
 public class MyCombinedChart extends CombinedChart {
     private MyLeftMarkerView myMarkerViewLeft;
-//    private MyHMarkerView myMarkerViewH;
+    //    private MyHMarkerView myMarkerViewH;
     private MyBottomMarkerView myBottomMarkerView;
     private Paint mPaint = new Paint();
-    private int top = getResources().getDimensionPixelSize(R.dimen.default_gap_13);
-    private static String FORMAT_LABEL=DevLib.getApp().getString(R.string.format_label);
+    private int top = getResources().getDimensionPixelSize(R.dimen.default_gap_20);
+    private static String FORMAT_LABEL = DevLib.getApp().getString(R.string.format_label);
+    private IAxisValueFormatter mLabelFormater = null;
 //    private DataParse minuteHelper;
 
-    private boolean mDrawMarkerViews =true;
+    private boolean mDrawMarkerViews = true;
 
     public MyCombinedChart(Context context) {
         super(context);
@@ -44,12 +45,17 @@ public class MyCombinedChart extends CombinedChart {
         super(context, attrs, defStyle);
     }
 
-    public void setMarker(MyLeftMarkerView markerLeft, MyBottomMarkerView markerBottom ) {
+    public void setMarker(MyLeftMarkerView markerLeft, MyBottomMarkerView markerBottom) {
         this.myMarkerViewLeft = markerLeft;
         this.myBottomMarkerView = markerBottom;
         mPaint.setTextSize(getResources().getDimensionPixelSize(R.dimen.default_size_20));
 //        this.minuteHelper = minuteHelper;
     }
+
+    public void setAxisValueFormatter(IAxisValueFormatter formatter) {
+        mLabelFormater = formatter;
+    }
+
 
 //    public void setMarker(MyLeftMarkerView markerLeft, MyHMarkerView markerH, DataParse minuteHelper) {
 //        this.myMarkerViewLeft = markerLeft;
@@ -83,30 +89,30 @@ public class MyCombinedChart extends CombinedChart {
                     : ((mData == null ? 0.f : mData.getXMax()) - 1.f);
             if (xIndex <= deltaX && xIndex <= deltaX * mAnimator.getPhaseX()) {
                 Entry e = mData.getEntryForHighlight(mIndicesToHighlight[i]);
-                List<BarLineScatterCandleBubbleData> alldata  = mData.getAllData();
-                for(BarLineScatterCandleBubbleData bubbleData:alldata){
+                List<BarLineScatterCandleBubbleData> alldata = mData.getAllData();
+                for (BarLineScatterCandleBubbleData bubbleData : alldata) {
                     int length = 15;
-                    if(bubbleData instanceof LineData){
+                    if (bubbleData instanceof LineData) {
 
-                        for(Object setObj: bubbleData.getDataSets()){
+                        for (Object setObj : bubbleData.getDataSets()) {
                             LineDataSet set = (LineDataSet) setObj;
 //                            Log.e("Draw","index"+mIndicesToHighlight[i].getDataIndex());
-                            int index = (int) (set.getValues().size()-(mData.getXMax()-mIndicesToHighlight[i].getX()))-1;
-                            if(index<0){
+                            int index = (int) (set.getValues().size() - (mData.getXMax() - mIndicesToHighlight[i].getX())) - 1;
+                            if (index < 0) {
                                 continue;
                             }
                             Entry eD = set.getValues().get(index);
                             mPaint.setColor(set.getColor());
-                            if(eD!=null&& !TextUtils.isEmpty(set.getLabel())){
-                                String context = String.format(FORMAT_LABEL,set.getLabel(),eD.getY());
-                                canvas.drawText(context, mViewPortHandler.contentLeft()+length, mViewPortHandler.contentTop()+top,mPaint);
-                                length+=mPaint.measureText(context)+10;
+                            if (eD != null && !TextUtils.isEmpty(set.getLabel())) {
+                                String context = String.format(FORMAT_LABEL, set.getLabel(), eD.getY());
+                                canvas.drawText(context, mViewPortHandler.contentLeft() + length, mViewPortHandler.contentTop() + top, mPaint);
+                                length += mPaint.measureText(context) + 10;
                             }
                         }
                     }
                 }
                 // make sure entry not null
-                if (e == null ||( (int)e.getX()) != mIndicesToHighlight[i].getX())
+                if (e == null || ((int) e.getX()) != mIndicesToHighlight[i].getX())
                     continue;
                 float[] pos = getMarkerPosition(highlight);
                 // check bounds
@@ -136,13 +142,17 @@ public class MyCombinedChart extends CombinedChart {
                             MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
                     myMarkerViewLeft.layout(0, 0, myMarkerViewLeft.getMeasuredWidth(),
                             myMarkerViewLeft.getMeasuredHeight());
-                    myMarkerViewLeft.draw(canvas, mViewPortHandler.contentRight()-myMarkerViewLeft.getWidth(), mIndicesToHighlight[i].getDrawY() - myMarkerViewLeft.getHeight() / 2);
+                    myMarkerViewLeft.draw(canvas, mViewPortHandler.contentRight() - myMarkerViewLeft.getWidth(), mIndicesToHighlight[i].getDrawY() - myMarkerViewLeft.getHeight() / 2);
 //                    myMarkerViewLeft.draw(canvas, mViewPortHandler.contentLeft(), mIndicesToHighlight[i].getTouchY() - myMarkerViewLeft.getHeight() / 2);
 
                 }
 
                 if (null != myBottomMarkerView) {
-                    String time= getXAxis().getValueFormatter().getFormattedValue(mIndicesToHighlight[i].getX(),getXAxis());
+                    String time = getXAxis().getValueFormatter().getFormattedValue(mIndicesToHighlight[i].getX(), getXAxis());
+                    if (mLabelFormater != null) {
+                        time = mLabelFormater.getFormattedValue(mIndicesToHighlight[i].getX(), getXAxis());
+                    }
+//                    String time= getXAxis().getValueFormatter().getFormattedValue(mIndicesToHighlight[i].getX(),getXAxis());
 //                    String time  = getXAxis().getFormattedLabel((int) mIndicesToHighlight[i].getX());
 //                    String time = minuteHelper.getKLineDatas().get(mIndicesToHighlight[i].getXIndex()).date;
                     myBottomMarkerView.setData(time);

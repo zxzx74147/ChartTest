@@ -117,15 +117,32 @@
             app:layout_constraintTop_toBottomOf="@+id/t1" />
 
         <Button
-            android:id="@+id/logout"
+            android:id="@+id/save_button"
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/default_gap_110"
-            android:textColor="@color/white"
-            android:text="@string/logout_current"
+            android:layout_marginTop="@dimen/default_gap_80"
+            android:textColor="@color/text_white_white_lite"
+            android:text="@string/save"
             app:layout_constraintTop_toBottomOf="@+id/div2"
+            android:enabled="false"
             android:background="@drawable/rect_round_red"
             android:textSize="@dimen/default_size_34"
             android:layout_height="@dimen/default_gap_80" />
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/default_gap_80"
+            android:layout_marginEnd="8dp"
+            android:background="@null"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="@dimen/default_gap_46"
+            android:text="@string/logout_current"
+            android:paddingBottom="@dimen/default_gap_26"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/default_size_34"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/save_button" />
 
 
     </android.support.constraint.ConstraintLayout>

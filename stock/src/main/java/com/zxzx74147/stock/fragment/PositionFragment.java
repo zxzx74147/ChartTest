@@ -49,6 +49,7 @@ import com.zxzx74147.stock.data.PositionListData;
 import com.zxzx74147.stock.databinding.FragmentPositionBinding;
 import com.zxzx74147.stock.databinding.ItemMachpositionBinding;
 import com.zxzx74147.stock.databinding.ItemMachpositionHeaderBinding;
+import com.zxzx74147.stock.databinding.ItemPositionBinding;
 import com.zxzx74147.stock.databinding.LayoutPositionHeaderBinding;
 import com.zxzx74147.stock.storage.TradesStorage;
 import com.zxzx74147.stock.util.FailDealUtil;
@@ -102,9 +103,19 @@ public class PositionFragment extends BaseDialogFragment {
 
     }
 
-
     private void initView() {
-        mPositionAdapter = new CommonRecyclerViewAdapter<>(new LinkedList<>());
+        mPositionAdapter = new CommonRecyclerViewAdapter(new LinkedList<>()) {
+            @Override
+            protected void convert(BaseBindingViewHolder helper, Object item) {
+                ViewDataBinding itemCommonBinding = helper.mBinding;
+                itemCommonBinding.setVariable(BR.data, item);
+                if (itemCommonBinding instanceof ItemPositionBinding) {
+                    ItemPositionBinding binding = (ItemPositionBinding) itemCommonBinding;
+                    binding.setCloseCallback(mClosePositonCallback);
+                }
+            }
+        };
+        mPositionAdapter.setHeaderFooterEmpty(true,false);
         mMachAdapter = new CommonRecyclerViewAdapter(new LinkedList<>()) {
             @Override
             protected void convert(BaseBindingViewHolder helper, Object item) {
@@ -206,6 +217,28 @@ public class PositionFragment extends BaseDialogFragment {
             startDelete(item);
         }
     };
+
+    private CommonCallback<Position> mClosePositonCallback = new CommonCallback<Position>() {
+        @Override
+        public void callback(Position item) {
+            startClose(item);
+        }
+    };
+
+    private void startClose(Position position){
+        PositionCloseFragment fragment =  PositionCloseFragment.newInstance(new IntentData<>(position));
+        ZXFragmentJumpHelper.startFragment(getActivity(), fragment, new CommonCallback() {
+            @Override
+            public void callback(Object item) {
+                RecyclerViewUtil.setupRecyclerView(mBinding.refreshLayout, mBinding.list, mPositionAdapter, new CommonListRequestCallback<Position>() {
+                    @Override
+                    public Observable<PositionListData> getObserverble(BaseListData listdata) {
+                        return mTradeStorage.positionGetList(listdata == null ? 0 : listdata.nextPage);
+                    }
+                });
+            }
+        });
+    }
 
     private void startMotify(MachPosition machPosition) {
         TradeFragment fragment = TradeFragment.newInstance(machPosition);

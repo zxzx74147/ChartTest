@@ -29,7 +29,7 @@
     <string name="hint_set_password">设置6-12位登录密码</string>
 
     <string name="hint_set_password_repeat">请重复以上密码</string>
-    <string name="zhongjin_login">中金所交易登录</string>
+    <string name="zhongjin_login">长江国际交易登录</string>
     <string name="zhongjin_login_remind">为保证账号安全，登录交易6小时后需重新登录</string>
     <string name="foget_pass">忘记密码？</string>
     <string name="profile_edit">编辑资料</string>
@@ -60,6 +60,9 @@
     <string name="unread_num">%d个未读</string>
     <string name="mark_read">标记为已读</string>
     <string name="select_portrait">选择头像</string>
+    <string name="save">保存</string>
+    <string name="use_it">立即使用</string>
+    <string name="bind_phone_remind">绑定手机号领取90元代金券\n0成本下单</string>
 
 
     <array name="profile_list">

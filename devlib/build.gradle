@@ -71,6 +71,8 @@ dependencies {
     implementation 'com.github.GrenderG:Toasty:1.2.8'
     api 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.1.4'
     api 'com.github.yalantis:ucrop:2.2.1'
+    api 'com.umeng.sdk:common:1.4.1'
+    api 'com.umeng.sdk:analytics:7.4.1'
     //    api 'com.umeng.sdk:common:1.4.1'
     //    api 'com.umeng.sdk:analytics:7.4.1'
     //    // RxJava support for Room

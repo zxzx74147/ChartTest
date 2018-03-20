@@ -85,7 +85,6 @@
                 android:id="@+id/cancel"
                 android:text="@string/cancel"
                 android:textColor="@color/text_gold"
-                android:onClick="@{()->BalanceBusStation.startRecharge(context)}"
                 android:layout_weight="1"
                 android:background="@drawable/rect_round_gold_stroke"
                 android:layout_height="match_parent" />

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+
+        <variable
+            name="voucher"
+            type="com.zxzx74147.profile.data.ComVoucher"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/content_layout"
+            android:layout_width="match_parent"
+            android:paddingLeft="@dimen/default_size_69"
+            android:paddingRight="@dimen/default_size_69"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/rect_round_red_big_corner"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/default_gap_100">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{voucher.title}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/default_size_48"
+                android:textStyle="bold" />
+
+            <com.zxzx74147.devlib.widget.ZXImageView
+                android:layout_width="match_parent"
+                app:aspectRatioWidth="524"
+                app:aspectRatioHeight="180"
+                android:layout_marginTop="@dimen/default_gap_100"
+                android:layout_height="wrap_content"
+                android:src="@drawable/vouchers" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_gap_74"
+                android:textColor="@color/white"
+                android:textSize="@dimen/default_size_30" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_gap_18"
+                android:text="@{voucher.getEndTime()}"
+                android:textColor="@color/yellow"
+                android:textSize="@dimen/default_size_30"
+                 />
+
+            <Button
+                android:layout_width="match_parent"
+                android:text="@string/use_it"
+                android:layout_marginTop="@dimen/default_gap_74"
+                android:textSize="@dimen/default_size_34"
+                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/default_gap_60"
+                android:textColor="@color/red"
+                android:background="@drawable/rect_round_white_big_corner_44"
+                android:layout_height="@dimen/default_gap_88" />
+
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/content_layout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/default_gap_60"
+            android:src="@drawable/icon_close_big" />
+    </RelativeLayout>
+</layout>
+

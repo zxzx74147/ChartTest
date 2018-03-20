@@ -13,11 +13,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
-import com.jakewharton.rxbinding2.widget.TextViewEditorActionEvent;
 import com.yalantis.ucrop.UCrop;
 import com.zxzx74147.devlib.base.BaseDialogFragment;
 import com.zxzx74147.devlib.callback.CommonCallback;
@@ -101,16 +99,29 @@ public class ProfileEditFragment extends BaseDialogFragment {
                 }
             }
         });
-        RxTextView.editorActionEvents(mBinding.nickName).subscribe(new Consumer<TextViewEditorActionEvent>() {
+        RxTextView.textChanges(mBinding.nickName).subscribe(new Consumer<CharSequence>() {
             @Override
-            public void accept(TextViewEditorActionEvent textViewEditorActionEvent) throws Exception {
-                if (textViewEditorActionEvent.actionId() == EditorInfo.IME_ACTION_SEND) {
-                    doEditName();
+            public void accept(CharSequence charSequence) throws Exception {
+                if (charSequence.length() == 0||charSequence.toString().equals(mBinding.getUser().nickName)) {
+                    mBinding.saveButton.setEnabled(false);
+                }else{
+                    mBinding.saveButton.setEnabled(true);
                 }
             }
         });
+        RxView.clicks(mBinding.saveButton).subscribe(v->{
+            doEditName();
+        });
+//        RxTextView.editorActionEvents(mBinding.nickName).subscribe(new Consumer<TextViewEditorActionEvent>() {
+//            @Override
+//            public void accept(TextViewEditorActionEvent textViewEditorActionEvent) throws Exception {
+//                if (textViewEditorActionEvent.actionId() == EditorInfo.IME_ACTION_SEND) {
+//                    doEditName();
+//                }
+//            }
+//        });
 
-        RxView.clicks(mBinding.logout).subscribe(v->{
+        RxView.clicks(mBinding.logout).subscribe(v -> {
             ProfileBusStation.startProfileLogout(getContext());
         });
 
@@ -152,7 +163,7 @@ public class ProfileEditFragment extends BaseDialogFragment {
             return;
         }
 
-        NetworkApi.ApiSubscribe(getActivity(),mUserStroage.accountUpdate(name, null),true, new Consumer<UserUniData>() {
+        NetworkApi.ApiSubscribe(getActivity(), mUserStroage.accountUpdate(name, null), true, new Consumer<UserUniData>() {
             @Override
             public void accept(UserUniData userUniData) throws Exception {
                 if (userUniData.hasError()) {
@@ -167,7 +178,7 @@ public class ProfileEditFragment extends BaseDialogFragment {
                 mBinding.setUser(userUniData.user);
                 ViewUtil.hideSoftPad(mBinding.nickName);
             }
-        },UserUniData.class);
+        }, UserUniData.class);
     }
 
     private void doEditPortrait(Uri resultUri) {
