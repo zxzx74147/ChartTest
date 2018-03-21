@@ -23,6 +23,7 @@ import com.zxzx74147.devlib.widget.CommonRecyclerViewAdapter;
 import com.zxzx74147.profile.R;
 import com.zxzx74147.profile.data.ProfileItem;
 import com.zxzx74147.profile.data.UserUniData;
+import com.zxzx74147.profile.databinding.LayoutExchangeBinding;
 import com.zxzx74147.profile.databinding.LayoutProfileBinding;
 
 import java.util.Arrays;
@@ -37,6 +38,7 @@ public class ProfileFragment extends BaseDialogFragment {
     private CommonRecyclerViewAdapter<ProfileItem> mAdapter = null;
     private List<ProfileItem> mData = new LinkedList<>();
     private UserViewModel mUserModelView = null;
+    private LayoutExchangeBinding mExchangeBinding = null;
 
     public static ProfileFragment newInstance() {
         ProfileFragment fragment = new ProfileFragment();
@@ -48,7 +50,7 @@ public class ProfileFragment extends BaseDialogFragment {
         super.onCreateView(inflater, container, savedInstanceState);
         mBinding = DataBindingUtil.inflate(inflater, R.layout.layout_profile, container, false);
         mUserModelView = ViewModelProviders.of(getActivity()).get(UserViewModel.class);
-
+        mExchangeBinding = DataBindingUtil.inflate(inflater, R.layout.layout_exchange, null, false);
         initView();
         initData();
         return mBinding.getRoot();
@@ -56,6 +58,7 @@ public class ProfileFragment extends BaseDialogFragment {
 
     private void initData() {
         mBinding.setUserUni(mUserModelView.getUserUniLiveData().getValue());
+        mExchangeBinding.setUserUni(mUserModelView.getUserUniLiveData().getValue());
         mUserModelView.getUserUniLiveData().observe(ProfileFragment.this, new Observer<UserUniData>() {
             @Override
             public void onChanged(@Nullable UserUniData userUniData) {
@@ -64,6 +67,7 @@ public class ProfileFragment extends BaseDialogFragment {
                 }
 
                 mBinding.setUserUni(userUniData);
+                mExchangeBinding.setUserUni(userUniData);
             }
         });
     }
@@ -77,6 +81,7 @@ public class ProfileFragment extends BaseDialogFragment {
 
     private void initView() {
         mAdapter = new CommonRecyclerViewAdapter<>(mData);
+        mAdapter.setHeaderView(mExchangeBinding.getRoot());
         CommonMultiTypeDelegate temp = new CommonMultiTypeDelegate();
         mAdapter.setMultiTypeDelegate(temp);
         mBinding.list.setAdapter(mAdapter);

@@ -64,7 +64,9 @@
                 android:id="@+id/textView41"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_gap_10"
                 android:src="@{data.isVoucher!=0? @drawable/label_coupons:null}"
+                android:layout_marginBottom="@dimen/default_gap_10"
                 app:layout_constraintBottom_toBottomOf="@+id/textView15"
                 app:layout_constraintStart_toEndOf="@+id/textView40" />
 
@@ -96,6 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_gap_24"
+                app:font="@{`din_light`}"
                 android:text="@{TimeUtil.reformatDefaultTime(data.closeTime,@string/format_YYYYMMDD_HHMM)}"
                 android:textColor="@color/text_light_grey"
                 android:textSize="@dimen/default_size_26"
@@ -126,6 +129,7 @@
             <TextView
                 android:id="@+id/textView14"
                 style="@style/trade_item"
+                app:font="@{`din_light`}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/buy_price"
@@ -136,6 +140,7 @@
             <TextView
                 android:id="@+id/textView16"
                 style="@style/trade_item"
+                app:font="@{`din_light`}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_gap_10"
@@ -147,6 +152,7 @@
             <TextView
                 android:id="@+id/textView18"
                 style="@style/trade_item"
+                app:font="@{`din_light`}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_gap_10"
@@ -160,6 +166,7 @@
                 style="@style/trade_item"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                app:font="@{`din_light`}"
                 android:layout_marginTop="@dimen/default_gap_10"
                 android:text="@string/limit_point"
                 app:layout_constraintEnd_toEndOf="@+id/textView21"
@@ -172,6 +179,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_gap_10"
+                app:font="@{`din_light`}"
                 android:text="@string/stop_point"
                 app:layout_constraintEnd_toEndOf="@+id/textView21"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -181,6 +189,7 @@
                 android:id="@+id/textView21"
                 style="@style/trade_item"
                 android:layout_width="wrap_content"
+                app:font="@{`din_light`}"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_gap_10"
                 android:text="@string/buy_method"
@@ -190,6 +199,7 @@
             <TextView
                 android:id="@+id/textView22"
                 style="@style/trade_item"
+                app:font="@{`din_light`}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text='@{@string/format_02(data.openPrice)}'
@@ -202,6 +212,7 @@
                 style="@style/trade_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:font="@{`din_light`}"
                 android:text='@{@string/format_02(data.closePrice)}'
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView16"
@@ -212,6 +223,7 @@
                 style="@style/trade_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:font="@{`din_light`}"
                 android:text='@{@string/format_02(data.closePrice)}'
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView18"
@@ -222,6 +234,7 @@
                 style="@style/trade_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:font="@{`din_light`}"
                 android:text='@{data.limit==0? @string/none:@string/format_limit_value(data.limit)}'
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView18"
@@ -232,6 +245,8 @@
                 style="@style/trade_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
+                app:font="@{`din_light`}"
                 android:text='@{data.stop==0? @string/none:@string/format_stop_value(data.stop)}'
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView18"
@@ -241,6 +256,7 @@
                 android:id="@+id/textView27"
                 style="@style/trade_item"
                 android:layout_width="wrap_content"
+                app:font="@{`din_light`}"
                 android:layout_height="wrap_content"
                 android:text='@{data.getBuyMethodStr()}'
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -250,6 +266,7 @@
             <TextView
                 android:id="@+id/textView28"
                 style="@style/trade_item"
+                app:font="@{`din_light`}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/open_time"
@@ -258,6 +275,7 @@
 
             <TextView
                 android:id="@+id/textView29"
+                app:font="@{`din_light`}"
                 style="@style/trade_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -268,6 +286,7 @@
             <TextView
                 android:id="@+id/textView30"
                 style="@style/trade_item"
+                app:font="@{`din_light`}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/open_cost"
@@ -278,6 +297,7 @@
                 android:id="@+id/textView31"
                 style="@style/trade_item"
                 android:layout_width="wrap_content"
+                app:font="@{`din_light`}"
                 android:layout_height="wrap_content"
                 android:text="@string/close_type"
                 app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -287,6 +307,7 @@
                 android:id="@+id/textView32"
                 style="@style/trade_item"
                 android:layout_width="0dip"
+                app:font="@{`din_light`}"
                 android:layout_height="wrap_content"
                 android:text="@string/open_charge"
                 app:layout_constraintEnd_toEndOf="@+id/textView31"
@@ -295,6 +316,7 @@
 
             <TextView
                 android:id="@+id/textView33"
+                app:font="@{`din_light`}"
                 style="@style/trade_item"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
@@ -308,6 +330,7 @@
             <TextView
                 android:id="@+id/textView34"
                 style="@style/trade_item"
+                app:font="@{`din_light`}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{TimeUtil.reformatDefaultTime(data.positionTime,@string/format_MMDD_HHMM)}"
@@ -318,6 +341,7 @@
                 android:id="@+id/textView35"
                 style="@style/trade_item"
                 android:layout_width="wrap_content"
+                app:font="@{`din_light`}"
                 android:layout_height="wrap_content"
                 android:text="@{TimeUtil.reformatDefaultTime(data.closeTime,@string/format_MMDD_HHMM)}"
                 app:layout_constraintStart_toEndOf="@+id/textView29"
@@ -329,6 +353,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{@string/format_cost(data.openCost)}"
+                app:font="@{`din_light`}"
                 app:layout_constraintStart_toEndOf="@+id/textView30"
                 app:layout_constraintTop_toTopOf="@+id/textView30" />
 
@@ -337,6 +362,7 @@
                 style="@style/trade_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:font="@{`din_light`}"
                 android:text="@{data.getCloseTypeStr()}"
                 app:layout_constraintStart_toEndOf="@+id/textView31"
                 app:layout_constraintTop_toTopOf="@+id/textView31" />
@@ -346,6 +372,7 @@
                 style="@style/trade_item"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                app:font="@{`din_light`}"
                 android:text="@{@string/format_cost(data.openCharge)}"
                 app:layout_constraintStart_toEndOf="@+id/textView32"
                 app:layout_constraintTop_toTopOf="@+id/textView32" />
@@ -355,6 +382,7 @@
                 style="@style/trade_item"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                app:font="@{`din_light`}"
                 android:onClick="@{()->{StockBusStation.viewPositionDeffer(context,data)}}"
                 android:text="@{@string/format_cost(data.deferred)}"
                 android:drawableRight="@{data.deferred==0? null:@drawable/home_quotes_fall_grey}"

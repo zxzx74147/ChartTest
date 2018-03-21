@@ -77,6 +77,7 @@
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:font="@{`din`}"
                 android:text="@{@string/format_lot(data.amount)}"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/default_size_30"
@@ -100,6 +101,7 @@
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:font="@{`din`}"
                 android:text="@{@string/format_01_sign(data.grossProfit)}"
                 android:textColor="@{data.grossProfit>0? @color/red:@color/green}"
                 app:layout_constraintBottom_toBottomOf="@+id/textView6"
@@ -111,6 +113,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_gap_50"
+                app:font="@{`din`}"
                 android:text="@{@string/format_buy_price(data.openPrice)}"
                 android:textColor="@color/text_dark_grey"
                 android:textSize="@dimen/default_size_26"
@@ -124,6 +127,7 @@
                 android:text="@{@string/format_buy_open_charge(data.openCharge)}"
                 android:textColor="@color/text_dark_grey"
                 android:textSize="@dimen/default_size_26"
+                app:font="@{`din`}"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -132,8 +136,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="@{()->{StockBusStation.viewPositionDeffer(context,data)}}"
-                android:text="@{@string/format_buy_deferred(data.deferred)}"
+                android:text="@{data.isDeferred==0? @string/no_deffer:@string/format_buy_deferred(data.deferred)}"
                 android:textColor="@color/text_dark_grey"
+                app:font="@{`din`}"
                 android:textSize="@dimen/default_size_26"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView9" />
@@ -141,7 +146,9 @@
             <TextView
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
+                android:textColor="@color/text_dark_grey"
                 android:layout_height="wrap_content"
+                app:font="@{`din`}"
                 android:text="@{@string/format_float_num(data.amountPerLot)}"
                 app:layout_constraintBottom_toBottomOf="@+id/textView8"
                 app:layout_constraintStart_toStartOf="@+id/guideline2" />
@@ -149,6 +156,8 @@
             <TextView
                 android:id="@+id/textView12"
                 android:layout_width="wrap_content"
+                android:textColor="@color/text_dark_grey"
+                app:font="@{`din`}"
                 android:layout_height="wrap_content"
                 android:text="@{data.limit==0? @string/format_limit_none:@string/format_limit(data.limit)}"
                 app:layout_constraintBottom_toBottomOf="@+id/textView9"
@@ -158,6 +167,8 @@
                 android:id="@+id/textView13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/text_dark_grey"
+                app:font="@{`din`}"
                 android:text="@{data.stop==0? @string/format_stop_none:@string/format_stop(data.stop)}"
                 app:layout_constraintBottom_toBottomOf="@+id/textView10"
                 app:layout_constraintStart_toStartOf="@+id/guideline2" />
@@ -165,7 +176,9 @@
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
+
                 android:layout_height="wrap_content"
+                app:font="@{`din`}"
                 android:layout_marginTop="@dimen/default_gap_24"
                 android:text="@{TimeUtil.reformatDefaultTime(data.positionTime,@string/format_YYYYMMDD_HHMM)}"
                 android:textColor="@color/text_light_grey"

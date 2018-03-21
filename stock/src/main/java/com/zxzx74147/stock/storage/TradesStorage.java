@@ -55,6 +55,12 @@ public interface TradesStorage {
             , @Query("stop") String stop, @Query("error") String error, @Query("deferred") int deferred);
 
 
+
+    @GET("/trades/position/comvoucheropen")
+    Observable<PositionData> comvoucherOpen(@Query("goodsType") String goodsType, @Query("buySell")
+            int buySell, @Query("limit") String limit, @Query("stop") String stop);
+
+
     @GET("/trades/position/modify")
     Observable<PositionData> positionModify(@Query("positionId") long positionId, @Query("limit")
             String limit, @Query("stop") String stop, @Query("deferred") int deferred);

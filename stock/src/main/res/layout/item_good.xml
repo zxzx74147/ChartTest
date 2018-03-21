@@ -57,7 +57,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:font="@{`din_light`}"
+                    app:font="@{`din`}"
                     android:drawablePadding="@dimen/default_gap_5"
                     android:drawableRight="@{data.mIsSelect? ((data.price.curPrice-data.price.open>0? @drawable/home_quotes_rise_white:@drawable/home_quotes_fall_white)):(data.price.curPrice-data.price.open>0? @drawable/home_quotes_rise:@drawable/home_quotes_fall)}"
                     android:text='@{String.valueOf(data.price.curPrice)}'
@@ -68,7 +68,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/default_gap_26"
-                    app:font="@{`din_light`}"
+                    app:font="@{`din`}"
                     android:text="@{@string/format_01_sign(data.price.curPrice-data.price.open)}"
                     android:textColor='@{data.mIsSelect? @color/white:(data.price.curPrice-data.price.open>0? @color/stock_up:@color/stock_down)}'
                     android:textSize="@dimen/default_size_26" />

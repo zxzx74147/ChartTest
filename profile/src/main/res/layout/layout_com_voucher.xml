@@ -11,12 +11,15 @@
     </data>
 
     <RelativeLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/content_layout"
             android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/default_gap_44"
+            android:layout_marginRight="@dimen/default_gap_44"
             android:paddingLeft="@dimen/default_size_69"
             android:paddingRight="@dimen/default_size_69"
             android:layout_height="wrap_content"
@@ -29,7 +32,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{voucher.title}"
+                android:text="@{voucher.remind}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/default_size_48"
                 android:textStyle="bold" />
@@ -45,6 +48,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{voucher.desc}"
                 android:layout_marginTop="@dimen/default_gap_74"
                 android:textColor="@color/white"
                 android:textSize="@dimen/default_size_30" />
@@ -59,6 +63,7 @@
                  />
 
             <Button
+                android:id="@+id/just_use"
                 android:layout_width="match_parent"
                 android:text="@string/use_it"
                 android:layout_marginTop="@dimen/default_gap_74"

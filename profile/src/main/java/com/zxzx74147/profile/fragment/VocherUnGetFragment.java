@@ -61,9 +61,11 @@ public class VocherUnGetFragment extends BaseDialogFragment {
 
     private void initView() {
         mVoucherAdapter = new CommonRecyclerViewAdapter<>(null);
+        mVoucherAdapter.setEmptyView(DataBindingUtil.inflate(LayoutInflater.from(getContext()),R.layout.no_voucher,null,false).getRoot());
+
         CommonMultiTypeDelegate delegate = new CommonMultiTypeDelegate();
         mVoucherAdapter.setMultiTypeDelegate(delegate);
-        mVoucherAdapter.setEmptyView(R.layout.no_voucher);
+//        mVoucherAdapter.setEmptyView(R.layout.no_voucher);
         LinearLayoutManager lm = new LinearLayoutManager(getContext());
         lm.setOrientation(LinearLayoutManager.VERTICAL);
         mBinding.list.setLayoutManager(lm);

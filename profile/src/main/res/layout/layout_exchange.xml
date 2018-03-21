@@ -21,7 +21,7 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/root_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/rect_round_white"
         android:paddingBottom="@dimen/default_gap_38"
         android:paddingLeft="@dimen/default_gap_27"
@@ -63,7 +63,7 @@
             android:id="@+id/textView3"
             style="@style/content_black"
             android:layout_width="wrap_content"
-            app:font="@{`din_light`}"
+            app:font="@{`din`}"
             android:layout_height="wrap_content"
             android:text='@{@string/format_02(user.total)}'
             app:layout_constraintStart_toStartOf="@+id/textView2"
@@ -82,7 +82,7 @@
             android:id="@+id/textView5"
             style="@style/content_black"
             android:layout_width="wrap_content"
-            app:font="@{`din_light`}"
+            app:font="@{`din`}"
             android:layout_height="wrap_content"
             android:text='@{@string/format_02(user.balance)}'
             app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -105,7 +105,7 @@
             android:id="@+id/textView7"
             style="@style/content_black"
             android:layout_width="wrap_content"
-            app:font="@{`din_light`}"
+            app:font="@{`din`}"
             android:layout_height="wrap_content"
             android:text="@{@string/format_02_sign(userUni.user.grossProfit)}"
             android:textColor="@{userUni.user.grossProfit>0? @color/text_red:@color/green}"
@@ -131,7 +131,7 @@
             style="@style/content_black"
             android:gravity="center"
             android:layout_width="wrap_content"
-            app:font="@{`din_light`}"
+            app:font="@{`din`}"
             android:layout_height="wrap_content"
             android:background="@drawable/coupons"
             android:text='@{String.valueOf(userUni.userVoucherList.num)}'
@@ -200,7 +200,7 @@
 
         <View
             android:id="@+id/div"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_marginTop="@dimen/default_gap_36"
             app:layout_constraintEnd_toEndOf="parent"

@@ -253,6 +253,10 @@ public class BarLineChartTouchListener extends ChartTouchListener<BarLineChartBa
                     }
                 }
 
+                if(mChart.getHighlighted()!=null){
+                    mTouchMode = NONE;
+                    mChart.highlightValue(null,true);
+                }
                 if (mTouchMode == X_ZOOM ||
                         mTouchMode == Y_ZOOM ||
                         mTouchMode == PINCH_ZOOM ||

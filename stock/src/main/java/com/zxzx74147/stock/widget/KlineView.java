@@ -14,15 +14,19 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.CandleData;
 import com.github.mikephil.charting.data.CandleDataSet;
+import com.github.mikephil.charting.data.CandleEntry;
 import com.github.mikephil.charting.data.CombinedData;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.renderer.CombinedChartRenderer;
 import com.jakewharton.rxbinding2.widget.RxRadioGroup;
+import com.zxzx74147.devlib.callback.CommonCallback;
+import com.zxzx74147.devlib.log.ZXLog;
 import com.zxzx74147.stock.R;
 import com.zxzx74147.stock.databinding.WidgetKlineBinding;
 import com.zxzx74147.stock.indicator.DataParse;
+import com.zxzx74147.stock.indicator.KLineBean;
 import com.zxzx74147.stock.utils.ChartUtil;
 
 import java.util.ArrayList;
@@ -54,12 +58,27 @@ public class KlineView extends LinearLayout {
         init();
     }
 
+    private StockWidget mStockWidget = null;
+    public void setKlineView(StockWidget stockWidget){
+        mStockWidget = stockWidget;
+    }
+    public CommonCallback<CandleEntry> mKLineCallback = new CommonCallback<CandleEntry>() {
+        @Override
+        public void callback(CandleEntry item) {
+            if(mStockWidget!=null){
+                mStockWidget.setCandle(item);
+            }
+            if(item!=null)
+            ZXLog.i(TAG,""+item.getHigh());
+        }
+    };
+
     private void init() {
         mBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.widget_kline, this, true);
         ChartUtil.setChart(mBinding.kline);
         ChartUtil.setRealTimeChart(mBinding.klineRealtime);
         ChartUtil.setChart(mBinding.kline2);
-        ChartUtil.showHighline(mBinding.kline, mBinding.kline2);
+        ChartUtil.showHighline(mBinding.kline, mBinding.kline2,mKLineCallback);
         ChartUtil.setMarkerView(mBinding.kline);
         ChartUtil.setMarkerView2(mBinding.kline2);
 
@@ -99,6 +118,7 @@ public class KlineView extends LinearLayout {
         }
         mDataParse = dataParse;
         refresh();
+        ChartUtil.mData = mDataParse;
         mBinding.klineRealtime.setVisibility(View.GONE);
         mBinding.klineOther.setVisibility(VISIBLE);
         mBinding.loading.rootView.setVisibility(GONE);
@@ -172,7 +192,11 @@ public class KlineView extends LinearLayout {
         combinedData.setData(candleData);
 
         XAxis xAxis = mBinding.kline.getXAxis();
-        xAxis.setValueFormatter(ChartUtil.getAxisValueFormatter1m(mDataParse.getCandleEntries()));
+        if(mDataParse.mType==6) {
+            xAxis.setValueFormatter(ChartUtil.getAxisValueFormatterDay(mDataParse.getCandleEntries()));
+        }else{
+            xAxis.setValueFormatter(ChartUtil.getAxisValueFormatter1m(mDataParse.getCandleEntries(),mBinding.kline));
+        }
         mBinding.kline.setAxisValueFormatter(ChartUtil.getAxisValueFormatterShowDay(mDataParse.getCandleEntries()));
     }
 

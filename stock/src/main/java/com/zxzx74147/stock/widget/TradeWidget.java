@@ -32,6 +32,7 @@ import com.zxzx74147.devlib.utils.FormatUtil;
 import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
+import com.zxzx74147.profile.data.ComVoucher;
 import com.zxzx74147.profile.data.Voucher;
 import com.zxzx74147.stock.R;
 import com.zxzx74147.stock.data.Good;
@@ -63,6 +64,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
     private TradesStorage mTradeStorage = RetrofitClient.getClient().create(TradesStorage.class);
     private MachPosition mMachPosition = null;
     private TradeFragment fragment;
+    private boolean mIsComVoucherShow = false;
 
 
     @BindingAdapter({"good"})
@@ -353,34 +355,65 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
 
             },MachPositionData.class);
         } else if(mBinding.voucher.isChecked()){
-            Observable<PositionData> observable = mTradeStorage.voucherOpen(mSelectGood.goodsId, mType + 1, mAmount, String.valueOf(mGoodType.price.curPrice), limitStr, stopStr, null, 0);
-            NetworkApi.ApiSubscribe(ViewUtil.getLivecirceOwer(this), observable, true,positionData -> {
-                if (positionData.hasError()) {
-                    if (FailDealUtil.dealFail(getContext(), positionData.failed)) {
+            if(mIsComVoucherShow){
+                Observable<PositionData> observable = mTradeStorage.comvoucherOpen(mSelectGood.goodsType, mType + 1,  limitStr, stopStr);
+                NetworkApi.ApiSubscribe(ViewUtil.getLivecirceOwer(this), observable, true, positionData -> {
+                    if (positionData.hasError()) {
+                        if (FailDealUtil.dealFail(getContext(), positionData.failed)) {
+                            return;
+                        }
+                        ToastUtil.showToast(getContext(), positionData.error.usermsg);
                         return;
                     }
-                    ToastUtil.showToast(getContext(), positionData.error.usermsg);
-                    return;
-                }
-                DialogItem dialogItem = new DialogItem();
-                dialogItem.title = getResources().getString(R.string.position_open_succ);
-                dialogItem.content = null;
-                dialogItem.cancel = getResources().getString(R.string.position_view);
-                dialogItem.cancel = getResources().getString(R.string.continu_trade);
-                CommonFragmentDialog fragmentDialog = CommonFragmentDialog.newInstance(new IntentData<>(dialogItem));
-                ZXFragmentJumpHelper.startFragment(getContext(), fragmentDialog, new CommonCallback() {
-                    @Override
-                    public void callback(Object item) {
-                        //TODO
-                        if (item == null) {
-                            StockBusStation.viewPosition(getContext());
-                        } else {
-                            ;
-                        }
+                    DialogItem dialogItem = new DialogItem();
+                    dialogItem.title = getResources().getString(R.string.position_open_succ);
+                    dialogItem.content = null;
+                    dialogItem.cancel = getResources().getString(R.string.position_view);
+                    dialogItem.cancel = getResources().getString(R.string.continu_trade);
+                    CommonFragmentDialog fragmentDialog = CommonFragmentDialog.newInstance(new IntentData<>(dialogItem));
+                    ZXFragmentJumpHelper.startFragment(getContext(), fragmentDialog, new CommonCallback() {
+                        @Override
+                        public void callback(Object item) {
+                            //TODO
+                            if (item == null) {
+                                StockBusStation.viewPosition(getContext());
+                            } else {
+                                ;
+                            }
 
+                        }
+                    });
+                }, PositionData.class);
+            }else {
+                Observable<PositionData> observable = mTradeStorage.voucherOpen(mSelectGood.goodsId, mType + 1, mAmount, String.valueOf(mGoodType.price.curPrice), limitStr, stopStr, null, 0);
+                NetworkApi.ApiSubscribe(ViewUtil.getLivecirceOwer(this), observable, true, positionData -> {
+                    if (positionData.hasError()) {
+                        if (FailDealUtil.dealFail(getContext(), positionData.failed)) {
+                            return;
+                        }
+                        ToastUtil.showToast(getContext(), positionData.error.usermsg);
+                        return;
                     }
-                });
-            },PositionData.class);
+                    DialogItem dialogItem = new DialogItem();
+                    dialogItem.title = getResources().getString(R.string.position_open_succ);
+                    dialogItem.content = null;
+                    dialogItem.cancel = getResources().getString(R.string.position_view);
+                    dialogItem.cancel = getResources().getString(R.string.continu_trade);
+                    CommonFragmentDialog fragmentDialog = CommonFragmentDialog.newInstance(new IntentData<>(dialogItem));
+                    ZXFragmentJumpHelper.startFragment(getContext(), fragmentDialog, new CommonCallback() {
+                        @Override
+                        public void callback(Object item) {
+                            //TODO
+                            if (item == null) {
+                                StockBusStation.viewPosition(getContext());
+                            } else {
+                                ;
+                            }
+
+                        }
+                    });
+                }, PositionData.class);
+            }
         }
         else if (mType <= TradeFragment.TYPE_POSITION_BUY_DOWN) {
             Observable<PositionData> observable = mTradeStorage.positionOpen(mSelectGood.goodsId, mType + 1, mAmount, String.valueOf(mGoodType.price.curPrice), limitStr, stopStr, null, 1);
@@ -473,19 +506,34 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
         if (AccountManager.sharedInstance().getUserUni() == null) {
             return;
         }
+        mIsComVoucherShow = false;
         mBinding.balance.setChecked(true);
         mBinding.voucher.setVisibility(View.GONE);
         mBinding.setVoucher(false);
         if (mType != TradeFragment.TYPE_POSITION_BUY_UP && mType != TradeFragment.TYPE_POSITION_BUY_DOWN) {
             return;
         }
+
+        if (mType > TradeFragment.TYPE_POSITION_BUY_DOWN) {
+            return;
+        }
+
+        ComVoucher comVoucher = AccountManager.sharedInstance().getUserUni().userComVoucherInfo;
+        if(comVoucher!=null){
+            if(mSelectGood.depositFee==comVoucher.depositFee){
+                mBinding.voucher.setVisibility(View.VISIBLE);
+                mBinding.voucher.setText(comVoucher.name);
+                mBinding.voucher.setChecked(false);
+                mIsComVoucherShow = true;
+                return;
+            }
+        }
+
         List<Voucher> myVouchers = AccountManager.sharedInstance().getUserUni().userVoucherList.getListItems();
         if (myVouchers == null) {
             return;
         }
-        if (mType > TradeFragment.TYPE_POSITION_BUY_DOWN) {
-            return;
-        }
+
         List<Voucher> validVochers = new LinkedList<>();
         for (Voucher voucher : myVouchers) {
             if (voucher.goods.goodsId.equals(mSelectGood.goodsId)) {

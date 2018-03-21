@@ -73,6 +73,9 @@
 
     <string name="bank_list">支持银行</string>
     <string name="withdraw_remind2">如果您在绑定银行卡中碰到任何问题，请联系客服</string>
+    <string name="withdraw_remind1"><![CDATA[•\t提现金额<200，收取手续费2元/次]]></string>
+    <string name="withdraw_remind22">•\t提现金额≥200，收取手续费提现金额的1%</string>
+    <string name="withdraw_remind3">•\t提现手续费2元起申请</string>
 
 
     <!--<item name="recharge_wechat_drawable">@drawable/pay_weixin</item>-->

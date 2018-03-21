@@ -1,5 +1,6 @@
 package com.zxzx74147.charttest;
 
+import android.app.Dialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
@@ -7,21 +8,28 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.view.GestureDetectorCompat;
 import android.view.GestureDetector;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 
+import com.allenliu.versionchecklib.v2.AllenVersionChecker;
+import com.allenliu.versionchecklib.v2.builder.UIData;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.zxzx74147.charttest.databinding.ActivityMainFeedBinding;
+import com.zxzx74147.charttest.databinding.LayoutUpgradeBinding;
+import com.zxzx74147.devlib.DevLib;
 import com.zxzx74147.devlib.base.BaseActivity;
 import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.devlib.data.DialogItem;
 import com.zxzx74147.devlib.data.IntentData;
 import com.zxzx74147.devlib.font.FontBinder;
 import com.zxzx74147.devlib.fragment.CommonFragmentDialog;
+import com.zxzx74147.devlib.kvstore.KVStore;
 import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.modules.account.UserViewModel;
 import com.zxzx74147.devlib.modules.busstation.LiveBusStation;
 import com.zxzx74147.devlib.modules.busstation.MainBusStation;
 import com.zxzx74147.devlib.modules.busstation.ProfileBusStation;
+import com.zxzx74147.devlib.modules.busstation.StockBusStation;
 import com.zxzx74147.devlib.modules.sys.SysInitManager;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
@@ -32,8 +40,13 @@ import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
 import com.zxzx74147.live.data.HomeData;
 import com.zxzx74147.live.data.Live;
 import com.zxzx74147.live.stroage.LiveStorage;
+import com.zxzx74147.profile.data.ComVoucher;
+import com.zxzx74147.profile.databinding.LayoutComVoucherBinding;
 import com.zxzx74147.stock.data.GoodType;
 import com.zxzx74147.stock.fragment.StockFragment;
+import com.zxzx74147.stock.fragment.TradeFragment;
+
+import java.util.HashSet;
 
 import io.reactivex.functions.Consumer;
 
@@ -159,8 +172,52 @@ public class MainFeedActivity extends BaseActivity {
             }
             mBinding.setUserUni(userUniData);
             mBinding.setUser(userUniData.user);
+            if(userUniData.userComVoucherInfo!=null){
+                showComVoucher(userUniData.userComVoucherInfo);
+            }
         });
     }
+
+    private static HashSet<String> mReadTable = new HashSet<>();
+    private static final String KEY_COM_VOUCHER = "KEY_COM_VOUCHER1";
+    static{
+        mReadTable = KVStore.get(KEY_COM_VOUCHER,HashSet.class);
+        if(mReadTable==null){
+            mReadTable = new HashSet<>();
+        }
+    }
+
+    public static boolean isRead(String id){
+        if(mReadTable.contains(id)){
+            return true;
+        }
+        return false;
+    }
+
+    public static void markRead(String id){
+        mReadTable.add(id);
+        KVStore.put(KEY_COM_VOUCHER,mReadTable);
+    }
+
+    public void showComVoucher(ComVoucher voucher){
+        if(isRead(voucher.voucherId)){
+            return;
+        }
+        markRead(voucher.voucherId);
+        Dialog dialog = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        LayoutComVoucherBinding binding = DataBindingUtil.inflate(LayoutInflater.from(DevLib.getApp()), R.layout.layout_com_voucher, null, false);
+        dialog.setContentView(binding.getRoot());
+        RxView.clicks(binding.close).subscribe(v -> {
+            dialog.dismiss();
+        });
+        RxView.clicks(binding.justUse).subscribe(v -> {
+            dialog.dismiss();
+            StockBusStation.startStockTrade(MainFeedActivity.this,AccountManager.sharedInstance().getUserUni().goodsTypeList.goodType.get(0), TradeFragment.TYPE_POSITION_BUY_UP);
+        });
+        binding.setVoucher(voucher);
+        dialog.show();
+    }
+
 
     public static void checkLive(Context context) {
         LiveStorage mStorage = RetrofitClient.getClient().create(LiveStorage.class);

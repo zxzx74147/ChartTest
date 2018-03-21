@@ -52,6 +52,7 @@ dependencies {
     // Room (use 1.1.0-alpha1 for latest alpha)
     api 'android.arch.persistence.room:runtime:1.0.0'
     annotationProcessor "android.arch.persistence.room:compiler:1.0.0"
+    api 'uk.co.chrisjenx:calligraphy:2.3.0'
     // Paging
     api 'com.android.support.constraint:constraint-layout:1.0.2'
     api 'android.arch.paging:runtime:1.0.0-alpha6'

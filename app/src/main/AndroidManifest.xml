@@ -23,7 +23,7 @@
 
         <meta-data
             android:name="app_version"
-            android:value="1.0.0(Build_2018032001)" />
+            android:value="1.0.0(Build_2018032102)" />
 
         <meta-data
             android:name="io.fabric.ApiKey"

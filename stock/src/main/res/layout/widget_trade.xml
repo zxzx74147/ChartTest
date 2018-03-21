@@ -49,7 +49,7 @@
         <android.support.v4.widget.NestedScrollView
             android:id="@+id/nestedScrollView"
             android:layout_width="0dp"
-            android:layout_height="@dimen/default_gap_800"
+            android:layout_height="@dimen/default_gap_685"
             android:layout_marginTop="@dimen/default_gap_15"
             android:background="@color/white"
             android:fillViewport="true"
@@ -66,7 +66,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="@dimen/default_gap_44">
+                    android:paddingTop="@dimen/default_gap_44"
+                    android:paddingRight="@dimen/default_gap_44"
+                    android:paddingLeft="@dimen/default_gap_44">
 
                     <LinearLayout
                         android:id="@+id/by_up"
@@ -81,6 +83,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:letterSpacing="0.2"
                             android:text="@string/buy_up"
                             android:textColor="@color/text_black_white"
                             android:textSize="@dimen/default_size_34" />
@@ -91,6 +94,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/default_gap_12"
                             android:text=""
+                            app:font="@{`din_light`}"
                             android:textColor="@color/text_grey_white"
                             android:textSize="@dimen/default_size_24" />
                     </LinearLayout>
@@ -109,6 +113,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/buy_down"
+                            android:letterSpacing="0.2"
                             android:textColor="@color/text_black_white"
                             android:textSize="@dimen/default_size_34" />
 
@@ -117,6 +122,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/default_gap_12"
+                            app:font="@{`din_light`}"
                             android:text=""
                             android:textColor="@color/text_grey_white"
                             android:textSize="@dimen/default_size_24" />
@@ -159,6 +165,7 @@
                             android:inputType="number"
                             android:paddingLeft="@dimen/default_gap_24"
                             android:paddingRight="@dimen/default_gap_24"
+                            android:maxLength="3"
                             android:textColor="@color/text_black"
                             android:textColorHint="@color/text_light_grey"
                             android:textSize="@dimen/default_size_30" />
@@ -286,6 +293,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:button="@drawable/radio_red"
+                        android:paddingLeft="@dimen/default_gap_5"
                         android:checked="true"
                         android:gravity="center_vertical"
                         android:text='@{@string/format_left(user.balance)}'
@@ -311,6 +319,7 @@
                         android:id="@+id/voucher"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/default_gap_5"
                         android:button="@drawable/radio_red"
                         android:checked="false"
                         android:gravity="center_vertical"
@@ -481,7 +490,7 @@
                 android:id="@+id/do_it"
                 android:layout_width="@dimen/default_gap_250"
                 android:layout_height="match_parent"
-                android:background='@{type==TradeFragment.TYPE_MACH_POSITION_BUY_UP||type==TradeFragment.TYPE_POSITION_BUY_UP? @color/stock_up:@color/stock_down}'
+                android:background='@{type==TradeFragment.TYPE_MACH_POSITION_BUY_UP||type==TradeFragment.TYPE_POSITION_BUY_UP? @color/red:@color/green}'
                 android:text="@string/buy_stock"
                 android:textColor="@color/white"
                 android:textSize="@dimen/default_size_34" />

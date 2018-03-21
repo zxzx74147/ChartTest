@@ -18,7 +18,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bg_grey"
+        android:background="@color/bg_grey2"
         android:orientation="vertical">
 
         <com.zxzx74147.stock.widget.GoodListWidget
@@ -49,6 +49,7 @@
                 android:layout_weight="27"
                 android:background="@color/stock_up"
                 android:text="@string/stock_by_increase"
+                android:letterSpacing="0.2"
                 android:textColor="@color/white"
                 android:textSize="@dimen/default_size_34"
                 android:textStyle="bold" />
@@ -58,6 +59,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="27"
                 android:background="@color/stock_down"
+                android:letterSpacing="0.2"
                 android:text="@string/stock_by_decrease"
                 android:textColor="@color/white"
                 android:textSize="@dimen/default_size_34"
@@ -69,7 +71,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="21"
                 android:background="@color/text_black"
-
+                android:letterSpacing="0.2"
                 android:text="@string/stock_by_without"
                 android:onClick="@{()->StockBusStation.startStockTrade(context,good,TradeFragment.TYPE_MACH_POSITION_BUY_UP)}"
                 android:textColor="@color/white"

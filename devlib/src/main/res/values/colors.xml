@@ -28,4 +28,5 @@
     <color name="text_gold">#C49676</color>
     <color name="progress_bg">#E0E0E6</color>
     <color name="black">#FF000000</color>
+    <color name="text_grey2">#848EA1</color>
 </resources>

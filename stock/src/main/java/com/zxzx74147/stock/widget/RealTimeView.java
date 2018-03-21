@@ -66,7 +66,7 @@ public class RealTimeView extends LinearLayout {
 
             XAxis xAxis = mBinding.kline.getXAxis();
 
-            xAxis.setValueFormatter(ChartUtil.getAxisValueFormatter1m(dataParse.getCandleEntries()));
+            xAxis.setValueFormatter(ChartUtil.getAxisValueFormatter1m(dataParse.getCandleEntries(),mBinding.kline));
 
 
             ArrayList<ILineDataSet> sets = new ArrayList<>();
@@ -92,7 +92,7 @@ public class RealTimeView extends LinearLayout {
 
             XAxis xAxis = mBinding.kline2.getXAxis();
             xAxis.setDrawLabels(false);
-            xAxis.setValueFormatter(ChartUtil.getAxisValueFormatter1m(dataParse.getCandleEntries()));
+            xAxis.setValueFormatter(ChartUtil.getAxisValueFormatter1m(dataParse.getCandleEntries(),null));
 
             BarDataSet set = new BarDataSet(dataParse.getMacdData(), "");
             ChartUtil.setBarDataSet(set);

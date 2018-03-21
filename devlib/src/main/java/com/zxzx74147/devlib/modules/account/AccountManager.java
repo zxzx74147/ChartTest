@@ -25,6 +25,7 @@ public class AccountManager {
     private static final String KEY = "ACCOUNT_USER";
     private static final String KEY_MSG_ID = "KEY_MSG_ID2";
 
+
     private static final AccountManager mInstance = new AccountManager();
     private UserData mUser = null;
     private UserUniData mUserUniData = null;

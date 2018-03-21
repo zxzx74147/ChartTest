@@ -7,14 +7,18 @@
         <variable
             name="price"
             type="com.zxzx74147.stock.data.Price" />
+
+        <variable
+            name="candle"
+            type="com.github.mikephil.charting.data.CandleEntry" />
     </data>
 
     <LinearLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/bg_grey">
+        android:background="@color/bg_grey"
+        android:orientation="vertical">
 
         <RelativeLayout
             android:id="@+id/relativeLayout"
@@ -31,7 +35,8 @@
                 android:layout_centerVertical="true"
                 android:text="@{String.valueOf(price.curPrice)}"
                 android:textColor='@{(price.curPrice-price.open)>0? @color/stock_up:@color/stock_down}'
-                android:textSize="@dimen/default_size_70" />
+                android:textSize="@dimen/default_size_70"
+                app:font="@{`din`}" />
 
             <TextView
                 android:id="@+id/up_down_abs"
@@ -42,7 +47,8 @@
                 android:layout_toRightOf="@+id/current_price"
                 android:text="@{String.valueOf(price.curPrice-price.open)}"
                 android:textColor='@{(price.curPrice-price.open)>0? @color/stock_up:@color/stock_down}'
-                android:textSize="@dimen/default_size_26" />
+                android:textSize="@dimen/default_size_26"
+                app:font="@{`din`}" />
 
             <TextView
 
@@ -53,7 +59,8 @@
                 android:layout_alignLeft="@+id/up_down_abs"
                 android:text='@{@string/format_sign_02(((float)(price.curPrice)-(float)(price.open))*100/(float)price.open)}'
                 android:textColor='@{(price.curPrice-price.open)>0? @color/stock_up:@color/stock_down}'
-                android:textSize="@dimen/default_size_26" />
+                android:textSize="@dimen/default_size_26"
+                app:font="@{`din`}" />
 
 
             <TextView
@@ -65,7 +72,8 @@
                 android:layout_alignTop="@+id/current_price"
                 android:text="@{@string/format_01(price.close)}"
                 android:textColor="@color/text_black"
-                android:textSize="@dimen/default_size_26" />
+                android:textSize="@dimen/default_size_26"
+                app:font="@{`din`}" />
 
             <TextView
                 android:id="@+id/close_label"
@@ -86,7 +94,8 @@
                 android:layout_alignParentRight="true"
                 android:text="@{@string/format_01(price.low)}"
                 android:textColor="@color/green"
-                android:textSize="@dimen/default_size_26" />
+                android:textSize="@dimen/default_size_26"
+                app:font="@{`din`}" />
 
             <TextView
                 android:id="@+id/low_label"
@@ -110,7 +119,8 @@
                 android:layout_toLeftOf="@id/close_label"
                 android:text="@{@string/format_01(price.open)}"
                 android:textColor="@color/text_black"
-                android:textSize="@dimen/default_size_26" />
+                android:textSize="@dimen/default_size_26"
+                app:font="@{`din`}" />
 
             <TextView
                 android:id="@+id/open_label"
@@ -132,7 +142,8 @@
                 android:layout_toLeftOf="@id/low_label"
                 android:text="@{@string/format_01(price.high)}"
                 android:textColor="@color/red"
-                android:textSize="@dimen/default_size_26" />
+                android:textSize="@dimen/default_size_26"
+                app:font="@{`din`}" />
 
             <TextView
                 android:id="@+id/high_label"
@@ -147,73 +158,87 @@
 
         </RelativeLayout>
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabLayout"
-            style="@style/Stock1TabLayout"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/default_gap_70"
-            android:layout_marginTop="@dimen/default_gap_12"
-            android:background="@color/white"
-            android:singleLine="true"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+            android:layout_marginTop="@dimen/default_gap_12">
 
-            <android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tabLayout"
+                style="@style/Stock1TabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:singleLine="true"
+                app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
 
-                android:layout_height="wrap_content"
-                android:tag="@string/stock_k_realtime_s"
-                android:text="@string/stock_k_realtime" />
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
 
-            <android.support.design.widget.TabItem
-                android:id="@+id/tab_default"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:tag="@string/stock_k_1m_s"
-                android:text="@string/stock_k_1m" />
+                    android:layout_height="wrap_content"
+                    android:tag="@string/stock_k_realtime_s"
+                    android:text="@string/stock_k_realtime" />
 
-            <android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:tag="@string/stock_k_5m_s"
-                android:text="@string/stock_k_5m" />
+                <android.support.design.widget.TabItem
+                    android:id="@+id/tab_default"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tag="@string/stock_k_1m_s"
+                    android:text="@string/stock_k_1m" />
 
-            <android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:tag="@string/stock_k_15m_s"
-                android:text="@string/stock_k_15m" />
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tag="@string/stock_k_5m_s"
+                    android:text="@string/stock_k_5m" />
 
-            <android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:tag="@string/stock_k_30m_s"
-                android:text="@string/stock_k_30m" />
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tag="@string/stock_k_15m_s"
+                    android:text="@string/stock_k_15m" />
 
-            <android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:tag="@string/stock_k_1h_s"
-                android:text="@string/stock_k_1h" />
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tag="@string/stock_k_30m_s"
+                    android:text="@string/stock_k_30m" />
 
-            <android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:tag="@string/stock_k_1d_s"
-                android:text="@string/stock_k_1d" />
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tag="@string/stock_k_1h_s"
+                    android:text="@string/stock_k_1h" />
 
-            <!--<android.support.design.widget.TabItem-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:tag="@string/stock_k_1d_s"-->
-            <!--android:text="@string/stock_k_1d" />-->
-        </android.support.design.widget.TabLayout>
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tag="@string/stock_k_1d_s"
+                    android:text="@string/stock_k_1d" />
+
+                <!--<android.support.design.widget.TabItem-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:tag="@string/stock_k_1d_s"-->
+                <!--android:text="@string/stock_k_1d" />-->
+            </android.support.design.widget.TabLayout>
+
+            <include
+                android:id="@+id/candel"
+                layout="@layout/layout_candle"
+                android:layout_width="match_parent"
+                app:candle="@{candle}"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:background="@color/white" />
+        </FrameLayout>
 
         <com.zxzx74147.devlib.widget.RatioRelativeLayout
             android:id="@+id/chart"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:ratioWidth="750"
-            app:ratioHeight="554">
+            app:ratioHeight="554"
+            app:ratioWidth="750">
 
             <!--app:layout_constraintStart_toStartOf="parent"-->
             <!--app:layout_constraintTop_toBottomOf="@+id/tabLayout"-->

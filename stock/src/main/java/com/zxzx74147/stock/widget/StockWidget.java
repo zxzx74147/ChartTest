@@ -7,8 +7,10 @@ import android.databinding.DataBindingUtil;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.FrameLayout;
 
+import com.github.mikephil.charting.data.CandleEntry;
 import com.jakewharton.rxbinding2.support.design.widget.RxTabLayout;
 import com.zxzx74147.devlib.interfaces.IViewModelHolder;
 import com.zxzx74147.devlib.json.JsonHelper;
@@ -17,6 +19,7 @@ import com.zxzx74147.stock.data.GoodType;
 import com.zxzx74147.stock.data.Price;
 import com.zxzx74147.stock.databinding.WidgetStockBinding;
 import com.zxzx74147.stock.indicator.DataParse;
+import com.zxzx74147.stock.indicator.KLineBean;
 import com.zxzx74147.stock.viewmodel.PriceViewModel;
 import com.zxzx74147.stock.viewmodel.StockViewModel;
 
@@ -59,7 +62,8 @@ public class StockWidget extends FrameLayout implements IViewModelHolder {
         mGoodType = good;
         try {
             mBinding.klineview.setLoading();
-            RxTabLayout.select(mBinding.tabLayout).accept(1);
+            mStockViewModel.getKLineData().setKType(0);
+            RxTabLayout.select(mBinding.tabLayout).accept(0);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -67,7 +71,7 @@ public class StockWidget extends FrameLayout implements IViewModelHolder {
 
 
     public void initView() {
-
+        mBinding.klineview.setKlineView(this);
     }
 
     private void init() {
@@ -79,6 +83,15 @@ public class StockWidget extends FrameLayout implements IViewModelHolder {
                 mBinding.klineview.setLoading();
             }
         });
+    }
+
+    public void setCandle(CandleEntry candle){
+        if(candle!=null) {
+            mBinding.setCandle(candle);
+            mBinding.candel.getRoot().setVisibility(View.VISIBLE);
+        }else{
+            mBinding.candel.getRoot().setVisibility(View.GONE);
+        }
     }
 
 

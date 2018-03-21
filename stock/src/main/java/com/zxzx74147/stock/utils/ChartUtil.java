@@ -3,12 +3,14 @@ package com.zxzx74147.stock.utils;
 import android.graphics.Paint;
 import android.util.Log;
 
+import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.CombinedChart;
 import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.CandleDataSet;
+import com.github.mikephil.charting.data.CandleEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
@@ -19,8 +21,10 @@ import com.github.mikephil.charting.mychart.MyCombinedChart;
 import com.github.mikephil.charting.mychart.MyLeftMarkerView;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.zxzx74147.devlib.DevLib;
+import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.devlib.utils.DisplayUtil;
 import com.zxzx74147.stock.R;
+import com.zxzx74147.stock.indicator.DataParse;
 import com.zxzx74147.stock.indicator.KLineBean;
 
 import java.text.ParseException;
@@ -42,10 +46,15 @@ public class ChartUtil {
 
     private static SimpleDateFormat TIME_MMDD_HHMM = new SimpleDateFormat("MM/dd HH:mm");
 
+    private static SimpleDateFormat TIME_MMDD = new SimpleDateFormat("MM/dd");
+
     private static Calendar CALENDER_NOW = Calendar.getInstance();
+
+    public static DataParse mData = null;
 
     public static <T extends Entry> IAxisValueFormatter getAxisValueFormatterShowDay(List<T> data) {
         IAxisValueFormatter formatter = (value, axis) -> {
+
             int index = (int) value;
             if (index < data.size()) {
                 KLineBean entry = (KLineBean) data.get(index).getData();
@@ -73,18 +82,46 @@ public class ChartUtil {
 
 
 
-    public static <T extends Entry> IAxisValueFormatter getAxisValueFormatter1m(List<T> data) {
+    public static <T extends Entry> IAxisValueFormatter getAxisValueFormatter1m(List<T> data,MyCombinedChart chart) {
         IAxisValueFormatter formatter = (value, axis) -> {
             int index = (int) value;
+            float xoffset = axis.getXOffset();
             if (index < data.size()) {
                 KLineBean entry = (KLineBean) data.get(index).getData();
                 Date temp = null;
                 Date now = new Date();
                 try {
                     temp = (TIME_PARSER.parse(entry.date));
+                    if(chart!=null&&chart.getLowestVisibleX()==value){
+                        return TIME_MMDD_HHMM.format(temp);
+                    }
 //                    if(temp.getDay()==now.getDay()&&temp.getMonth()==now.getMonth()) {
                     return TIME_HHMM.format(temp);
-//                    }return TIME_MMDD_HHMM.format(temp);
+//                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+            return "";
+
+        };
+        return formatter;
+    }
+
+    public static <T extends Entry> IAxisValueFormatter getAxisValueFormatterDay(List<T> data) {
+        IAxisValueFormatter formatter = (value, axis) -> {
+            int index = (int) value;
+            if (index < data.size()) {
+                KLineBean entry = (KLineBean) data.get(index).getData();
+                Date temp = null;
+                Date now = new Date();
+
+                try {
+                    temp = (TIME_PARSER.parse(entry.date));
+
+//                    if(temp.getDay()==now.getDay()&&temp.getMonth()==now.getMonth()) {
+                    return TIME_MMDD.format(temp);
+//                    }
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -112,6 +149,9 @@ public class ChartUtil {
                 Date temp = null;
                 try {
                     temp = (TIME_PARSER.parse(entry.date));
+                    if(chart!=null&&chart.getLowestVisibleX()==value){
+                        return TIME_MMDD_HHMM.format(temp);
+                    }
                     return TIME_HHMM.format(temp);
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -438,7 +478,7 @@ public class ChartUtil {
 
     }
 
-    public static void showHighline(CombinedChart chart, CombinedChart chart2) {
+    public static void showHighline(CombinedChart chart, CombinedChart chart2, CommonCallback<CandleEntry> callback) {
         chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
@@ -456,6 +496,9 @@ public class ChartUtil {
 //                highlight2.setDraw(h.getDrawX(), h.getDrawY());
 
                 chart2.highlightValues(new Highlight[]{highlight2});
+                if(mData!=null&&mData.mType!=0){
+                    callback.callback(mData.getCandleEntries().get((int) h.getX()));
+                }
             }
 
 
@@ -463,6 +506,9 @@ public class ChartUtil {
             public void onNothingSelected() {
                 chart.highlightValue(null);
                 chart2.highlightValue(null);
+                if(callback!=null){
+                    callback.callback(null);
+                }
 
             }
         });
@@ -479,6 +525,9 @@ public class ChartUtil {
 //                highlight2.setDraw(h.getDrawX(), h.getDrawY());
 
                 chart.highlightValues(new Highlight[]{highlight2});
+                if(mData!=null&&mData.mType!=0){
+                    callback.callback(mData.getCandleEntries().get((int) h.getX()));
+                }
 
             }
 
@@ -487,6 +536,9 @@ public class ChartUtil {
             public void onNothingSelected() {
                 chart.highlightValue(null);
                 chart2.highlightValue(null);
+                if(callback!=null){
+                    callback.callback(null);
+                }
 
             }
         });

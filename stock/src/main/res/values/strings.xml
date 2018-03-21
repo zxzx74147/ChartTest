@@ -142,6 +142,11 @@
     <string name="voucher_limit_remind">用券默认止盈10%，止损10%</string>
     <string name="voucher_deffer_remind">用券不过夜</string>
     <string name="voucher_fee_remind">0元</string>
+    <string name="open">开盘</string>
+    <string name="close">收盘</string>
+    <string name="low">最低</string>
+    <string name="high">最高</string>
+    <string name="no_deffer">过夜费：不过夜</string>
 
 
 </resources>

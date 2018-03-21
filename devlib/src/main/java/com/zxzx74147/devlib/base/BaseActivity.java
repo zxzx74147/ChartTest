@@ -18,6 +18,7 @@ import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
 import com.zxzx74147.devlib.widget.CommonLoading;
 
 import me.yokeyword.fragmentation.SupportActivity;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by zhengxin on 2018/2/6.
@@ -39,6 +40,11 @@ public class BaseActivity extends SupportActivity {
         mCallback = ZXActivityJumpHelper.getCallBack();
         mIntentData = (IntentData) getIntent().getSerializableExtra(ZXActivityJumpHelper.INTENT_DATA);
     }
+
+//    @Override
+//    protected void attachBaseContext(Context newBase){
+//        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+//    }
 
     @Override
     protected void onResume() {

@@ -92,8 +92,6 @@ public class WithdrawActivity extends BaseActivity {
             if(all<202){
                 all = all-2;
                 all = all<0? 0:all;
-            }else if(all>2020){
-                all = all-20;
             }else{
                 all = all/1.01f;
             }
@@ -134,9 +132,7 @@ public class WithdrawActivity extends BaseActivity {
                 if(fee<2){
                     fee = 2;
                 }
-                if(fee>20){
-                    fee = 20;
-                }
+
                 mBinding.withdrawAmount.setFee(fee);
             }
         });
