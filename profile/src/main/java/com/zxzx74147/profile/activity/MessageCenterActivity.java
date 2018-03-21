@@ -61,6 +61,7 @@ public class MessageCenterActivity extends BaseActivity {
 
 
 
+
     private ActivityMessageCenterBinding mBinding = null;
     private CommonRecyclerViewAdapter<Message> mAdapter = null;
     private MessageCenterStorage mFeedStorage = RetrofitClient.getClient().create(MessageCenterStorage.class);
