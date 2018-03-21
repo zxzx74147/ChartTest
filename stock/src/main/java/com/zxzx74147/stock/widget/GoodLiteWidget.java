@@ -114,14 +114,13 @@ public class GoodLiteWidget extends FrameLayout implements IViewModelHolder {
 
     @Override
     public void setLifeCircle(LifecycleOwner owner) {
-//        mModel.getUserUniLiveData().observe(owner, userUniData -> {
-//            if (userUniData.hasError()) {
-//                return;
-//            }
-//
-//
-//            refreshData();
-//
-//        });
+        mModel.getUserUniLiveData().observe(owner, userUniData -> {
+            if (userUniData.hasError()) {
+                return;
+            }
+            mUniData = userUniData;
+            refreshData();
+
+        });
     }
 }

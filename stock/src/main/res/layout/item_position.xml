@@ -15,6 +15,10 @@
         <variable
             name="closeCallback"
             type="com.zxzx74147.devlib.callback.CommonCallback"/>
+
+        <variable
+            name="modifyCallback"
+            type="com.zxzx74147.devlib.callback.CommonCallback"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -180,7 +184,7 @@
                 android:background="@drawable/rect_round_gold_stroke"
                 android:text="@string/modify"
                 android:textColor="@color/text_gold_white"
-                android:onClick="@{()->StockBusStation.modifyPosition(context,data)}"
+                android:onClick="@{()->modifyCallback.callback(data)}"
                 android:textSize="@dimen/default_size_34"
                 app:layout_constraintEnd_toStartOf="@+id/guideline"
                 app:layout_constraintLeft_toLeftOf="parent"

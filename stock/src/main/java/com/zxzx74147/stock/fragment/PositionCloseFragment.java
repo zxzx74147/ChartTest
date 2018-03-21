@@ -14,6 +14,7 @@ import com.zxzx74147.devlib.data.IntentData;
 import com.zxzx74147.devlib.data.UniApiData;
 import com.zxzx74147.devlib.data.WheelSelectorData;
 import com.zxzx74147.devlib.fragment.CommonWheelSelectorDialog;
+import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.devlib.utils.FormatUtil;
@@ -22,6 +23,7 @@ import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
 import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
 import com.zxzx74147.stock.R;
 import com.zxzx74147.stock.data.Fail;
+import com.zxzx74147.stock.data.GoodType;
 import com.zxzx74147.stock.data.MachPositionData;
 import com.zxzx74147.stock.data.Position;
 import com.zxzx74147.stock.data.PositionData;
@@ -80,7 +82,17 @@ public class PositionCloseFragment extends BaseDialogFragment {
 
         Bundle bundle = getArguments();
         IntentData intentData = (IntentData<Position>) bundle.getSerializable(ZXActivityJumpHelper.INTENT_DATA);
-        mBinding.setData((Position) intentData.data);
+
+        Position data = (Position) intentData.data;
+        if(AccountManager.sharedInstance().getUserUni()!=null&&AccountManager.sharedInstance().getUserUni().goodsTypeList!=null){
+            for(GoodType goodType:AccountManager.sharedInstance().getUserUni().goodsTypeList.goodType) {
+                if(goodType.goodsType.equals(data.goodsType)) {
+                    data.closePrice =goodType.price.curPrice;
+                    break;
+                }
+            }
+        }
+        mBinding.setData(data);
 
         RxView.clicks(mBinding.ok).subscribe(o -> {
             submit();

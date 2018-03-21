@@ -159,6 +159,8 @@ public class FeedReplyFragment extends BaseFragment {
             }
         });
         mBinding.refreshLayout.setRefreshing(false);
+        mAdapter.setCommonEmptyView(getActivity(),R.string.no_reply);
+        mAdapter.setHeaderFooterEmpty(true,false);
 
     }
 

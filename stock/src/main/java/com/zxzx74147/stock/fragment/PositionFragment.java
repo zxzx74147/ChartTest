@@ -112,6 +112,8 @@ public class PositionFragment extends BaseDialogFragment {
                 if (itemCommonBinding instanceof ItemPositionBinding) {
                     ItemPositionBinding binding = (ItemPositionBinding) itemCommonBinding;
                     binding.setCloseCallback(mClosePositonCallback);
+                    binding.setModifyCallback(mModifyPositonCallback);
+                    binding.goodLite.setLifeCircle(PositionFragment.this);
                 }
             }
         };
@@ -225,6 +227,13 @@ public class PositionFragment extends BaseDialogFragment {
         }
     };
 
+    private CommonCallback<Position> mModifyPositonCallback = new CommonCallback<Position>() {
+        @Override
+        public void callback(Position item) {
+            startMotify(item);
+        }
+    };
+
     private void startClose(Position position){
         PositionCloseFragment fragment =  PositionCloseFragment.newInstance(new IntentData<>(position));
         ZXFragmentJumpHelper.startFragment(getActivity(), fragment, new CommonCallback() {
@@ -250,6 +259,22 @@ public class PositionFragment extends BaseDialogFragment {
                     public Observable<MachPositionListData> getObserverble(BaseListData listdata) {
 //                        return mTradeStorage.machpositionGetList(listdata == null ? 0 : listdata.nextPage);
                         return mTradeStorage.machpositionGetHisList(listdata == null ? 0 : listdata.nextPage);
+                    }
+                });
+            }
+        });
+
+    }
+
+    private void startMotify(Position position) {
+        PositionModifyFragment fragment = PositionModifyFragment.newInstance(new IntentData<>(position));
+        ZXFragmentJumpHelper.startFragment(getActivity(), fragment, new CommonCallback() {
+            @Override
+            public void callback(Object item) {
+                RecyclerViewUtil.setupRecyclerView(mBinding.refreshLayout, mBinding.list, mPositionAdapter, new CommonListRequestCallback<Position>() {
+                    @Override
+                    public Observable<PositionListData> getObserverble(BaseListData listdata) {
+                        return mTradeStorage.positionGetList(listdata == null ? 0 : listdata.nextPage);
                     }
                 });
             }

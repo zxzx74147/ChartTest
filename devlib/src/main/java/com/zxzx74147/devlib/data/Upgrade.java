@@ -10,6 +10,8 @@ public class Upgrade implements Serializable
     public int force;
     public String msg;
     public String url;
+    public int isLatestVersion;
+    public String latestVersion;
     private final static long serialVersionUID = -4917904389322304240L;
 
 }

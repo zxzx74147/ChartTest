@@ -73,4 +73,16 @@ public class TimeUtil {
 
     }
 
+    public static String parserIntTimeWithDay(long time) {
+        time*=1000;
+        Date date = new Date(time);
+        long now = new Date().getTime();
+        if(now-time<60*1000){
+            return DevLib.getApp().getString(R.string.just_now);
+        }
+        return FormatUtil.formatWithDay(date);
+//        return outDateFormat.format(date);
+
+    }
+
 }

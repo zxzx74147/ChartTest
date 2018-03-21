@@ -20,6 +20,7 @@ public class UserUniData extends UniApiData implements Serializable {
     public GoodsList goodsTypeList;
     public MachPositionList machPositionList;
     public VoucherUserList userVoucherList;
+    public ComVoucher userComVoucherInfo;
     public Auth auth;
     public int isLiving;
     public int lastMsgCenterId;

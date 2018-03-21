@@ -9,6 +9,7 @@ import com.alibaba.sdk.android.push.CommonCallback;
 import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory;
 import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
+import com.umeng.commonsdk.UMConfigure;
 import com.zxzx74147.devlib.image.ImageLoader;
 import com.zxzx74147.devlib.kvstore.KVStore;
 import com.zxzx74147.devlib.modules.busstation.MainBusStation;
@@ -77,7 +78,7 @@ public class DevLib {
     }
 
     private static void initUmeng(){
-//        UMConfigure.init(mApplication, UMConfigure.DEVICE_TYPE_PHONE, mApplication.getResources().getString(R.string.umeng));
+        UMConfigure.init(mApplication, UMConfigure.DEVICE_TYPE_PHONE, mApplication.getResources().getString(R.string.umeng));
     }
 
     private static void initWXAPI(){

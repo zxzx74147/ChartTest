@@ -223,7 +223,12 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
     }
 
     public void setGood(GoodType good) {
+        if(good.equals(mGoodType)){
+            mGoodType=good;
+            return;
+        }
         mGoodType = good;
+
         refreshData();
     }
 

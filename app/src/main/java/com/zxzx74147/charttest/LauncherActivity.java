@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -18,6 +20,7 @@ import com.zxzx74147.charttest.databinding.LayoutUpgradeBinding;
 import com.zxzx74147.devlib.DevLib;
 import com.zxzx74147.devlib.base.BaseActivity;
 import com.zxzx74147.devlib.callback.CommonCallback;
+import com.zxzx74147.devlib.data.IntentData;
 import com.zxzx74147.devlib.data.SysInitData;
 import com.zxzx74147.devlib.data.Upgrade;
 import com.zxzx74147.devlib.kvstore.KVStore;
@@ -34,7 +37,7 @@ import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
 import com.zxzx74147.devlib.wxapi.WxApiHandler;
 import com.zxzx74147.profile.activity.FillPhoneActivity;
-import com.zxzx74147.profile.data.UserUniData;
+import com.zxzx74147.profile.data.WeChatData;
 import com.zxzx74147.profile.storage.AccountStorage;
 import com.zxzx74147.profile.storage.SysStorage;
 
@@ -51,6 +54,7 @@ public class LauncherActivity extends BaseActivity {
     private boolean mIsSysInit = false;
     private boolean misAnimation = false;
     private AccountStorage mStockStorage = RetrofitClient.getClient().create(AccountStorage.class);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,7 +90,7 @@ public class LauncherActivity extends BaseActivity {
         });
         RxView.clicks(mBinding.loginPhone).subscribe(v -> {
             ProfileBusStation.startLogin(this, item -> {
-                if(item!=null){
+                if (item != null) {
                     finish();
                 }
             });
@@ -99,22 +103,34 @@ public class LauncherActivity extends BaseActivity {
             @Override
             public void callback(SendAuth.Resp item) {
                 String code = item.code;
+                Log.i("WxApiHandler", code);
                 String token = KVStore.getString("push_id");
-                Observable<UserUniData> observable = mStockStorage.wechatLogin(code,DeviceIDMananger.sharedInstance().getDeviceID(), PackageInfoMananger.sharedInstance().getVersionInfo().getVersonName()
-                        , Build.MODEL,  AnalyticsConfig.getChannel(getApplication()),token);
-                NetworkApi.ApiSubscribe(LauncherActivity.this,observable, true,new Consumer<UserUniData>() {
+                Observable<WeChatData> observable = mStockStorage.wechatLogin(code, DeviceIDMananger.sharedInstance().getDeviceID(), PackageInfoMananger.sharedInstance().getVersionInfo().getVersonName()
+                        , Build.MODEL, AnalyticsConfig.getChannel(getApplication()), token);
+                NetworkApi.ApiSubscribe(LauncherActivity.this, observable, true, new Consumer<WeChatData>() {
                     @Override
-                    public void accept(UserUniData userUniData) throws Exception {
+                    public void accept(WeChatData userUniData) throws Exception {
                         if (userUniData.hasError()) {
                             ToastUtil.showToast(LauncherActivity.this, userUniData.error.usermsg);
                             return;
                         }
-                        AccountManager.sharedInstance().saveUser(userUniData.user);
-                        ZXActivityJumpHelper.startActivityWithCallback(LauncherActivity.this, FillPhoneActivity.class,o->{
-
+                        if (userUniData.user != null && !TextUtils.isEmpty(userUniData.user.uId)) {
+                            AccountManager.sharedInstance().saveUser(userUniData.user);
+                            if (mIsSysInit) {
+                                openMain();
+                            }
+                            return;
+                        }
+                        userUniData.code = code;
+                        ZXActivityJumpHelper.startActivityWithCallback(LauncherActivity.this, FillPhoneActivity.class, new IntentData(userUniData), o -> {
+                            if (o != null) {
+                                if (mIsSysInit) {
+                                    openMain();
+                                }
+                            }
                         });
                     }
-                },UserUniData.class);
+                }, WeChatData.class);
             }
         });
     }
@@ -130,8 +146,8 @@ public class LauncherActivity extends BaseActivity {
     private void sysInit() {
         String token = KVStore.getString("push_id");
         SysStorage mStorage = RetrofitClient.getClient().create(SysStorage.class);
-        Observable<SysInitData> initObser = mStorage.sysInit("main", DeviceIDMananger.sharedInstance().getDeviceID(), token, "", PackageInfoMananger.sharedInstance().getVersionInfo().getVersonName());
-        NetworkApi.ApiSubscribe(this,initObser, sysInit -> {
+        Observable<SysInitData> initObser = mStorage.sysInit(AnalyticsConfig.getChannel(this), DeviceIDMananger.sharedInstance().getDeviceID(), token, Build.MODEL, PackageInfoMananger.sharedInstance().getVersionInfo().getVersonName());
+        NetworkApi.ApiSubscribe(this, initObser, sysInit -> {
             if (sysInit.hasError()) {
                 ToastUtil.showToast(LauncherActivity.this, sysInit.error.usermsg);
                 return;
@@ -146,7 +162,7 @@ public class LauncherActivity extends BaseActivity {
 //            if (dealUpgrade(sysInit.upgrade)) {
 //                return;
 //            }
-            if(sysInit.needLogin!=0){
+            if (sysInit.needLogin != 0) {
                 toLogin();
                 return;
             }
@@ -158,10 +174,10 @@ public class LauncherActivity extends BaseActivity {
                     showLoginButton();
                 }
             }
-        },SysInitData.class);
+        }, SysInitData.class);
     }
 
-    private void toLogin(){
+    private void toLogin() {
         AccountManager.sharedInstance().logout();
         showLoginButton();
     }

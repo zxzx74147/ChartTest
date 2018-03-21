@@ -1,6 +1,7 @@
 package com.zxzx74147.devlib.wxapi;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -19,6 +20,7 @@ public class WxApiHandler {
     public static void createApi(Context context){
         mIWXAPI = WXAPIFactory.createWXAPI(context,context.getString(R.string.wx_appid),true);
         mIWXAPI.registerApp(context.getString(R.string.wx_appid));
+
     }
 
     public static void doLogin(Context context, CommonCallback<SendAuth.Resp> callback){

@@ -201,13 +201,13 @@ public class KlineView extends LinearLayout {
         setKData(combinedData);
         ArrayList<ILineDataSet> sets = new ArrayList<>();
         LineDataSet lineMA5 = new LineDataSet(mDataParse.getExpmaData5(), "EMA5");
-        LineDataSet lineMA10 = new LineDataSet(mDataParse.getExpmaData10(), "EMA10");
+        LineDataSet lineMA12 = new LineDataSet(mDataParse.getExpmaData12(), "EMA12");
         LineDataSet lineMA20 = new LineDataSet(mDataParse.getExpmaData20(), "EMA20");
         ChartUtil.setLineDataleSet(lineMA5, getResources().getColor(R.color.stock_kline_ma5));
-        ChartUtil.setLineDataleSet(lineMA10, getResources().getColor(R.color.stock_kline_ma10));
+        ChartUtil.setLineDataleSet(lineMA12, getResources().getColor(R.color.stock_kline_ma10));
         ChartUtil.setLineDataleSet(lineMA20, getResources().getColor(R.color.stock_kline_ma20));
-        sets.add(lineMA5);
-        sets.add(lineMA10);
+//        sets.add(lineMA5);
+        sets.add(lineMA12);
         sets.add(lineMA20);
 
         LineData lineData = new LineData(sets);

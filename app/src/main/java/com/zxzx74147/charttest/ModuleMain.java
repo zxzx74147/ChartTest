@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.os.Build;
 
+import com.umeng.analytics.AnalyticsConfig;
 import com.zxzx74147.charttest.unicorn.UniCornModule;
 import com.zxzx74147.devlib.DevLib;
 import com.zxzx74147.devlib.base.BaseActivity;
@@ -91,7 +93,7 @@ public class ModuleMain {
 
     private void updateToken(String token){
         SysStorage mStorage = RetrofitClient.getClient().create(SysStorage.class);
-        Observable<SysInitData> initObser = mStorage.sysInit("main", DeviceIDMananger.sharedInstance().getDeviceID(), token, "", PackageInfoMananger.sharedInstance().getVersionInfo().getVersonName());
+        Observable<SysInitData> initObser = mStorage.sysInit(AnalyticsConfig.getChannel(DevLib.getApp()), DeviceIDMananger.sharedInstance().getDeviceID(), token, Build.MODEL, PackageInfoMananger.sharedInstance().getVersionInfo().getVersonName());
         NetworkApi.ApiSubscribe(initObser, sysInit -> {
             if (sysInit.hasError()) {
                 ToastUtil.showToast(DevLib.getApp(), sysInit.error.usermsg);

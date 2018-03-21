@@ -4,6 +4,7 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 
+import com.wustrive.aesrsa.util.RSA;
 import com.zxzx74147.devlib.data.RsaRspData;
 import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.network.NetworkConfig;
@@ -64,7 +65,8 @@ public class RsaInterceptor implements Interceptor {
 //        String rspStirng = rsp.body().string();
 //        Log.i(TAG,"RESPONSE "+rspStirng);
 //        RsaRspData rsaRsp = JsonUtil.parseJson(rspStirng,RsaRspData.class);
-//        String decodedStr=RsaUtil.decrypt(RsaPare.sharedInstance().getPrivateKey(), rsaRsp.response);
+//        String decodedStr = RSA.decrypt(rsaRsp.response,RsaPare.sharedInstance().getPrivateKey());
+////        String decodedStr=RsaUtil.decrypt(RsaPare.sharedInstance().getPrivateKey(), rsaRsp.response);
 //        Log.i(TAG,"RESPONSE DECODE"+decodedStr);
 //        rsp.newBuilder().body(ResponseBody.create(JSON,decodedStr));
 

@@ -1,10 +1,12 @@
 package com.zxzx74147.devlib.kvstore;
 
 import android.content.Context;
+import android.view.MotionEvent;
 
 import com.snappydb.DB;
 import com.snappydb.DBFactory;
 import com.snappydb.SnappydbException;
+import com.umeng.analytics.MobclickAgent;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Function;
@@ -22,6 +24,7 @@ public class KVStore {
         try {
             mSnappydb = DBFactory.open(context);
         } catch (SnappydbException e) {
+            MobclickAgent.onEvent(context,"snappy_db_exception",e.getMessage());
             e.printStackTrace();
         }
     }

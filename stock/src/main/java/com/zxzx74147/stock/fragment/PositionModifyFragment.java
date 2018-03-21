@@ -154,6 +154,9 @@ public class PositionModifyFragment extends BaseDialogFragment {
                 }
                 ToastUtil.showToast(getActivity(),getResources().getString(R.string.succ));
                 dismiss();
+                if(mCallback!=null){
+                    mCallback.callback(mBinding.getData());
+                }
             }
         },PositionData.class);
     }

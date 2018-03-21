@@ -61,8 +61,10 @@ public class DataParse {
 
     private List<BarEntry> barDatasEXPMA = new ArrayList<>();
     private List<Entry> expmaData5 = new ArrayList<>();
+    private List<Entry> expmaData12 = new ArrayList<>();
     private List<Entry> expmaData10 = new ArrayList<>();
     private List<Entry> expmaData20 = new ArrayList<>();
+    private List<Entry> expmaData50 = new ArrayList<>();
     private List<Entry> expmaData60 = new ArrayList<>();
 
     private List<BarEntry> barDatasDMI = new ArrayList<>();
@@ -394,11 +396,14 @@ public class DataParse {
     public void initEXPMA(ArrayList<KLineBean> datas) {
         EXPMAEntity expmaEntity5 = new EXPMAEntity(datas, 5);
         EXPMAEntity expmaEntity10 = new EXPMAEntity(datas, 10);
+        EXPMAEntity expmaEntity12 = new EXPMAEntity(datas, 12);
         EXPMAEntity expmaEntity20 = new EXPMAEntity(datas, 20);
+        EXPMAEntity expmaEntity50 = new EXPMAEntity(datas, 50);
         EXPMAEntity expmaEntity60 = new EXPMAEntity(datas, 60);
 
         barDatasEXPMA = new ArrayList<>();
         expmaData5 = new ArrayList<>();
+        expmaData12 = new ArrayList<>();
         expmaData10 = new ArrayList<>();
         expmaData20 = new ArrayList<>();
         expmaData60 = new ArrayList<>();
@@ -406,7 +411,9 @@ public class DataParse {
             barDatasEXPMA.add(new BarEntry(0, i));
             expmaData5.add(new Entry(i, expmaEntity5.getEXPMAs().get(i), datas.get(i)));
             expmaData10.add(new Entry(i, expmaEntity10.getEXPMAs().get(i), datas.get(i)));
+            expmaData12.add(new Entry(i, expmaEntity12.getEXPMAs().get(i), datas.get(i)));
             expmaData20.add(new Entry(i, expmaEntity20.getEXPMAs().get(i), datas.get(i)));
+            expmaData50.add(new Entry(i, expmaEntity50.getEXPMAs().get(i), datas.get(i)));
             expmaData60.add(new Entry(i, expmaEntity60.getEXPMAs().get(i), datas.get(i)));
         }
     }
@@ -763,6 +770,10 @@ public class DataParse {
 
     public List<Entry> getExpmaData20() {
         return expmaData20;
+    }
+
+    public List<Entry> getExpmaData12() {
+        return expmaData12;
     }
 
     public List<Entry> getExpmaData60() {

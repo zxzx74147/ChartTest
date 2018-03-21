@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="user"
-            type="com.zxzx74147.devlib.data.UserData"/>
+            name="data"
+            type="com.zxzx74147.profile.data.WeChatData"/>
     </data>
 
     <LinearLayout
@@ -24,8 +24,9 @@
 
             <com.zxzx74147.devlib.widget.ZXImageView
                 android:id="@+id/portrait"
-                app:imageUrl="@{user.portraitUrl}"
+                app:imageUrl="@{data.portraitUrl}"
                 android:layout_width="@dimen/default_gap_140"
+                app:riv_corner_radius="@dimen/default_gap_130"
                 android:layout_height="@dimen/default_gap_140" />
 
             <TextView
@@ -35,6 +36,7 @@
                 android:layout_marginLeft="@dimen/default_gap_32"
                 android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
+                android:text="@{data.nickName}"
                 android:layout_height="wrap_content" />
 
 

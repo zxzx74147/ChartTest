@@ -23,6 +23,7 @@ import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.utils.WebviewUtil;
 import com.zxzx74147.profile.R;
 import com.zxzx74147.profile.data.UserUniData;
+import com.zxzx74147.profile.data.WeChatData;
 import com.zxzx74147.profile.databinding.ActivityFillPhoneBinding;
 import com.zxzx74147.profile.databinding.ActivityLoginPhoneBinding;
 import com.zxzx74147.profile.storage.AccountStorage;
@@ -42,11 +43,14 @@ public class FillPhoneActivity extends BaseActivity {
     private boolean mIsCountDonw = false;
     private AccountStorage mStockStorage = RetrofitClient.getClient().create(AccountStorage.class);
     private Disposable mDisposable = null;
+    private WeChatData mData= null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_fill_phone);
+        mData = (WeChatData) mIntentData.data;
+        mBinding.setData(mData);
         init();
     }
 
@@ -62,6 +66,7 @@ public class FillPhoneActivity extends BaseActivity {
         RxView.clicks(mBinding.layoutFillPhone.enterDelete).subscribe(a -> {
             mBinding.layoutFillPhone.phoneNumber.setText("");
         });
+
         Observable<CharSequence> phoneNumberOb = RxTextView.textChanges(mBinding.layoutFillPhone.phoneNumber);
         phoneNumberOb.subscribe(charSequence -> {
             if (mIsCountDonw) {
@@ -106,7 +111,7 @@ public class FillPhoneActivity extends BaseActivity {
 
     public void requestVcode() {
 
-        NetworkApi.ApiSubscribe(this,mStockStorage.accountGetVCode(mBinding.layoutFillPhone.phoneNumber.getText().toString()),false, new Consumer<UniApiData>() {
+        NetworkApi.ApiSubscribe(this,mStockStorage.accountGetVCodeWithCode(mBinding.layoutFillPhone.phoneNumber.getText().toString(),mData.code),false, new Consumer<UniApiData>() {
 
             @Override
             public void accept(UniApiData uniApiData) throws Exception {
@@ -145,8 +150,8 @@ public class FillPhoneActivity extends BaseActivity {
             return;
         }
         String token = KVStore.getString("push_id");
-        Observable<UserUniData> observable = mStockStorage.acctountLogin(mBinding.layoutFillPhone.phoneNumber.getText().toString(),
-                mBinding.layoutFillPhone.vcode.getText().toString(),
+        Observable<UserUniData> observable = mStockStorage.acctountLoginWithCode(mBinding.layoutFillPhone.phoneNumber.getText().toString(),
+                mBinding.layoutFillPhone.vcode.getText().toString(),mData.code,
                 DeviceIDMananger.sharedInstance().getDeviceID(), PackageInfoMananger.sharedInstance().getVersionInfo().getVersonName()
         , Build.MODEL,  AnalyticsConfig.getChannel(getApplication()),token);
         NetworkApi.ApiSubscribe(this,observable, true,new Consumer<UserUniData>() {

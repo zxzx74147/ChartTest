@@ -11,5 +11,9 @@
     <string name="unicorn_key">aeeac4bfbb8953094b728aee3332fba1</string>
     <string name="send_remind">注册使用2个月之后且盈利率>50%可以发表观点</string>
     <string name="remind">提示</string>
-    <string name="format_version">当前版本 v1.0</string>
+    <string name="format_version">当前版本 %s</string>
+    <string name="no_new_version">已经是最新版本</string>
+    <string name="upgrade_to_latest">升级到最新 %s</string>
+
+
 </resources>

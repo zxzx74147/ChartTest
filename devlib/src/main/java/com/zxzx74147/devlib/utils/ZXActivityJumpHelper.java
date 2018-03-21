@@ -52,6 +52,13 @@ public class ZXActivityJumpHelper {
         context.startActivityForResult(intent, requestCode);
     }
 
+    public static void startActivityWithCallback(Activity context,Class<? extends BaseActivity> T, IntentData data,CommonCallback callback) {
+        Intent intent = new Intent(context, T);
+        intent.putExtra(INTENT_DATA, data);
+        CALL_BACK= callback;
+        context.startActivity(intent);
+    }
+
     public static void startActivityWithCallback(Activity context,  Class<? extends BaseActivity> T,CommonCallback callback) {
         Intent intent = new Intent(context, T);
         CALL_BACK = callback;

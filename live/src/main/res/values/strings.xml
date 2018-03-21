@@ -40,4 +40,5 @@
     <string name="delete">删除</string>
     <string name="format_profit">盈利播报: %s盈利</string>
     <string name="delete_verify">确定删除？</string>
+    <string name="no_reply">暂无回复</string>
 </resources>

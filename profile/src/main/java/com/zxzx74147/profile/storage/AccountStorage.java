@@ -4,6 +4,7 @@ import com.zxzx74147.devlib.data.UniApiData;
 import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.profile.data.AuthApplyData;
 import com.zxzx74147.profile.data.UserUniData;
+import com.zxzx74147.profile.data.WeChatData;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -36,8 +37,15 @@ public interface AccountStorage {
     @GET("/user/account/getvcode")
     Observable<UniApiData> accountGetVCode(@Query("phone") String phone);
 
+    @GET("/user/account/getvcode")
+    Observable<UniApiData> accountGetVCodeWithCode(@Query("phone") String phone,@Query("code") String code);
+
+
     @GET("/user/account/login")
     Observable<UserUniData> acctountLogin(@Query("phone") String phone, @Query("vcode") String vcode, @Query("deviceId") String deviceId, @Query("version") String version,@Query("deviceType") String deviceType,@Query("channel") String channel,@Query("deviceToken") String deviceToken);
+
+    @GET("/user/account/login")
+    Observable<UserUniData> acctountLoginWithCode(@Query("phone") String phone, @Query("vcode") String vcode,@Query("code") String code, @Query("deviceId") String deviceId, @Query("version") String version,@Query("deviceType") String deviceType,@Query("channel") String channel,@Query("deviceToken") String deviceToken);
 
 
     @GET("/user/trades/password")
@@ -61,7 +69,7 @@ public interface AccountStorage {
     Observable<AuthApplyData> authApply(@Query("name") String name, @Query("identityNo") String identityNo);
 
     @GET("/user/wechat/login")
-    Observable<UserUniData> wechatLogin(@Query("code") String phone, @Query("deviceId") String deviceId, @Query("version") String version,@Query("deviceType") String deviceType,@Query("channel") String channel,@Query("deviceToken") String deviceToken);
+    Observable<WeChatData> wechatLogin(@Query("code") String phone, @Query("deviceId") String deviceId, @Query("version") String version, @Query("deviceType") String deviceType, @Query("channel") String channel, @Query("deviceToken") String deviceToken);
 
 
 
