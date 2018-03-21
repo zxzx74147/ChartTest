@@ -50,6 +50,7 @@
                 android:layout_centerInParent="true"
                 android:gravity="center"
                 android:text="@string/feed_title"
+                android:textStyle="bold"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/default_size_34" />
 
@@ -74,10 +75,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/default_gap_2"
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="@dimen/default_gap_20"
                     android:layout_marginRight="@dimen/default_gap_66"
-                    android:text="@{@string/yuan_sign+@string/format_02(user.total)}"
+                    android:text="@{@string/yuan_sign+@string/format_0(user.total)}"
                     android:textColor="@color/text_black"
                     android:textSize="@dimen/default_size_34" />
 
@@ -117,7 +119,7 @@
             android:layout_height="wrap_content"
 
             android:paddingBottom="@dimen/default_gap_16"
-            android:background="@color/bg_grey"
+            android:background="#F2F2F8"
             android:paddingTop="@dimen/default_gap_16"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

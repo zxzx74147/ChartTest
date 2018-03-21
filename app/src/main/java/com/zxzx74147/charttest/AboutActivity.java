@@ -12,6 +12,7 @@ import com.zxzx74147.charttest.databinding.ActivityAboutBinding;
 import com.zxzx74147.devlib.base.BaseActivity;
 import com.zxzx74147.devlib.data.Upgrade;
 import com.zxzx74147.devlib.modules.sys.SysInitManager;
+import com.zxzx74147.devlib.os.PackageInfoMananger;
 
 public class AboutActivity extends BaseActivity {
 
@@ -22,7 +23,7 @@ public class AboutActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_about);
         String version = AppInfoUtil.getAppVersionName(this);
-        mBinding.setVersion(version);
+        mBinding.setVersion(version+ "("+PackageInfoMananger.sharedInstance().getVersionInfo().buildVersion+")");
         mBinding.setUpgrade(SysInitManager.sharedInstance().getSysInitData().upgrade);
         RxView.clicks(mBinding.upgrade).subscribe(v->{
             dealUpgrade(mBinding.getUpgrade());

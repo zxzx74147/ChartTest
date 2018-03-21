@@ -17,7 +17,7 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg_grey"
+        android:background="@color/bg_grey2"
         android:paddingLeft="@dimen/default_gap_44"
         android:paddingRight="@dimen/default_gap_44"
         android:paddingTop="@dimen/default_gap_44">

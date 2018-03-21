@@ -15,6 +15,7 @@ import com.zxzx74147.devlib.base.BaseActivity;
 import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.devlib.data.DialogItem;
 import com.zxzx74147.devlib.data.IntentData;
+import com.zxzx74147.devlib.font.FontBinder;
 import com.zxzx74147.devlib.fragment.CommonFragmentDialog;
 import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.modules.account.UserViewModel;
@@ -113,6 +114,7 @@ public class MainFeedActivity extends BaseActivity {
         ViewUtil.startAnimition(mBinding.toLive);
         initView();
         initData();
+
     }
 
     private CommonCallback<GoodType> mCallback = item -> {

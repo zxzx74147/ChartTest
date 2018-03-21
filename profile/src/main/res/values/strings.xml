@@ -63,6 +63,8 @@
     <string name="save">保存</string>
     <string name="use_it">立即使用</string>
     <string name="bind_phone_remind">绑定手机号领取90元代金券\n0成本下单</string>
+    <string name="withdraw_space">提 现</string>
+    <string name="recharge_space">充 值</string>
 
 
     <array name="profile_list">

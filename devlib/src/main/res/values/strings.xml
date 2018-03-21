@@ -12,6 +12,7 @@
     <string name="format_sign_02">%+.2f%%</string>
     <string name="format_bracket">(%s)</string>
     <string name="format_02">%.2f</string>
+    <string name="format_0">%.0f</string>
     <string name="format_01">%.1f</string>
     <string name="format_01_sign">%+.1f</string>
     <string name="format_02_sign">%+.2f</string>

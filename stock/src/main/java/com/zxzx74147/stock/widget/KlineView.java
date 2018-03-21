@@ -180,9 +180,9 @@ public class KlineView extends LinearLayout {
         CombinedData combinedData = new CombinedData();
         setKData(combinedData);
         ArrayList<ILineDataSet> sets = new ArrayList<>();
-        LineDataSet lineMA5 = new LineDataSet(mDataParse.getMa5DataL(), "MA5");
-        LineDataSet lineMA10 = new LineDataSet(mDataParse.getMa10DataL(), "MA10");
-        LineDataSet lineMA20 = new LineDataSet(mDataParse.getMa20DataL(), "MA20");
+        LineDataSet lineMA5 = new LineDataSet(mDataParse.getMa5DataL(), "SMA5");
+        LineDataSet lineMA10 = new LineDataSet(mDataParse.getMa10DataL(), "SMA10");
+        LineDataSet lineMA20 = new LineDataSet(mDataParse.getMa20DataL(), "SMA20");
         ChartUtil.setLineDataleSet(lineMA5, getResources().getColor(R.color.stock_kline_ma5));
         ChartUtil.setLineDataleSet(lineMA10, getResources().getColor(R.color.stock_kline_ma10));
         ChartUtil.setLineDataleSet(lineMA20, getResources().getColor(R.color.stock_kline_ma20));

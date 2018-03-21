@@ -42,6 +42,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textStyle="bold"
                     android:text="@{data.title}"
                     android:textColor="@color/text_black"
                     android:textSize="@dimen/default_size_48" />
@@ -51,6 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/default_gap_38"
                     android:text="@{data.createTime}"
+                    app:font="@{`din_light`}"
                     android:textColor="@color/text_light_grey"
                     android:textSize="@dimen/default_size_24" />
 

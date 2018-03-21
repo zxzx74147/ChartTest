@@ -286,6 +286,15 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             mBinding.listAmount.addTab(newTab);
         }
         mAmount = mSelectGood.minLot;
+        mBinding.listAmount.getTabAt(0).select();
+        mBinding.listAmount.post(new Runnable() {
+            @Override
+            public void run() {
+                mBinding.listAmount.setSmoothScrollingEnabled(false);
+                mBinding.listAmount.setScrollX(0);
+            }
+        });
+
         refreshAmount();
 
         if (mType == TradeFragment.TYPE_MACH_POSITION_BUY_UP || mType == TradeFragment.TYPE_POSITION_BUY_UP) {

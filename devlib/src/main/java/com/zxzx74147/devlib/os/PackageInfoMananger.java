@@ -47,6 +47,7 @@ public class PackageInfoMananger {
 			versionInfo.setVersonName(packInfo.versionName);
 			versionInfo.setVersonCode(packInfo.versionCode);
 			versionInfo.setInnerVersionName(appInfo.metaData.getString("api_version"));
+			versionInfo.buildVersion=appInfo.metaData.getString("test_version");
 //			versionInfo.buildVersion = appInfo.metaData.getString("build_version");
 			return versionInfo;
 		} catch (NameNotFoundException e) {

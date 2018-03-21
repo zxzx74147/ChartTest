@@ -53,9 +53,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:font="@{`din_light`}"
                     android:text="@{TimeUtil.parserIntTime(data.createTime,@string/format_HHMM)}"
                     android:textColor="@color/text_light_grey"
-                    android:textSize="@dimen/default_size_24" />
+                    android:textSize="@dimen/default_size_20" />
             </LinearLayout>
         </LinearLayout>
 
@@ -64,6 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_gap_24"
             android:text="@{data.content}"
+            android:lineSpacingMultiplier="1.2"
             android:textColor="@color/text_black"
             android:textSize="@dimen/default_size_30" />
 
@@ -87,6 +89,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:textColor="@color/text_black"
+                android:textStyle="bold"
                 android:textSize="@dimen/default_size_40"
                 android:text="@string/comment"
                 android:layout_height="wrap_content" />
