@@ -179,7 +179,7 @@ public class MainFeedActivity extends BaseActivity {
     }
 
     private static HashSet<String> mReadTable = new HashSet<>();
-    private static final String KEY_COM_VOUCHER = "KEY_COM_VOUCHER1";
+    private static final String KEY_COM_VOUCHER = "KEY_COM_VOUCHER3";
     static{
         mReadTable = KVStore.get(KEY_COM_VOUCHER,HashSet.class);
         if(mReadTable==null){

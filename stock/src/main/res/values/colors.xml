@@ -12,6 +12,6 @@
     <color name="stock_kline_dea">#823E66</color>
     <color name="stock_kline_realtime">#6B6B6B</color>
     <color name="stock_kline_dif">#B99C7A</color>
-    <color name="stock_highlight">#A2A4B2</color>
+    <color name="stock_highlight">#E0E0E6</color>
 
 </resources>

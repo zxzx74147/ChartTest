@@ -107,8 +107,8 @@
             android:layout_width="wrap_content"
             app:font="@{`din`}"
             android:layout_height="wrap_content"
-            android:text="@{@string/format_02_sign(userUni.user.grossProfit)}"
-            android:textColor="@{userUni.user.grossProfit>0? @color/text_red:@color/green}"
+            android:text="@{userUni.user.grossProfit==0? @string/str_loading:@string/format_02_sign(userUni.user.grossProfit)}"
+            android:textColor="@{userUni.user.grossProfit>0? @color/text_red:(userUni.user.grossProfit==0? @color/text_black:@color/green)}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView6"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -134,7 +134,7 @@
             app:font="@{`din`}"
             android:layout_height="wrap_content"
             android:background="@drawable/coupons"
-            android:text='@{String.valueOf(userUni.userVoucherList.num)}'
+            android:text='@{String.valueOf(userUni.userVoucherList.num+(userUni.userComVoucherInfo==null? 0:1))}'
             android:textColor="@color/white"
             android:onClick="@{()->ProfileBusStation.startProfileVocher(context)}"
             app:layout_constraintStart_toStartOf="@+id/guideline"

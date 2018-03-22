@@ -1,7 +1,9 @@
 package com.zxzx74147.profile.fragment;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +15,10 @@ import com.zxzx74147.devlib.data.BaseListData;
 import com.zxzx74147.devlib.data.IntentData;
 import com.zxzx74147.devlib.fragment.CommonInfoDialog;
 import com.zxzx74147.devlib.interfaces.CommonListRequestCallback;
+import com.zxzx74147.devlib.modules.account.UserViewModel;
 import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.devlib.utils.RecyclerViewUtil;
+import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.devlib.widget.CommonRecyclerViewAdapter;
@@ -22,6 +26,7 @@ import com.zxzx74147.profile.R;
 import com.zxzx74147.profile.data.VocherUserListData;
 import com.zxzx74147.profile.data.Voucher;
 import com.zxzx74147.profile.databinding.FragmentVocherBinding;
+import com.zxzx74147.profile.databinding.ItemComVoucherBinding;
 import com.zxzx74147.profile.storage.EventStorage;
 
 import io.reactivex.Observable;
@@ -36,6 +41,8 @@ public class VoucherFragment extends BaseDialogFragment {
     //    private UserViewModel mUserViewModel = null;
 //
     private CommonRecyclerViewAdapter<Voucher> mVoucherAdapter = null;
+    private ItemComVoucherBinding mComVoucherBinding = null;
+    private UserViewModel mUserViewModel = null;
 
     //
 //
@@ -52,12 +59,19 @@ public class VoucherFragment extends BaseDialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_vocher, container, false);
-//        mUserViewModel = ViewModelProviders.of(ViewUtil.getFragmentActivity(getContext())).get(UserViewModel.class);
-//        mUserViewModel.getUserUniLiveData().observe(this, userUniData -> {
-//            refresh(userUniData);
-//        });
+        mUserViewModel = ViewModelProviders.of(ViewUtil.getFragmentActivity(getContext())).get(UserViewModel.class);
+        mUserViewModel.getUserUniLiveData().observe(this, userUniData -> {
+            mComVoucherBinding.setData(userUniData.userComVoucherInfo);
+        });
+        mComVoucherBinding = DataBindingUtil.inflate(inflater,R.layout.item_com_voucher,null,false);
         initView();
         return mBinding.getRoot();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
     }
 
     //
@@ -74,10 +88,19 @@ public class VoucherFragment extends BaseDialogFragment {
 //
 //
     private void initView() {
+
         mVoucherAdapter = new CommonRecyclerViewAdapter<>(null);
+
         CommonMultiTypeDelegate delegate = new CommonMultiTypeDelegate();
         mVoucherAdapter.setMultiTypeDelegate(delegate);
-        mVoucherAdapter.setEmptyView(DataBindingUtil.inflate(LayoutInflater.from(getContext()),R.layout.no_voucher,null,false).getRoot());
+        mVoucherAdapter.setHeaderFooterEmpty(true,false);
+
+        if(mUserViewModel.getUserUniLiveData().getValue().userComVoucherInfo!=null) {
+            mVoucherAdapter.addHeaderView(mComVoucherBinding.getRoot());
+            mComVoucherBinding.setData(mUserViewModel.getUserUniLiveData().getValue().userComVoucherInfo);
+        }else{
+            mVoucherAdapter.setEmptyView(DataBindingUtil.inflate(LayoutInflater.from(getContext()),R.layout.no_voucher,null,false).getRoot());
+        }
 
         LinearLayoutManager lm = new LinearLayoutManager(getContext());
         lm.setOrientation(LinearLayoutManager.VERTICAL);

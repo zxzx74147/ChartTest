@@ -34,11 +34,12 @@ public class StockBusStation {
 
     }
 
-    public static void startStock(Context context, GoodType type) {
-        if(type==null){
+    public static void startStock(Context context, GoodType good) {
+        if(good==null){
             return;
         }
-        MessageEvent<GoodType> event = new MessageEvent<>(BUS_ID_STOCK_VIEW, context, type);
+
+        MessageEvent<GoodType> event = new MessageEvent<>(BUS_ID_STOCK_VIEW, context, good);
         EventBus.getDefault().post(event);
     }
 
@@ -49,7 +50,16 @@ public class StockBusStation {
             ProfileBusStation.startSetTradePassword(context);
             return;
         }
-        MessageEvent<GoodType> event = new MessageEvent<>(BUS_ID_STOCK_TRADE, context, good);
+        GoodType goodType = AccountManager.sharedInstance().getUserUni().goodsTypeList.goodType.get(0);
+        if(good!=null){
+            for(GoodType item:AccountManager.sharedInstance().getUserUni().goodsTypeList.goodType){
+                if(item.goodsType.equals(good.goodsType)){
+                    goodType = item;
+                    break;
+                }
+            }
+        }
+        MessageEvent<GoodType> event = new MessageEvent<>(BUS_ID_STOCK_TRADE, context, goodType);
         event.type = type;
         EventBus.getDefault().post(event);
     }

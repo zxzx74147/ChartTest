@@ -58,6 +58,7 @@
                 android:layout_height="@dimen/default_gap_72"
                 android:background="@drawable/rect_round_stroke_red_big"
                 android:paddingLeft="@dimen/default_gap_36"
+                android:layout_marginBottom="@dimen/default_gap_40"
                 android:paddingRight="@dimen/default_gap_36"
                 android:text="@string/upgrade_button"
                 android:textColor="@color/red"

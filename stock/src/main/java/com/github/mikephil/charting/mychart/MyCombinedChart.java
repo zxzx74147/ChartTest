@@ -30,6 +30,7 @@ public class MyCombinedChart extends CombinedChart {
     private int top = getResources().getDimensionPixelSize(R.dimen.default_gap_20);
     private static String FORMAT_LABEL = DevLib.getApp().getString(R.string.format_label);
     private IAxisValueFormatter mLabelFormater = null;
+    private static final String BOOL_LABEL="BOLL(20,2)";
 //    private DataParse minuteHelper;
 
     private boolean mDrawMarkerViews = true;
@@ -96,10 +97,18 @@ public class MyCombinedChart extends CombinedChart {
 //                        if (index < 0) {
 //                            continue;
 //                        }
+                        if(set.getLabel().equals("LOWER")){
+                            mPaint.setColor(getResources().getColor(R.color.text_light_grey));
+                            String context = BOOL_LABEL;
+                            canvas.drawText(context, mViewPortHandler.contentLeft() + length, mViewPortHandler.contentTop() + top, mPaint);
+                            length += mPaint.measureText(context) + 10;
+                        }
                         if(maxX>set.getValues().size()){
+
                             continue;
                         }
                         Entry eD = set.getValues().get((int) maxX);
+
                         mPaint.setColor(set.getColor());
                         if (eD != null && !TextUtils.isEmpty(set.getLabel())) {
                             String context = String.format(FORMAT_LABEL, set.getLabel(), eD.getY());
@@ -127,9 +136,16 @@ public class MyCombinedChart extends CombinedChart {
 
                             for (Object setObj : bubbleData.getDataSets()) {
                                 LineDataSet set = (LineDataSet) setObj;
+                                if(set.getLabel().equals("LOWER")){
+                                    mPaint.setColor(getResources().getColor(R.color.text_light_grey));
+                                    String context = BOOL_LABEL;
+                                    canvas.drawText(context, mViewPortHandler.contentLeft() + length, mViewPortHandler.contentTop() + top, mPaint);
+                                    length += mPaint.measureText(context) + 10;
+                                }
 //                            Log.e("Draw","index"+mIndicesToHighlight[i].getDataIndex());
                                 int index = (int) (set.getValues().size() - (mData.getXMax() - mIndicesToHighlight[i].getX())) - 1;
                                 if (index < 0) {
+
                                     continue;
                                 }
                                 Entry eD = set.getValues().get(index);

@@ -159,9 +159,9 @@ public class LauncherActivity extends BaseActivity {
 //            sysInit.upgrade.msg = "hahah";
 //            sysInit.upgrade.url = "http://pws.myhug.cn/android_apk/avalon/559818/common/channels/avalon_common_main_2.0.0.apk";
 
-//            if (dealUpgrade(sysInit.upgrade)) {
-//                return;
-//            }
+            if (dealUpgrade(sysInit.upgrade)) {
+                return;
+            }
             if (sysInit.needLogin != 0) {
                 toLogin();
                 return;

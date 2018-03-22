@@ -29,7 +29,7 @@ public class AccountManager {
     private static final AccountManager mInstance = new AccountManager();
     private UserData mUser = null;
     private UserUniData mUserUniData = null;
-    private int mLastReadMessageID=0;
+    private int mLastReadMessageID = 0;
 
     private UserStorage mUserStorage = RetrofitClient.getClient().create(UserStorage.class);
     private static final int PERIOD = 1000 * 5;
@@ -41,7 +41,7 @@ public class AccountManager {
 
     private AccountManager() {
         mUser = KVStore.get(KEY, UserData.class);
-        mLastReadMessageID = SharedPreferenceHelper.getInt(KEY_MSG_ID,0);
+        mLastReadMessageID = SharedPreferenceHelper.getInt(KEY_MSG_ID, 0);
     }
 
     public static AccountManager sharedInstance() {
@@ -75,6 +75,7 @@ public class AccountManager {
     public void logout() {
         mUser = null;
         KVStore.put(KEY, "");
+        KVStore.put(KEY_MSG_ID, 0);
     }
 
 
@@ -91,7 +92,7 @@ public class AccountManager {
         mConsumers.add(consumer);
         checkStatus();
         try {
-            if(mUserUniData!=null) {
+            if (mUserUniData != null) {
                 consumer.accept(mUserUniData);
             }
         } catch (Exception e) {
@@ -151,20 +152,26 @@ public class AccountManager {
         NetworkApi.ApiSubscribe(userCall, new Consumer<UserUniData>() {
             @Override
             public void accept(UserUniData userUniData) throws Exception {
-                for(Consumer consumer:mConsumers){
+                if (userUniData.hasError()) {
+                    return;
+                }
+                if (userUniData.userComVoucherInfo != null && userUniData.userComVoucherInfo.voucherId == null) {
+                    userUniData.userComVoucherInfo = null;
+                }
+                for (Consumer consumer : mConsumers) {
                     consumer.accept(userUniData);
                 }
                 mUserUniData = userUniData;
                 saveUser(userUniData.user);
-                mUser.unreadNum = mUserUniData.lastMsgCenterId-mLastReadMessageID;
-                mUser.unreadNum = Math.max(mUser.unreadNum ,0);
+                mUser.unreadNum = mUserUniData.lastMsgCenterId - mLastReadMessageID;
+                mUser.unreadNum = Math.max(mUser.unreadNum, 0);
             }
         });
     }
 
-    public void markMessageRead(){
-        SharedPreferenceHelper.saveInt(KEY_MSG_ID,mUserUniData.lastMsgCenterId);
-        mLastReadMessageID =mUserUniData.lastMsgCenterId;
+    public void markMessageRead() {
+        SharedPreferenceHelper.saveInt(KEY_MSG_ID, mUserUniData.lastMsgCenterId);
+        mLastReadMessageID = mUserUniData.lastMsgCenterId;
     }
 
 

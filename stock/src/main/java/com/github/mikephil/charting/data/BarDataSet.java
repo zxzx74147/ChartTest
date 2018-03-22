@@ -235,4 +235,16 @@ public class BarDataSet extends BarLineScatterCandleBubbleDataSet<BarEntry> impl
     public String[] getStackLabels() {
         return mStackLabels;
     }
+
+    @Override
+    public int getColor(int index) {
+        if (mValues != null && mValues.size() > index) {
+            if (mValues.get(index).getY() > 0) {
+                return mColors.get(0);
+            }
+            return mColors.get(1);
+        } else {
+            return mColors.get(index % mColors.size());
+        }
+    }
 }

@@ -79,7 +79,7 @@ public class StockWidget extends FrameLayout implements IViewModelHolder {
         initView();
         RxTabLayout.selections(mBinding.tabLayout).subscribe(tab -> {
             if (mStockViewModel != null) {
-                mStockViewModel.getKLineData().setKType(tab.getPosition());
+                mStockViewModel.getKLineData().setKType(tab.getPosition()==0? 0:tab.getPosition()+1);
                 mBinding.klineview.setLoading();
             }
         });

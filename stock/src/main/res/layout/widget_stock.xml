@@ -179,12 +179,12 @@
                     android:tag="@string/stock_k_realtime_s"
                     android:text="@string/stock_k_realtime" />
 
-                <android.support.design.widget.TabItem
-                    android:id="@+id/tab_default"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:tag="@string/stock_k_1m_s"
-                    android:text="@string/stock_k_1m" />
+                <!--<android.support.design.widget.TabItem-->
+                    <!--android:id="@+id/tab_default"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:tag="@string/stock_k_1m_s"-->
+                    <!--android:text="@string/stock_k_1m" />-->
 
                 <android.support.design.widget.TabItem
                     android:layout_width="wrap_content"

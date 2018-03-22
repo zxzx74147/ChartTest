@@ -269,7 +269,7 @@ public class ChartUtil {
         set.setIncreasingPaintStyle(Paint.Style.FILL);
         set.setNeutralColor(DevLib.getApp().getResources().getColor(R.color.stock_grey));//设置开盘价等于收盘价的颜色
         set.setShadowColorSameAsCandle(true);
-        set.setHighlightLineWidth(1f);
+        set.setHighlightLineWidth(0.5f);
         set.setHighLightColor(DevLib.getApp().getResources().getColor(R.color.stock_highlight));
         set.setDrawValues(false);
 
@@ -286,7 +286,7 @@ public class ChartUtil {
         set.setDrawValues(false);
         set.setLineWidth(1f);
         set.setDrawCircles(false);
-        set.setHighlightLineWidth(1f);
+        set.setHighlightLineWidth(0.5f);
         set.setColor(color);
         set.setAxisDependency(YAxis.AxisDependency.RIGHT);
 
@@ -295,7 +295,7 @@ public class ChartUtil {
 //        set.setDrawHorizontalHighlightIndicator(false);
 //        set.setAxisDependency(YAxis.AxisDependency.RIGHT);
 //        set.setDrawIcons(false);
-//        set.setHighlightLineWidth(1f);
+//        set.setHighlightLineWidth(0.5f);
 //        set.setHighLightColor(DevLib.getApp().getResources().getColor(R.color.text_black));
 //        set.setDrawValues(false);
 //        set.setValueTextColor(DevLib.getApp().getResources().getColor(R.color.text_black));
@@ -418,6 +418,19 @@ public class ChartUtil {
         chart.setDragDecelerationFrictionCoef(0.2f);
     }
 
+//    public static void setMacdSet(BarDataSet set){
+//        set.setHighlightEnabled(true);
+//        set.setHighLightAlpha(255);
+//        set.setDrawIcons(false);
+//        set.setDrawValues(false);
+//        set.setAxisDependency(YAxis.AxisDependency.RIGHT);
+//        List<Integer> list = new ArrayList<>();
+//        list.add(DevLib.getApp().getResources().getColor(R.color.stock_up));
+//        list.add(DevLib.getApp().getResources().getColor(R.color.stock_down));
+//        set.setColors(list);
+//        set.setHighLightColor(DevLib.getApp().getResources().getColor(R.color.text_black));
+//    }
+
     public static void setBarDataSet(BarDataSet set) {
 
         set.setHighlightEnabled(true);
@@ -429,7 +442,7 @@ public class ChartUtil {
         list.add(DevLib.getApp().getResources().getColor(R.color.stock_up));
         list.add(DevLib.getApp().getResources().getColor(R.color.stock_down));
         set.setColors(list);
-        set.setHighLightColor(DevLib.getApp().getResources().getColor(R.color.text_black));
+        set.setHighLightColor(DevLib.getApp().getResources().getColor(R.color.stock_highlight));
 
 
 //        set.setHighlightEnabled(true);
@@ -443,7 +456,7 @@ public class ChartUtil {
 ////        set.setIncreasingPaintStyle(Paint.Style.FILL);
 ////        set.setNeutralColor(DevLib.getApp().getResources().getColor(R.color.stock_grey));//设置开盘价等于收盘价的颜色
 ////        set.setShadowColorSameAsCandle(true);
-////        set.setHighlightLineWidth(1f);
+////        set.setHighlightLineWidth(0.5f);
 //        set.setHighLightColor(DevLib.getApp().getResources().getColor(R.color.text_black));
 //        set.setDrawValues(false);
 //        set.setValueTextColor(DevLib.getApp().getResources().getColor(R.color.text_black));

@@ -6,18 +6,25 @@
 
         <variable
             name="data"
-            type="com.zxzx74147.profile.data.Voucher" />
+            type="com.zxzx74147.profile.data.ComVoucher" />
 
         <import type="com.zxzx74147.devlib.utils.TimeUtil"/>
+        <import type="com.zxzx74147.devlib.modules.busstation.StockBusStation"/>
 
     </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/default_gap_180"
-        android:onClick="@{v->{StockBusStation.startStockTrade(context,null,0)}"
-        app:voucher_back='@{data}'>
+        android:onClick="@{v->{StockBusStation.startStockTrade(context,data.applyGoodsType.get(0),0)}"
+        android:layout_height="wrap_content">
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:src="@drawable/vouchers_9_new"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintDimensionRatio="678:204"
+            android:layout_height="wrap_content" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline2"
@@ -50,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_marginTop="@dimen/default_gap_5"
                 android:layout_height="wrap_content"
-                android:text="@{@string/format_voucher_price(data.goods.depositFee)}"
+                android:text="@{data.desc}"
                 android:textColor="#95FFFFFF"
                 android:textSize="@dimen/default_size_24" />
 
@@ -59,34 +66,12 @@
                 android:layout_marginTop="@dimen/default_gap_5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{data.getEndTime()}"
+                android:text="@{TimeUtil.reformatDefaultTime(data.validEndDt,@string/format_YYYYMMDD_HHMM)}"
                 android:textColor="#95FFFFFF"
                 android:textSize="@dimen/default_size_24" />
         </LinearLayout>
 
-        <!--<TextView-->
-        <!--android:id="@+id/textView12"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="@string/yuan_sign"-->
-        <!--android:textColor="@color/white"-->
-        <!--android:textSize="@dimen/default_size_22"-->
-        <!--android:layout_marginLeft="@dimen/default_gap_61"-->
-        <!--app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--android:layout_marginTop="@dimen/default_gap_117"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent" />-->
 
-        <!--<TextView-->
-        <!--android:id="@+id/textView13"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="@{data.goods.depositFee}"-->
-        <!--android:textColor="@color/white"-->
-        <!--android:layout_marginLeft="@dimen/default_gap_10"-->
-        <!--android:textSize="@dimen/default_size_80"-->
-        <!--app:layout_constraintBottom_toBottomOf="@+id/textView12"-->
-        <!--app:layout_constraintStart_toEndOf="@+id/textView12" />-->
 
 
     </android.support.constraint.ConstraintLayout>

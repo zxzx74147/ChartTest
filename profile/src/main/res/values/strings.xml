@@ -65,6 +65,7 @@
     <string name="bind_phone_remind">绑定手机号领取90元代金券\n0成本下单</string>
     <string name="withdraw_space">提 现</string>
     <string name="recharge_space">充 值</string>
+    <string name="nickname_edit_done">昵称修改成功</string>
 
 
     <array name="profile_list">

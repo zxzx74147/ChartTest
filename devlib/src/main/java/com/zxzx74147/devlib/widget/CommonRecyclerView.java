@@ -34,7 +34,7 @@ public class CommonRecyclerView extends RecyclerView{
                 return;
             }
             int count = getAdapter().getItemCount();
-            smoothScrollToPosition(count);
+            smoothScrollToPosition(count-1);
         },30);
 
     }

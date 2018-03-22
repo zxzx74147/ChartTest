@@ -30,6 +30,7 @@ import com.zxzx74147.stock.indicator.KLineBean;
 import com.zxzx74147.stock.utils.ChartUtil;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Created by zhengxin on 2018/2/13.
@@ -244,12 +245,14 @@ public class KlineView extends LinearLayout {
         CombinedData combinedData = new CombinedData();
         setKData(combinedData);
         ArrayList<ILineDataSet> sets = new ArrayList<>();
+        LineDataSet bollLABEL = new LineDataSet(new LinkedList<>(),"(BOOL,20,2)");
         LineDataSet bollD = new LineDataSet(mDataParse.getBollDataDN(), "LOWER");
         LineDataSet bollM = new LineDataSet(mDataParse.getBollDataMB(), "MID");
         LineDataSet bollU = new LineDataSet(mDataParse.getBollDataUP(), "UPPER");
         ChartUtil.setLineDataleSet(bollD, getResources().getColor(R.color.stock_kline_ma5));
         ChartUtil.setLineDataleSet(bollU, getResources().getColor(R.color.stock_kline_ma10));
         ChartUtil.setLineDataleSet(bollM, getResources().getColor(R.color.stock_kline_ma20));
+//        sets.add(bollLABEL);
         sets.add(bollD);
         sets.add(bollU);
         sets.add(bollM);
@@ -338,7 +341,7 @@ public class KlineView extends LinearLayout {
         lineK.setFormSize(15.f);
         lineK.setHighlightEnabled(true);
         lineK.setDrawHighlightIndicators(true);
-        lineK.setHighlightLineWidth(1f);
+        lineK.setHighlightLineWidth(0.5f);
         LineData lineData = new LineData(sets);
         combinedData.setData(lineData);
         ((CombinedChartRenderer) mBinding.klineRealtime.getRenderer()).getSubRenderers().clear();

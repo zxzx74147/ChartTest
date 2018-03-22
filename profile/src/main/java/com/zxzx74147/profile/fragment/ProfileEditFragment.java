@@ -177,6 +177,7 @@ public class ProfileEditFragment extends BaseDialogFragment {
                 AccountManager.sharedInstance().doRefresh();
                 mBinding.setUser(userUniData.user);
                 ViewUtil.hideSoftPad(mBinding.nickName);
+                ToastUtil.showToast(getActivity(),R.string.nickname_edit_done);
             }
         }, UserUniData.class);
     }
