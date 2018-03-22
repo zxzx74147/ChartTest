@@ -59,6 +59,7 @@ import java.util.LinkedList;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
 /**
  */
@@ -254,13 +255,25 @@ public class PositionFragment extends BaseDialogFragment {
         ZXFragmentJumpHelper.startFragment(getActivity(), fragment, new CommonCallback() {
             @Override
             public void callback(Object item) {
-                setupRecyclerViewMachPosition(mBinding.refreshLayout, mBinding.list, mMachAdapter, new CommonListRequestCallback<MachPosition>() {
+                Observable<MachPositionListData> mPositionObs = mTradeStorage.machpositionGetList(0);
+                NetworkApi.ApiSubscribe(mPositionObs, new Consumer<MachPositionListData>() {
                     @Override
-                    public Observable<MachPositionListData> getObserverble(BaseListData listdata) {
+                    public void accept(MachPositionListData userUniData) throws Exception {
+                        if (userUniData.hasError()) {
+                            return;
+                        }
+                        AccountManager.sharedInstance().getUserUni().machPositionList = userUniData.machPositionList;
+                        setupRecyclerViewMachPosition(mBinding.refreshLayout, mBinding.list, mMachAdapter, new CommonListRequestCallback<MachPosition>() {
+                            @Override
+                            public Observable<MachPositionListData> getObserverble(BaseListData listdata) {
 //                        return mTradeStorage.machpositionGetList(listdata == null ? 0 : listdata.nextPage);
-                        return mTradeStorage.machpositionGetHisList(listdata == null ? 0 : listdata.nextPage);
+                                return mTradeStorage.machpositionGetHisList(listdata == null ? 0 : listdata.nextPage);
+                            }
+                        });
                     }
                 });
+
+
             }
         });
 
@@ -300,13 +313,30 @@ public class PositionFragment extends BaseDialogFragment {
                             ToastUtil.showToast(getActivity(), o.error.usermsg);
                             return;
                         }
-                        setupRecyclerViewMachPosition(mBinding.refreshLayout, mBinding.list, mMachAdapter, new CommonListRequestCallback<MachPosition>() {
+                        Observable<MachPositionListData> mPositionObs = mTradeStorage.machpositionGetList(0);
+                        NetworkApi.ApiSubscribe(mPositionObs, new Consumer<MachPositionListData>() {
                             @Override
-                            public Observable<MachPositionListData> getObserverble(BaseListData listdata) {
+                            public void accept(MachPositionListData userUniData) throws Exception {
+                                if (userUniData.hasError()) {
+                                    return;
+                                }
+                                AccountManager.sharedInstance().getUserUni().machPositionList = userUniData.machPositionList;
+                                setupRecyclerViewMachPosition(mBinding.refreshLayout, mBinding.list, mMachAdapter, new CommonListRequestCallback<MachPosition>() {
+                                    @Override
+                                    public Observable<MachPositionListData> getObserverble(BaseListData listdata) {
 //                        return mTradeStorage.machpositionGetList(listdata == null ? 0 : listdata.nextPage);
-                                return mTradeStorage.machpositionGetHisList(listdata == null ? 0 : listdata.nextPage);
+                                        return mTradeStorage.machpositionGetHisList(listdata == null ? 0 : listdata.nextPage);
+                                    }
+                                });
                             }
                         });
+//                        setupRecyclerViewMachPosition(mBinding.refreshLayout, mBinding.list, mMachAdapter, new CommonListRequestCallback<MachPosition>() {
+//                            @Override
+//                            public Observable<MachPositionListData> getObserverble(BaseListData listdata) {
+////                        return mTradeStorage.machpositionGetList(listdata == null ? 0 : listdata.nextPage);
+//                                return mTradeStorage.machpositionGetHisList(listdata == null ? 0 : listdata.nextPage);
+//                            }
+//                        });
 
                     });
                 }
@@ -356,6 +386,7 @@ public class PositionFragment extends BaseDialogFragment {
                         if (iBaseListDataHolder.getListData() == null) {
                             return;
                         }
+
                         MachPositionList list = AccountManager.sharedInstance().getUserUni().machPositionList;
                         if (list != null && list.num > 0 && iBaseListDataHolder.getListData() != null) {
                             iBaseListDataHolder.getListData().getListItems().addAll(0, list.getListItems());

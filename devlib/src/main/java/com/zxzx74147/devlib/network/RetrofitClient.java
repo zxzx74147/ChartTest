@@ -45,7 +45,7 @@ public class RetrofitClient {
         builder.addInterceptor(new StethoInterceptor());
         OkHttpClient client = builder.build();
         mStockRetrofit = new Retrofit.Builder()
-                .baseUrl(NetworkConfig.HOST_STOCK)
+                .baseUrl(NetworkConfig.HOST)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)

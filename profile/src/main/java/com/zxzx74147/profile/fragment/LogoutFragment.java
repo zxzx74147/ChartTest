@@ -17,6 +17,7 @@ import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
 import com.zxzx74147.profile.R;
+import com.zxzx74147.profile.data.UnReadManager;
 import com.zxzx74147.profile.data.UserUniData;
 import com.zxzx74147.profile.databinding.LayoutLogoutBinding;
 import com.zxzx74147.profile.storage.AccountStorage;
@@ -63,6 +64,7 @@ public class LogoutFragment extends BaseDialogFragment {
             }
             dismiss();
             MainBusStation.logout(getActivity());
+            UnReadManager.sharedInstance().clearUserInfo();
         },UniApiData.class);
     }
 

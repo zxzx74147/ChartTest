@@ -9,8 +9,12 @@
             type="com.zxzx74147.devlib.data.UserData" />
 
         <variable
+            name="unRead"
+            type="Integer"/>
+        <variable
             name="userUni"
             type="com.zxzx74147.profile.data.UserUniData" />
+        <import type="com.zxzx74147.profile.data.UnReadManager"/>
 
         <import type="com.zxzx74147.devlib.modules.busstation.StockBusStation" />
         <import type="com.zxzx74147.devlib.modules.busstation.MainBusStation"/>
@@ -85,7 +89,7 @@
                     android:textSize="@dimen/default_size_34" />
 
                 <ImageView
-                    android:visibility="@{user.unreadNum>0? View.VISIBLE:View.GONE}"
+                    android:visibility="@{unRead>0? View.VISIBLE:View.GONE}"
                     android:layout_width="@dimen/default_gap_10"
                     android:layout_height="@dimen/default_gap_10"
                     android:layout_gravity="right|top"

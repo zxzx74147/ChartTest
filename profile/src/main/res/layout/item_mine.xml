@@ -7,6 +7,7 @@
             name="data"
             type="com.zxzx74147.profile.data.ProfileItem" />
         <import type="android.view.View"/>
+        <import type="com.zxzx74147.profile.data.UnReadManager"/>
 
     </data>
 
@@ -16,7 +17,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_gap_30"
             android:layout_marginTop="@dimen/default_gap_30"
@@ -30,11 +31,11 @@
             android:layout_weight="1" />
 
         <TextView
-            android:visibility="@{data.uread==0? View.GONE:View.VISIBLE}"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/rect_round_red"
             android:paddingLeft="@dimen/default_gap_10"
+            android:visibility="@{data.uread==0? View.GONE:View.VISIBLE}"
             android:paddingRight="@dimen/default_gap_10"
             android:layout_gravity="center_vertical"
             android:text="@{String.valueOf(data.uread)}"

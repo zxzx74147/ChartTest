@@ -18,5 +18,4 @@ public class UserData implements Serializable {
     public String couponDeadline;      //红包有效期
     public int hasTradePasswd;     //是否有交易密码
     public int needTradePasswd;    //是否需要输入交易密码（每6小时需要输入一次）
-    public int unreadNum = 0;
 }

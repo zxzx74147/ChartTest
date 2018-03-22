@@ -14,8 +14,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/default_gap_12"
-        android:paddingBottom="@dimen/default_gap_12"
+        android:paddingTop="@dimen/default_gap_6"
+        android:paddingBottom="@dimen/default_gap_6"
         android:orientation="vertical">
 
         <TextView

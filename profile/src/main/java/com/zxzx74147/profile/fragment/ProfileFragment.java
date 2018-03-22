@@ -22,6 +22,7 @@ import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.devlib.widget.CommonRecyclerViewAdapter;
 import com.zxzx74147.profile.R;
 import com.zxzx74147.profile.data.ProfileItem;
+import com.zxzx74147.profile.data.UnReadManager;
 import com.zxzx74147.profile.data.UserUniData;
 import com.zxzx74147.profile.databinding.LayoutExchangeBinding;
 import com.zxzx74147.profile.databinding.LayoutProfileBinding;
@@ -78,6 +79,19 @@ public class ProfileFragment extends BaseDialogFragment {
     public void onResume() {
         super.onResume();
         AccountManager.sharedInstance().doRefresh();
+        mData.clear();
+        String[] items = getResources().getStringArray(R.array.profile_list);
+        ProfileItem temp = null;
+        for(String item:items){
+            ProfileItem pItem = new ProfileItem();
+            pItem.content = item;
+            if(item.equals(getString(R.string.message_center))){
+                pItem.uread = UnReadManager.sharedInstance().getUnReadNum();
+                temp = pItem;
+            }
+            mData.add(pItem);
+        }
+        mAdapter.notifyItemChanged(temp);
         mAdapter.notifyDataSetChanged();
     }
 
@@ -89,15 +103,16 @@ public class ProfileFragment extends BaseDialogFragment {
         mBinding.list.setAdapter(mAdapter);
         LinearLayoutManager lm = new LinearLayoutManager(getContext());
         mBinding.list.setLayoutManager(lm);
-        String[] items = getResources().getStringArray(R.array.profile_list);
-        for(String item:items){
-            ProfileItem pItem = new ProfileItem();
-            pItem.content = item;
-            if(item.equals(getString(R.string.message_center))){
-                pItem.uread = AccountManager.sharedInstance().getUser().unreadNum;
-            }
-            mData.add(pItem);
-        }
+//        String[] items = getResources().getStringArray(R.array.profile_list);
+//        for(String item:items){
+//            ProfileItem pItem = new ProfileItem();
+//            pItem.content = item;
+//            if(item.equals(getString(R.string.message_center))){
+//                pItem.uread = UnReadManager.sharedInstance().getUnReadNum();
+//            }
+//            mData.add(pItem);
+//        }
+//        mAdapter.notifyDataSetChanged();
 //        mData.addAll(Arrays.asList(items));
 
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -111,7 +126,6 @@ public class ProfileFragment extends BaseDialogFragment {
                         WebviewUtil.showWebActivity(getActivity(), SysInitManager.sharedInstance().getSysInitData().config.userGuideUrl);
                         break;
                     case 2:
-                        mAdapter.getItem(3).uread=0;
                         ProfileBusStation.startMessageCenter(getActivity());
                         break;
                     case 3:

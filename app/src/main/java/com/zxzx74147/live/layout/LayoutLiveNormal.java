@@ -260,7 +260,10 @@ public class LayoutLiveNormal extends FrameLayout {
             if (mIsTouchint) {
                 return;
             }
-            mAdapter.setNewData(liveMsgListData.msgList.msg);
+            if( mAdapter.getData().size()==0) {
+                mAdapter.setNewData(liveMsgListData.msgList.msg);
+            }
+            mAdapter.notifyDataSetChanged();
             mBingding.list.scrollToButtom();
             mBingding.bubble.startAnimation(mBingding.bubble.getWidth() / 2, mBingding.bubble.getHeight() - getResources().getDimensionPixelSize(R.dimen.default_gap_100), 2);
             if (mBingding.profitLayout.rootView.getVisibility() == View.GONE) {
@@ -397,11 +400,11 @@ public class LayoutLiveNormal extends FrameLayout {
     private void doLike() {
         LiveMsgListData liveMsgListLiveData = mMsgViewModel.getLiveMsgListLiveData().getValue();
         Observable<UniApiData> obs = null;
-        if (liveMsgListLiveData.liveDynamic.isLove > 0) {
-            obs = mLiveStorage.roomHate(mMsgViewModel.getLive().liveId);
-        } else {
+//        if (liveMsgListLiveData.liveDynamic.isLove > 0) {
+//            obs = mLiveStorage.roomHate(mMsgViewModel.getLive().liveId);
+//        } else {
             obs = mLiveStorage.roomLove(mMsgViewModel.getLive().liveId);
-        }
+//        }
         NetworkApi.ApiSubscribe(((BaseActivity) getContext()), obs, new Consumer<UniApiData>() {
             @Override
             public void accept(UniApiData uniApiData) throws Exception {

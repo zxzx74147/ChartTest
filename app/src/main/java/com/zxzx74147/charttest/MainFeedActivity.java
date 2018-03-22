@@ -41,6 +41,7 @@ import com.zxzx74147.live.data.HomeData;
 import com.zxzx74147.live.data.Live;
 import com.zxzx74147.live.stroage.LiveStorage;
 import com.zxzx74147.profile.data.ComVoucher;
+import com.zxzx74147.profile.data.UnReadManager;
 import com.zxzx74147.profile.databinding.LayoutComVoucherBinding;
 import com.zxzx74147.stock.data.GoodType;
 import com.zxzx74147.stock.fragment.StockFragment;
@@ -172,6 +173,7 @@ public class MainFeedActivity extends BaseActivity {
             }
             mBinding.setUserUni(userUniData);
             mBinding.setUser(userUniData.user);
+            mBinding.setUnRead(UnReadManager.sharedInstance().getUnReadNum());
             if(userUniData.userComVoucherInfo!=null){
                 showComVoucher(userUniData.userComVoucherInfo);
             }

@@ -19,6 +19,7 @@ import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.devlib.data.IntentData;
 import com.zxzx74147.devlib.data.WheelSelectorData;
 import com.zxzx74147.devlib.fragment.CommonWheelSelectorDialog;
+import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.modules.account.UserViewModel;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
@@ -95,6 +96,8 @@ public class PositionModifyFragment extends BaseDialogFragment {
             int offset = FormatUtil.getPureNum(mBinding.buyStopValue.getText().toString());
             WheelSelectorData data = new WheelSelectorData();
             data.items = FormatUtil.POINT_LIST;
+            offset = offset==0? 0:offset-6;
+            offset = Math.max(0,offset);
             data.offset = offset;
             CommonWheelSelectorDialog dialog = CommonWheelSelectorDialog.newInstance(new IntentData<>(data));
             ZXFragmentJumpHelper.startFragment(getContext(), dialog, new CommonCallback() {
@@ -103,7 +106,9 @@ public class PositionModifyFragment extends BaseDialogFragment {
                     if(item==null){
                         return;
                     }
-                    mBinding.buyStopValue.setText(data.items.get((Integer) item));
+
+                    int sel = (int) item;
+                    mBinding.buyStopValue.setText((sel==0? 0:sel+6) + "点");
                 }
             });
         });
@@ -115,6 +120,8 @@ public class PositionModifyFragment extends BaseDialogFragment {
             int offset = FormatUtil.getPureNum(mBinding.buyLimitValue.getText().toString());
             WheelSelectorData data = new WheelSelectorData();
             data.items = FormatUtil.POINT_LIST;
+            offset = offset==0? 0:offset-6;
+            offset = Math.max(0,offset);
             data.offset = offset;
             CommonWheelSelectorDialog dialog = CommonWheelSelectorDialog.newInstance(new IntentData<>(data));
             ZXFragmentJumpHelper.startFragment(getContext(), dialog, new CommonCallback() {
@@ -123,7 +130,8 @@ public class PositionModifyFragment extends BaseDialogFragment {
                     if(item==null){
                         return;
                     }
-                    mBinding.buyLimitValue.setText(data.items.get((Integer) item));
+                    int sel = (int) item;
+                    mBinding.buyLimitValue.setText((sel==0? 0:sel+6) + "点");
                 }
             });
         });

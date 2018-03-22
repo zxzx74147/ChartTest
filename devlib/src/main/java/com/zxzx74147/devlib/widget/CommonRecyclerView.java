@@ -24,6 +24,7 @@ public class CommonRecyclerView extends RecyclerView{
     private void init() {
         ((SimpleItemAnimator)getItemAnimator()).setSupportsChangeAnimations(false);
         getItemAnimator().setChangeDuration(0);
+        setItemAnimator(null);
 
     }
 
@@ -34,8 +35,8 @@ public class CommonRecyclerView extends RecyclerView{
                 return;
             }
             int count = getAdapter().getItemCount();
-            smoothScrollToPosition(count-1);
-        },30);
+            smoothScrollBy(0,500);
+        },100);
 
     }
 }

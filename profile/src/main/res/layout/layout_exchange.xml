@@ -107,8 +107,8 @@
             android:layout_width="wrap_content"
             app:font="@{`din`}"
             android:layout_height="wrap_content"
-            android:text="@{userUni.user.grossProfit==0? @string/str_loading:@string/format_02_sign(userUni.user.grossProfit)}"
-            android:textColor="@{userUni.user.grossProfit>0? @color/text_red:(userUni.user.grossProfit==0? @color/text_black:@color/green)}"
+            android:text="@{userUni.positionList.num==0? @string/str_loading:@string/format_02_sign(userUni.user.grossProfit)}"
+            android:textColor="@{userUni.positionList.num==0? @color/text_black:(userUni.user.grossProfit>0? @color/text_red:@color/green)}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView6"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />

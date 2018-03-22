@@ -5,6 +5,7 @@ import com.zxzx74147.devlib.R;
 import com.zxzx74147.devlib.base.BaseFragment;
 import com.zxzx74147.stock.data.Good;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,13 +33,13 @@ public class FormatUtil {
     static {
         POINT_LIST = new ArrayList<>(50);
         POINT_LIST.add("无");
-        for(int i=1;i<100;i++){
+        for(int i=7;i<100;i++){
             POINT_LIST.add(i+"点");
         }
 
         POINT_LIST = new ArrayList<>(50);
         POINT_LIST.add("无");
-        for(int i=1;i<100;i++){
+        for(int i=7;i<100;i++){
             POINT_LIST.add(i+"点");
         }
     }
@@ -50,7 +51,7 @@ public class FormatUtil {
         }
         pointList.add("无");
         String format = DevLib.getApp().getString(R.string.format_02);
-        for(int i=1;i<100;i++){
+        for(int i=7;i<100;i++){
             String money = "("+String.format(format,good.profitPerUnit*i*amount)+"元)";
             pointList.add(i+"点"+money);
         }
@@ -89,5 +90,11 @@ public class FormatUtil {
         }catch (Exception e){
             return 0f;
         }
+    }
+
+    public static String getFormat(float num,String format){
+        DecimalFormat   df   =   new DecimalFormat( "#,##0.0");
+        String   value   =   df.format(num);
+        return value;
     }
 }

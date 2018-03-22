@@ -163,8 +163,8 @@ public class AccountManager {
                 }
                 mUserUniData = userUniData;
                 saveUser(userUniData.user);
-                mUser.unreadNum = mUserUniData.lastMsgCenterId - mLastReadMessageID;
-                mUser.unreadNum = Math.max(mUser.unreadNum, 0);
+//                mUser.unreadNum = mUserUniData.lastMsgCenterId - mLastReadMessageID;
+//                mUser.unreadNum = Math.max(mUser.unreadNum, 0);
             }
         });
     }

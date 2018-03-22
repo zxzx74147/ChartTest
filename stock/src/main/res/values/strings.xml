@@ -121,8 +121,6 @@
     <string name="valid_time">有效期</string>
     <string name="cancel_time">撤销时间</string>
 
-
-
     <string name="mach_price_remind">请输入挂单价</string>
     <string name="mach_price_mistake_remind1">允许成交价于挂单价上下</string>
     <string name="mach_price_mistake_remind2">100</string>

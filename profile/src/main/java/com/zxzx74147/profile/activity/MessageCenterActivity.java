@@ -3,7 +3,6 @@ package com.zxzx74147.profile.activity;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.SparseArray;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -13,7 +12,6 @@ import com.zxzx74147.devlib.base.BaseActivity;
 import com.zxzx74147.devlib.data.BaseListData;
 import com.zxzx74147.devlib.data.IntentData;
 import com.zxzx74147.devlib.interfaces.CommonListRequestCallback;
-import com.zxzx74147.devlib.kvstore.KVStore;
 import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.devlib.utils.RecyclerViewUtil;
@@ -24,12 +22,10 @@ import com.zxzx74147.devlib.widget.RecycleViewDivider;
 import com.zxzx74147.profile.R;
 import com.zxzx74147.profile.data.Message;
 import com.zxzx74147.profile.data.MessageListData;
+import com.zxzx74147.profile.data.UnReadManager;
 import com.zxzx74147.profile.databinding.ActivityMessageCenterBinding;
 import com.zxzx74147.profile.storage.MessageCenterStorage;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -37,29 +33,6 @@ import io.reactivex.Observable;
 
 public class MessageCenterActivity extends BaseActivity {
     private static final String TAG = MessageCenterActivity.class.getSimpleName();
-    private static HashSet<Integer> mReadTable = new HashSet<>();
-    private static final String READ_TABLE = "READ_TABLE";
-    static{
-        mReadTable = KVStore.get(READ_TABLE,HashSet.class);
-        if(mReadTable==null){
-            mReadTable = new HashSet<>();
-        }
-    }
-
-    public static boolean isRead(int id){
-        if(mReadTable.contains(id)){
-            return true;
-        }
-        return false;
-    }
-
-    public static void markRead(int id){
-        mReadTable.add(id);
-        KVStore.put(READ_TABLE,mReadTable);
-    }
-
-
-
 
 
     private ActivityMessageCenterBinding mBinding = null;
@@ -86,16 +59,17 @@ public class MessageCenterActivity extends BaseActivity {
         AccountManager.sharedInstance().markMessageRead();
         mBinding.list.addItemDecoration(new RecycleViewDivider(this, LinearLayout.HORIZONTAL,
                 getResources().getDimensionPixelOffset(R.dimen.default_gap_24), getResources().getColor(R.color.tran)));
-        mAdapter = new CommonRecyclerViewAdapter<Message>(new LinkedList<>()){
+        mAdapter = new CommonRecyclerViewAdapter<Message>(new LinkedList<>()) {
             public void setNewData(List<Message> data) {
                 super.setNewData(data);
                 int count = 0;
-                for(Message msg:data){
-                    if(!isRead(msg.msgId)){
-                        count++;
-                    }
-                }
-                mBinding.setNum(count);
+                UnReadManager.sharedInstance().refresh(data);
+//                for (Message msg : data) {
+//                    if (!UnReadManager.sharedInstance().isRead(msg.msgId)) {
+//                        count++;
+//                    }
+//                }
+                mBinding.setNum(UnReadManager.sharedInstance().getUnReadNum());
 
             }
         };
@@ -105,12 +79,12 @@ public class MessageCenterActivity extends BaseActivity {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Message msg = (Message) adapter.getItem(position);
-                markRead(msg.msgId);
-                ZXActivityJumpHelper.startActivity(MessageCenterActivity.this,MessageActivity.class,new IntentData(msg));
+                UnReadManager.sharedInstance().markRead(msg.msgId);
+                ZXActivityJumpHelper.startActivity(MessageCenterActivity.this, MessageActivity.class, new IntentData(msg));
             }
         });
 
-        RxView.clicks(mBinding.markRead).subscribe(v->{
+        RxView.clicks(mBinding.markRead).subscribe(v -> {
             markAllRead();
         });
 
@@ -128,12 +102,10 @@ public class MessageCenterActivity extends BaseActivity {
 
     }
 
-    private void markAllRead(){
-       for(Message msg :mAdapter.getData()){
-           markRead(msg.msgId);
-       }
-       mBinding.setNum(0);
-       mAdapter.notifyDataSetChanged();
+    private void markAllRead() {
+        UnReadManager.sharedInstance().markAllRead(mAdapter.getData());
+        mBinding.setNum(0);
+        mAdapter.notifyDataSetChanged();
     }
 
 

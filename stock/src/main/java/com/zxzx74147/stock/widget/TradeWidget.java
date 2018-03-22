@@ -154,6 +154,8 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             int offset = FormatUtil.getPureNum(mBinding.buyStopValue.getText().toString());
             WheelSelectorData data = new WheelSelectorData();
             data.items = FormatUtil.getPointCal(mSelectGood, mAmount);
+            offset = offset==0? 0:offset-6;
+            offset = Math.max(0,offset);
             data.offset = offset;
             CommonWheelSelectorDialog dialog = CommonWheelSelectorDialog.newInstance(new IntentData<>(data));
             ZXFragmentJumpHelper.startFragment(getContext(), dialog, new CommonCallback() {
@@ -162,7 +164,8 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                     if (item == null) {
                         return;
                     }
-                    mBinding.buyStopValue.setText(((Integer) item) + "点");
+                    int sel = (int) item;
+                    mBinding.buyStopValue.setText((sel==0? 0:sel+6) + "点");
                 }
             });
         });
@@ -171,6 +174,8 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             int offset = FormatUtil.getPureNum(mBinding.buyLimitValue.getText().toString());
             WheelSelectorData data = new WheelSelectorData();
             data.items = FormatUtil.getPointCal(mSelectGood, mAmount);
+            offset = offset==0? 0:offset-6;
+            offset = Math.max(0,offset);
             data.offset = offset;
             CommonWheelSelectorDialog dialog = CommonWheelSelectorDialog.newInstance(new IntentData<>(data));
             ZXFragmentJumpHelper.startFragment(getContext(), dialog, new CommonCallback() {
@@ -179,7 +184,8 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                     if (item == null) {
                         return;
                     }
-                    mBinding.buyLimitValue.setText(((Integer) item) + "点");
+                    int sel = (int) item;
+                    mBinding.buyLimitValue.setText((sel==0? 0:sel+6) + "点");
                 }
             });
         });
@@ -270,7 +276,9 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
         mBinding.listType.removeAllTabs();
         mBinding.listAmount.removeAllTabs();
         for (Good good : mGoodType.goods) {
-            String temp = (String.valueOf(good.depositFee) + "元/手");
+            String format = "%.0f元/手";
+            String temp = String.format(format,good.depositFee);
+//            String temp = (String.valueOf(good.depositFee) + "元/手");
             TabLayout.Tab newTab = mBinding.listType.newTab();
             newTab.setText(temp);
             newTab.setTag(good);
@@ -338,6 +346,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                     ToastUtil.showToast(getContext(), machPositionData.error.usermsg);
                     return;
                 }
+                AccountManager.sharedInstance().doRefresh();
                 DialogItem dialogItem = new DialogItem();
                 dialogItem.title = getResources().getString(R.string.machposition_motify_succ);
                 dialogItem.content = null;
@@ -396,6 +405,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                         ToastUtil.showToast(getContext(), positionData.error.usermsg);
                         return;
                     }
+                    AccountManager.sharedInstance().doRefresh();
                     DialogItem dialogItem = new DialogItem();
                     dialogItem.title = getResources().getString(R.string.position_open_succ);
                     dialogItem.content = null;
@@ -426,6 +436,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                     ToastUtil.showToast(getContext(), positionData.error.usermsg);
                     return;
                 }
+                AccountManager.sharedInstance().doRefresh();
                 DialogItem dialogItem = new DialogItem();
                 dialogItem.title = getResources().getString(R.string.position_open_succ);
                 dialogItem.content = null;
@@ -464,6 +475,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                     ToastUtil.showToast(getContext(), machPositionData.error.usermsg);
                     return;
                 }
+                AccountManager.sharedInstance().doRefresh();
                 DialogItem dialogItem = new DialogItem();
                 dialogItem.title = getResources().getString(R.string.machposition_open_succ);
                 dialogItem.content = null;
@@ -485,6 +497,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
 
             }, MachPositionData.class);
         }
+
     }
 
 
