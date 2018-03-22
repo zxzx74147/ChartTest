@@ -108,7 +108,7 @@ public class RechargeWechatFragment extends BaseDialogFragment {
                 FileUtil.verifyStoragePermissions(getActivity());
                 return;
             }
-            if(mBinding.getPay()==null){
+            if(mBinding.getData()==null){
                 ToastUtil.showToast(getActivity(),"加载中，请稍后");
                 return;
             }

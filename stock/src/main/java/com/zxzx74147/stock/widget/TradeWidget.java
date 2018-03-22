@@ -332,8 +332,10 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
         String limitStr = limit == 0 ? "" : String.valueOf(limit);
 
         if (mMachPosition != null) {
-            float price = FormatUtil.getPureFloatNum(mBinding.price.getText().toString());
-            if (price == 0) {
+            double test = FormatUtil.getPureDoubleNum(mBinding.price.getText().toString());
+            String price=mBinding.price.getText().toString();
+//            String price = FormatUtil.getPureDoubleNum(mBinding.price.getText().toString());
+            if (test == 0) {
                 ToastUtil.showToast(getContext(), R.string.mach_price_remind);
                 return;
             }
@@ -461,12 +463,12 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                     }
                 });
             }, PositionData.class);
-
-
         } else {
 
-            float price = FormatUtil.getPureNum(mBinding.price.getText().toString());
-            if (price == 0) {
+            double test = FormatUtil.getPureDoubleNum(mBinding.price.getText().toString());
+            String price=mBinding.price.getText().toString();
+//            String price = FormatUtil.getPureDoubleNum(mBinding.price.getText().toString());
+            if (test == 0) {
                 ToastUtil.showToast(getContext(), R.string.mach_price_remind);
                 return;
             }
@@ -645,7 +647,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             @Override
             public void run() {
                 mBinding.machRemind.setText(String.format("%.0f", mMachPosition.error));
-                mBinding.price.setText(String.valueOf(machPosition.price));
+                mBinding.price.setText(String.format("%.1f",machPosition.price));
                 mBinding.buyLimitValue.setText(String.format("%.0f点", machPosition.limit));
                 mBinding.buyStopValue.setText(String.format("%.0f点", machPosition.stop));
                 GoodType goodType = mGoodType;

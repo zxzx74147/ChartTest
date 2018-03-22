@@ -21,13 +21,13 @@ public interface TradesStorage {
 
     @GET("/trades/machposition/modify")
     Observable<MachPositionData> machpositionModify(@Query("machPositionId") long machPositionId,@Query("goodsId") String goodsId, @Query("buySell")
-            int buySell, @Query("amount") int amount, @Query("price") float price, @Query("limit") String limit
+            int buySell, @Query("amount") int amount, @Query("price") String price, @Query("limit") String limit
             , @Query("stop") String stop, @Query("error") String error, @Query("deferred") int deferred);
 
 
     @GET("/trades/machposition/open")
     Observable<MachPositionData> machpositionOpen(@Query("goodsId") String goodsId, @Query("buySell")
-            int buySell, @Query("amount") int amount, @Query("price") float price, @Query("limit") String limit
+            int buySell, @Query("amount") int amount, @Query("price") String price, @Query("limit") String limit
             , @Query("stop") String stop, @Query("error") String error, @Query("deferred") int deferred);
 
 

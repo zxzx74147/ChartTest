@@ -92,6 +92,16 @@ public class FormatUtil {
         }
     }
 
+    public static double getPureDoubleNum(String input){
+        try {
+            Matcher m = P_PURE_NUMBER_FLOAT.matcher(input);
+            String pure = m.replaceAll("").trim();
+            return Double.valueOf(pure);
+        }catch (Exception e){
+            return 0f;
+        }
+    }
+
     public static String getFormat(float num,String format){
         DecimalFormat   df   =   new DecimalFormat( "#,##0.0");
         String   value   =   df.format(num);

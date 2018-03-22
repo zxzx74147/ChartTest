@@ -14,7 +14,7 @@ public class MachPosition implements Serializable {
     public String name;     //商品名称
     public int buySell;   //买卖方向(1-买,2-卖)
     public float amount;      //持仓手数
-    public float price;      //挂单价格
+    public double price;      //挂单价格
     public String amountPerLot;     //每手数量(字符串描述)
     public float openCost;      //建仓成本
     public float openCharge;      //建仓手续费

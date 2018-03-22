@@ -14,6 +14,7 @@
     <string name="format_02">%.2f</string>
     <string name="format_0">%.0f</string>
     <string name="format_01">%.1f</string>
+    <string name="format_d_01">%.1lf</string>
     <string name="format_01_sign">%+.1f</string>
     <string name="format_02_sign">%+.2f</string>
     <string name="format_02_per">%.2f%</string>
