@@ -224,7 +224,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:font="@{`din_light`}"
-                android:text='@{@string/format_02(data.closePrice)}'
+                android:text="@{data.closePrice>data.openPrice? @string/format_num_up(data.closePrice-data.openPrice):@string/format_num_down(data.openPrice-data.closePrice)}"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView18"
                 app:layout_constraintTop_toTopOf="@+id/textView18" />

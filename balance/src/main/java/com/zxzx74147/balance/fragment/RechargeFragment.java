@@ -70,11 +70,9 @@ public class RechargeFragment extends BaseDialogFragment {
         mBinding.list.getItemAnimator().setChangeDuration(0);// 通过设置动画执行时间为0来解决闪烁问题
         mBinding.list.addItemDecoration(new GridSpaceItemDecoration(3, spacingInPixels, spacingInPixels));
         mBinding.list.setLayoutManager(lm);
-        String dst = "18元代金券";
         String str = getResources().getString(R.string.recharge_remind);
-        int start = str.indexOf(dst);
         Spannable strSpan = new SpannableString(str);
-        strSpan.setSpan(new ForegroundColorSpan(ColorUtil.getColor(R.color.red)), start, start + dst.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        strSpan.setSpan(new ForegroundColorSpan(ColorUtil.getColor(R.color.red)), start, start + dst.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         mBinding.textView2.setText(strSpan);
         if (SysInitManager.sharedInstance().getSysInitData().depositItemList == null|| SysInitManager.sharedInstance().getSysInitData().depositItemList.depositItem==null) {
             return;

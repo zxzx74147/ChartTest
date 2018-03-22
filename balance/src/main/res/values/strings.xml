@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">balance</string>
-    <string name="recharge_remind">资金存入交易所账户，受政府监控，安全无风险\n新手充值50元送18元代金券</string>
+    <string name="recharge_remind">资金存入交易所账户，受政府监控，安全无风险</string>
     <string name="recharge_select_method">选择支付方式</string>
 
     <string name="recharge_wechat">微信支付</string>

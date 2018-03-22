@@ -137,14 +137,14 @@
                 android:layout_height="wrap_content"
                 android:text="@{@string/format_amount(data.amountPerLot)}"
                 app:layout_constraintBottom_toBottomOf="@+id/textView8"
-                android:textColor="@color/text_light_grey"
+                android:textColor="@color/text_dark_grey"
                 app:layout_constraintStart_toStartOf="@+id/guideline2" />
 
             <TextView
                 android:id="@+id/textView12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_light_grey"
+                android:textColor="@color/text_dark_grey"
                 app:font="@{`din`}"
                 android:text="@{data.limit==0? @string/format_limit_none:@string/format_limit(data.limit)}"
                 app:layout_constraintBottom_toBottomOf="@+id/textView9"
@@ -154,7 +154,7 @@
                 android:id="@+id/textView13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_light_grey"
+                android:textColor="@color/text_dark_grey"
                 app:font="@{`din`}"
                 android:text="@{data.stop==0? @string/format_stop_none:@string/format_stop(data.stop)}"
                 app:layout_constraintBottom_toBottomOf="@+id/textView10"

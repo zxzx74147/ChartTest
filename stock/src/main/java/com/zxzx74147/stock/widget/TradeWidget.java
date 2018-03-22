@@ -135,8 +135,8 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             Good good = (Good) tabLayoutSelectionEvent.tab().getTag();
             mSelectGood = good;
             mBinding.setGood(mSelectGood);
-            refreshAmount();
             refreshVucher();
+            refreshAmount();
         });
 
         RxTabLayout.selectionEvents(mBinding.listAmount).subscribe(tabLayoutSelectionEvent -> {
@@ -255,7 +255,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             return;
         }
 
-        float total = mAmount * mSelectGood.depositFee;
+        float total = mAmount * mSelectGood.depositFee+(mBinding.voucher.isChecked()? 0:mAmount*mSelectGood.openChargeFee);
         mBinding.setTotal(total);
     }
 
@@ -602,6 +602,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             ViewUtil.enableTabLayout(mBinding.listAmount);
             ViewUtil.enableTabLayout(mBinding.listType);
         }
+        refreshAmount();
     }
 
     public void onVucherChecked(boolean check) {
@@ -622,6 +623,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             mBinding.buyStopValue.setClickable(true);
             ViewUtil.enableTabLayout(mBinding.listAmount);
         }
+        refreshAmount();
     }
 
     //    private GoodType  mGoodType;
