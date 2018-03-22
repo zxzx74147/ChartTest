@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.jakewharton.rxbinding2.support.design.widget.RxTabLayout;
 import com.jakewharton.rxbinding2.support.design.widget.TabLayoutSelectionEvent;
 import com.jakewharton.rxbinding2.view.RxView;
+import com.jakewharton.rxbinding2.widget.RxCompoundButton;
 import com.zxzx74147.devlib.base.BaseDialogFragment;
 import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.devlib.data.IntentData;
@@ -135,6 +136,11 @@ public class PositionModifyFragment extends BaseDialogFragment {
         RxView.clicks(mBinding.ok).subscribe(o -> {
             submit();
         });
+        if(mBinding.getData().isVoucher!=0){
+            RxCompoundButton.checkedChanges(mBinding.checkDeffer).subscribe(v->{
+                mBinding.checkDeffer.setChecked(false);
+            });
+        }
     }
 
     public void submit(){

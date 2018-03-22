@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.zxzx74147.devlib.data.MessageEvent;
 import com.zxzx74147.devlib.modules.account.AccountManager;
+import com.zxzx74147.stock.data.Good;
 import com.zxzx74147.stock.data.GoodType;
 import com.zxzx74147.stock.data.MachPosition;
 import com.zxzx74147.stock.data.Position;
@@ -43,6 +44,24 @@ public class StockBusStation {
         EventBus.getDefault().post(event);
     }
 
+    public static void startStockTrade(Context context, Good good, int type) {
+        if(AccountManager.sharedInstance().getUser().needTradePasswd!=0&&AccountManager.sharedInstance().getUser().hasTradePasswd==0){
+            ProfileBusStation.startSetTradePassword(context);
+            return;
+        }
+        GoodType goodType = AccountManager.sharedInstance().getUserUni().goodsTypeList.goodType.get(0);
+        if(good!=null){
+            for(GoodType item:AccountManager.sharedInstance().getUserUni().goodsTypeList.goodType){
+                if(item.goodsType.equals(good.goodsType)){
+                    goodType = item;
+                    break;
+                }
+            }
+        }
+        MessageEvent<GoodType> event = new MessageEvent<>(BUS_ID_STOCK_TRADE, context, goodType);
+        event.type = type;
+        EventBus.getDefault().post(event);
+    }
 
 
     public static void startStockTrade(Context context, GoodType good,int type) {

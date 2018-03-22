@@ -46,7 +46,7 @@ public class TimeUtil {
     }
 
     public static String reformatDefaultTime(String input, String formatOutput) {
-        if(TextUtils.isEmpty(formatOutput)){
+        if(TextUtils.isEmpty(formatOutput)||TextUtils.isEmpty(input)){
             return "";
         }
         SimpleDateFormat inputDateFormat = getSampleFormat(DevLib.getApp().getResources().getString(R.string.format_input));

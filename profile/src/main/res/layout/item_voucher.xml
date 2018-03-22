@@ -9,13 +9,14 @@
             type="com.zxzx74147.profile.data.Voucher" />
 
         <import type="com.zxzx74147.devlib.utils.TimeUtil"/>
+        <import type="com.zxzx74147.devlib.modules.busstation.StockBusStation"/>
 
     </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/default_gap_180"
-        android:onClick="@{v->{StockBusStation.startStockTrade(context,null,0)}"
+        android:onClick="@{v->{StockBusStation.startStockTrade(context,data.goods,0)}}"
         app:voucher_back='@{data}'>
 
 

@@ -164,6 +164,7 @@
                             android:hint="@string/mach_price_remind"
                             android:inputType="number"
                             android:paddingLeft="@dimen/default_gap_24"
+                            android:maxLength="8"
                             android:paddingRight="@dimen/default_gap_24"
 
                             android:textColor="@color/text_black"

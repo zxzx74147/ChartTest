@@ -15,7 +15,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:onClick="@{v->{StockBusStation.startStockTrade(context,data.applyGoodsType.get(0),0)}"
+        android:onClick="@{v->{StockBusStation.startStockTrade(context,data.applyGoodsType.get(0),0)}}"
         android:layout_height="wrap_content">
 
         <ImageView

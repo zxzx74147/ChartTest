@@ -146,7 +146,7 @@
     <string name="close">收盘</string>
     <string name="low">最低</string>
     <string name="high">最高</string>
-    <string name="no_deffer">过夜费：不过夜</string>
+    <string name="no_deffer">过夜费：用券不过夜</string>
 
 
 </resources>
