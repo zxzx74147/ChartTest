@@ -520,13 +520,17 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
 
         ComVoucher comVoucher = AccountManager.sharedInstance().getUserUni().userComVoucherInfo;
         if(comVoucher!=null){
-            if(mSelectGood.depositFee==comVoucher.depositFee){
-                mBinding.voucher.setVisibility(View.VISIBLE);
-                mBinding.voucher.setText(comVoucher.name);
-                mBinding.voucher.setChecked(false);
-                mIsComVoucherShow = true;
-                return;
+            if(comVoucher.applyGoodsType!=null){
+                for(GoodType type:comVoucher.applyGoodsType){
+                    if(type.equals(mSelectGood.goodsType)){
+                        mBinding.voucher.setVisibility(View.VISIBLE);
+                        mBinding.voucher.setText(comVoucher.name);
+                        mBinding.voucher.setChecked(false);
+                        mIsComVoucherShow = true;
+                    }
+                }
             }
+
         }
 
         List<Voucher> myVouchers = AccountManager.sharedInstance().getUserUni().userVoucherList.getListItems();

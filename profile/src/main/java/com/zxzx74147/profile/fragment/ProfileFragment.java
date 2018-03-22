@@ -57,6 +57,7 @@ public class ProfileFragment extends BaseDialogFragment {
     }
 
     private void initData() {
+        mExchangeBinding.setUser(mUserModelView.getUserUniLiveData().getValue().user);
         mBinding.setUserUni(mUserModelView.getUserUniLiveData().getValue());
         mExchangeBinding.setUserUni(mUserModelView.getUserUniLiveData().getValue());
         mUserModelView.getUserUniLiveData().observe(ProfileFragment.this, new Observer<UserUniData>() {
@@ -68,6 +69,7 @@ public class ProfileFragment extends BaseDialogFragment {
 
                 mBinding.setUserUni(userUniData);
                 mExchangeBinding.setUserUni(userUniData);
+                mExchangeBinding.setUser(userUniData.user);
             }
         });
     }

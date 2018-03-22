@@ -118,6 +118,7 @@
                 android:onClick="@{v->{ProfileBusStation.startProfileVoucherList(context)}}"
                 android:src="@drawable/home_icon_coupons_normal"
                 app:layout_constraintBottom_toTopOf="@+id/comment"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/like" />
 
             <com.zxzx74147.devlib.widget.ZXImageView
