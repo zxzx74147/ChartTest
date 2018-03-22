@@ -71,6 +71,7 @@ public class PositionFragment extends BaseDialogFragment {
     private CommonRecyclerViewAdapter<Position> mPositionAdapter = null;
     private CommonRecyclerViewAdapter<Object> mMachAdapter = null;
     private TradesStorage mTradeStorage = RetrofitClient.getClient().create(TradesStorage.class);
+    private LayoutPositionHeaderBinding mLayoutPositionHeaderBinding = null;
 
 
     public static PositionFragment newInstance(IntentData intnetData) {
@@ -101,7 +102,9 @@ public class PositionFragment extends BaseDialogFragment {
     private void refresh(UserUniData userdata) {
         ViewUtil.changeTabs(((ViewGroup) mBinding.tabLayout2.getChildAt(0)).getChildAt(0), String.format(getString(R.string.format_my_position), userdata.positionList.num));
         ViewUtil.changeTabs(((ViewGroup) mBinding.tabLayout2.getChildAt(0)).getChildAt(1), String.format(getString(R.string.format_my_machposition), userdata.machPositionList.num));
-
+        if(mLayoutPositionHeaderBinding!=null){
+            mLayoutPositionHeaderBinding.setUserUniData(userdata);
+        }
     }
 
     private void initView() {
@@ -185,7 +188,7 @@ public class PositionFragment extends BaseDialogFragment {
         ItemMachpositionHeaderBinding mMachpositionHeaderBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.item_machposition_header, null, false);
         mMachAdapter.addHeaderView(mMachpositionHeaderBinding.getRoot());
 
-        LayoutPositionHeaderBinding mLayoutPositionHeaderBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.layout_position_header, null, false);
+        mLayoutPositionHeaderBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.layout_position_header, null, false);
         mPositionAdapter.addHeaderView(mLayoutPositionHeaderBinding.getRoot());
         mLayoutPositionHeaderBinding.setUserUniData(AccountManager.sharedInstance().getUserUni());
 

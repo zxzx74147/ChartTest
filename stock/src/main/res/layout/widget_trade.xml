@@ -279,7 +279,7 @@
                     android:layout_marginLeft="@dimen/default_gap_125"
                     android:layout_marginRight="@dimen/default_gap_44"
                     android:layout_marginTop="@dimen/default_gap_24"
-                    android:text='@{voucher? @string/voucher_limit_remind:@string/format_trade_amount(good.weightNum*amount,good.weightUnit,good.profitPerUnit*amount)}'
+                    android:text='@{voucher? @string/voucher_limit_remind:(type==TradeFragment.TYPE_MACH_POSITION_BUY_DOWN||type==TradeFragment.TYPE_POSITION_BUY_DOWN? @string/format_trade_amount_down(good.weightNum*amount,good.weightUnit,good.profitPerUnit*amount):@string/format_trade_amount_up(good.weightNum*amount,good.weightUnit,good.profitPerUnit*amount))}'
                     android:textColor="@color/text_light_grey"
                     android:textSize="@dimen/default_size_26" />
 

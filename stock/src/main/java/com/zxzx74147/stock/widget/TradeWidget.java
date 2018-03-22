@@ -6,6 +6,7 @@ import android.content.Context;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.support.design.widget.TabLayout;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -337,6 +338,10 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                 return;
             }
             float error = FormatUtil.getPureFloatNum(mBinding.machRemind.getText().toString());
+            if(TextUtils.isEmpty(mBinding.machRemind.getText().toString())){
+                ToastUtil.showToast(getContext(),"请输入允许误差");
+                return;
+            }
             Observable<MachPositionData> observable = mTradeStorage.machpositionModify(mMachPosition.machPositionId, mSelectGood.goodsId, mType - 2, mAmount, price, limitStr, stopStr, String.valueOf(error), 1);
             NetworkApi.ApiSubscribe(ViewUtil.getLivecirceOwer(this), observable, true, machPositionData -> {
                 if (machPositionData.hasError()) {
@@ -463,6 +468,10 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             float price = FormatUtil.getPureNum(mBinding.price.getText().toString());
             if (price == 0) {
                 ToastUtil.showToast(getContext(), R.string.mach_price_remind);
+                return;
+            }
+            if(TextUtils.isEmpty(mBinding.machRemind.getText().toString())){
+                ToastUtil.showToast(getContext(),"请输入允许误差");
                 return;
             }
             float error = FormatUtil.getPureFloatNum(mBinding.machRemind.getText().toString());
