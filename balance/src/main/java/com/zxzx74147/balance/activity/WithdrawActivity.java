@@ -3,6 +3,7 @@ package com.zxzx74147.balance.activity;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.InputFilter;
 import android.text.TextUtils;
 
 import com.jakewharton.rxbinding2.view.RxView;
@@ -32,6 +33,7 @@ import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
 import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
+import com.zxzx74147.devlib.widget.ChineseFilter;
 
 import java.util.concurrent.TimeUnit;
 
@@ -77,7 +79,10 @@ public class WithdrawActivity extends BaseActivity {
         });
     }
     private void initView() {
-
+        float balance = AccountManager.sharedInstance().getUser().balance;
+        int len = String.format("%.2f",balance).length();
+        mBinding.withdrawAmount.amount.setFilters(new InputFilter[] { new InputFilter.LengthFilter(len) });
+        mBinding.withdrawBank.editText2.setFilters(new InputFilter[] { new ChineseFilter() });
         //binding amount
         mBinding.setUser(AccountManager.sharedInstance().getUser());
         RxTextView.textChanges(mBinding.withdrawAmount.amount).subscribe(charSequence -> {

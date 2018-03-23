@@ -7,7 +7,10 @@ import com.zxzx74147.profile.data.UserUniData;
 import com.zxzx74147.profile.data.WeChatData;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -34,42 +37,52 @@ public interface AccountStorage {
     @GET("/user/password/reset")
     Observable<UniApiData> passwordReset(@Query("phone") String phone,@Query("passwd") String passwd,@Query("vcode") String vcode);
 
-    @GET("/user/account/getvcode")
-    Observable<UniApiData> accountGetVCode(@Query("phone") String phone);
+    @FormUrlEncoded
+    @POST("/user/account/getvcode")
+    Observable<UniApiData> accountGetVCode(@Field("phone") String phone);
 
-    @GET("/user/account/getvcode")
-    Observable<UniApiData> accountGetVCodeWithCode(@Query("phone") String phone,@Query("code") String code);
-
-
-    @GET("/user/account/login")
-    Observable<UserUniData> acctountLogin(@Query("phone") String phone, @Query("vcode") String vcode, @Query("deviceId") String deviceId, @Query("version") String version,@Query("deviceType") String deviceType,@Query("channel") String channel,@Query("deviceToken") String deviceToken);
-
-    @GET("/user/account/login")
-    Observable<UserUniData> acctountLoginWithCode(@Query("phone") String phone, @Query("vcode") String vcode,@Query("code") String code, @Query("deviceId") String deviceId, @Query("version") String version,@Query("deviceType") String deviceType,@Query("channel") String channel,@Query("deviceToken") String deviceToken);
+    @FormUrlEncoded
+    @POST("/user/account/getvcode")
+    Observable<UniApiData> accountGetVCodeWithCode(@Field("phone") String phone,@Field("code") String code);
 
 
-    @GET("/user/trades/password")
-    Observable<UserUniData> tradePassword(@Query("passwd") String passwd);
+    @FormUrlEncoded
+    @POST("/user/account/login")
+    Observable<UserUniData> acctountLogin(@Field("phone") String phone, @Field("vcode") String vcode,@Field("deviceId") String deviceId, @Field("version") String version,@Field("deviceType") String deviceType,@Field("channel") String channel,@Field("deviceToken") String deviceToken);
 
-    @GET("/user/trades/modify")
-    Observable<UserUniData> tradePasswordModify(@Query("passwd") String passwd,@Query("vcode") String vcode);
+    @FormUrlEncoded
+    @POST("/user/account/login")
+    Observable<UserUniData> acctountLoginWithCode(@Field("phone") String phone,@Field("vcode") String vcode,@Field("code") String code, @Field("deviceId") String deviceId, @Field("version") String version,@Field("deviceType") String deviceType,@Field("channel") String channel,@Field("deviceToken") String deviceToken);
 
-    @GET("/user/trades/getvcode")
-    Observable<UniApiData> tradePasswordVcode();
 
-    @GET("/user/trades/login")
-    Observable<UserUniData> tradeLogin(@Query("passwd") String passwd);
+    @FormUrlEncoded
+    @POST("/user/trades/password")
+    Observable<UserUniData> tradePassword(@Field("passwd") String passwd);
+
+    @FormUrlEncoded
+    @POST("/user/trades/modify")
+    Observable<UserUniData> tradePasswordModify(@Field("passwd") String passwd,@Field("vcode") String vcode);
+
+    @FormUrlEncoded
+    @POST("/user/trades/getvcode")
+    Observable<UniApiData> tradePasswordVcode(@Field("a") String a);
+
+    @FormUrlEncoded
+    @POST("/user/trades/login")
+    Observable<UserUniData> tradeLogin(@Field("passwd") String passwd);
 
     @GET("/user/account/logout")
     Observable<UniApiData> logout();
 
 
 
-    @GET("/user/simauth/apply")
-    Observable<AuthApplyData> authApply(@Query("name") String name, @Query("identityNo") String identityNo);
+    @FormUrlEncoded
+    @POST("/user/simauth/apply")
+    Observable<AuthApplyData> authApply(@Field("name") String name, @Field("identityNo") String identityNo);
 
-    @GET("/user/wechat/login")
-    Observable<WeChatData> wechatLogin(@Query("code") String phone, @Query("deviceId") String deviceId, @Query("version") String version, @Query("deviceType") String deviceType, @Query("channel") String channel, @Query("deviceToken") String deviceToken);
+    @FormUrlEncoded
+    @POST("/user/wechat/login")
+    Observable<WeChatData> wechatLogin(@Field("code") String phone, @Field("deviceId") String deviceId, @Field("version") String version, @Field("deviceType") String deviceType, @Field("channel") String channel, @Field("deviceToken") String deviceToken);
 
 
 

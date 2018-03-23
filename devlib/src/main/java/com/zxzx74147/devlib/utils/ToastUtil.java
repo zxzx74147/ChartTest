@@ -1,6 +1,7 @@
 package com.zxzx74147.devlib.utils;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.zxzx74147.devlib.DevLib;
@@ -23,7 +24,9 @@ public class ToastUtil {
 
     public static void showToast(Context context, String content) {
 //        Toasty.info(context, content, Toast.LENGTH_LONG).show();
-
+        if(TextUtils.isEmpty(content)){
+            return;
+        }
         Toasty.custom(context, content, null, Toast.LENGTH_LONG, false).show();
     }
 

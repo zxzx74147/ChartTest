@@ -38,7 +38,8 @@ public class RsaPare {
         try {
             InputStream publicKey = DevLib.getApp().getResources().openRawResource(R.raw.rsa_public_key);
             mPublicKey = RsaUtil.loadPublicKey(publicKey);
-            InputStream privateKey = DevLib.getApp().getResources().openRawResource(R.raw.client_rsa_private_key);
+//            InputStream privateKey = DevLib.getApp().getResources().openRawResource(R.raw.client_rsa_private_key);
+            InputStream privateKey = DevLib.getApp().getResources().openRawResource(R.raw.rsa_private_key);
             mPrivateKey = RsaUtil.loadPrivateKey(privateKey);
             return true;
         } catch (Exception e) {

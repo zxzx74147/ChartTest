@@ -5,7 +5,10 @@ import com.zxzx74147.balance.data.WithdrawData;
 import com.zxzx74147.balance.data.WithdrawListData;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -14,11 +17,13 @@ import retrofit2.http.Query;
 
 public interface WithDrawStorage {
 
-    @GET("/withdraws/record/getlist")
-    Observable<WithdrawListData> withdrawList(@Query("page") int page);
+    @FormUrlEncoded
+    @POST("/withdraws/record/getlist")
+    Observable<WithdrawListData> withdrawList(@Field("page") int page);
 
-    @GET("/withdraws/bankcard/cash")
-    Observable<WithdrawData> withdrawCase(@Query("bankCardId") int bankCardId, @Query("amount") int amount);
+    @FormUrlEncoded
+    @POST("/withdraws/bankcard/cash")
+    Observable<WithdrawData> withdrawCase(@Field("bankCardId") int bankCardId, @Field("amount") int amount);
 
 
 }

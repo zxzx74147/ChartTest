@@ -9,6 +9,7 @@ import com.zxzx74147.devlib.modules.account.AccountManager;
 
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -34,9 +35,23 @@ public class RetrofitClient {
         builder.connectTimeout(7, TimeUnit.SECONDS);
         builder.addInterceptor(chain -> {
             Request request = chain.request().newBuilder().addHeader("User-Agent", NetworkConfig.UA).build();
+
             if(!TextUtils.isEmpty(AccountManager.sharedInstance().getUid())) {
-                HttpUrl url = request.url().newBuilder().addQueryParameter("uId", AccountManager.sharedInstance().getUid()).build();
-                request = request.newBuilder().url(url).build();
+                if("POST".equals(request.method())&&request.body() instanceof FormBody) {
+                    if(request.body() instanceof FormBody){
+                        Request.Builder requestBuilder = request.newBuilder();
+                        FormBody.Builder newFormBody = new FormBody.Builder();
+                        FormBody oidFormBody = (FormBody) request.body();
+                        for (int i = 0;i<oidFormBody.size();i++){
+                            newFormBody.addEncoded(oidFormBody.encodedName(i),oidFormBody.encodedValue(i));
+                        }
+                        newFormBody.add("uId",AccountManager.sharedInstance().getUid());
+                        request = requestBuilder.method(request.method(),newFormBody.build()).build();
+                    }
+                }else{
+                    HttpUrl url = request.url().newBuilder().addQueryParameter("uId", AccountManager.sharedInstance().getUid()).build();
+                    request = request.newBuilder().url(url).build();
+                }
             }
 
             Log.i(TAG,request.url().toString());
@@ -51,7 +66,7 @@ public class RetrofitClient {
                 .client(client)
                 .build();
 
-
+        builder.addInterceptor(new RsaInterceptor());
         client = builder.build();
         mRetrofit= new Retrofit.Builder()
                 .baseUrl(NetworkConfig.HOST)
@@ -60,7 +75,7 @@ public class RetrofitClient {
                 .client(client)
                 .build();
 
-        builder.addInterceptor(new RsaInterceptor());
+
         client = builder.build();
         mRSARetrofit= new Retrofit.Builder()
                 .baseUrl(NetworkConfig.HOST)

@@ -133,7 +133,7 @@ public class PasswordResetFragment extends BaseDialogFragment {
 
     public void requestVcode() {
 
-        NetworkApi.ApiSubscribe(this,mStorage.tradePasswordVcode(),false, new Consumer<UniApiData>() {
+        NetworkApi.ApiSubscribe(this,mStorage.tradePasswordVcode(""),false, new Consumer<UniApiData>() {
 
             @Override
             public void accept(UniApiData uniApiData) throws Exception {

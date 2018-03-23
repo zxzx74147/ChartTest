@@ -6,7 +6,10 @@ import com.zxzx74147.stock.data.PositionData;
 import com.zxzx74147.stock.data.PositionListData;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -16,59 +19,71 @@ import retrofit2.http.Query;
 public interface TradesStorage {
 
     //machposition
-    @GET("/trades/machposition/cancel")
-    Observable<MachPositionData> machpositionCancel(@Query("machPositionId") long machPositionId);
+    @FormUrlEncoded
+    @POST("/trades/machposition/cancel")
+    Observable<MachPositionData> machpositionCancel(@Field("machPositionId") long machPositionId);
 
-    @GET("/trades/machposition/modify")
-    Observable<MachPositionData> machpositionModify(@Query("machPositionId") long machPositionId,@Query("goodsId") String goodsId, @Query("buySell")
-            int buySell, @Query("amount") int amount, @Query("price") String price, @Query("limit") String limit
-            , @Query("stop") String stop, @Query("error") String error, @Query("deferred") int deferred);
-
-
-    @GET("/trades/machposition/open")
-    Observable<MachPositionData> machpositionOpen(@Query("goodsId") String goodsId, @Query("buySell")
-            int buySell, @Query("amount") int amount, @Query("price") String price, @Query("limit") String limit
-            , @Query("stop") String stop, @Query("error") String error, @Query("deferred") int deferred);
+    @FormUrlEncoded
+    @POST("/trades/machposition/modify")
+    Observable<MachPositionData> machpositionModify(@Field("machPositionId") long machPositionId,@Field("goodsId") String goodsId, @Field("buySell")
+            int buySell, @Field("amount") int amount, @Field("price") String price, @Field("limit") String limit
+            , @Field("stop") String stop, @Field("error") String error, @Field("deferred") int deferred);
 
 
-    @GET("/trades/machposition/getlist")
-    Observable<MachPositionListData> machpositionGetList(@Query("page") int page);
-
-    @GET("/trades/machposition/gethislist")
-    Observable<MachPositionListData> machpositionGetHisList(@Query("page") int page);
-
-
+    @FormUrlEncoded
+    @POST("/trades/machposition/open")
+    Observable<MachPositionData> machpositionOpen(@Field("goodsId") String goodsId, @Field("buySell")
+            int buySell, @Field("amount") int amount, @Field("price") String price, @Field("limit") String limit
+            , @Field("stop") String stop, @Field("error") String error, @Field("deferred") int deferred);
 
 
+    @FormUrlEncoded
+    @POST("/trades/machposition/getlist")
+    Observable<MachPositionListData> machpositionGetList(@Field("page") int page);
 
-    @GET("/trades/position/close")
-    Observable<PositionData> positionClose(@Query("positionId") long positionId,@Query("price") float price);
-
-    @GET("/trades/position/open")
-    Observable<PositionData> positionOpen(@Query("goodsId") String goodsId, @Query("buySell")
-            int buySell, @Query("amount") int amount, @Query("price") String price, @Query("limit") String limit
-            , @Query("stop") String stop, @Query("error") String error, @Query("deferred") int deferred);
-
-    @GET("/trades/position/voucheropen")
-    Observable<PositionData> voucherOpen(@Query("goodsId") String goodsId, @Query("buySell")
-            int buySell, @Query("amount") int amount, @Query("price") String price, @Query("limit") String limit
-            , @Query("stop") String stop, @Query("error") String error, @Query("deferred") int deferred);
+    @FormUrlEncoded
+    @POST("/trades/machposition/gethislist")
+    Observable<MachPositionListData> machpositionGetHisList(@Field("page") int page);
 
 
 
-    @GET("/trades/position/comvoucheropen")
-    Observable<PositionData> comvoucherOpen(@Query("goodsType") String goodsType, @Query("buySell")
-            int buySell, @Query("limit") String limit, @Query("stop") String stop);
 
 
-    @GET("/trades/position/modify")
-    Observable<PositionData> positionModify(@Query("positionId") long positionId, @Query("limit")
-            String limit, @Query("stop") String stop, @Query("deferred") int deferred);
+    @FormUrlEncoded
+    @POST("/trades/position/close")
+    Observable<PositionData> positionClose(@Field("positionId") long positionId,@Field("price") float price);
+
+    @FormUrlEncoded
+    @POST("/trades/position/open")
+    Observable<PositionData> positionOpen(@Field("goodsId") String goodsId, @Field("buySell")
+            int buySell, @Field("amount") int amount, @Field("price") String price, @Field("limit") String limit
+            , @Field("stop") String stop, @Field("error") String error, @Field("deferred") int deferred);
+
+    @FormUrlEncoded
+    @POST("/trades/position/voucheropen")
+    Observable<PositionData> voucherOpen(@Field("goodsId") String goodsId, @Field("buySell")
+            int buySell, @Field("amount") int amount, @Field("price") String price, @Field("limit") String limit
+            , @Field("stop") String stop, @Field("error") String error, @Field("deferred") int deferred);
 
 
-    @GET("/trades/position/getlist")
-    Observable<PositionListData> positionGetList(@Query("page") int page);
 
-    @GET("/trades/position/gethislist")
-    Observable<PositionListData> positionGetHisList(@Query("page") int page);
+    @FormUrlEncoded
+    @POST("/trades/position/comvoucheropen")
+    Observable<PositionData> comvoucherOpen(@Field("goodsType") String goodsType, @Field("buySell")
+            int buySell, @Field("limit") String limit, @Field("stop") String stop);
+
+
+    @FormUrlEncoded
+    @POST("/trades/position/modify")
+    Observable<PositionData> positionModify(@Field("positionId") long positionId, @Field("limit")
+            String limit, @Field("stop") String stop, @Field("deferred") int deferred);
+
+
+    @FormUrlEncoded
+    @POST("/trades/position/getlist")
+    Observable<PositionListData> positionGetList(@Field("page") int page);
+
+    @FormUrlEncoded
+    @POST("/trades/position/gethislist")
+    Observable<PositionListData> positionGetHisList(@Field("page") int page);
 }

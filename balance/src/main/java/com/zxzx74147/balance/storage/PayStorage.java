@@ -5,7 +5,10 @@ import com.zxzx74147.balance.data.PayResultData;
 import com.zxzx74147.balance.data.PayUniData;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -14,15 +17,19 @@ import retrofit2.http.Query;
 
 public interface PayStorage {
 
-    @GET("/pay/wechat")
-    Observable<PayNewData> payWechat(@Query("amount") int amount);
+    @FormUrlEncoded
+    @POST("/pay/wechat")
+    Observable<PayNewData> payWechat(@Field("amount") int amount);
 
-    @GET("/pay/alipay")
-    Observable<PayNewData> payAli(@Query("amount") int amount);
+    @FormUrlEncoded
+    @POST("/pay/alipay")
+    Observable<PayNewData> payAli(@Field("amount") int amount);
 
-    @GET("/pay/quickpay")
-    Observable<PayUniData> payUn(@Query("amount") int amount);
+    @FormUrlEncoded
+    @POST("/pay/quickpay")
+    Observable<PayUniData> payUn(@Field("amount") int amount);
 
-    @GET("/pay/verify")
-    Observable<PayResultData> payVerify(@Query("depositId") long depositId);
+    @FormUrlEncoded
+    @POST("/pay/verify")
+    Observable<PayResultData> payVerify(@Field("depositId") long depositId);
 }

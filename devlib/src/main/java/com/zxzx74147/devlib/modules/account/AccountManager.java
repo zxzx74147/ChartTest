@@ -148,7 +148,7 @@ public class AccountManager {
         if (mDisposable != null) {
             mDisposable.dispose();
         }
-        Observable<UserUniData> userCall = mUserStorage.accountGet();
+        Observable<UserUniData> userCall = mUserStorage.accountGet("");
         NetworkApi.ApiSubscribe(userCall, new Consumer<UserUniData>() {
             @Override
             public void accept(UserUniData userUniData) throws Exception {

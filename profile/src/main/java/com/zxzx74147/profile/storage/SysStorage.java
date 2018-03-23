@@ -10,6 +10,8 @@ import io.reactivex.Observable;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -21,8 +23,9 @@ import retrofit2.http.Query;
  */
 
 public interface SysStorage {
-    @GET("/sys/init?deviceOs=Android")
-    Observable<SysInitData> sysInit(@Query("channel") String channel, @Query("deviceId") String deviceId, @Query("deviceToken") String deviceToken, @Query("deviceType") String deviceType, @Query("version") String version);
+    @FormUrlEncoded
+    @POST("/sys/init?deviceOs=Android")
+    Observable<SysInitData> sysInit(@Field("channel") String channel, @Field("deviceId") String deviceId, @Field("deviceToken") String deviceToken, @Field("deviceType") String deviceType, @Field("version") String version);
 
     @Multipart
     @POST("/sys/uppic")

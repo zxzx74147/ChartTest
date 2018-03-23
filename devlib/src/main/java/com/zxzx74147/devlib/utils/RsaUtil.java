@@ -3,6 +3,7 @@ package com.zxzx74147.devlib.utils;
 import android.util.Base64;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -136,16 +137,36 @@ public class RsaUtil {
      *
      *
      */
-
+    private static int MAX_ENCRYPT_BLOCK = 117;
     public static String encrypt(RSAPublicKey publicKey, String plainTextData)
              {
         Cipher cipher = null;
         try {
             // 使用默认RSA
-            cipher = Cipher.getInstance("RSA");
-            // cipher= Cipher.getInstance("RSA", new BouncyCastleProvider());
+            cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+            byte[] input = plainTextData.getBytes("UTF-8");
             cipher.init(Cipher.ENCRYPT_MODE, publicKey);
-            byte[] output = cipher.doFinal(plainTextData.getBytes("UTF-8"));
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            int inputLen = input.length;
+            int offSet = 0;
+            byte[] cache;
+            int i = 0;
+            // 对数据分段解密
+            while (inputLen - offSet > 0) {
+                if (inputLen - offSet > MAX_ENCRYPT_BLOCK) {
+                    cache = cipher.doFinal(input, offSet, MAX_ENCRYPT_BLOCK);
+                } else {
+                    cache = cipher.doFinal(input, offSet, inputLen - offSet);
+                }
+                out.write(cache, 0, cache.length);
+                i++;
+                offSet = i * MAX_ENCRYPT_BLOCK;
+            }
+
+            // cipher= Cipher.getInstance("RSA", new BouncyCastleProvider());
+
+
+            byte[] output = out.toByteArray();//cipher.doFinal(plainTextData.getBytes("UTF-8"));
             return Base64.encodeToString(output,Base64.DEFAULT);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
@@ -168,96 +189,31 @@ public class RsaUtil {
                  return null;
     }
 
-//    public static String decrypt(RSAPrivateKey privateKey, byte[] cipherData)
-//    {
-//        Cipher cipher = null;
-//        try {
-//            // 使用默认RSA
-//            cipher = Cipher.getInstance("RSA");
-//            // cipher= Cipher.getInstance("RSA", new BouncyCastleProvider());
-//            cipher.init(Cipher.DECRYPT_MODE, privateKey);
-//
-//            //模长
-//            int key_len = privateKey.getModulus().bitLength() / 8;
-//            byte[] bytes = cipherData;
-//            byte[] bcd = ASCII_To_BCD(bytes, bytes.length);
-//            System.err.println(bcd.length);
-//            //如果密文长度大于模长则要分组解密
-//            String ming = "";
-//            byte[][] arrays = splitArray(bcd, key_len);
-//            for(byte[] arr : arrays){
-//                ming += new String(cipher.doFinal(arr));
-//            }
-//            return ming;
-//
-////            byte[] output = cipher.doFinal(cipherData);
-////            return Base64.encodeToString(output,Base64.DEFAULT);
-//        } catch (NoSuchAlgorithmException e) {
-//            e.printStackTrace();
-////            throw new Exception("无此解密算法");
-//        } catch (NoSuchPaddingException e) {
-//            e.printStackTrace();
-//            return null;
-//        } catch (InvalidKeyException e) {
-//            e.printStackTrace();
-////            throw new Exception("解密私钥非法,请检查");
-//        } catch (IllegalBlockSizeException e) {
-//            e.printStackTrace();
-////            throw new Exception("密文长度非法");
-//        } catch (BadPaddingException e) {
-//            e.printStackTrace();
-////            throw new Exception("密文数据已损坏");
-//        }
-//        return null;
-//    }
-//
-//    /**
-//     *拆分数组
-//     */
-//    public static byte[][] splitArray(byte[] data,int len){
-//        int x = data.length / len;
-//        int y = data.length % len;
-//        int z = 0;
-//        if(y!=0){
-//            z = 1;
-//        }
-//        byte[][] arrays = new byte[x+z][];
-//        byte[] arr;
-//        for(int i=0; i<x+z; i++){
-//            arr = new byte[len];
-//            if(i==x+z-1 && y!=0){
-//                System.arraycopy(data, i*len, arr, 0, y);
-//            }else{
-//                System.arraycopy(data, i*len, arr, 0, len);
-//            }
-//            arrays[i] = arr;
-//        }
-//        return arrays;
-//    }
-//
-//
-//    public static byte[] ASCII_To_BCD(byte[] ascii, int asc_len) {
-//        byte[] bcd = new byte[asc_len / 2];
-//        int j = 0;
-//        for (int i = 0; i < (asc_len + 1) / 2; i++) {
-//            bcd[i] = asc_to_bcd(ascii[j++]);
-//            bcd[i] = (byte) (((j >= asc_len) ? 0x00 : asc_to_bcd(ascii[j++])) + (bcd[i] << 4));
-//        }
-//        return bcd;
-//    }
-//    public static byte asc_to_bcd(byte asc) {
-//        byte bcd;
-//
-//        if ((asc >= '0') && (asc <= '9'))
-//            bcd = (byte) (asc - '0');
-//        else if ((asc >= 'A') && (asc <= 'F'))
-//            bcd = (byte) (asc - 'A' + 10);
-//        else if ((asc >= 'a') && (asc <= 'f'))
-//            bcd = (byte) (asc - 'a' + 10);
-//        else
-//            bcd = (byte) (asc - 48);
-//        return bcd;
-//    }
+    private static int MAX_DECRYPT_BLOCK = 128;
+    public static byte[] decryptByPrivateKey(byte[] encryptedData, PrivateKey privateK)
+            throws Exception {
+        Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+        cipher.init(Cipher.DECRYPT_MODE, privateK);
+        int inputLen = encryptedData.length;
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        int offSet = 0;
+        byte[] cache;
+        int i = 0;
+        // 对数据分段解密
+        while (inputLen - offSet > 0) {
+            if (inputLen - offSet > MAX_DECRYPT_BLOCK) {
+                cache = cipher.doFinal(encryptedData, offSet, MAX_DECRYPT_BLOCK);
+            } else {
+                cache = cipher.doFinal(encryptedData, offSet, inputLen - offSet);
+            }
+            out.write(cache, 0, cache.length);
+            i++;
+            offSet = i * MAX_DECRYPT_BLOCK;
+        }
+        byte[] decryptedData = out.toByteArray();
+        out.close();
+        return decryptedData;
+    }
 
     public static String decrypt(RSAPrivateKey privateKey, String cipherData)
             {
