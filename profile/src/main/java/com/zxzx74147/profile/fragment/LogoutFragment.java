@@ -11,6 +11,7 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.zxzx74147.devlib.base.BaseDialogFragment;
 import com.zxzx74147.devlib.base.BaseFragment;
 import com.zxzx74147.devlib.data.UniApiData;
+import com.zxzx74147.devlib.kvstore.KVStore;
 import com.zxzx74147.devlib.modules.busstation.MainBusStation;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
@@ -65,6 +66,7 @@ public class LogoutFragment extends BaseDialogFragment {
             dismiss();
             MainBusStation.logout(getActivity());
             UnReadManager.sharedInstance().clearUserInfo();
+            KVStore.clearAll();
         },UniApiData.class);
     }
 

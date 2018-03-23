@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.devlib.data.MessageEvent;
+import com.zxzx74147.devlib.modules.account.AccountManager;
+import com.zxzx74147.devlib.utils.ToastUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -48,6 +50,10 @@ public class ProfileBusStation {
     }
 
     public static void startProfile(Context context) {
+        if(AccountManager.sharedInstance().getUserUni()==null){
+            ToastUtil.showToast(context, "数据加载中，请稍后");
+            return;
+        }
         MessageEvent event = new MessageEvent<>(BUS_ID_PROFILE_DETAIL, context);
         EventBus.getDefault().post(event);
     }

@@ -4,6 +4,7 @@ import android.app.Application;
 import android.support.multidex.MultiDexApplication;
 
 import com.crashlytics.android.Crashlytics;
+import com.umeng.analytics.MobclickAgent;
 import com.zxzx74147.balance.ModuleBalance;
 import com.zxzx74147.charttest.unicorn.UniCornModule;
 import com.zxzx74147.devlib.DevLib;
@@ -34,6 +35,7 @@ public class ZXApplication extends MultiDexApplication {
         FontBinder.init(this);
 
         Fabric.with(this, new Crashlytics());
+        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
 
 
     }

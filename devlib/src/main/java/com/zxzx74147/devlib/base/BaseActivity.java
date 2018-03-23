@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.jakewharton.rxbinding2.view.RxView;
+import com.umeng.analytics.MobclickAgent;
 import com.zxzx74147.devlib.R;
 import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.devlib.data.IntentData;
@@ -53,7 +54,14 @@ public class BaseActivity extends SupportActivity {
         if(v!=null){
             RxView.clicks(v).subscribe(a->{finish();});
         }
+        MobclickAgent.onResume(this);
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     public class MyObserver implements LifecycleObserver {

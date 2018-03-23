@@ -543,7 +543,9 @@ public class LineChartRenderer extends LineRadarRenderer {
                     valOffset = valOffset / 2;
 
                 mXBounds.set(mChart, dataSet);
-
+                if(dataSet.getEntryCount()==0){
+                    continue;
+                }
                 float[] positions = trans.generateTransformedValuesLine(dataSet, mAnimator.getPhaseX(), mAnimator
                         .getPhaseY(), mXBounds.min, mXBounds.max);
 

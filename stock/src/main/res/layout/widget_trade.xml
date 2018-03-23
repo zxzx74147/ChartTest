@@ -485,7 +485,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/default_gap_10"
                 android:layout_weight="1"
-                android:text="@{@string/format_02(total)}"
+                android:text="@{voucher? `0.00`:@string/format_02(total)}"
                 android:textColor='@{@color/text_red}' />
 
             <Button

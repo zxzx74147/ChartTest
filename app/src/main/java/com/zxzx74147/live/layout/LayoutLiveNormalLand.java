@@ -265,10 +265,15 @@ public class LayoutLiveNormalLand extends FrameLayout {
             if (liveMsgListData.hasError()) {
                 return;
             }
+            if(liveMsgListData.liveDynamic.status==3){
+                ((Activity)getContext()).finish();
+                return;
+            }
             mBingding.setLiveMsg(liveMsgListData);
             if (mIsTouchint) {
                 return;
             }
+
             if( mAdapter.getData().size()==0) {
                 mAdapter.setNewData(liveMsgListData.msgList.msg);
             }

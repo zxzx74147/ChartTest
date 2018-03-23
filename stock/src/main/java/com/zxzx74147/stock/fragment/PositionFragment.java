@@ -169,7 +169,9 @@ public class PositionFragment extends BaseDialogFragment {
                 RecyclerViewUtil.setupRecyclerView(mBinding.refreshLayout, mBinding.list, mPositionAdapter, new CommonListRequestCallback<Position>() {
                     @Override
                     public Observable<PositionListData> getObserverble(BaseListData listdata) {
+                        AccountManager.sharedInstance().doRefresh();
                         return mTradeStorage.positionGetList(listdata == null ? 0 : listdata.nextPage);
+
                     }
                 });
             } else {

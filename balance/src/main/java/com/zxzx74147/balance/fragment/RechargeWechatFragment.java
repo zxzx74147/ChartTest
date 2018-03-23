@@ -22,6 +22,8 @@ import com.zxzx74147.balance.storage.PayStorage;
 import com.zxzx74147.devlib.base.BaseDialogFragment;
 import com.zxzx74147.devlib.data.IntentData;
 import com.zxzx74147.devlib.image.ImageBinder;
+import com.zxzx74147.devlib.modules.account.AccountManager;
+import com.zxzx74147.devlib.modules.busstation.ProfileBusStation;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.devlib.utils.FileUtil;
@@ -71,7 +73,7 @@ public class RechargeWechatFragment extends BaseDialogFragment {
         NetworkApi.ApiSubscribe(getActivity(), obs, false, payNewData -> {
             mBinding.progress.setVisibility(View.GONE);
             if (payNewData.hasError()) {
-                ToastUtil.showToast(getActivity(),payNewData.error.usermsg);
+                ToastUtil.showToast(getActivity(), payNewData.error.usermsg);
                 return;
             }
             mBinding.setData(payNewData);
@@ -108,8 +110,8 @@ public class RechargeWechatFragment extends BaseDialogFragment {
                 FileUtil.verifyStoragePermissions(getActivity());
                 return;
             }
-            if(mBinding.getData()==null){
-                ToastUtil.showToast(getActivity(),"加载中，请稍后");
+            if (mBinding.getData() == null) {
+                ToastUtil.showToast(getActivity(), "加载中，请稍后");
                 return;
             }
 
@@ -126,8 +128,8 @@ public class RechargeWechatFragment extends BaseDialogFragment {
             ImageBinder.loadImageFromBase64(mShareBinding.qrCode, mBinding.getData().codeImg);
             mBinding.getRoot().postDelayed(() -> {
                 Bitmap bm = ViewUtil.generateBitmapFromView(mShareBinding.getRoot(), getResources().getDimensionPixelSize(R.dimen.default_gap_512), getResources().getDimensionPixelSize(R.dimen.default_gap_918));
-                if(ViewUtil.saveImageToGallery(getContext(), bm)){
-                    ToastUtil.showToast(getActivity(),"保存成功");
+                if (ViewUtil.saveImageToGallery(getContext(), bm)) {
+                    ToastUtil.showToast(getActivity(), "保存成功");
                 }
             }, 500);
         });
@@ -135,6 +137,7 @@ public class RechargeWechatFragment extends BaseDialogFragment {
     }
 
     public void showSucc() {
+        AccountManager.sharedInstance().doRefresh();
         BottomSheetDialog dialog = new BottomSheetDialog(getActivity());
         FragmentRechargeSuccBinding binding = DataBindingUtil.inflate(LayoutInflater.from(getActivity()), R.layout.fragment_recharge_succ, null, false);
         binding.setAmount(mPayReqeust.amount);
@@ -142,6 +145,7 @@ public class RechargeWechatFragment extends BaseDialogFragment {
         dialog.show();
         RxView.clicks(binding.recharge).subscribe(v -> {
                     dialog.dismiss();
+                    ProfileBusStation.startProfile(getActivity());
                 }
         );
 

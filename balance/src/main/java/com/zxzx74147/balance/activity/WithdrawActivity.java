@@ -223,6 +223,7 @@ public class WithdrawActivity extends BaseActivity {
                 });
                 return;
             }
+            AccountManager.sharedInstance().doRefresh();
             ToastUtil.showToast(WithdrawActivity.this,R.string.withdraw_succ);
             finish();
         },WithdrawData.class);

@@ -1,13 +1,17 @@
 package com.zxzx74147.profile.fragment;
 
+import android.Manifest;
 import android.app.Activity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,6 +33,7 @@ import com.zxzx74147.devlib.modules.account.UserViewModel;
 import com.zxzx74147.devlib.modules.busstation.ProfileBusStation;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
+import com.zxzx74147.devlib.utils.FileUtil;
 import com.zxzx74147.devlib.utils.ImageUtil;
 import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.devlib.utils.ViewUtil;
@@ -127,29 +132,40 @@ public class ProfileEditFragment extends BaseDialogFragment {
 
 
         RxView.clicks(mBinding.portrait).subscribe(v -> {
-            DialogItem dialogItem = new DialogItem();
-            dialogItem.title = getString(R.string.select_portrait);
-            dialogItem.items = new String[]{getString(R.string.take_photo), getString(R.string.gallery)};
-            CommonItemSelectorDialog dialog = CommonItemSelectorDialog.newInstance(new IntentData(dialogItem));
-            ZXFragmentJumpHelper.startFragment(getContext(), dialog, new CommonCallback() {
-                @Override
-                public void callback(Object item) {
-                    if (item == null) {
-                        return;
-                    }
-                    int id = (int) item;
-                    switch (id) {
-                        case 0:
-                            mCaptureUri = ImageUtil.takeCamera(ProfileEditFragment.this, REQUEST_IMAGE_CAPTURE);
-                            break;
-                        case 1:
-                            ImageUtil.selectImage(ProfileEditFragment.this, REQUEST_IMAGE_GALLERY);
-                            break;
-                    }
-                }
-            });
+            if(!FileUtil.isExternalStorageWritable()||!FileUtil.isCameraAvaliable()){
+                FileUtil.verifyStoragePermissions(getActivity());
+            }else{
+                startEditPortrait();
+            }
+
         });
     }
+
+
+    private void startEditPortrait(){
+        DialogItem dialogItem = new DialogItem();
+        dialogItem.title = getString(R.string.select_portrait);
+        dialogItem.items = new String[]{getString(R.string.take_photo), getString(R.string.gallery)};
+        CommonItemSelectorDialog dialog = CommonItemSelectorDialog.newInstance(new IntentData(dialogItem));
+        ZXFragmentJumpHelper.startFragment(getContext(), dialog, new CommonCallback() {
+            @Override
+            public void callback(Object item) {
+                if (item == null) {
+                    return;
+                }
+                int id = (int) item;
+                switch (id) {
+                    case 0:
+                        mCaptureUri = ImageUtil.takeCamera(ProfileEditFragment.this, REQUEST_IMAGE_CAPTURE);
+                        break;
+                    case 1:
+                        ImageUtil.selectImage(ProfileEditFragment.this, REQUEST_IMAGE_GALLERY);
+                        break;
+                }
+            }
+        });
+    }
+
 
     private void doEditName() {
 

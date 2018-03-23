@@ -115,7 +115,7 @@
                 <CheckBox
                     android:layout_width="@dimen/default_gap_132"
                     android:id="@+id/check_deffer"
-                    android:enabled="@{data.isDeferred==1? false:true}"
+                    android:enabled="@{data.isVoucher==1? false:true}"
                     android:checked="@{data.isDeferred==1? true:false}"
                     android:layout_height="@dimen/default_gap_56"
                     android:layout_marginTop="@dimen/default_gap_24"

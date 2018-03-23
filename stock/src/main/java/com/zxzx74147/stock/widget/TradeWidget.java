@@ -257,6 +257,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
         }
 
         float total = mAmount * mSelectGood.depositFee+(mBinding.voucher.isChecked()? 0:mAmount*mSelectGood.openChargeFee);
+
         mBinding.setTotal(total);
     }
 
@@ -610,6 +611,8 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                 }
             }
         } else {
+            mBinding.buyLimitValue.setText("无");
+            mBinding.buyStopValue.setText("无");
             ViewUtil.enableTabLayout(mBinding.listAmount);
             ViewUtil.enableTabLayout(mBinding.listType);
         }
@@ -630,6 +633,8 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             }
             ViewUtil.disableTabLayout(mBinding.listAmount);
         } else {
+            mBinding.buyLimitValue.setText("无");
+            mBinding.buyStopValue.setText("无");
             mBinding.buyLimitValue.setClickable(true);
             mBinding.buyStopValue.setClickable(true);
             ViewUtil.enableTabLayout(mBinding.listAmount);

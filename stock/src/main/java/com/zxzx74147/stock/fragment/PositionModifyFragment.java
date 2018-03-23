@@ -144,11 +144,11 @@ public class PositionModifyFragment extends BaseDialogFragment {
         RxView.clicks(mBinding.ok).subscribe(o -> {
             submit();
         });
-        if(mBinding.getData().isVoucher!=0){
-            RxCompoundButton.checkedChanges(mBinding.checkDeffer).subscribe(v->{
-                mBinding.checkDeffer.setChecked(false);
-            });
-        }
+//        if(mBinding.getData().isVoucher!=0){
+//            RxCompoundButton.checkedChanges(mBinding.checkDeffer).subscribe(v->{
+//                mBinding.checkDeffer.setChecked(false);
+//            });
+//        }
     }
 
     public void submit(){

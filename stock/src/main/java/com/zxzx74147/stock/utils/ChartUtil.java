@@ -133,7 +133,7 @@ public class ChartUtil {
     }
 
     public static void setupRealTimeY(CombinedChart chart, List<Entry> data) {
-        float start = data.get(0).getY();
+        float start = data.size()>0? data.get(0).getY():0;
         float min = start;
         float max = start;
         for (Entry item : data) {
@@ -157,6 +157,9 @@ public class ChartUtil {
                     e.printStackTrace();
                 }
             } else {
+                if(data.size()==0){
+                    return "";
+                }
                 KLineBean entry = (KLineBean) data.get(0).getData();
                 try {
                     Date temp = (TIME_PARSER.parse(entry.date));
