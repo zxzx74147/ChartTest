@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -22,15 +23,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/position_close_verify"
+            android:textStyle="bold"
             android:textColor="@color/text_black"
             android:textSize="@dimen/default_size_40" />
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/default_gap_212"
-            android:paddingLeft="@dimen/default_gap_44"
-            android:paddingRight="@dimen/default_gap_24">
+            android:layout_height="@dimen/default_gap_212">
 
             <LinearLayout
 
@@ -53,6 +53,7 @@
                     android:layout_height="@dimen/default_gap_56"
                     android:layout_marginTop="@dimen/default_gap_24"
                     android:gravity="left|center_vertical"
+                    app:font="@{`din`}"
                     android:text="@{@string/format_02(data.openPrice)}"
                     android:textColor="@color/text_black"
                     android:textSize="@dimen/default_size_30" />
@@ -62,15 +63,23 @@
 
             <View
                 android:layout_width="1px"
-                android:background="@color/div_default"
-                android:layout_height="match_parent"/>
+                android:layout_gravity="bottom"
+                android:background="#E4E4E4"
+                android:layout_height="@dimen/default_gap_108"/>
             <LinearLayout
 
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="left|center_vertical"
+                android:gravity="center_horizontal|center_vertical"
                 android:orientation="vertical">
+
+                <LinearLayout
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -85,24 +94,31 @@
                     android:layout_height="@dimen/default_gap_56"
                     android:layout_marginTop="@dimen/default_gap_24"
                     android:gravity="left|center_vertical"
+                    app:font="@{`din`}"
                     android:text="@{@string/format_02(data.closePrice)}"
                     android:textColor="@color/text_black"
                     android:textSize="@dimen/default_size_30" />
 
             </LinearLayout>
+            </LinearLayout>
             <View
                 android:layout_width="1px"
-                android:background="@color/div_default"
-                android:layout_height="match_parent"/>
+                android:layout_gravity="bottom"
+                android:background="#E4E4E4"
+                android:layout_height="@dimen/default_gap_108"/>
 
             <LinearLayout
 
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="left|center_vertical"
+                android:gravity="right|center_vertical"
                 android:orientation="vertical">
+                <LinearLayout
 
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -114,6 +130,7 @@
                 <TextView
                     android:id="@+id/text1"
                     android:layout_width="wrap_content"
+                    app:font="@{`din`}"
                     android:layout_height="@dimen/default_gap_56"
                     android:layout_marginTop="@dimen/default_gap_24"
                     android:gravity="left|center_vertical"
@@ -121,6 +138,7 @@
                     android:textColor="@{data.grossProfit>0? @color/red:@color/green}"
                     android:textSize="@dimen/default_size_30" />
 
+            </LinearLayout>
             </LinearLayout>
 
 

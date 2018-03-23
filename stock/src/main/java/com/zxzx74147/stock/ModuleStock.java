@@ -11,6 +11,7 @@ import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.stock.activity.TradeListActivity;
+import com.zxzx74147.stock.data.Deffer;
 import com.zxzx74147.stock.data.GoodType;
 import com.zxzx74147.stock.data.MachPosition;
 import com.zxzx74147.stock.data.Position;
@@ -93,6 +94,7 @@ public class ModuleStock {
 
     static {
         CommonMultiTypeDelegate.registDefaultViewType(GoodType.class, R.layout.item_good);
+        CommonMultiTypeDelegate.registDefaultViewType(Deffer.class, R.layout.item_deffer);
         CommonMultiTypeDelegate.registDefaultViewType(Position.class, R.layout.item_position);
         CommonMultiTypeDelegate.registDefaultViewType(MachPosition.class, R.layout.item_machposition);
     }

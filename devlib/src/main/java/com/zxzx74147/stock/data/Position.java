@@ -36,6 +36,8 @@ public class Position implements Serializable {
     public int isVoucher;
     public DefferList deferredList;
 
+    public int mIsExpand = 0;
+
     public String getCloseTypeStr() {
         switch (closeType) {
             case 1:

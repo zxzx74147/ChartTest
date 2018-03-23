@@ -25,9 +25,23 @@ public class BankCard implements Serializable {
     }
 
     public String getBankSecu2(){
-        if(TextUtils.isEmpty(cardNo)||cardNo.length()!=16){
+        if(TextUtils.isEmpty(cardNo)||cardNo.length()<5){
             return "*";
         }
         return cardNo.substring(0,4)+" **** **** "+cardNo.substring(cardNo.length()-4,cardNo.length());
+    }
+
+    public String getCardNumSpace(){
+        if(cardNo==null){
+            return "";
+        }
+        int count =0;
+        String result = "";
+        while(count<cardNo.length()){
+            int dst = Math.min(count+4,cardNo.length());
+            result+=cardNo.substring(count,dst)+" ";
+            count+=4;
+        }
+        return result;
     }
 }

@@ -101,8 +101,8 @@ public class FeedReplyFragment extends BaseFragment {
     }
 
     private void initView() {
-        mBinding.list.addItemDecoration(new RecycleViewDivider(getContext(), LinearLayout.HORIZONTAL,
-                1, getResources().getColor(R.color.div_default)));
+//        mBinding.list.addItemDecoration(new RecycleViewDivider(getContext(), LinearLayout.HORIZONTAL,
+//                1, getResources().getColor(R.color.div_default)));
         mAdapter = new CommonRecyclerViewAdapter<Reply>(new LinkedList<>()){
             @Override
             protected void convert(BaseBindingViewHolder helper, Reply item) {
@@ -191,6 +191,8 @@ public class FeedReplyFragment extends BaseFragment {
                     ToastUtil.showToast(getActivity(), replyData.error.usermsg);
                     return;
                 }
+                mHeadBinding.getData().replyNum = replyData.replyNum;
+                mHeadBinding.setData(mHeadBinding.getData());
                 ToastUtil.showToast(getActivity(), "回复成功");
                 mAdapter.addData(0,replyData.reply);
                 mBinding.replyEidt.setText("");

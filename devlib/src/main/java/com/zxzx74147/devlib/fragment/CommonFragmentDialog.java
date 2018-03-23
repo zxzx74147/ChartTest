@@ -1,6 +1,7 @@
 package com.zxzx74147.devlib.fragment;
 
 import android.databinding.DataBindingUtil;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,23 +45,32 @@ public class CommonFragmentDialog extends BaseDialogFragment {
         IntentData<DialogItem> intentData = (IntentData<DialogItem>) getArguments().getSerializable(ZXActivityJumpHelper.INTENT_DATA);
         DialogItem card = intentData.data;
         mBinding.setDialogItem(card);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if (card.ok != null && card.ok.length() > 2) {
+                mBinding.ok.setLetterSpacing(0f);
+            }
+            if (card.cancel != null && card.cancel.length() > 2) {
+                mBinding.cancel.setLetterSpacing(0f);
+            }
+        }
 //
 //
-        RxView.clicks(mBinding.cancel).subscribe(o->{
+        RxView.clicks(mBinding.cancel).subscribe(o -> {
             dismiss();
-            if(mCallback!=null){
+            if (mCallback != null) {
                 mCallback.callback(null);
-            }else{
-                Log.e(TAG, "NO CALLBACK !"+JsonHelper.toJson(card));
+            } else {
+                Log.e(TAG, "NO CALLBACK !" + JsonHelper.toJson(card));
             }
         });
 //
-        RxView.clicks(mBinding.ok).subscribe(o->{
+        RxView.clicks(mBinding.ok).subscribe(o -> {
             dismiss();
-            if(mCallback!=null){
+            if (mCallback != null) {
                 mCallback.callback(mBinding.getDialogItem().obj);
-            }else{
-                Log.e(TAG, "NO CALLBACK !"+JsonHelper.toJson(card));
+            } else {
+                Log.e(TAG, "NO CALLBACK !" + JsonHelper.toJson(card));
             }
         });
 

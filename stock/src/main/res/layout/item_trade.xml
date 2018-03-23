@@ -13,6 +13,7 @@
         <import type="com.zxzx74147.devlib.utils.TimeUtil" />
 
         <import type="com.zxzx74147.devlib.modules.busstation.StockBusStation" />
+        <import type="android.view.View"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -34,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text='@{data.buySell==Position.BUY_UP? @string/stock_by_increase:@string/stock_by_decrease}'
-                android:textColor="@{data.buySell==Position.BUY_UP? @color/red:@color/green}"
+                android:textColor="@{data.buySell==Position.BUY_UP? @color/red:@color/green2}"
                 android:textSize="@dimen/default_size_34"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -79,7 +80,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/buy_type"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/icon_expand" />
+                android:src="@{data.mIsExpand==1? @drawable/icon_putaway:@drawable/icon_expand}" />
 
             <TextView
                 android:id="@+id/gross"
@@ -113,7 +114,7 @@
 
             android:layout_marginTop="@dimen/default_gap_60"
             android:orientation="vertical"
-            android:visibility="gone"
+            android:visibility="@{data.mIsExpand==1? View.VISIBLE:View.GONE}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/head">
 

@@ -17,6 +17,7 @@
             android:maxLines="2"
             android:id="@+id/content"
             android:textSize="@dimen/default_size_26"
+            android:lineSpacingMultiplier="@dimen/text_line_spacing"
             android:textColor="@color/text_light_grey"
             android:text="@string/mach_remind"
             android:layout_height="wrap_content" />

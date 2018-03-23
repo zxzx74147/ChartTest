@@ -26,7 +26,9 @@
     <color name="bg_grey2">#F4F4FA</color>
     <color name="bg_grey3">#F8F8FC</color>
     <color name="div_default">#E7E7E7</color>
+    <color name="div_default2">#E4E4E4</color>
     <color name="green">#1AAC18</color>
+    <color name="green2">#00C074</color>
     <color name="text_gold">#C49676</color>
     <color name="progress_bg">#E0E0E6</color>
     <color name="black">#FF000000</color>

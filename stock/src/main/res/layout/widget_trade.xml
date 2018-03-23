@@ -52,6 +52,7 @@
             android:layout_height="@dimen/default_gap_685"
             android:layout_marginTop="@dimen/default_gap_15"
             android:background="@color/white"
+            android:fadeScrollbars="false"
             android:fillViewport="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -73,19 +74,19 @@
                     <LinearLayout
                         android:id="@+id/by_up"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/default_gap_100"
                         android:layout_weight="1"
                         android:background="@drawable/select_rect_grey_red_left"
                         android:gravity="center_horizontal"
-                        android:orientation="vertical"
-                        android:padding="@dimen/default_gap_15">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:letterSpacing="0.2"
+                            android:letterSpacing="@dimen/text_letter_spacing"
                             android:text="@string/buy_up"
                             android:textColor="@color/text_black_white"
+                            android:textStyle="bold"
                             android:textSize="@dimen/default_size_34" />
 
                         <TextView
@@ -102,18 +103,18 @@
                     <LinearLayout
                         android:id="@+id/by_down"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/default_gap_100"
                         android:layout_weight="1"
                         android:background="@drawable/select_rect_grey_green_right"
                         android:gravity="center_horizontal"
-                        android:orientation="vertical"
-                        android:padding="@dimen/default_gap_15">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
+                            android:textStyle="bold"
                             android:layout_height="wrap_content"
                             android:text="@string/buy_down"
-                            android:letterSpacing="0.2"
+                            android:letterSpacing="@dimen/text_letter_spacing"
                             android:textColor="@color/text_black_white"
                             android:textSize="@dimen/default_size_34" />
 
@@ -221,7 +222,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/default_gap_50"
+                    android:layout_marginTop="@dimen/default_gap_40"
                     android:gravity="center_vertical|left"
                     android:orientation="horizontal">
 
@@ -239,7 +240,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/default_gap_80"
                         android:layout_marginLeft="@dimen/default_gap_22"
-                        android:background="@drawable/rect_round_stroke_bg_grey"
+                        android:background="@drawable/rect_round_stroke_grey_select"
                         android:text="@string/buy_down"
                         android:textColor="@color/text_grey_white"
                         android:textSize="@dimen/default_size_24" />
@@ -266,7 +267,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/default_gap_80"
                         android:layout_marginLeft="@dimen/default_gap_22"
-                        android:background="@drawable/rect_round_stroke_bg_grey"
+                        android:background="@drawable/rect_round_stroke_grey_select"
                         android:text="@string/buy_down"
                         android:textColor="@color/text_grey_white"
                         android:textSize="@dimen/default_size_24" />
@@ -295,7 +296,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:button="@drawable/radio_red"
-                        android:paddingLeft="@dimen/default_gap_5"
+                        android:paddingLeft="@dimen/default_gap_8"
                         android:checked="true"
                         android:gravity="center_vertical"
                         android:text='@{@string/format_left(user.balance)}'
@@ -321,7 +322,7 @@
                         android:id="@+id/voucher"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="@dimen/default_gap_5"
+                        android:paddingLeft="@dimen/default_gap_8"
                         android:button="@drawable/radio_red"
                         android:checked="false"
                         android:gravity="center_vertical"
@@ -362,7 +363,7 @@
                             android:layout_width="@dimen/default_gap_132"
                             android:layout_height="@dimen/default_gap_56"
                             android:layout_marginTop="@dimen/default_gap_24"
-                            android:background="@drawable/rect_round_gold_stroke"
+                            android:background="@drawable/rect_round_stroke_grey_select"
                             android:drawableRight="@drawable/home_quotes_fall_grey"
                             android:gravity="left|center_vertical"
                             android:paddingLeft="@dimen/default_gap_10"
@@ -379,9 +380,14 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:gravity="left|center_vertical"
+                        android:gravity="center_horizontal|center_vertical"
                         android:orientation="vertical">
 
+                        <LinearLayout
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -394,7 +400,7 @@
                             android:layout_width="@dimen/default_gap_132"
                             android:layout_height="@dimen/default_gap_56"
                             android:layout_marginTop="@dimen/default_gap_24"
-                            android:background="@drawable/rect_round_gold_stroke"
+                            android:background="@drawable/rect_round_stroke_grey_select"
                             android:drawableRight="@drawable/home_quotes_fall_grey"
                             android:gravity="left|center_vertical"
                             android:paddingLeft="@dimen/default_gap_10"
@@ -403,7 +409,7 @@
                             android:textColor="@color/text_dark_grey"
                             android:textSize="@dimen/default_size_26" />
 
-                    </LinearLayout>
+                    </LinearLayout></LinearLayout>
 
 
                     <LinearLayout
@@ -411,8 +417,14 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:gravity="left|center_vertical"
+                        android:gravity="center_horizontal|center_vertical"
                         android:orientation="vertical">
+
+                        <LinearLayout
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -423,7 +435,7 @@
 
                         <!--android:text="@{string/format_defer(good.deferredFee)}"-->
                         <TextView
-                            android:layout_width="@dimen/default_gap_132"
+                            android:layout_width="wrap_content"
                             android:layout_height="@dimen/default_gap_56"
                             android:layout_marginTop="@dimen/default_gap_24"
                             android:gravity="left|center_vertical"
@@ -431,7 +443,7 @@
                             android:textColor="@color/text_dark_grey"
                             android:textSize="@dimen/default_size_26" />
 
-                    </LinearLayout>
+                    </LinearLayout></LinearLayout>
 
 
                     <LinearLayout
@@ -439,8 +451,14 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:gravity="left|center_vertical"
+                        android:gravity="right|center_vertical"
                         android:orientation="vertical">
+
+                        <LinearLayout
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -450,7 +468,7 @@
                             android:textSize="@dimen/default_size_30" />
                         <!--android:text="@{string/format_defer(good.openChargeFee)}"-->
                         <TextView
-                            android:layout_width="@dimen/default_gap_132"
+                            android:layout_width="wrap_content"
                             android:layout_height="@dimen/default_gap_56"
                             android:layout_marginTop="@dimen/default_gap_24"
                             android:gravity="left|center_vertical"
@@ -458,7 +476,7 @@
                             android:textColor="@color/text_dark_grey"
                             android:textSize="@dimen/default_size_26" />
 
-                    </LinearLayout>
+                    </LinearLayout></LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
@@ -477,6 +495,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/default_gap_44"
+                android:textSize="@dimen/default_size_26"
+
                 android:text="@string/total"
                 android:textColor="@color/text_dark_grey" />
 
@@ -485,14 +505,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/default_gap_10"
                 android:layout_weight="1"
+                android:paddingBottom="@dimen/default_size_7"
+                app:font="@{`din_bold`}"
+                android:textSize="@dimen/default_size_40"
                 android:text="@{voucher? `0.00`:@string/format_02(total)}"
                 android:textColor='@{@color/text_red}' />
 
             <Button
                 android:id="@+id/do_it"
+                android:letterSpacing="@dimen/text_letter_spacing"
                 android:layout_width="@dimen/default_gap_250"
                 android:layout_height="match_parent"
-                android:background='@{type==TradeFragment.TYPE_MACH_POSITION_BUY_UP||type==TradeFragment.TYPE_POSITION_BUY_UP? @color/red:@color/green}'
+                android:textStyle="bold"
+                android:background='@{type==TradeFragment.TYPE_MACH_POSITION_BUY_UP||type==TradeFragment.TYPE_POSITION_BUY_UP? @color/red:@color/green2}'
                 android:text="@string/buy_stock"
                 android:textColor="@color/white"
                 android:textSize="@dimen/default_size_34" />

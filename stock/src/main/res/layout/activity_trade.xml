@@ -22,11 +22,14 @@
             android:layout_height="@dimen/default_gap_100"
             android:layout_marginEnd="8dp"
             app:title="@{@string/trade_his}"
+            app:hideDiveder="@{true}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <com.dinuscxj.refresh.RecyclerRefreshLayout
             android:id="@+id/refresh_layout"
+            android:layout_marginTop="-1dp"
+            android:background="@color/white"
             android:layout_width="0dp"
             android:paddingLeft="@dimen/default_gap_44"
             android:paddingRight="@dimen/default_gap_44"

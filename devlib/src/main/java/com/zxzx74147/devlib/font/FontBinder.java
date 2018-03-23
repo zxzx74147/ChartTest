@@ -2,6 +2,7 @@ package com.zxzx74147.devlib.font;
 
 import android.app.Application;
 import android.databinding.BindingAdapter;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.widget.TextView;
 
@@ -33,6 +34,15 @@ public class FontBinder {
             view.setTypeface(DIN_BLOD);
         }else if(font.equals("din_light")){
             view.setTypeface(DIN_LIGHT);
+        }else if(font.equals("just_light")){
+            Paint paint = view.getPaint();
+            Object o = view.getTag(R.id.tag_has_thin);
+            if(o!=null) {
+                view.setTag(R.id.tag_has_thin,new Object());
+                float width = paint.getStrokeWidth();
+                width *= 0.7;
+                paint.setStrokeWidth(width);
+            }
         }
 
     }

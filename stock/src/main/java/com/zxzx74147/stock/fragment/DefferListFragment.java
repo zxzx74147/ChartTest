@@ -63,6 +63,7 @@ public class DefferListFragment extends BaseDialogFragment {
             return;
         }
         mData.addAll(position.deferredList.deferred);
+        mDefferAdapter =new CommonRecyclerViewAdapter<>(null);
 //        mBinding.setData((Position) intentData.data);
         mDefferAdapter.setNewData(mData);
         mBinding.list.setAdapter(mDefferAdapter);

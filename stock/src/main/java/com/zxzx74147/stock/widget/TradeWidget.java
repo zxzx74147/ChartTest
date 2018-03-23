@@ -388,7 +388,8 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                     dialogItem.title = getResources().getString(R.string.position_open_succ);
                     dialogItem.content = null;
                     dialogItem.cancel = getResources().getString(R.string.position_view);
-                    dialogItem.cancel = getResources().getString(R.string.continu_trade);
+                    dialogItem.ok = getResources().getString(R.string.continu_trade);
+                    dialogItem.obj = positionData;
                     CommonFragmentDialog fragmentDialog = CommonFragmentDialog.newInstance(new IntentData<>(dialogItem));
                     ZXFragmentJumpHelper.startFragment(getContext(), fragmentDialog, new CommonCallback() {
                         @Override
@@ -418,7 +419,8 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                     dialogItem.title = getResources().getString(R.string.position_open_succ);
                     dialogItem.content = null;
                     dialogItem.cancel = getResources().getString(R.string.position_view);
-                    dialogItem.cancel = getResources().getString(R.string.continu_trade);
+                    dialogItem.ok = getResources().getString(R.string.continu_trade);
+                    dialogItem.obj = positionData;
                     CommonFragmentDialog fragmentDialog = CommonFragmentDialog.newInstance(new IntentData<>(dialogItem));
                     ZXFragmentJumpHelper.startFragment(getContext(), fragmentDialog, new CommonCallback() {
                         @Override
@@ -449,7 +451,8 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                 dialogItem.title = getResources().getString(R.string.position_open_succ);
                 dialogItem.content = null;
                 dialogItem.cancel = getResources().getString(R.string.position_view);
-                dialogItem.cancel = getResources().getString(R.string.continu_trade);
+                dialogItem.ok = getResources().getString(R.string.continu_trade);
+                dialogItem.obj = positionData;
                 CommonFragmentDialog fragmentDialog = CommonFragmentDialog.newInstance(new IntentData<>(dialogItem));
                 ZXFragmentJumpHelper.startFragment(getContext(), fragmentDialog, new CommonCallback() {
                     @Override

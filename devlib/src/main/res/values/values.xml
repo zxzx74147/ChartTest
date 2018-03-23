@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="text_line_spacing">1.4</dimen>
-    <dimen name="text_letter_spacing">1</dimen>
+    <dimen name="text_line_spacing">1.2</dimen>
+    <dimen name="text_letter_spacing">0.6</dimen>
+    <dimen name="text_letter_spacing2">1.0</dimen>
 </resources>

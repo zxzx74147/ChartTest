@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -39,6 +40,7 @@
                 android:text="@{@string/format_02(userUniData.user.total)}"
                 android:layout_marginTop="@dimen/default_gap_10"
                 android:textSize="@dimen/default_size_30"
+                app:font="@{`din`}"
                 android:textColor="@color/text_black"
                 android:layout_height="wrap_content" />
 
@@ -59,6 +61,7 @@
                 android:layout_width="wrap_content"
                 android:text="@{@string/format_02(userUniData.user.balance)}"
                 android:layout_marginTop="@dimen/default_gap_10"
+                app:font="@{`din`}"
                 android:textSize="@dimen/default_size_30"
                 android:textColor="@color/text_black"
                 android:layout_height="wrap_content" />
@@ -78,6 +81,7 @@
                 android:layout_height="wrap_content" />
             <TextView
                 android:layout_width="wrap_content"
+                app:font="@{`din`}"
                 android:text="@{userUniData.positionList.num==0? @string/str_loading:@string/format_02_sign(userUniData.user.grossProfit)}"
                 android:textColor="@{userUniData.positionList.num==0? @color/text_black:(userUniData.user.grossProfit>0? @color/text_red:@color/green)}"
                 android:layout_marginTop="@dimen/default_gap_10"

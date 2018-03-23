@@ -56,13 +56,15 @@ public class TradeListActivity extends BaseActivity {
                 ItemTradeBinding itemCommonBinding = (ItemTradeBinding) helper.mBinding;
                 itemCommonBinding.setVariable(BR.data, item);
                 RxView.clicks(itemCommonBinding.head).subscribe(o -> {
-                    if(itemCommonBinding.expand.getVisibility()==View.VISIBLE){
-                        itemCommonBinding.expand.setVisibility(View.GONE);
-                        itemCommonBinding.imageButton.setImageResource(R.drawable.icon_expand);
-                    }else if(itemCommonBinding.expand.getVisibility()==View.GONE){
-                        itemCommonBinding.expand.setVisibility(View.VISIBLE);
-                        itemCommonBinding.imageButton.setImageResource(R.drawable.icon_putaway);
-                    }
+                    item.mIsExpand = (item.mIsExpand+1)%2;
+                    itemCommonBinding.setData(item);
+//                    if(itemCommonBinding.expand.getVisibility()==View.VISIBLE){
+//                        itemCommonBinding.expand.setVisibility(View.GONE);
+//                        itemCommonBinding.imageButton.setImageResource(R.drawable.icon_expand);
+//                    }else if(itemCommonBinding.expand.getVisibility()==View.GONE){
+//                        itemCommonBinding.expand.setVisibility(View.VISIBLE);
+//                        itemCommonBinding.imageButton.setImageResource(R.drawable.icon_putaway);
+//                    }
 
                 });
             }

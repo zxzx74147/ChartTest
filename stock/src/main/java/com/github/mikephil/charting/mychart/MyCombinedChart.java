@@ -51,7 +51,7 @@ public class MyCombinedChart extends CombinedChart {
         this.myMarkerViewLeft = markerLeft;
         this.myBottomMarkerView = markerBottom;
         mPaint.setTextSize(getResources().getDimensionPixelSize(R.dimen.default_size_20));
-        mPaint.setTypeface(FontBinder.DIN);
+        mPaint.setTypeface(FontBinder.DIN_LIGHT);
 //        this.minuteHelper = minuteHelper;
     }
 

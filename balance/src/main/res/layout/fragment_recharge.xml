@@ -59,6 +59,7 @@
             android:layout_height="wrap_content"
             android:text="@string/recharge_select_method"
             android:textColor="@color/text_black"
+            android:layout_marginTop="@dimen/default_gap_50"
             android:textSize="@dimen/default_size_34"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -86,6 +87,7 @@
             <TextView
                 android:layout_width="@dimen/default_gap_130"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_gap_24"
                 android:text="@string/recharge_wechat"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/default_size_30" />
@@ -95,6 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/recharge_wechat_remind"
+                android:layout_marginLeft="@dimen/default_gap_14"
                 android:textColor="@color/text_light_grey"
                 android:textSize="@dimen/default_size_24" />
 
@@ -105,6 +108,13 @@
                 android:button="@drawable/selector_red_circle"
                 android:checked="true" />
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/default_gap_60"
+            app:layout_constraintTop_toBottomOf="@+id/wechat_layout"
+            android:background="@color/div_default2"
+            android:layout_height="@dimen/default_gap_1"/>
 
         <!---->
         <LinearLayout
@@ -128,6 +138,7 @@
                 android:layout_width="@dimen/default_gap_130"
                 android:layout_height="wrap_content"
                 android:text="@string/recharge_alipay"
+                android:layout_marginLeft="@dimen/default_gap_24"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/default_size_30" />
 
@@ -146,6 +157,14 @@
                 android:button="@drawable/selector_red_circle" />
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/default_gap_60"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/alipay_layout"
+            android:background="@color/div_default2"
+            android:layout_height="@dimen/default_gap_1"/>
+
         <Button
             android:id="@+id/recharge"
             android:layout_width="match_parent"
@@ -153,6 +172,7 @@
             android:background="@drawable/rect_round_red"
             android:layout_marginTop="@dimen/default_gap_44"
             android:text="@string/go_recharge"
+            android:textStyle="bold"
             android:textColor="@color/white"
             android:textSize="@dimen/default_size_34"
             app:layout_constraintEnd_toEndOf="parent"
@@ -162,7 +182,7 @@
         <View
             android:id="@+id/outside"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/default_gap_88"
+            android:layout_height="@dimen/default_gap_8"
             android:background="@drawable/rect_round_red"
             android:layout_marginTop="@dimen/default_gap_44"
             android:text="@string/go_recharge"

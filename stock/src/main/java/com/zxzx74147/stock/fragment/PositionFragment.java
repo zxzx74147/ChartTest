@@ -3,13 +3,18 @@ package com.zxzx74147.stock.fragment;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.dinuscxj.refresh.MaterialDragDistanceConverter;
 import com.dinuscxj.refresh.RecyclerRefreshLayout;
@@ -31,6 +36,7 @@ import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.modules.account.UserViewModel;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
+import com.zxzx74147.devlib.utils.DisplayUtil;
 import com.zxzx74147.devlib.utils.RecyclerViewUtil;
 import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.devlib.utils.ViewUtil;
@@ -480,6 +486,20 @@ public class PositionFragment extends BaseDialogFragment {
         }, mRecyclerView);
 
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Window window = getDialog().getWindow();
+        WindowManager.LayoutParams params = window.getAttributes();
+        params.gravity = Gravity.BOTTOM;
+        params.width = WindowManager.LayoutParams.MATCH_PARENT;
+        params.height = WindowManager.LayoutParams.MATCH_PARENT;
+        params.height = DisplayUtil.getDisplayMetrics().heightPixels-getActivity().getResources().getDimensionPixelSize(R.dimen.default_gap_128);
+        window.setAttributes(params);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        window.setWindowAnimations(com.zxzx74147.devlib.R.style.dialogWindowAnim);
     }
 
 }
