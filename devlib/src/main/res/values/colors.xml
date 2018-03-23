@@ -24,6 +24,7 @@
 
     <color name="bg_grey">#F4F4F4</color>
     <color name="bg_grey2">#F4F4FA</color>
+    <color name="bg_grey3">#F8F8FC</color>
     <color name="div_default">#E7E7E7</color>
     <color name="green">#1AAC18</color>
     <color name="text_gold">#C49676</color>

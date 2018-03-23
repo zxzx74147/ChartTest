@@ -186,6 +186,7 @@
             android:layout_marginRight="@dimen/default_gap_44"
             android:layout_height="wrap_content"
             android:text="@string/submit"
+            android:letterSpacing="@dimen/text_letter_spacing"
             android:textColor="@color/white"
             android:textSize="@dimen/default_size_34"
             android:layout_marginBottom="@dimen/default_gap_28"

@@ -6,6 +6,7 @@ import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
@@ -26,10 +27,13 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxCompoundButton;
+import com.zxzx74147.devlib.DevLib;
+import com.zxzx74147.devlib.R;
 import com.zxzx74147.devlib.base.BaseActivity;
 import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.live.data.Text;
@@ -216,6 +220,16 @@ public class ViewUtil {
         }
         return null;
 
+    }
+
+    public static void changeTabsText(TabLayout tabLayout, String text,int index) {
+        if(tabLayout==null){
+            return;
+        }
+        TabLayout.Tab tab = tabLayout.getTabAt(index);
+        tab.setText(text);
+        ColorStateList colorStateList = tabLayout.getTabTextColors();
+        tabLayout.setTabTextColors(DevLib.getApp().getResources().getColor(R.color.text_black),DevLib.getApp().getResources().getColor(R.color.text_black));
     }
 
     public static void changeTabs(View tabLayout,String text) {

@@ -11,6 +11,11 @@
         <attr name="ratioHeight" format="integer" />
     </declare-styleable>
 
+    <declare-styleable name="CommonTabLayout">
+        <attr name="scaleSize" format="float" />
+        <attr name="selectBold" format="boolean" />
+    </declare-styleable>
+
 
 
 </resources>

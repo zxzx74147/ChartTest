@@ -173,9 +173,10 @@ public class NetworkApi {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e(TAG, e.getMessage());
-
-                        e.printStackTrace();
+                        if(e!=null&&e.getMessage()!=null) {
+                            Log.e(TAG, e.getMessage());
+                            e.printStackTrace();
+                        }
 
                     }
 

@@ -66,7 +66,7 @@
             android:layout_marginTop="@dimen/default_gap_24"
             android:text="@{data.content}"
             android:lineSpacingMultiplier="1.2"
-            android:textColor="@color/text_black"
+            android:textColor="@color/text_black2"
             android:textSize="@dimen/default_size_30" />
 
 
@@ -85,6 +85,7 @@
             android:layout_width="match_parent"
             android:orientation="horizontal"
             android:gravity="bottom"
+            android:layout_marginTop="@dimen/default_gap_30"
             android:layout_height="wrap_content">
             <TextView
                 android:layout_width="wrap_content"
@@ -95,6 +96,7 @@
                 android:layout_height="wrap_content" />
             <TextView
                 android:layout_width="wrap_content"
+                android:layout_marginLeft="@dimen/default_gap_15"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/default_size_26"
                 android:text='@{"("+String.valueOf(data.replyNum)+")"}'
@@ -108,7 +110,7 @@
             <TextView
                 android:id="@+id/write"
                 android:layout_width="wrap_content"
-                android:textColor="@color/text_grey"
+                android:textColor="@color/text_black2"
                 android:visibility="visible"
                 android:textSize="@dimen/default_size_26"
                 android:text="@string/write_comment"

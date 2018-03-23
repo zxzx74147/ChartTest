@@ -124,8 +124,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:text="/"
-                android:textColor="@color/text_dark_grey"
+                android:textColor="#D6D6DC"
                 android:paddingLeft="@dimen/default_gap_25"
+
                 app:font="@{`din_light`}"
                 android:paddingRight="@dimen/default_gap_25"
                 android:layout_height="wrap_content"/>

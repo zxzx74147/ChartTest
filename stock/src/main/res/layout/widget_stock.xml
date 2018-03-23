@@ -163,9 +163,10 @@
             android:layout_height="@dimen/default_gap_70"
             android:layout_marginTop="@dimen/default_gap_12">
 
-            <android.support.design.widget.TabLayout
+            <com.zxzx74147.devlib.widget.CommonTabLayout
                 android:id="@+id/tabLayout"
                 style="@style/Stock1TabLayout"
+                app:selectBold="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
@@ -221,7 +222,7 @@
                 <!--android:layout_height="wrap_content"-->
                 <!--android:tag="@string/stock_k_1d_s"-->
                 <!--android:text="@string/stock_k_1d" />-->
-            </android.support.design.widget.TabLayout>
+            </com.zxzx74147.devlib.widget.CommonTabLayout>
 
             <include
                 android:id="@+id/candel"

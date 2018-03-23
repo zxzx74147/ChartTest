@@ -31,6 +31,7 @@
             style="@style/TitleTabLayout"
             android:layout_width="0dp"
             android:paddingLeft="@dimen/default_gap_44"
+            app:scaleSize="1.33"
             android:paddingRight="@dimen/default_gap_44"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"

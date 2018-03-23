@@ -14,7 +14,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg_grey"
+        android:background="@color/bg_grey3"
         android:orientation="vertical"
         android:padding="@dimen/default_gap_44"
         android:paddingBottom="0dp">
@@ -23,6 +23,7 @@
             android:id="@+id/tabLayout2"
             style="@style/TitleTabLayout"
             android:layout_width="0dp"
+            app:scaleSize="1.33"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

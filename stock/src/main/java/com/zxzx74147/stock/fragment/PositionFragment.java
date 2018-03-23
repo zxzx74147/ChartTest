@@ -100,8 +100,10 @@ public class PositionFragment extends BaseDialogFragment {
     }
 
     private void refresh(UserUniData userdata) {
-        ViewUtil.changeTabs(((ViewGroup) mBinding.tabLayout2.getChildAt(0)).getChildAt(0), String.format(getString(R.string.format_my_position), userdata.positionList.num));
-        ViewUtil.changeTabs(((ViewGroup) mBinding.tabLayout2.getChildAt(0)).getChildAt(1), String.format(getString(R.string.format_my_machposition), userdata.machPositionList.num));
+        ViewUtil.changeTabsText(mBinding.tabLayout2,String.format(getString(R.string.format_my_position), userdata.positionList.num),0);
+        ViewUtil.changeTabsText(mBinding.tabLayout2,String.format(getString(R.string.format_my_machposition), userdata.machPositionList.num),1);
+//        ViewUtil.changeTabs(((ViewGroup) mBinding.tabLayout2.getChildAt(0)).getChildAt(0), String.format(getString(R.string.format_my_position), userdata.positionList.num));
+//        ViewUtil.changeTabs(((ViewGroup) mBinding.tabLayout2.getChildAt(0)).getChildAt(1), String.format(getString(R.string.format_my_machposition), userdata.machPositionList.num));
         if(mLayoutPositionHeaderBinding!=null){
             mLayoutPositionHeaderBinding.setUserUniData(userdata);
         }
