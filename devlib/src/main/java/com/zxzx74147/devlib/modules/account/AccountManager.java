@@ -74,6 +74,7 @@ public class AccountManager {
 
     public void logout() {
         mUser = null;
+        mUserUniData = null;
         KVStore.put(KEY, "");
         KVStore.put(KEY_MSG_ID, 0);
     }

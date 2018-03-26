@@ -9,10 +9,12 @@ import com.zxzx74147.devlib.modules.account.AccountManager;
 
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Dispatcher;
 import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okio.Buffer;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -23,6 +25,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
     private static final String TAG = RetrofitClient.class.getSimpleName();
+    private static Dispatcher dispatcher=new Dispatcher();
+
     private static Retrofit mStockRetrofit;
     private static Retrofit mRetrofit;
     private static Retrofit mRSARetrofit;
@@ -30,6 +34,9 @@ public class RetrofitClient {
     }
 
     static{
+        dispatcher.setMaxRequests(30);
+
+
         OkHttpClient.Builder builder = new OkHttpClient().newBuilder();
         builder.readTimeout(15, TimeUnit.SECONDS);
         builder.connectTimeout(7, TimeUnit.SECONDS);
@@ -47,14 +54,20 @@ public class RetrofitClient {
                         }
                         newFormBody.add("uId",AccountManager.sharedInstance().getUid());
                         request = requestBuilder.method(request.method(),newFormBody.build()).build();
+                        if(request.body()!=null) {
+                            Buffer buffer = new Buffer();
+                            request.body().writeTo(buffer);
+                            Log.i(TAG+"POST",request.url().toString()+(request.url().toString().contains("?")? "&":"?")+buffer.readUtf8());
+                        }
                     }
                 }else{
                     HttpUrl url = request.url().newBuilder().addQueryParameter("uId", AccountManager.sharedInstance().getUid()).build();
                     request = request.newBuilder().url(url).build();
+                    Log.i(TAG+request.method(),request.url().toString());
                 }
             }
 
-            Log.i(TAG,request.url().toString());
+
             return chain.proceed(request);
         });
         builder.addInterceptor(new StethoInterceptor());
@@ -67,6 +80,7 @@ public class RetrofitClient {
                 .build();
 
         builder.addInterceptor(new RsaInterceptor());
+        builder.dispatcher(dispatcher);
         client = builder.build();
         mRetrofit= new Retrofit.Builder()
                 .baseUrl(NetworkConfig.HOST)
@@ -90,11 +104,17 @@ public class RetrofitClient {
         return mRetrofit;
     }
 
-    public static Retrofit getRSAClient(){
-        return mRSARetrofit;
-    }
+//    public static Retrofit getRSAClient(){
+//        return mRSARetrofit;
+//    }
 
     public static Retrofit getStockClient(){
         return mStockRetrofit;
+    }
+
+    public static void cancelAll(){
+        if(dispatcher!=null) {
+            dispatcher.cancelAll();
+        }
     }
 }

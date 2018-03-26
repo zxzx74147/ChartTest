@@ -33,6 +33,9 @@ public class NetworkApi {
     private static final String TAG = NetworkApi.class.getSimpleName();
 
     public static <T> void ApiSubscribe(Observable<? extends T> observable, Observer<T> observer) {
+        if(observable==null){
+            return;
+        }
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);

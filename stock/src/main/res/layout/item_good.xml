@@ -11,6 +11,7 @@
         <import type="com.zxzx74147.stock.data.Price" />
         <import type="android.view.View"/>
         <import type="android.text.TextUtils"/>
+        <import type="com.zxzx74147.devlib.utils.FormatUtil"/>
     </data>
 
     <LinearLayout
@@ -60,7 +61,8 @@
                     app:font="@{`din`}"
                     android:drawablePadding="@dimen/default_gap_5"
                     android:drawableRight="@{data.mIsSelect? ((data.price.curPrice-data.price.open>0? @drawable/home_quotes_rise_white:@drawable/home_quotes_fall_white)):(data.price.curPrice-data.price.open>0? @drawable/home_quotes_rise:@drawable/home_quotes_fall)}"
-                    android:text='@{String.valueOf(data.price.curPrice)}'
+
+                    android:text="@{FormatUtil.formatWithoutZero(data.price.curPrice,@string/format_01)}"
                     android:textColor='@{data.mIsSelect? @color/white:(data.price.curPrice-data.price.open>0? @color/stock_up:@color/stock_down)}'
                     android:textSize="@dimen/default_size_26" />
 
@@ -69,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/default_gap_26"
                     app:font="@{`din`}"
-                    android:text="@{@string/format_01_sign(data.price.curPrice-data.price.open)}"
+                    android:text="@{FormatUtil.formatWithoutZero(data.price.curPrice-data.price.open,@string/format_01_sign)}"
                     android:textColor='@{data.mIsSelect? @color/white:(data.price.curPrice-data.price.open>0? @color/stock_up:@color/stock_down)}'
                     android:textSize="@dimen/default_size_26" />
             </LinearLayout>

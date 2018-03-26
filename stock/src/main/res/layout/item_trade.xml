@@ -14,6 +14,7 @@
 
         <import type="com.zxzx74147.devlib.modules.busstation.StockBusStation" />
         <import type="android.view.View"/>
+        <import type="com.zxzx74147.devlib.utils.FormatUtil"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -203,7 +204,8 @@
                 app:font="@{`din_light`}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text='@{@string/format_02(data.openPrice)}'
+                android:text="@{FormatUtil.formatWithoutZero(data.openPrice,@string/format_02)}"
+
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView14"
                 app:layout_constraintTop_toTopOf="@+id/textView14" />
@@ -214,7 +216,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:font="@{`din_light`}"
-                android:text='@{@string/format_02(data.closePrice)}'
+                android:text="@{FormatUtil.formatWithoutZero(data.closePrice,@string/format_02)}"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView16"
                 app:layout_constraintTop_toTopOf="@+id/textView16" />
@@ -236,7 +238,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:font="@{`din_light`}"
-                android:text='@{data.limit==0? @string/none:@string/format_limit_value(data.limit)}'
+                android:text='@{data.limit==0? @string/none:FormatUtil.formatWithoutZero(data.limit,@string/format_01)}'
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView18"
                 app:layout_constraintTop_toTopOf="@+id/textView19" />
@@ -248,7 +250,7 @@
                 android:layout_height="wrap_content"
 
                 app:font="@{`din_light`}"
-                android:text='@{data.stop==0? @string/none:@string/format_stop_value(data.stop)}'
+                android:text='@{data.stop==0? @string/none:FormatUtil.formatWithoutZero(data.stop,@string/format_01)}'
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView18"
                 app:layout_constraintTop_toTopOf="@+id/textView20" />

@@ -107,4 +107,19 @@ public class FormatUtil {
         String   value   =   df.format(num);
         return value;
     }
+
+    public static String formatWithoutZero(double num,String format){
+        String ouput = String.format(format,num);
+        while (ouput.length()>0){
+            if(ouput.endsWith("0")&&ouput.contains(".")){
+                ouput = ouput.substring(0,ouput.length()-1);
+            }else
+            if(ouput.endsWith(".")){
+                ouput = ouput.substring(0,ouput.length()-1);
+            }else{
+                break;
+            }
+        }
+        return ouput;
+    }
 }

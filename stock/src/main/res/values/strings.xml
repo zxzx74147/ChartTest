@@ -73,14 +73,14 @@
     <string name="format_lot">%d手</string>
     <string name="profit_and_loss">盈亏</string>
     <string name="profit_and_loss_yuan">盈亏(元)</string>
-    <string name="format_buy_price">建仓价：%.2f</string>
+    <string name="format_buy_price">建仓价：%.0f</string>
     <string name="format_buy_open_charge">手续费: %.1f元</string>
     <string name="format_buy_deferred_free">过夜费: 用券不过夜</string>
     <string name="format_buy_deferred">过夜费: %.1f元/天</string>
     <string name="format_float_num_up">浮动点: 上升%.1f点</string>
     <string name="format_float_num_down">浮动点: 下跌%.1f点</string>
-    <string name="format_num_up">上升%.1f点</string>
-    <string name="format_num_down">下跌%.1f点</string>
+    <string name="format_num_up">上升%.0f点</string>
+    <string name="format_num_down">下跌%.0f点</string>
     <string name="format_limit">止盈点: %.0f点</string>
     <string name="format_limit_value">%.0f点</string>
     <string name="format_limit_none">止盈点: 无</string>

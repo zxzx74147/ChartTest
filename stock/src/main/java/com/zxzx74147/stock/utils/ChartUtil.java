@@ -111,7 +111,7 @@ public class ChartUtil {
     public static <T extends Entry> IAxisValueFormatter getAxisValueFormatterDay(List<T> data) {
         IAxisValueFormatter formatter = (value, axis) -> {
             int index = (int) value;
-            if (index < data.size()) {
+            if (index < data.size()&&index>0) {
                 KLineBean entry = (KLineBean) data.get(index).getData();
                 Date temp = null;
                 Date now = new Date();

@@ -83,6 +83,10 @@ public interface TradesStorage {
     @POST("/trades/position/getlist")
     Observable<PositionListData> positionGetList(@Field("page") int page);
 
+//    @FormUrlEncoded
+//    @POST("/user/account/get")
+//    Observable<PositionListData> positionGetList(@Field("page") int page);
+
     @FormUrlEncoded
     @POST("/trades/position/gethislist")
     Observable<PositionListData> positionGetHisList(@Field("page") int page);

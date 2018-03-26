@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">蚂蚁投资教室</string>
     <string name="network_host">http://app.arnoldlabs.com/</string>
-    <string name="umeng">5a9668fba40fa3717e00025a</string>
+    <string name="umeng">5ab89ae8b27b0a62070000ed</string>
     <string name="live_msg_remind">学投资从互动开始…</string>
     <string name="feed_title">蚂蚁投资</string>
     <string name="by_up_tiny">看多买涨</string>

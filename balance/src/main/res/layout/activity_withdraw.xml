@@ -156,8 +156,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/default_gap_28"
-                    android:layout_marginLeft="@dimen/default_gap_44"
-                    android:layout_marginRight="@dimen/default_gap_44"
                     android:background="@drawable/rect_round_red"
                     android:paddingLeft="@dimen/default_size_44"
                     android:layout_marginTop="@dimen/default_gap_30"

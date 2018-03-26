@@ -64,8 +64,8 @@ public class LogoutFragment extends BaseDialogFragment {
                 return;
             }
             dismiss();
+            RetrofitClient.cancelAll();
             MainBusStation.logout(getActivity());
-            UnReadManager.sharedInstance().clearUserInfo();
             KVStore.clearAll();
         },UniApiData.class);
     }

@@ -18,7 +18,7 @@
 
         <meta-data
             android:name="test_version"
-            android:value="v20180323_5">
+            android:value="v20180324_1">
         </meta-data>
 
         <meta-data
@@ -38,7 +38,7 @@
 
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="5a9668fba40fa3717e00025a" />
+            android:value="5ab89ae8b27b0a62070000ed" />
 
 
         <meta-data

@@ -46,10 +46,12 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
             case BaseResp.ErrCode.ERR_AUTH_DENIED:
                 if (RETURN_MSG_TYPE_SHARE == resp.getType()) ToastUtil.showToast(this,"分享验证失败");
                 else ToastUtil.showToast(this,"登录验证失败");
+                finish();
                 break;
             case BaseResp.ErrCode.ERR_USER_CANCEL:
                 if (RETURN_MSG_TYPE_SHARE == resp.getType()) ToastUtil.showToast(this,"分享失败");
                 else ToastUtil.showToast(this,"登录失败");
+                finish();
                 break;
             case BaseResp.ErrCode.ERR_OK:
                 switch (resp.getType()) {
@@ -69,6 +71,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
                 }
                 break;
         }
+
     }
 
 }

@@ -64,24 +64,24 @@ public class LiveActivity extends BaseActivity {
 //        Matrix matrix = new Matrix();
 //        matrix.reset();
 //        matrix.setScale(-1,1, DisplayUtil.getDisplayMetrics().widthPixels/2,0);
-        mBinding.video2.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-            @Override
-            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                Matrix matrix = new Matrix();
-                matrix.reset();
-                matrix.setScale(-1,1, (right-left)/2,0);
-                mBinding.video2.setTransform(matrix);
-            }
-        });
-        mBinding.video1.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-            @Override
-            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                Matrix matrix = new Matrix();
-                matrix.reset();
-                matrix.setScale(-1,1, (right-left)/2,0);
-                mBinding.video1.setTransform(matrix);
-            }
-        });
+//        mBinding.video2.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+//            @Override
+//            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+//                Matrix matrix = new Matrix();
+//                matrix.reset();
+//                matrix.setScale(-1,1, (right-left)/2,0);
+//                mBinding.video2.setTransform(matrix);
+//            }
+//        });
+//        mBinding.video1.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+//            @Override
+//            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+//                Matrix matrix = new Matrix();
+//                matrix.reset();
+//                matrix.setScale(-1,1, (right-left)/2,0);
+//                mBinding.video1.setTransform(matrix);
+//            }
+//        });
         switch (this.getResources().getConfiguration().orientation) {
             case Configuration.ORIENTATION_PORTRAIT:
                 RxView.clicks(mBinding.video2).subscribe(v -> {

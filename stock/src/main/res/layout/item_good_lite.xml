@@ -14,6 +14,7 @@
         <import type="com.zxzx74147.stock.data.Price" />
 
         <import type="com.zxzx74147.devlib.modules.busstation.StockBusStation" />
+        <import type="com.zxzx74147.devlib.utils.FormatUtil"/>
     </data>
 
     <LinearLayout
@@ -49,7 +50,8 @@
                 app:font="@{`din`}"
                 android:drawablePadding="@dimen/default_gap_5"
                 android:drawableRight="@{data.price.curPrice>=data.price.open? @drawable/home_quotes_rise_white:@drawable/home_quotes_fall_white}"
-                android:text="@{@string/format_01(data.price.curPrice)}"
+
+                android:text="@{FormatUtil.formatWithoutZero(data.price.curPrice,@string/format_01)}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/default_size_26" />
 
@@ -58,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/default_gap_15"
                 app:font="@{`din`}"
-                android:text="@{@string/format_01_sign(data.price.curPrice-data.price.open)}"
+                android:text="@{FormatUtil.formatWithoutZero(data.price.curPrice-data.price.open,@string/format_01_sign)}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/default_size_26" />
 

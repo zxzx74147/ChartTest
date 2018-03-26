@@ -33,6 +33,7 @@ import com.zxzx74147.devlib.fragment.CommonFragmentDialog;
 import com.zxzx74147.devlib.interfaces.CommonListRequestCallback;
 import com.zxzx74147.devlib.interfaces.IBaseListDataHolder;
 import com.zxzx74147.devlib.modules.account.AccountManager;
+import com.zxzx74147.devlib.modules.account.UserStorage;
 import com.zxzx74147.devlib.modules.account.UserViewModel;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
@@ -77,6 +78,7 @@ public class PositionFragment extends BaseDialogFragment {
     private CommonRecyclerViewAdapter<Position> mPositionAdapter = null;
     private CommonRecyclerViewAdapter<Object> mMachAdapter = null;
     private TradesStorage mTradeStorage = RetrofitClient.getClient().create(TradesStorage.class);
+    private UserStorage mUserStorage = RetrofitClient.getClient().create(UserStorage.class);
     private LayoutPositionHeaderBinding mLayoutPositionHeaderBinding = null;
 
 
@@ -112,6 +114,10 @@ public class PositionFragment extends BaseDialogFragment {
 //        ViewUtil.changeTabs(((ViewGroup) mBinding.tabLayout2.getChildAt(0)).getChildAt(1), String.format(getString(R.string.format_my_machposition), userdata.machPositionList.num));
         if(mLayoutPositionHeaderBinding!=null){
             mLayoutPositionHeaderBinding.setUserUniData(userdata);
+        }
+        if(mBinding.tabLayout2.getTabAt(0).isSelected()){
+            mPositionAdapter.setNewData(userdata.positionList.getListItems());
+            mBinding.refreshLayout.setRefreshing(false);
         }
     }
 
@@ -174,11 +180,13 @@ public class PositionFragment extends BaseDialogFragment {
         RxTabLayout.selectionEvents(mBinding.tabLayout2).subscribe(tabLayoutSelectionEvent -> {
             if (tabLayoutSelectionEvent.tab().getPosition() == 0) {
                 mPositionAdapter.loadMoreComplete();
+                mPositionAdapter.setNewData(AccountManager.sharedInstance().getUserUni().positionList.getListItems());
                 RecyclerViewUtil.setupRecyclerView(mBinding.refreshLayout, mBinding.list, mPositionAdapter, new CommonListRequestCallback<Position>() {
                     @Override
                     public Observable<PositionListData> getObserverble(BaseListData listdata) {
                         AccountManager.sharedInstance().doRefresh();
-                        return mTradeStorage.positionGetList(listdata == null ? 0 : listdata.nextPage);
+                        return null;
+//                        return mTradeStorage.positionGetList(listdata == null ? 0 : listdata.nextPage);
 
                     }
                 });

@@ -40,6 +40,7 @@ public class RechargeWechatFragment extends BaseDialogFragment {
     private PayStorage mPayStorage = RetrofitClient.getClient().create(PayStorage.class);
     private PayResultLiveData mPayResultLiveDat = new PayResultLiveData();
     private PayRequest mPayReqeust;
+    private boolean mHasSaved = false;
 
     public static RechargeWechatFragment newInstance(IntentData<PayRequest> amount) {
         RechargeWechatFragment fragment = new RechargeWechatFragment();
@@ -114,6 +115,10 @@ public class RechargeWechatFragment extends BaseDialogFragment {
                 ToastUtil.showToast(getActivity(), "加载中，请稍后");
                 return;
             }
+            if (mHasSaved) {
+                ToastUtil.showToast(getActivity(), "已保存,请到相册查看");
+                return;
+            }
 
             ShareRechargeWechatBinding mShareBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.share_recharge_wechat, null, false);
             switch (mPayReqeust.type) {
@@ -130,8 +135,9 @@ public class RechargeWechatFragment extends BaseDialogFragment {
                 Bitmap bm = ViewUtil.generateBitmapFromView(mShareBinding.getRoot(), getResources().getDimensionPixelSize(R.dimen.default_gap_512), getResources().getDimensionPixelSize(R.dimen.default_gap_918));
                 if (ViewUtil.saveImageToGallery(getContext(), bm)) {
                     ToastUtil.showToast(getActivity(), "保存成功");
+                    mHasSaved = true;
                 }
-            }, 500);
+            }, 200);
         });
 
     }
@@ -144,8 +150,9 @@ public class RechargeWechatFragment extends BaseDialogFragment {
         dialog.setContentView(binding.getRoot());
         dialog.show();
         RxView.clicks(binding.recharge).subscribe(v -> {
+            ProfileBusStation.startProfile(getActivity());
                     dialog.dismiss();
-                    ProfileBusStation.startProfile(getActivity());
+
                 }
         );
 

@@ -103,7 +103,7 @@ public class MyCombinedChart extends CombinedChart {
                             canvas.drawText(context, mViewPortHandler.contentLeft() + length, mViewPortHandler.contentTop() + top, mPaint);
                             length += mPaint.measureText(context) + 10;
                         }
-                        if(maxX>set.getValues().size()||maxX<0||set.getValues().size()==0){
+                        if(maxX>=set.getValues().size()||maxX<0||set.getValues().size()==0){
 
                             continue;
                         }

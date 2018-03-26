@@ -270,6 +270,9 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             int upPer = mGoodType.buyUserNum * 100 / (mGoodType.buyUserNum + mGoodType.sellUserNum);
             mBinding.upPer.setText(upPer + "%人选择");
             mBinding.downPer.setText((100 - upPer) + "%人选择");
+        }else{
+            mBinding.upPer.setText("50%人选择");
+            mBinding.downPer.setText("50%人选择");
         }
 
         mBinding.price.setText("");

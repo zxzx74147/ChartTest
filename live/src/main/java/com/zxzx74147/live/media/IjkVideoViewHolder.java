@@ -19,27 +19,19 @@ package com.zxzx74147.live.media;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.MediaController;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
-import com.google.android.exoplayer.text.TextRenderer;
 import com.zxzx74147.live.R;
 import com.zxzx74147.live.services.MediaPlayerService;
 
@@ -544,6 +536,9 @@ public class IjkVideoViewHolder implements MediaController.MediaPlayerControl {
                         if (mOnErrorListener.onError(mMediaPlayer, framework_err, impl_err)) {
                             return true;
                         }
+                    }
+                    if(mRenderView!=null&&mRenderView.getView()!=null&&mRenderView.getView().isAttachedToWindow()) {
+                        mRenderView.getView().postDelayed(mRetryRunnable, 3000);
                     }
 
                     /* Otherwise, pop up an error dialog so the user knows that
@@ -1132,4 +1127,15 @@ public class IjkVideoViewHolder implements MediaController.MediaPlayerControl {
     public int getSelectedTrack(int trackType) {
         return MediaPlayerCompat.getSelectedTrack(mMediaPlayer, trackType);
     }
+
+    public Runnable mRetryRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if(mUri!=null&&mMediaPlayer!=null){
+                setVideoURI(mUri);
+            }
+        }
+    };
+
+
 }
