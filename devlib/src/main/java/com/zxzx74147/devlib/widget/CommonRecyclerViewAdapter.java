@@ -73,4 +73,6 @@ public class CommonRecyclerViewAdapter<T> extends BaseQuickAdapter<T, BaseBindin
             notifyItemChanged(positon);
         }
     }
+
+
 }

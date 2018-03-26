@@ -150,9 +150,8 @@ public class RechargeWechatFragment extends BaseDialogFragment {
         dialog.setContentView(binding.getRoot());
         dialog.show();
         RxView.clicks(binding.recharge).subscribe(v -> {
-            ProfileBusStation.startProfile(getActivity());
+                    ProfileBusStation.startProfile(getActivity());
                     dialog.dismiss();
-
                 }
         );
 

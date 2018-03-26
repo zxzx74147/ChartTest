@@ -14,6 +14,7 @@
         <import type="com.zxzx74147.stock.data.MachPosition" />
         <import type="com.zxzx74147.stock.data.Position" />
         <import type="com.zxzx74147.devlib.modules.busstation.StockBusStation"/>
+        <import type="com.zxzx74147.devlib.utils.FormatUtil"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -72,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/default_gap_16"
-                android:text='@{@string/mach_price+@string/format_01(data.price)}'
+                android:text='@{@string/mach_price+FormatUtil.formatWithoutZero(data.price,@string/format_01)}'
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/default_size_30"
                 app:layout_constraintBottom_toBottomOf="@+id/textView4"

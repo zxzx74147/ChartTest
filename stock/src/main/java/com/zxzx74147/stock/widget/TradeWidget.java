@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import com.jakewharton.rxbinding2.support.design.widget.RxTabLayout;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxCompoundButton;
+import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.devlib.data.DialogItem;
 import com.zxzx74147.devlib.data.IntentData;
@@ -48,6 +49,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.functions.Function;
 
 /**
  * Created by zhengxin on 2018/2/8.
@@ -132,6 +134,40 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             mBinding.setType(mType);
         });
 
+
+        RxTextView.textChanges(mBinding.machRemind).subscribe(charSequence -> {
+            if(charSequence==null||charSequence.length()==0){
+                mBinding.machRemind.setText("0");
+                return;
+            }
+            boolean isChanged = false;
+            String result = charSequence.toString();
+            while(result.startsWith("0")&&result.length()>1){
+                result = result.substring(1);
+                isChanged = true;
+            }
+            if(isChanged){
+                mBinding.machRemind.setText(result);
+            }
+
+        });
+
+        RxTextView.textChanges(mBinding.price).subscribe(charSequence -> {
+            if(charSequence.length()==0){
+                return;
+            }
+            boolean isChanged = false;
+            String result = charSequence.toString();
+            while(result.length()>1&&result.startsWith("0")){
+                result = result.substring(1);
+                isChanged = true;
+            }
+            if(isChanged){
+                mBinding.price.setText(result);
+            }
+
+        });
+
         RxTabLayout.selectionEvents(mBinding.listType).subscribe(tabLayoutSelectionEvent -> {
             Good good = (Good) tabLayoutSelectionEvent.tab().getTag();
             mSelectGood = good;
@@ -155,8 +191,8 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             int offset = FormatUtil.getPureNum(mBinding.buyStopValue.getText().toString());
             WheelSelectorData data = new WheelSelectorData();
             data.items = FormatUtil.getPointCal(mSelectGood, mAmount);
-            offset = offset==0? 0:offset-6;
-            offset = Math.max(0,offset);
+            offset = offset == 0 ? 0 : offset - 6;
+            offset = Math.max(0, offset);
             data.offset = offset;
             CommonWheelSelectorDialog dialog = CommonWheelSelectorDialog.newInstance(new IntentData<>(data));
             ZXFragmentJumpHelper.startFragment(getContext(), dialog, new CommonCallback() {
@@ -166,7 +202,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                         return;
                     }
                     int sel = (int) item;
-                    mBinding.buyStopValue.setText((sel==0? 0:sel+6) + "点");
+                    mBinding.buyStopValue.setText((sel == 0 ? 0 : sel + 6) + "点");
                 }
             });
         });
@@ -175,8 +211,8 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             int offset = FormatUtil.getPureNum(mBinding.buyLimitValue.getText().toString());
             WheelSelectorData data = new WheelSelectorData();
             data.items = FormatUtil.getPointCal(mSelectGood, mAmount);
-            offset = offset==0? 0:offset-6;
-            offset = Math.max(0,offset);
+            offset = offset == 0 ? 0 : offset - 6;
+            offset = Math.max(0, offset);
             data.offset = offset;
             CommonWheelSelectorDialog dialog = CommonWheelSelectorDialog.newInstance(new IntentData<>(data));
             ZXFragmentJumpHelper.startFragment(getContext(), dialog, new CommonCallback() {
@@ -186,7 +222,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                         return;
                     }
                     int sel = (int) item;
-                    mBinding.buyLimitValue.setText((sel==0? 0:sel+6) + "点");
+                    mBinding.buyLimitValue.setText((sel == 0 ? 0 : sel + 6) + "点");
                 }
             });
         });
@@ -256,7 +292,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             return;
         }
 
-        float total = mAmount * mSelectGood.depositFee+(mBinding.voucher.isChecked()? 0:mAmount*mSelectGood.openChargeFee);
+        float total = mAmount * mSelectGood.depositFee + (mBinding.voucher.isChecked() ? 0 : mAmount * mSelectGood.openChargeFee);
 
         mBinding.setTotal(total);
     }
@@ -270,7 +306,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             int upPer = mGoodType.buyUserNum * 100 / (mGoodType.buyUserNum + mGoodType.sellUserNum);
             mBinding.upPer.setText(upPer + "%人选择");
             mBinding.downPer.setText((100 - upPer) + "%人选择");
-        }else{
+        } else {
             mBinding.upPer.setText("50%人选择");
             mBinding.downPer.setText("50%人选择");
         }
@@ -282,7 +318,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
         mBinding.listAmount.removeAllTabs();
         for (Good good : mGoodType.goods) {
             String format = "%.0f元/手";
-            String temp = String.format(format,good.depositFee);
+            String temp = String.format(format, good.depositFee);
 //            String temp = (String.valueOf(good.depositFee) + "元/手");
             TabLayout.Tab newTab = mBinding.listType.newTab();
             newTab.setText(temp);
@@ -337,15 +373,15 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
 
         if (mMachPosition != null) {
             double test = FormatUtil.getPureDoubleNum(mBinding.price.getText().toString());
-            String price=mBinding.price.getText().toString();
+            String price = mBinding.price.getText().toString();
 //            String price = FormatUtil.getPureDoubleNum(mBinding.price.getText().toString());
             if (test == 0) {
                 ToastUtil.showToast(getContext(), R.string.mach_price_remind);
                 return;
             }
             float error = FormatUtil.getPureFloatNum(mBinding.machRemind.getText().toString());
-            if(TextUtils.isEmpty(mBinding.machRemind.getText().toString())){
-                ToastUtil.showToast(getContext(),"请输入允许误差");
+            if (TextUtils.isEmpty(mBinding.machRemind.getText().toString())) {
+                ToastUtil.showToast(getContext(), "请输入允许误差");
                 return;
             }
             Observable<MachPositionData> observable = mTradeStorage.machpositionModify(mMachPosition.machPositionId, mSelectGood.goodsId, mType - 2, mAmount, price, limitStr, stopStr, String.valueOf(error), 1);
@@ -473,14 +509,14 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
         } else {
 
             double test = FormatUtil.getPureDoubleNum(mBinding.price.getText().toString());
-            String price=mBinding.price.getText().toString();
+            String price = mBinding.price.getText().toString();
 //            String price = FormatUtil.getPureDoubleNum(mBinding.price.getText().toString());
             if (test == 0) {
                 ToastUtil.showToast(getContext(), R.string.mach_price_remind);
                 return;
             }
-            if(TextUtils.isEmpty(mBinding.machRemind.getText().toString())){
-                ToastUtil.showToast(getContext(),"请输入允许误差");
+            if (TextUtils.isEmpty(mBinding.machRemind.getText().toString())) {
+                ToastUtil.showToast(getContext(), "请输入允许误差");
                 return;
             }
             float error = FormatUtil.getPureFloatNum(mBinding.machRemind.getText().toString());
@@ -599,23 +635,23 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
         mBinding.setVoucher(check);
         ComVoucher comVoucher = AccountManager.sharedInstance().getUserUni().userComVoucherInfo;
         if (check) {
-            int vFee = (int) comVoucher.depositFee;
-            int count = 0;
-            for (Good good : mGoodType.goods) {
-                int gFee = (int) good.depositFee;
-                if (gFee > 0) {
-                    if (vFee % gFee == 0) {
-                        mBinding.buyLimitValue.setText("10点");
-                        mBinding.buyStopValue.setText("10点");
-                        mBinding.listAmount.getTabAt(vFee / gFee - 1).select();
-                        mBinding.listAmount.setScrollX(0);
-                        mBinding.listType.getTabAt(count).select();
-                        ViewUtil.disableTabLayout(mBinding.listAmount);
-                        ViewUtil.disableTabLayout(mBinding.listType);
-                        count++;
-                    }
-                }
-            }
+//            int vFee = (int) comVoucher.depositFee;
+//            int count = 0;
+//            for (Good good : mGoodType.goods) {
+//                int gFee = (int) good.depositFee;
+//                if (gFee > 0) {
+//                    if (vFee % gFee == 0) {
+//                        mBinding.buyLimitValue.setText("10点");
+//                        mBinding.buyStopValue.setText("10点");
+//                        mBinding.listAmount.getTabAt(vFee / gFee - 1).select();
+//                        mBinding.listAmount.setScrollX(0);
+//                        mBinding.listType.getTabAt(count).select();
+//                        ViewUtil.disableTabLayout(mBinding.listAmount);
+//                        ViewUtil.disableTabLayout(mBinding.listType);
+//                        count++;
+//                    }
+//                }
+//            }
         } else {
             mBinding.buyLimitValue.setText("无");
             mBinding.buyStopValue.setText("无");
@@ -658,7 +694,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
             @Override
             public void run() {
                 mBinding.machRemind.setText(String.format("%.0f", mMachPosition.error));
-                mBinding.price.setText(String.format("%.1f",machPosition.price));
+                mBinding.price.setText(FormatUtil.formatWithoutZero(machPosition.price, "%.1f"));
                 mBinding.buyLimitValue.setText(String.format("%.0f点", machPosition.limit));
                 mBinding.buyStopValue.setText(String.format("%.0f点", machPosition.stop));
                 GoodType goodType = mGoodType;

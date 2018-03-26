@@ -64,6 +64,7 @@ public class ProfileEditFragment extends BaseDialogFragment {
     private static int REQUEST_IMAGE_GALLERY = 101;
     private static int REQUEST_IMAGE_CROP = 102;
     private Uri mCaptureUri = null;
+    private UpPicData mUpPicData = null;
 
     public static ProfileEditFragment newInstance() {
         ProfileEditFragment fragment = new ProfileEditFragment();
@@ -107,7 +108,7 @@ public class ProfileEditFragment extends BaseDialogFragment {
         RxTextView.textChanges(mBinding.nickName).subscribe(new Consumer<CharSequence>() {
             @Override
             public void accept(CharSequence charSequence) throws Exception {
-                if (charSequence.length() == 0||charSequence.toString().equals(mBinding.getUser().nickName)) {
+                if (mUpPicData==null&&(charSequence.length() == 0||charSequence.toString().equals(mBinding.getUser().nickName))) {
                     mBinding.saveButton.setEnabled(false);
                 }else{
                     mBinding.saveButton.setEnabled(true);
@@ -175,11 +176,11 @@ public class ProfileEditFragment extends BaseDialogFragment {
             return;
         }
 
-        if (name.equals(mBinding.getUser().nickName)) {
+        if (name.equals(mBinding.getUser().nickName)&&mUpPicData==null) {
             return;
         }
 
-        NetworkApi.ApiSubscribe(getActivity(), mUserStroage.accountUpdate(name, null), true, new Consumer<UserUniData>() {
+        NetworkApi.ApiSubscribe(getActivity(), mUserStroage.accountUpdate(name, mUpPicData==null? null:mUpPicData.picKey), true, new Consumer<UserUniData>() {
             @Override
             public void accept(UserUniData userUniData) throws Exception {
                 if (userUniData.hasError()) {
@@ -190,6 +191,8 @@ public class ProfileEditFragment extends BaseDialogFragment {
                     mUserModelView.getUserUniLiveData().getValue().user = userUniData.user;
                     mUserModelView.getUserUniLiveData().setValue(mUserModelView.getUserUniLiveData().getValue());
                 }
+                mUpPicData = null;
+                mBinding.saveButton.setEnabled(false);
                 AccountManager.sharedInstance().doRefresh();
                 mBinding.setUser(userUniData.user);
                 ViewUtil.hideSoftPad(mBinding.nickName);
@@ -215,23 +218,27 @@ public class ProfileEditFragment extends BaseDialogFragment {
                     ToastUtil.showToast(getActivity(), upPicData.error.usermsg);
                     return;
                 }
+                mUpPicData = upPicData;
+                mBinding.getUser().portraitUrl = upPicData.picUrl;
+                mBinding.setUser(mBinding.getUser());
+                mBinding.saveButton.setEnabled(true);
 
-                NetworkApi.ApiSubscribe(mUserStroage.accountUpdate(null, upPicData.picKey), new Consumer<UserUniData>() {
-                    @Override
-                    public void accept(UserUniData userUniData) throws Exception {
-                        if (userUniData.hasError()) {
-                            ToastUtil.showToast(getActivity(), userUniData.error.usermsg);
-                            return;
-                        }
-                        if (mUserModelView.getUserUniLiveData().getValue() != null) {
-                            mUserModelView.getUserUniLiveData().getValue().user = userUniData.user;
-                            mUserModelView.getUserUniLiveData().setValue(mUserModelView.getUserUniLiveData().getValue());
-                        }
-                        AccountManager.sharedInstance().doRefresh();
-                        mBinding.setUser(userUniData.user);
-                        ViewUtil.hideSoftPad(mBinding.nickName);
-                    }
-                });
+//                NetworkApi.ApiSubscribe(mUserStroage.accountUpdate(null, upPicData.picKey), new Consumer<UserUniData>() {
+//                    @Override
+//                    public void accept(UserUniData userUniData) throws Exception {
+//                        if (userUniData.hasError()) {
+//                            ToastUtil.showToast(getActivity(), userUniData.error.usermsg);
+//                            return;
+//                        }
+//                        if (mUserModelView.getUserUniLiveData().getValue() != null) {
+//                            mUserModelView.getUserUniLiveData().getValue().user = userUniData.user;
+//                            mUserModelView.getUserUniLiveData().setValue(mUserModelView.getUserUniLiveData().getValue());
+//                        }
+//                        AccountManager.sharedInstance().doRefresh();
+//                        mBinding.setUser(userUniData.user);
+//                        ViewUtil.hideSoftPad(mBinding.nickName);
+//                    }
+//                });
             }
 
             @Override

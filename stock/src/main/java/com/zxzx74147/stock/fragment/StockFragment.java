@@ -45,6 +45,7 @@ public class StockFragment extends BaseDialogFragment {
         Bundle bundle = getArguments();
         GoodType good = (GoodType) bundle.getSerializable(ZXActivityJumpHelper.INTENT_DATA);
         mBinding.setGood(good);
+        mBinding.goodList.scrollToCurrent();
         mBinding.goodList.setCallback(item -> mBinding.setGood(item));
         initData();
 

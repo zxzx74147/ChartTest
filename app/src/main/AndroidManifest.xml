@@ -18,7 +18,7 @@
 
         <meta-data
             android:name="test_version"
-            android:value="v20180324_1">
+            android:value="v20180326_1">
         </meta-data>
 
         <meta-data

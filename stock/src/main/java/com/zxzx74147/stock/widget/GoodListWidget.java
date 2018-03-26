@@ -37,6 +37,7 @@ public class GoodListWidget extends RelativeLayout implements IViewModelHolder {
     private GoodType mGoodType = null;
     private boolean mNeedMyPosition;
 
+
     private List<GoodType> mData = new LinkedList<>();
     private CommonRecyclerViewAdapter<GoodType> mAdapter = null;
 
@@ -92,6 +93,17 @@ public class GoodListWidget extends RelativeLayout implements IViewModelHolder {
     public void setGood(GoodType good){
         mGoodType = good;
         refreshData();
+
+    }
+
+    public void scrollToCurrent(){
+        postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mBinding.list.scrollToItem(mGoodType);
+            }
+        },50);
+
     }
 
     public void refreshData(){
@@ -100,6 +112,7 @@ public class GoodListWidget extends RelativeLayout implements IViewModelHolder {
             for(GoodType item:mData){
                 if(mGoodType.goodsTypeName.equals(item.goodsTypeName)){
                     item.mIsSelect = true;
+                    mGoodType = item;
                 }else{
                     item.mIsSelect= false;
                 }
@@ -110,9 +123,7 @@ public class GoodListWidget extends RelativeLayout implements IViewModelHolder {
 
     public void clearSelect(){
         for(GoodType item:mData){
-
                 item.mIsSelect= false;
-
         }
     }
 
