@@ -67,7 +67,7 @@
 
             <com.zxzx74147.devlib.widget.CommonTabLayout
                 android:id="@+id/tabLayout"
-                style="@style/TitleTabLayout"
+                style="@style/MainTitleTabLayout"
                 app:selectBold="true"
                 app:tabMode="fixed"
                 android:visibility="@{SysInitManager.sharedInstance().getSysInitData().swich.liveOpen==0? View.GONE:View.VISIBLE}"
