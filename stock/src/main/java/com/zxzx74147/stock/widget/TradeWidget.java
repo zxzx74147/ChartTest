@@ -1,5 +1,6 @@
 package com.zxzx74147.stock.widget;
 
+import android.annotation.SuppressLint;
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.ViewModelProvider;
 import android.content.Context;
@@ -28,6 +29,8 @@ import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.modules.busstation.StockBusStation;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
+import com.zxzx74147.devlib.umeng.UmengAction;
+import com.zxzx74147.devlib.umeng.UmengAgent;
 import com.zxzx74147.devlib.utils.FormatUtil;
 import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.devlib.utils.ViewUtil;
@@ -54,7 +57,7 @@ import io.reactivex.functions.Function;
 /**
  * Created by zhengxin on 2018/2/8.
  */
-
+@SuppressLint("CheckResult")
 public class TradeWidget extends LinearLayout implements IViewModelHolder {
     private WidgetTradeBinding mBinding = null;
     private GoodType mGoodType = null;
@@ -105,6 +108,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
         super(context, attrs, defStyleAttr);
         init();
     }
+
 
 
     private void initView() {
@@ -384,6 +388,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                 ToastUtil.showToast(getContext(), "请输入允许误差");
                 return;
             }
+            UmengAgent.onEvent(UmengAction.ALUmengPageMachinePositionEdit);
             Observable<MachPositionData> observable = mTradeStorage.machpositionModify(mMachPosition.machPositionId, mSelectGood.goodsId, mType - 2, mAmount, price, limitStr, stopStr, String.valueOf(error), 1);
             NetworkApi.ApiSubscribe(ViewUtil.getLivecirceOwer(this), observable, true, machPositionData -> {
                 if (machPositionData.hasError()) {
@@ -429,6 +434,7 @@ public class TradeWidget extends LinearLayout implements IViewModelHolder {
                     dialogItem.cancel = getResources().getString(R.string.position_view);
                     dialogItem.ok = getResources().getString(R.string.continu_trade);
                     dialogItem.obj = positionData;
+                    UmengAgent.onEvent(UmengAction.ALUmengPagePositionOrderSucceed);
                     CommonFragmentDialog fragmentDialog = CommonFragmentDialog.newInstance(new IntentData<>(dialogItem));
                     ZXFragmentJumpHelper.startFragment(getContext(), fragmentDialog, new CommonCallback() {
                         @Override

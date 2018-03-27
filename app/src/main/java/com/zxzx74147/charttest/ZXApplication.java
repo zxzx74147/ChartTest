@@ -36,6 +36,7 @@ public class ZXApplication extends MultiDexApplication {
 
         Fabric.with(this, new Crashlytics());
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
+        MobclickAgent.openActivityDurationTrack(false);
 
 
     }

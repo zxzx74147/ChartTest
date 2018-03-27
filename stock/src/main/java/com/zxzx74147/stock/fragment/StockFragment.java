@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import com.zxzx74147.devlib.base.BaseDialogFragment;
 import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.devlib.modules.account.UserViewModel;
+import com.zxzx74147.devlib.umeng.UmengAction;
+import com.zxzx74147.devlib.umeng.UmengAgent;
 import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
 import com.zxzx74147.stock.R;
@@ -34,6 +36,7 @@ public class StockFragment extends BaseDialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+        UmengAgent.onEvent(UmengAction.ALUmengPageTradeInfo);
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_stock, container, false);
         mBinding.goodList.setProvider(ViewModelProviders.of(ViewUtil.getFragmentActivity(mBinding.getRoot())));
         mBinding.goodList.setLifeCircle(this);

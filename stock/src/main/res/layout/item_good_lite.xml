@@ -15,6 +15,8 @@
 
         <import type="com.zxzx74147.devlib.modules.busstation.StockBusStation" />
         <import type="com.zxzx74147.devlib.utils.FormatUtil"/>
+        <import type="com.zxzx74147.devlib.umeng.UmengAgent"/>
+        <import type="com.zxzx74147.devlib.umeng.UmengAction"/>
     </data>
 
     <LinearLayout

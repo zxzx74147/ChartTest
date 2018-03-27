@@ -17,6 +17,8 @@ import com.zxzx74147.devlib.modules.account.UserViewModel;
 import com.zxzx74147.devlib.modules.busstation.MainBusStation;
 import com.zxzx74147.devlib.modules.busstation.ProfileBusStation;
 import com.zxzx74147.devlib.modules.sys.SysInitManager;
+import com.zxzx74147.devlib.umeng.UmengAction;
+import com.zxzx74147.devlib.umeng.UmengAgent;
 import com.zxzx74147.devlib.utils.WebviewUtil;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.devlib.widget.CommonRecyclerViewAdapter;
@@ -54,6 +56,7 @@ public class ProfileFragment extends BaseDialogFragment {
         mExchangeBinding = DataBindingUtil.inflate(inflater, R.layout.layout_exchange, null, false);
         initView();
         initData();
+        UmengAgent.onEvent(UmengAction.ALUmengPageUserCenter);
         return mBinding.getRoot();
     }
 

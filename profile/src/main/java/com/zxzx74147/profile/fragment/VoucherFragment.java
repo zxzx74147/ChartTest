@@ -1,5 +1,6 @@
 package com.zxzx74147.profile.fragment;
 
+import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -17,6 +18,8 @@ import com.zxzx74147.devlib.fragment.CommonInfoDialog;
 import com.zxzx74147.devlib.interfaces.CommonListRequestCallback;
 import com.zxzx74147.devlib.modules.account.UserViewModel;
 import com.zxzx74147.devlib.network.RetrofitClient;
+import com.zxzx74147.devlib.umeng.UmengAction;
+import com.zxzx74147.devlib.umeng.UmengAgent;
 import com.zxzx74147.devlib.utils.RecyclerViewUtil;
 import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
@@ -33,6 +36,7 @@ import io.reactivex.Observable;
 
 /**
  */
+@SuppressLint("CheckResult")
 public class VoucherFragment extends BaseDialogFragment {
 
 
@@ -58,6 +62,7 @@ public class VoucherFragment extends BaseDialogFragment {
 //    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+        UmengAgent.onEvent(UmengAction.ALUmengPageMyVoucher);
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_vocher, container, false);
         mUserViewModel = ViewModelProviders.of(ViewUtil.getFragmentActivity(getContext())).get(UserViewModel.class);
         mUserViewModel.getUserUniLiveData().observe(this, userUniData -> {
@@ -87,6 +92,7 @@ public class VoucherFragment extends BaseDialogFragment {
 //    }
 //
 //
+
     private void initView() {
 
         mVoucherAdapter = new CommonRecyclerViewAdapter<>(null);

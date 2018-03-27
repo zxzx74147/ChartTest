@@ -13,17 +13,17 @@
         android:theme="@style/AppTheme">
         <meta-data
         android:name="api_version"
-        android:value="1.0.0">
+        android:value="1.1.0">
     </meta-data>
 
         <meta-data
             android:name="test_version"
-            android:value="v20180326_2">
+            android:value="v20180327_1">
         </meta-data>
 
         <meta-data
             android:name="app_version"
-            android:value="1.0.0(Build_2018032102)" />
+            android:value="1.1.0(Build_2018032102)" />
 
         <meta-data
             android:name="io.fabric.ApiKey"

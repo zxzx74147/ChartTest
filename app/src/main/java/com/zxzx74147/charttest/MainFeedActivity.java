@@ -1,8 +1,10 @@
 package com.zxzx74147.charttest;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -10,32 +12,26 @@ import android.support.v4.view.GestureDetectorCompat;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
-import android.view.View;
 
-import com.allenliu.versionchecklib.v2.AllenVersionChecker;
-import com.allenliu.versionchecklib.v2.builder.UIData;
-import com.jakewharton.rxbinding2.support.design.widget.RxTabLayout;
-import com.jakewharton.rxbinding2.support.design.widget.TabLayoutSelectionEvent;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.zxzx74147.charttest.databinding.ActivityMainFeedBinding;
-import com.zxzx74147.charttest.databinding.LayoutUpgradeBinding;
 import com.zxzx74147.devlib.DevLib;
 import com.zxzx74147.devlib.base.BaseActivity;
 import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.devlib.data.DialogItem;
 import com.zxzx74147.devlib.data.IntentData;
-import com.zxzx74147.devlib.font.FontBinder;
 import com.zxzx74147.devlib.fragment.CommonFragmentDialog;
 import com.zxzx74147.devlib.kvstore.KVStore;
 import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.modules.account.UserViewModel;
 import com.zxzx74147.devlib.modules.busstation.LiveBusStation;
 import com.zxzx74147.devlib.modules.busstation.MainBusStation;
-import com.zxzx74147.devlib.modules.busstation.ProfileBusStation;
 import com.zxzx74147.devlib.modules.busstation.StockBusStation;
 import com.zxzx74147.devlib.modules.sys.SysInitManager;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
+import com.zxzx74147.devlib.umeng.UmengAction;
+import com.zxzx74147.devlib.umeng.UmengAgent;
 import com.zxzx74147.devlib.utils.DisplayUtil;
 import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.devlib.utils.ViewUtil;
@@ -57,7 +53,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 
 import io.reactivex.functions.Consumer;
-
+@SuppressLint("CheckResult")
 public class MainFeedActivity extends BaseActivity {
 
     private ActivityMainFeedBinding mBinding = null;
@@ -100,7 +96,7 @@ public class MainFeedActivity extends BaseActivity {
             if(e1==null||e2==null){
                 return true;
             }
-            if (velocityX > 0&&Math.abs(e1.getX()-e2.getX())>2*Math.abs(e1.getY()-e2.getY())) {
+            if (velocityX > 0&&Math.abs(e1.getX()-e2.getX())>2*Math.abs(e1.getY()-e2.getY())&&Math.abs(e1.getX()-e2.getX())>DisplayUtil.getDisplayMetrics().widthPixels/3) {
                 if (SysInitManager.sharedInstance().getSysInitData().swich.liveOpen != 0) {
                     checkLive(MainFeedActivity.this);
                 }
@@ -127,6 +123,7 @@ public class MainFeedActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        UmengAgent.onEvent(UmengAction.ALUmengPageFeedDetail);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main_feed);
         mBinding.goodList.setCallback(mCallback);
         mBinding.goodList.setProvider(ViewModelProviders.of(this));
@@ -166,6 +163,7 @@ public class MainFeedActivity extends BaseActivity {
             item.content=getResources().getString(R.string.send_remind);
             item.cancel = null;
             item.ok = getResources().getString(com.zxzx74147.balance.R.string.i_know);
+            UmengAgent.onEvent(UmengAction.ALUmengPagePostAlert);
             CommonFragmentDialog dialog = CommonFragmentDialog.newInstance(new IntentData<>(item));
             ZXFragmentJumpHelper.startFragment(MainFeedActivity.this, dialog, new CommonCallback() {
                 @Override
@@ -182,14 +180,14 @@ public class MainFeedActivity extends BaseActivity {
     private void initData() {
         mUserViewModel = ViewModelProviders.of(MainFeedActivity.this).get(UserViewModel.class);
         mUserViewModel.getUserUniLiveData().observe(MainFeedActivity.this, userUniData -> {
-            if (userUniData.hasError()) {
+            if (userUniData!=null&&userUniData.hasError()) {
                 return;
             }
             mBinding.setUserUni(userUniData);
             mBinding.setUser(userUniData.user);
             mBinding.setUnRead(UnReadManager.sharedInstance().getUnReadNum());
             if(userUniData.userComVoucherInfo!=null){
-                showComVoucher(userUniData.userComVoucherInfo);
+                showComVoucher(MainFeedActivity.this,userUniData.userComVoucherInfo);
             }
         });
     }
@@ -215,20 +213,34 @@ public class MainFeedActivity extends BaseActivity {
         KVStore.put(KEY_COM_VOUCHER,mReadTable);
     }
 
-    public void showComVoucher(ComVoucher voucher){
+    private static boolean useVoucher = false;
+
+    public static void showComVoucher(Context context, ComVoucher voucher){
         if(isRead(voucher.voucherId)){
             return;
         }
+        useVoucher = false;
+        UmengAgent.onEvent(UmengAction.ALUmengPageCommonVoucher);
         markRead(voucher.voucherId);
-        Dialog dialog = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        Dialog dialog = new Dialog(context, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         LayoutComVoucherBinding binding = DataBindingUtil.inflate(LayoutInflater.from(DevLib.getApp()), R.layout.layout_com_voucher, null, false);
         dialog.setContentView(binding.getRoot());
         RxView.clicks(binding.close).subscribe(v -> {
             dialog.dismiss();
         });
         RxView.clicks(binding.justUse).subscribe(v -> {
+            useVoucher = true;
             dialog.dismiss();
-            StockBusStation.startStockTrade(MainFeedActivity.this,AccountManager.sharedInstance().getUserUni().goodsTypeList.goodType.get(0), TradeFragment.TYPE_POSITION_BUY_UP);
+            UmengAgent.onEvent(UmengAction.ALUmengPageVoucherUse);
+            StockBusStation.startStockTrade(context,AccountManager.sharedInstance().getUserUni().goodsTypeList.goodType.get(0), TradeFragment.TYPE_POSITION_BUY_UP);
+        });
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                if(!useVoucher){
+                    UmengAgent.onEvent(UmengAction.ALUmengPageVoucherClose);
+                }
+            }
         });
         binding.setVoucher(voucher);
         dialog.show();

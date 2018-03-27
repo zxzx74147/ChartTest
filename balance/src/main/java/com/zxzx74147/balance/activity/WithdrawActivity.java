@@ -1,5 +1,6 @@
 package com.zxzx74147.balance.activity;
 
+import android.annotation.SuppressLint;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +9,7 @@ import android.text.TextUtils;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
+import com.umeng.analytics.MobclickAgent;
 import com.zxzx74147.balance.R;
 import com.zxzx74147.balance.data.Bank;
 import com.zxzx74147.balance.data.BankCard;
@@ -18,6 +20,7 @@ import com.zxzx74147.balance.databinding.ActivityWithdrawBinding;
 import com.zxzx74147.balance.fragment.BindCorfirmFragment;
 import com.zxzx74147.balance.storage.BankStorage;
 import com.zxzx74147.balance.storage.WithDrawStorage;
+import com.zxzx74147.devlib.DevLib;
 import com.zxzx74147.devlib.base.BaseActivity;
 import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.devlib.data.DialogItem;
@@ -30,6 +33,8 @@ import com.zxzx74147.devlib.modules.busstation.MainBusStation;
 import com.zxzx74147.devlib.modules.busstation.ProfileBusStation;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
+import com.zxzx74147.devlib.umeng.UmengAction;
+import com.zxzx74147.devlib.umeng.UmengAgent;
 import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
 import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
@@ -45,7 +50,7 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * Created by zhengxin on 2018/3/4.
  */
-
+@SuppressLint("CheckResult")
 public class WithdrawActivity extends BaseActivity {
 
     private ActivityWithdrawBinding mBinding = null;
@@ -57,11 +62,13 @@ public class WithdrawActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        UmengAgent.onEvent(UmengAction.ALUmengPageWithdraw);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_withdraw);
         mBankStorage = RetrofitClient.getClient().create(BankStorage.class);
         mWithdrawStorage = RetrofitClient.getClient().create(WithDrawStorage.class);
         initView();
         initData();
+
     }
 
     private void initData() {
@@ -78,6 +85,7 @@ public class WithdrawActivity extends BaseActivity {
             initHasCard();
         });
     }
+
     private void initView() {
 //        float balance = AccountManager.sharedInstance().getUser().balance;
 //        int len = String.format("%.2f",balance).length();

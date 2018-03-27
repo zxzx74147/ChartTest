@@ -33,6 +33,8 @@ import com.zxzx74147.devlib.modules.account.UserViewModel;
 import com.zxzx74147.devlib.modules.busstation.ProfileBusStation;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
+import com.zxzx74147.devlib.umeng.UmengAction;
+import com.zxzx74147.devlib.umeng.UmengAgent;
 import com.zxzx74147.devlib.utils.FileUtil;
 import com.zxzx74147.devlib.utils.ImageUtil;
 import com.zxzx74147.devlib.utils.ToastUtil;
@@ -74,6 +76,7 @@ public class ProfileEditFragment extends BaseDialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+        UmengAgent.onEvent(UmengAction.ALUmengPageEditProfile);
         mBinding = DataBindingUtil.inflate(inflater, R.layout.layout_profile_edit, container, false);
         mBinding.setUser(AccountManager.sharedInstance().getUser());
         mUserModelView = ViewModelProviders.of(getActivity()).get(UserViewModel.class);

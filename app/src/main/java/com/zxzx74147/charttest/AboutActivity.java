@@ -13,6 +13,8 @@ import com.zxzx74147.devlib.base.BaseActivity;
 import com.zxzx74147.devlib.data.Upgrade;
 import com.zxzx74147.devlib.modules.sys.SysInitManager;
 import com.zxzx74147.devlib.os.PackageInfoMananger;
+import com.zxzx74147.devlib.umeng.UmengAction;
+import com.zxzx74147.devlib.umeng.UmengAgent;
 
 public class AboutActivity extends BaseActivity {
 
@@ -21,6 +23,7 @@ public class AboutActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        UmengAgent.onEvent(UmengAction.ALUmengPageAboutUs);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_about);
         String version = AppInfoUtil.getAppVersionName(this);
         mBinding.setVersion(version+ "("+PackageInfoMananger.sharedInstance().getVersionInfo().buildVersion+")");

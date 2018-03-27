@@ -26,7 +26,6 @@ import android.widget.ImageView;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.jakewharton.rxbinding2.widget.TextViewEditorActionEvent;
-import com.zxzx74147.charttest.MainFeedActivity;
 import com.zxzx74147.charttest.R;
 import com.zxzx74147.charttest.databinding.LayoutLiveNormalBinding;
 import com.zxzx74147.devlib.base.BaseActivity;
@@ -50,6 +49,7 @@ import com.zxzx74147.live.data.Msg;
 import com.zxzx74147.live.data.MsgData;
 import com.zxzx74147.live.stroage.LiveStorage;
 import com.zxzx74147.live.viewmodel.LiveMsgViewModel;
+import com.zxzx74147.profile.data.UnReadManager;
 import com.zxzx74147.stock.data.GoodType;
 import com.zxzx74147.stock.fragment.StockFragment;
 
@@ -90,9 +90,9 @@ public class LayoutLiveNormal extends FrameLayout {
     private LiveStorage mLiveStorage = RetrofitClient.getClient().create(LiveStorage.class);
     private boolean mIsTouchint = false;
     private KeyboardStatusDetector mDetector = new KeyboardStatusDetector();
+    private List<Msg> mData = new LinkedList<>();
     private GestureDetectorCompat mGestureDetector;
     private MotionEvent mLastOnDownEvent = null;
-    private List<Msg> mData = new LinkedList<>();
     private GestureDetector.OnGestureListener mOnGestureListener = new GestureDetector.OnGestureListener() {
         @Override
         public boolean onDown(MotionEvent e) {
@@ -266,9 +266,7 @@ public class LayoutLiveNormal extends FrameLayout {
                 return;
             }
             mBingding.setLiveMsg(liveMsgListData);
-            if (mIsTouchint) {
-                return;
-            }
+
 
 //            if( mAdapter.getData().size()==0) {
 //                mAdapter.setNewData(liveMsgListData.msgList.msg);
@@ -278,6 +276,9 @@ public class LayoutLiveNormal extends FrameLayout {
             }
             mAdapter.addData(liveMsgListData.msgList.msg);
 
+            if (mIsTouchint) {
+                return;
+            }
 //            mAdapter.notifyDataSetChanged();
             mBingding.list.scrollToButtom();
             mBingding.bubble.startAnimation(mBingding.bubble.getWidth() / 2, mBingding.bubble.getHeight() - getResources().getDimensionPixelSize(R.dimen.default_gap_100), 2);
@@ -435,5 +436,6 @@ public class LayoutLiveNormal extends FrameLayout {
 
     public void setUserData(UserData user) {
         mBingding.setUser(user);
+        mBingding.setUnRead(UnReadManager.sharedInstance().getUnReadNum());
     }
 }

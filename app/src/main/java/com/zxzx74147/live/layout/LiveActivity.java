@@ -19,6 +19,8 @@ import com.zxzx74147.devlib.data.UniApiData;
 import com.zxzx74147.devlib.modules.account.UserViewModel;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
+import com.zxzx74147.devlib.umeng.UmengAction;
+import com.zxzx74147.devlib.umeng.UmengAgent;
 import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.live.data.Live;
 import com.zxzx74147.live.media.IjkVideoViewHolder;
@@ -45,6 +47,7 @@ public class LiveActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        UmengAgent.onEvent(UmengAction.ALUmengPageLive);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_live);
         mLiveMsgViewModel = ViewModelProviders.of(this).get(LiveMsgViewModel.class);
         mLive = (Live) mIntentData.data;

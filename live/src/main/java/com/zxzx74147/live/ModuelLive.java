@@ -1,5 +1,6 @@
 package com.zxzx74147.live;
 
+import android.app.Activity;
 import android.app.Application;
 import android.support.v4.app.FragmentActivity;
 
@@ -10,6 +11,7 @@ import com.zxzx74147.devlib.modules.busstation.LiveBusStation;
 import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.live.activity.FeedReplyActivity;
+import com.zxzx74147.live.activity.ImagePreviewActivity;
 import com.zxzx74147.live.data.Live;
 import com.zxzx74147.live.data.Msg;
 import com.zxzx74147.live.data.Reply;
@@ -56,6 +58,9 @@ public class ModuelLive {
             fragment.show(((FragmentActivity) event.context).getSupportFragmentManager(), fragment.getTag());
         }else  if (event.id == LiveBusStation.BUS_ID_FEED_VIEW) {
             ZXActivityJumpHelper.startActivity(event.context, FeedReplyActivity.class,new IntentData((Serializable) event.data));
+        } if (event.id == LiveBusStation.BUS_ID_IMAGE_VIEW) {
+            ZXActivityJumpHelper.startActivity(event.context, ImagePreviewActivity.class,new IntentData((Serializable) event.data));
+            ((Activity) event.context).overridePendingTransition(R.anim.scale_in, R.anim.slide_in_hold);
         }
     }
 }

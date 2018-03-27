@@ -16,31 +16,74 @@
             name="liveMsg"
             type="com.zxzx74147.live.data.LiveMsgListData" />
 
+        <variable
+            name="unRead"
+            type="Integer" />
+
         <import type="com.zxzx74147.devlib.modules.busstation.ProfileBusStation" />
 
         <import type="com.zxzx74147.devlib.modules.sys.SysInitManager" />
 
         <import type="com.zxzx74147.devlib.utils.WebviewUtil" />
-        <import type="android.text.TextUtils"/>
-        <import type="android.view.View"/>
+
+        <import type="android.text.TextUtils" />
+
+        <import type="android.view.View" />
+        <import type="com.zxzx74147.devlib.modules.busstation.LiveBusStation"/>
 
 
     </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:background="@drawable/mask"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/mask">
 
 
-        <ImageView
-            android:id="@id/close"
-            android:src="@drawable/live_close"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:padding="@dimen/default_gap_44"
-            app:layout_constraintTop_toTopOf="parent"
+        <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="@dimen/default_gap_56"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/default_gap_44"
+            android:layout_marginTop="@dimen/default_gap_22"
+            android:background="@drawable/rect_round_live_portrait"
+            android:onClick="@{()->ProfileBusStation.startProfile(context)}"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.zxzx74147.devlib.widget.ZXImageView
+                android:id="@+id/portrait"
+                android:layout_width="@dimen/default_gap_48"
+                android:layout_height="@dimen/default_gap_48"
+                android:layout_gravity="right"
+                android:layout_margin="@dimen/default_gap_4"
+                app:imageUrl="@{user.portraitUrl}"
+                app:riv_corner_radius="@dimen/default_gap_28" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/default_gap_66"
+                android:layout_marginTop="@dimen/default_gap_2"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/default_gap_20"
+                android:text="@{@string/yuan_sign+@string/format_0(user.total)}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/default_size_30"
+                app:font="@{`din_bold`}" />
+
+            <ImageView
+                android:layout_width="@dimen/default_gap_10"
+                android:layout_height="@dimen/default_gap_10"
+                android:layout_gravity="right|top"
+                android:layout_marginRight="@dimen/default_gap_4"
+                android:layout_marginTop="@dimen/default_gap_4"
+                android:background="@drawable/rect_round_white"
+                android:padding="@dimen/default_gap_1"
+                android:src="@drawable/rect_round_red_point"
+                android:visibility="@{unRead>0? View.VISIBLE:View.GONE}" />
+        </FrameLayout>
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/all_item"
@@ -59,8 +102,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:liveDynamic='@{liveMsg.liveDynamic}'
                 app:live='@{live}'
+                app:liveDynamic='@{liveMsg.liveDynamic}'
                 app:user='@{user}' />
 
             <FrameLayout
@@ -74,18 +117,18 @@
 
                 <com.zxzx74147.devlib.widget.CommonRecyclerView
                     android:id="@+id/list"
-                    android:layout_marginRight="@dimen/default_gap_250"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom" />
+                    android:layout_gravity="bottom"
+                    android:layout_marginRight="@dimen/default_gap_250" />
             </FrameLayout>
 
             <Button
                 android:id="@+id/like"
                 android:layout_width="@dimen/default_gap_48"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/default_gap_44"
                 android:layout_marginBottom="@dimen/default_gap_44"
+                android:layout_marginRight="@dimen/default_gap_44"
                 android:background="@null"
                 android:drawablePadding="@dimen/default_gap_10"
                 android:drawableTop="@{liveMsg.liveDynamic.isLove==0? @drawable/home_icon_like:@drawable/home_icon_like_normal}"
@@ -101,15 +144,25 @@
                 android:layout_width="@dimen/default_gap_48"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:drawablePadding="@dimen/default_gap_10"
                 android:drawableTop="@drawable/selector_home_icon_comment"
                 android:gravity="center"
                 android:text="@{String.valueOf(liveMsg.liveDynamic.msgNum)}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/default_size_22"
+                app:layout_constraintBottom_toBottomOf="parent"
 
                 app:layout_constraintEnd_toEndOf="@+id/like" />
+
+            <com.zxzx74147.devlib.widget.ZXImageView
+                android:id="@+id/teacher1"
+                android:layout_width="@dimen/default_gap_64"
+                android:onClick='@{()->LiveBusStation.startTeacherProfile(context,live.teacherList.teacher[0])}'
+                android:padding="@dimen/default_gap_1"
+                app:imageUrl="@{live.teacherList.teacher[0].portraitUrl}"
+                app:layout_constraintBottom_toTopOf="@+id/comment"
+                app:layout_constraintEnd_toEndOf="@+id/like"
+                app:riv_corner_radius="@dimen/default_gap_32" />
 
             <ImageButton
                 android:id="@+id/coupons"
@@ -119,8 +172,8 @@
                 android:background="@null"
                 android:onClick="@{v->{ProfileBusStation.startProfileVoucherList(context)}}"
                 android:src="@drawable/home_icon_coupons_normal"
-                app:layout_constraintBottom_toTopOf="@+id/comment"
                 android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/comment"
                 app:layout_constraintEnd_toEndOf="@+id/like" />
 
             <com.zxzx74147.devlib.widget.ZXImageView
@@ -131,8 +184,8 @@
                 android:layout_marginRight="@dimen/default_gap_32"
                 android:background="@null"
                 android:onClick="@{v->WebviewUtil.showWebActivity(context,SysInitManager.sharedInstance().getSysInitData().config.activityJumpUrl)}"
-                app:imageUrl="@{SysInitManager.sharedInstance().getSysInitData().config.activityIconUrl}"
                 android:visibility="@{TextUtils.isEmpty(SysInitManager.sharedInstance().getSysInitData().config.activityJumpUrl)? View.GONE:View.VISIBLE}"
+                app:imageUrl="@{SysInitManager.sharedInstance().getSysInitData().config.activityIconUrl}"
                 app:layout_constraintBottom_toTopOf="@+id/coupons"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -210,11 +263,11 @@
             android:id="@+id/show_list"
             android:layout_width="@dimen/default_gap_48"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/default_gap_44"
-            android:background="@null"
             android:layout_marginRight="@dimen/default_gap_44"
+            android:background="@null"
             android:drawablePadding="@dimen/default_gap_10"
             android:gravity="center"
+            android:paddingBottom="@dimen/default_gap_44"
             android:src="@drawable/selector_home_icon_conventional"
             android:textColor="@color/white"
             android:textSize="@dimen/default_size_22"

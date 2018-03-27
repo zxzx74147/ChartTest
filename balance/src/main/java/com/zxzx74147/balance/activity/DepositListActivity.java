@@ -1,5 +1,6 @@
 package com.zxzx74147.balance.activity;
 
+import android.annotation.SuppressLint;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.view.View;
 import com.jakewharton.rxbinding2.support.design.widget.RxTabLayout;
 import com.jakewharton.rxbinding2.support.design.widget.TabLayoutSelectionEvent;
 import com.jakewharton.rxbinding2.view.RxView;
+import com.umeng.analytics.MobclickAgent;
 import com.zxzx74147.balance.R;
 import com.zxzx74147.balance.data.Deposit;
 import com.zxzx74147.balance.data.DepositListData;
@@ -19,12 +21,15 @@ import com.zxzx74147.balance.databinding.ActivityDepositListBinding;
 import com.zxzx74147.balance.storage.DepositStorage;
 import com.zxzx74147.balance.storage.WithDrawStorage;
 import com.zxzx74147.devlib.BR;
+import com.zxzx74147.devlib.DevLib;
 import com.zxzx74147.devlib.base.BaseActivity;
 import com.zxzx74147.devlib.base.BaseBindingViewHolder;
 import com.zxzx74147.devlib.data.BaseListData;
 import com.zxzx74147.devlib.interfaces.CommonListRequestCallback;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
+import com.zxzx74147.devlib.umeng.UmengAction;
+import com.zxzx74147.devlib.umeng.UmengAgent;
 import com.zxzx74147.devlib.utils.RecyclerViewUtil;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.devlib.widget.CommonRecyclerViewAdapter;
@@ -40,7 +45,7 @@ import io.reactivex.functions.Consumer;
 /**
  * Created by zhengxin on 2018/3/4.
  */
-
+@SuppressLint("CheckResult")
 public class DepositListActivity extends BaseActivity {
 
     private ActivityDepositListBinding mBinding = null;
@@ -80,12 +85,14 @@ public class DepositListActivity extends BaseActivity {
 
     }
 
+
     private void initView(){
 
         RxTabLayout.selectionEvents(mBinding.tabLayout2).subscribe(tabLayoutSelectionEvent -> {
             if(tabLayoutSelectionEvent.tab().getPosition()==0){
 //                mBinding.refreshLayout.setVisibility(View.VISIBLE);
 //                mBinding.refreshLayout2.setVisibility(View.GONE);
+                UmengAgent.onEvent(UmengAction.ALUmengPageChargeHistory);
                 mAdapter.loadMoreComplete();
                 RecyclerViewUtil.setupRecyclerView(mBinding.refreshLayout, mBinding.list, mAdapter, new CommonListRequestCallback<Deposit>() {
                     @Override
@@ -101,7 +108,7 @@ public class DepositListActivity extends BaseActivity {
             }else{
 //                mBinding.refreshLayout.setVisibility(View.GONE);
 //                mBinding.refreshLayout2.setVisibility(View.VISIBLE);
-
+                MobclickAgent.onEvent(DevLib.getApp(), UmengAction.ALUmengPageWithdrawHistory);
                 mAdapter2.loadMoreComplete();
                 RecyclerViewUtil.setupRecyclerView(mBinding.refreshLayout, mBinding.list, mAdapter2, new CommonListRequestCallback<Withdraw>() {
                     @Override

@@ -1,5 +1,6 @@
 package com.zxzx74147.profile.activity;
 
+import android.annotation.SuppressLint;
 import android.databinding.DataBindingUtil;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,6 +9,8 @@ import android.text.TextUtils;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.umeng.analytics.AnalyticsConfig;
+import com.umeng.analytics.MobclickAgent;
+import com.zxzx74147.devlib.DevLib;
 import com.zxzx74147.devlib.base.BaseActivity;
 import com.zxzx74147.devlib.data.UniApiData;
 import com.zxzx74147.devlib.kvstore.KVStore;
@@ -18,6 +21,8 @@ import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.devlib.os.DeviceIDMananger;
 import com.zxzx74147.devlib.os.PackageInfoMananger;
+import com.zxzx74147.devlib.umeng.UmengAction;
+import com.zxzx74147.devlib.umeng.UmengAgent;
 import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.utils.WebviewUtil;
@@ -33,7 +38,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-
+@SuppressLint("CheckResult")
 public class LoginPhoneActivity extends BaseActivity {
     private static final String TAG = LoginPhoneActivity.class.getSimpleName();
 
@@ -45,6 +50,7 @@ public class LoginPhoneActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MobclickAgent.onEvent(DevLib.getApp(), UmengAction.ALUmengPagePhoneLogin);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_login_phone);
         init();
     }
@@ -56,6 +62,7 @@ public class LoginPhoneActivity extends BaseActivity {
             mDisposable.dispose();
         }
     }
+
 
     private void init() {
         RxView.clicks(mBinding.layoutRegist.enterDelete).subscribe(a -> {
@@ -106,7 +113,7 @@ public class LoginPhoneActivity extends BaseActivity {
     }
 
     public void requestVcode() {
-
+        MobclickAgent.onEvent(DevLib.getApp(), UmengAction.ALUmengPagePhoneLoginGetVCode);
         NetworkApi.ApiSubscribe(this,mStockStorage.accountGetVCode(mBinding.layoutRegist.phoneNumber.getText().toString()),false, new Consumer<UniApiData>() {
 
             @Override
@@ -142,9 +149,12 @@ public class LoginPhoneActivity extends BaseActivity {
         if (!checkPhoneNum(mBinding.layoutRegist.phoneNumber.getText())) {
             return;
         }
+        UmengAgent.onEvent(UmengAction.ALUmengPagePhoneLoginEnterPhoneNumber);
         if (TextUtils.isEmpty(mBinding.layoutRegist.vcode.getText())) {
             return;
         }
+        UmengAgent.onEvent(UmengAction.ALUmengPagePhoneLoginEnterVCode);
+        UmengAgent.onEvent(UmengAction.ALUmengPagePhoneLoginButtonPressed);
         String token = KVStore.getString("push_id");
         Observable<UserUniData> observable = mStockStorage.acctountLogin(mBinding.layoutRegist.phoneNumber.getText().toString(),
                 mBinding.layoutRegist.vcode.getText().toString(),

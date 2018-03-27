@@ -18,6 +18,8 @@ import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.devlib.os.DeviceIDMananger;
 import com.zxzx74147.devlib.os.PackageInfoMananger;
+import com.zxzx74147.devlib.umeng.UmengAction;
+import com.zxzx74147.devlib.umeng.UmengAgent;
 import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.utils.WebviewUtil;
@@ -48,6 +50,7 @@ public class FillPhoneActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        UmengAgent.onEvent(UmengAction.ALUmengPageWechatBindPhone);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_fill_phone);
         mData = (WeChatData) mIntentData.data;
         mBinding.setData(mData);

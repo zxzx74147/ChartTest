@@ -80,6 +80,7 @@
         <com.zxzx74147.devlib.widget.ZXImageView
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:onClick="@{v->{LiveBusStation.startImageView(context,data.picUrl)}}"
             android:layout_marginTop="@dimen/default_gap_20"
             android:scaleType="centerCrop"
             android:visibility="@{TextUtils.isEmpty(data.picUrl)? View.GONE:View.VISIBLE}"

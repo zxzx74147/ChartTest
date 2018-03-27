@@ -31,6 +31,13 @@ public class ImageLoader {
         Picasso.with(imageView.getContext()).load(url).fit().centerCrop().into(imageView);
     }
 
+    public static void loadImageNoFill(ImageView imageView,String url){
+        if(TextUtils.isEmpty(url)){
+            return;
+        }
+        Picasso.with(imageView.getContext()).load(url).into(imageView);
+    }
+
     public static Bitmap loadImageSync(String url,int width,int height){
         if(TextUtils.isEmpty(url)){
             return null;

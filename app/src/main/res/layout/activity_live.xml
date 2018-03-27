@@ -64,6 +64,8 @@
         </FrameLayout>
 
 
+
+
         <com.zxzx74147.live.layout.LayoutLiveNormal
             android:id="@+id/normal"
             android:layout_width="match_parent"

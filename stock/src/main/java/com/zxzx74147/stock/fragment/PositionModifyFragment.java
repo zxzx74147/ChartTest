@@ -1,5 +1,6 @@
 package com.zxzx74147.stock.fragment;
 
+import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -23,6 +24,8 @@ import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.modules.account.UserViewModel;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
+import com.zxzx74147.devlib.umeng.UmengAction;
+import com.zxzx74147.devlib.umeng.UmengAgent;
 import com.zxzx74147.devlib.utils.FormatUtil;
 import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.devlib.utils.ViewUtil;
@@ -83,6 +86,7 @@ public class PositionModifyFragment extends BaseDialogFragment {
 
 
 
+    @SuppressLint("CheckResult")
     private void initView() {
 
         RxView.clicks(mBinding.cancel).subscribe(o->{
@@ -156,6 +160,7 @@ public class PositionModifyFragment extends BaseDialogFragment {
         int limit = FormatUtil.getPureNum(mBinding.buyLimitValue.getText().toString());
         String stopStr = stop==0? "":String.valueOf(stop);
         String limitStr = limit==0? "":String.valueOf(limit);
+        UmengAgent.onEvent(UmengAction.ALUmengPagePositionEdit);
         NetworkApi.ApiSubscribe(getActivity(),mTradeStorage.positionModify(mBinding.getData().positionId, limitStr, stopStr, mBinding.checkDeffer.isChecked() ? 1 : 0),true, new Consumer<PositionData>() {
             @Override
             public void accept(PositionData machPositionData) throws Exception {

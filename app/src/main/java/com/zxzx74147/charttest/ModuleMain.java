@@ -21,6 +21,8 @@ import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.devlib.os.DeviceIDMananger;
 import com.zxzx74147.devlib.os.PackageInfoMananger;
+import com.zxzx74147.devlib.umeng.UmengAction;
+import com.zxzx74147.devlib.umeng.UmengAgent;
 import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
 import com.zxzx74147.live.layout.LiveActivity;
@@ -84,6 +86,7 @@ public class ModuleMain {
             ((Activity) event.context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_hold);
         }else  if (event.id == MainBusStation.BUS_ID_MAIN_START_UNICORN){
             UniCornModule.startUnicorn(event.context);
+            UmengAgent.onEvent(UmengAction.ALUmengPageCustomService);
         }else  if (event.id == MainBusStation.BUS_ID_MAIN_SHOW_ABOUT){
             ZXActivityJumpHelper.startActivity(event.context,AboutActivity.class);
         }

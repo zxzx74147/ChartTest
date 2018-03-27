@@ -57,6 +57,14 @@
                 <!--android:visibility="@{SysInitManager.sharedInstance().getSysInitData().swich.liveOpen==0? View.GONE:View.VISIBLE}"-->
                 <!--app:imageAnim="@{userUni.isLiving==0? @drawable/selector_home_live_normal:@drawable/home_live}" />-->
 
+            <ImageButton
+                android:id="@+id/send_feed"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/default_gap_44"
+                android:background="@null"
+                android:src="@drawable/write_opinion"/>
+
             <com.zxzx74147.devlib.widget.CommonTabLayout
                 android:id="@+id/tabLayout"
                 style="@style/TitleTabLayout"
@@ -172,16 +180,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <ImageButton
-            android:id="@+id/send_feed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_gap_80"
-            android:layout_marginEnd="@dimen/default_gap_44"
-            android:background="@null"
-            android:src="@drawable/selector_home_send_feed"
-            app:layout_constraintBottom_toTopOf="@+id/goodList"
-            app:layout_constraintEnd_toEndOf="parent" />
+
 
         <ImageButton
             android:id="@+id/coupons"
@@ -193,7 +192,7 @@
             android:onClick="@{v->{ProfileBusStation.startProfileVoucherList(context)}}"
             android:src="@drawable/home_icon_coupons_normal"
             android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/send_feed"
+            app:layout_constraintBottom_toTopOf="@+id/goodList"
             app:layout_constraintEnd_toEndOf="parent" />
 
 

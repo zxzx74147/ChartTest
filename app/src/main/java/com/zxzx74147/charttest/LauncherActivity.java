@@ -1,5 +1,6 @@
 package com.zxzx74147.charttest;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
@@ -15,6 +16,7 @@ import com.allenliu.versionchecklib.v2.builder.UIData;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.umeng.analytics.AnalyticsConfig;
+import com.umeng.analytics.MobclickAgent;
 import com.zxzx74147.charttest.databinding.ActivityLauncherBinding;
 import com.zxzx74147.charttest.databinding.LayoutUpgradeBinding;
 import com.zxzx74147.devlib.DevLib;
@@ -32,6 +34,8 @@ import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.devlib.os.DeviceIDMananger;
 import com.zxzx74147.devlib.os.PackageInfoMananger;
+import com.zxzx74147.devlib.umeng.UmengAction;
+import com.zxzx74147.devlib.umeng.UmengAgent;
 import com.zxzx74147.devlib.utils.AnimationUtil;
 import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
@@ -47,7 +51,7 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-
+@SuppressLint("CheckResult")
 public class LauncherActivity extends BaseActivity {
 
     private ActivityLauncherBinding mBinding = null;
@@ -58,6 +62,7 @@ public class LauncherActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MobclickAgent.onEvent(DevLib.getApp(), UmengAction.ALUmengPageLaunch);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_launcher);
         sysInit();
 
@@ -82,7 +87,7 @@ public class LauncherActivity extends BaseActivity {
     }
 
     private void showLoginButton() {
-
+        MobclickAgent.onEvent(DevLib.getApp(), UmengAction.ALUmengPageLogin);
         AnimationUtil.showViewAlpha(mBinding.loginPhone);
         AnimationUtil.showViewAlpha(mBinding.loginWechat);
         RxView.clicks(mBinding.loginWechat).subscribe(v -> {
@@ -99,6 +104,7 @@ public class LauncherActivity extends BaseActivity {
     }
 
     private void loginWechat() {
+        UmengAgent.onEvent(UmengAction.ALUmengPageWechatLogin);
         WxApiHandler.doLogin(this, new CommonCallback<SendAuth.Resp>() {
             @Override
             public void callback(SendAuth.Resp item) {

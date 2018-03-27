@@ -22,6 +22,7 @@ public class LiveBusStation {
 
     public static final int BUS_ID_FEED_VIEW = BusIDGen.genBusID("BUS_ID_FEED_VIEW");
     public static final int BUS_ID_LIVE_VIEW = BusIDGen.genBusID("BUS_ID_LIVE_VIEW");
+    public static final int BUS_ID_IMAGE_VIEW = BusIDGen.genBusID("BUS_ID_IMAGE_VIEW");
 
 
     private LiveBusStation() {
@@ -42,6 +43,12 @@ public class LiveBusStation {
     public static void startLive(Context context, Live live) {
         MessageEvent event = new MessageEvent<>(BUS_ID_LIVE_VIEW, context);
         event.data = live;
+        EventBus.getDefault().post(event);
+    }
+
+    public static void startImageView(Context context, String url) {
+        MessageEvent event = new MessageEvent<>(BUS_ID_IMAGE_VIEW, context);
+        event.data = url;
         EventBus.getDefault().post(event);
     }
 

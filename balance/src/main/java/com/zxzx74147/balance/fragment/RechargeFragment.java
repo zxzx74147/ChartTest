@@ -1,5 +1,6 @@
 package com.zxzx74147.balance.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
@@ -25,6 +26,8 @@ import com.zxzx74147.devlib.data.IntentData;
 import com.zxzx74147.devlib.modules.sys.SysInitManager;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
+import com.zxzx74147.devlib.umeng.UmengAction;
+import com.zxzx74147.devlib.umeng.UmengAgent;
 import com.zxzx74147.devlib.utils.ColorUtil;
 import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
@@ -53,11 +56,13 @@ public class RechargeFragment extends BaseDialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+        UmengAgent.onEvent(UmengAction.ALUmengPageCharge);
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_recharge, container, false);
         initView();
         return mBinding.getRoot();
     }
 
+    @SuppressLint("CheckResult")
     private void initView() {
         mAdapter = new CommonRecyclerViewAdapter<>(mData);
         mBinding.setSwich(SysInitManager.sharedInstance().getSysInitData().swich);
@@ -85,12 +90,15 @@ public class RechargeFragment extends BaseDialogFragment {
         }
         amount = mData.get(0).amount;
         mData.get(0).mIsSelect = true;
+        UmengAgent.onEvent(UmengAction.ALUmengPageChargeType+(1));
 
 
         mAdapter.notifyDataSetChanged();
 
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            UmengAgent.onEvent(UmengAction.ALUmengPageChargeType+(position+1));
             for (int i = 0; i < mData.size(); i++) {
+
                 if (position == i) {
                     if (mData.get(i).mIsSelect != true) {
                         mData.get(i).mIsSelect = true;
@@ -109,9 +117,11 @@ public class RechargeFragment extends BaseDialogFragment {
 
 
         RxCompoundButton.checkedChanges(mBinding.checkboxWechat).subscribe(checked -> {
+            UmengAgent.onEvent(UmengAction.ALUmengPageChargeSelectWechat);
             mBinding.checkboxAli.setChecked(!checked);
         });
         RxCompoundButton.checkedChanges(mBinding.checkboxAli).subscribe(checked -> {
+            UmengAgent.onEvent(UmengAction.ALUmengPageChargeSelectAlipay);
             mBinding.checkboxWechat.setChecked(!checked);
         });
         RxView.clicks(mBinding.wechatLayout).subscribe(v -> {
@@ -127,6 +137,7 @@ public class RechargeFragment extends BaseDialogFragment {
             PayRequest payRequest = new PayRequest();
             payRequest.amount = amount;
             intent.data = payRequest;
+            UmengAgent.onEvent(UmengAction.ALUmengPageChargeButtonPressed);
             if (mBinding.checkboxWechat.isChecked()&&mBinding.wechatLayout.getVisibility()==View.VISIBLE) {
                 payRequest.type = PayRequest.TYPE_WECHAT;
                 ZXFragmentJumpHelper.startFragment(getContext(), RechargeWechatFragment.class, intent);

@@ -1,5 +1,6 @@
 package com.zxzx74147.stock.fragment;
 
+import android.annotation.SuppressLint;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
@@ -17,6 +18,8 @@ import com.zxzx74147.devlib.data.IntentData;
 import com.zxzx74147.devlib.fragment.CommonInfoDialog;
 import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.modules.account.UserViewModel;
+import com.zxzx74147.devlib.umeng.UmengAction;
+import com.zxzx74147.devlib.umeng.UmengAgent;
 import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
 import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
@@ -60,6 +63,7 @@ public class TradeFragment extends BaseDialogFragment {
         return fragment;
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
@@ -72,6 +76,12 @@ public class TradeFragment extends BaseDialogFragment {
         IntentData goodIntent = (IntentData) bundle.getSerializable(ZXActivityJumpHelper.INTENT_DATA);
         int type = goodIntent.type;
         mBinding.setType(goodIntent.type);
+        if(type==TYPE_POSITION_BUY_UP||type==TYPE_POSITION_BUY_DOWN){
+            UmengAgent.onEvent(UmengAction.ALUmengPagePositionOrder);
+        }
+        if(type==TYPE_MACH_POSITION_BUY_UP||type==TYPE_MACH_POSITION_BUY_DOWN){
+            UmengAgent.onEvent(UmengAction.ALUmengPageMachinePositionOrder);
+        }
         if(type==TYPE_MACH_POSITION_MOTIFY){
             MachPosition machPosition = (MachPosition) goodIntent.data;
             UserUniData uniData= AccountManager.sharedInstance().getUserUni();

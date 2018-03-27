@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -16,8 +15,10 @@
         <variable
             name="liveDynamic"
             type="com.zxzx74147.live.data.LiveDynamic" />
-        <import type="com.zxzx74147.devlib.modules.busstation.ProfileBusStation"/>
-        <import type="com.zxzx74147.devlib.modules.busstation.LiveBusStation"/>
+
+        <import type="com.zxzx74147.devlib.modules.busstation.ProfileBusStation" />
+
+        <import type="com.zxzx74147.devlib.modules.busstation.LiveBusStation" />
 
         <import type="android.view.View" />
 
@@ -32,55 +33,38 @@
         <!--android:visibility='@{live!=null? View.VISIBLE:View.GONE}'-->
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/default_gap_64"
-            android:layout_marginLeft="@dimen/default_gap_44"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:visibility='@{live!=null? View.VISIBLE:View.GONE}'
-            android:background="@drawable/rect_teancher"
-            >
+            android:layout_marginLeft="@dimen/default_gap_44"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility='@{live!=null? View.VISIBLE:View.GONE}'>
 
-            <com.zxzx74147.devlib.widget.ZXImageView
-                android:id="@+id/teacher1"
-                app:riv_corner_radius="@dimen/default_gap_32"
-                app:imageUrl="@{live.teacherList.teacher[0].portraitUrl}"
-                android:layout_width="@dimen/default_gap_64"
-                android:padding="@dimen/default_gap_1"
-                android:onClick='@{()->LiveBusStation.startTeacherProfile(context,live.teacherList.teacher[0])}'
-                android:layout_height="@dimen/default_gap_64"
-                android:background="@drawable/home_current_teacher" />
-
-            <com.zxzx74147.devlib.widget.ZXImageView
-                android:id="@+id/teacher2"
-                android:layout_width="@dimen/default_gap_64"
-                android:onClick='@{()->LiveBusStation.startTeacherProfile(context,live.teacherList.teacher[1])}'
-                android:padding="@dimen/default_gap_1"
-                app:riv_corner_radius="@dimen/default_gap_32"
-                android:layout_height="@dimen/default_gap_64"
-                android:visibility='@{live.teacherList.teacher.size()>1? View.VISIBLE:View.GONE}'
-                app:imageUrl="@{live.teacherList.teacher[1].portraitUrl}"
-                android:layout_marginLeft="-10dip"
-                android:background="@drawable/home_current_teacher" />
-
+            <!--<com.zxzx74147.devlib.widget.ZXImageView-->
+            <!--android:id="@+id/teacher1"-->
+            <!--app:riv_corner_radius="@dimen/default_gap_32"-->
+            <!--app:imageUrl="@{live.teacherList.teacher[0].portraitUrl}"-->
+            <!--android:layout_width="@dimen/default_gap_64"-->
+            <!--android:padding="@dimen/default_gap_1"-->
+            <!--android:onClick='@{()->LiveBusStation.startTeacherProfile(context,live.teacherList.teacher[0])}'-->
+            <!--android:layout_height="@dimen/default_gap_64"-->
+            <!--android:background="@drawable/home_current_teacher" />-->
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/default_gap_20"
-                android:layout_toRightOf='@id/teacher1'
+                android:drawableLeft="@drawable/number_people"
+                android:drawablePadding="@dimen/default_gap_12"
                 android:paddingRight="@dimen/default_gap_35"
                 android:text="@{@string/format_live_num(liveDynamic.joinNum)}"
                 android:textColor="@color/white"
-                android:textSize="@dimen/default_size_24" />
+                android:textSize="@dimen/default_size_30" />
         </LinearLayout>
 
 
         <TextView
             android:id="@+id/asset_total"
-            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/default_gap_64"
             android:layout_alignParentEnd="true"
@@ -89,12 +73,13 @@
             android:background="@drawable/bg_my_money"
             android:drawablePadding="@dimen/default_gap_12"
             android:drawableRight="@drawable/home_icon_arrow"
+            android:onClick="@{()->ProfileBusStation.startProfile(context)}"
             android:paddingLeft="@dimen/default_gap_40"
             android:paddingRight="@dimen/default_gap_40"
-            android:onClick="@{()->ProfileBusStation.startProfile(context)}"
             android:text='@{@string/format_02(user.total)}'
             android:textColor="@color/text_white"
-            android:textSize="@dimen/default_size_40" />
+            android:textSize="@dimen/default_size_40"
+            android:visibility="gone" />
 
 
     </RelativeLayout>

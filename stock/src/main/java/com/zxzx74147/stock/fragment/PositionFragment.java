@@ -1,5 +1,6 @@
 package com.zxzx74147.stock.fragment;
 
+import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
@@ -37,6 +38,8 @@ import com.zxzx74147.devlib.modules.account.UserStorage;
 import com.zxzx74147.devlib.modules.account.UserViewModel;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
+import com.zxzx74147.devlib.umeng.UmengAction;
+import com.zxzx74147.devlib.umeng.UmengAgent;
 import com.zxzx74147.devlib.utils.DisplayUtil;
 import com.zxzx74147.devlib.utils.RecyclerViewUtil;
 import com.zxzx74147.devlib.utils.ToastUtil;
@@ -70,6 +73,7 @@ import io.reactivex.functions.Consumer;
 
 /**
  */
+@SuppressLint("CheckResult")
 public class PositionFragment extends BaseDialogFragment {
 
     private FragmentPositionBinding mBinding = null;
@@ -123,10 +127,11 @@ public class PositionFragment extends BaseDialogFragment {
         }
     }
 
+
     private void initView() {
-        mPositionAdapter = new CommonRecyclerViewAdapter(new LinkedList<>()) {
+        mPositionAdapter = new CommonRecyclerViewAdapter<Position>(new LinkedList<>()) {
             @Override
-            protected void convert(BaseBindingViewHolder helper, Object item) {
+            protected void convert(BaseBindingViewHolder helper, Position item) {
                 ViewDataBinding itemCommonBinding = helper.mBinding;
                 itemCommonBinding.setVariable(BR.data, item);
                 if (itemCommonBinding instanceof ItemPositionBinding) {
@@ -139,7 +144,7 @@ public class PositionFragment extends BaseDialogFragment {
         };
         mPositionAdapter.setEnableLoadMore(false);
         mPositionAdapter.setHeaderFooterEmpty(true,false);
-        mMachAdapter = new CommonRecyclerViewAdapter(new LinkedList<>()) {
+        mMachAdapter = new CommonRecyclerViewAdapter<Object>(new LinkedList<>()) {
             @Override
             protected void convert(BaseBindingViewHolder helper, Object item) {
                 ViewDataBinding itemCommonBinding = helper.mBinding;
@@ -182,6 +187,7 @@ public class PositionFragment extends BaseDialogFragment {
 
         RxTabLayout.selectionEvents(mBinding.tabLayout2).subscribe(tabLayoutSelectionEvent -> {
             if (tabLayoutSelectionEvent.tab().getPosition() == 0) {
+                UmengAgent.onEvent(UmengAction.ALUmengPageMyPosition);
                 mPositionAdapter.loadMoreComplete();
                 mPositionAdapter.setNewData(AccountManager.sharedInstance().getUserUni().positionList.getListItems());
                 RecyclerViewUtil.setupRecyclerView(mBinding.refreshLayout, mBinding.list, mPositionAdapter, new CommonListRequestCallback<Position>() {
@@ -194,6 +200,7 @@ public class PositionFragment extends BaseDialogFragment {
                     }
                 });
             } else {
+                UmengAgent.onEvent(UmengAction.ALUmengPageMyMachinePosition);
                 mMachAdapter.loadMoreComplete();
                 setupRecyclerViewMachPosition(mBinding.refreshLayout, mBinding.list, mMachAdapter, new CommonListRequestCallback<MachPosition>() {
                     @Override
@@ -329,6 +336,7 @@ public class PositionFragment extends BaseDialogFragment {
             @Override
             public void callback(Object item) {
                 if (item != null) {
+                    UmengAgent.onEvent(UmengAction.ALUmengPageMachinePositionCancel);
                     NetworkApi.ApiSubscribe(mTradeStorage.machpositionCancel(machPosition.machPositionId), o -> {
                         if (o.hasError()) {
                             if(FailDealUtil.dealFail(getActivity(),o.failed)){

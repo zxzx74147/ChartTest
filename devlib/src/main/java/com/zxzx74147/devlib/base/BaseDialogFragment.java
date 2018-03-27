@@ -20,6 +20,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 
 import com.jakewharton.rxbinding2.view.RxView;
+import com.umeng.analytics.MobclickAgent;
 import com.zxzx74147.devlib.R;
 import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.devlib.fragment.CommonFragmentDialog;
@@ -118,6 +119,8 @@ public class BaseDialogFragment extends DialogFragment implements ISupportFragme
             });
         }
 
+        MobclickAgent.onPageStart(this.getClass().getSimpleName());
+
 
     }
 
@@ -125,6 +128,7 @@ public class BaseDialogFragment extends DialogFragment implements ISupportFragme
     public void onPause() {
         super.onPause();
         mDelegate.onPause();
+        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
     }
 
     @Override

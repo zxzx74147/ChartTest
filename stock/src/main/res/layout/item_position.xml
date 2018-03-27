@@ -19,6 +19,7 @@
         <variable
             name="modifyCallback"
             type="com.zxzx74147.devlib.callback.CommonCallback"/>
+        <import type="com.zxzx74147.devlib.umeng.UmengAgent"/>
     </data>
 
     <android.support.constraint.ConstraintLayout

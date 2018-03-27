@@ -14,6 +14,8 @@ import com.zxzx74147.devlib.data.IntentData;
 import com.zxzx74147.devlib.interfaces.CommonListRequestCallback;
 import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.network.RetrofitClient;
+import com.zxzx74147.devlib.umeng.UmengAction;
+import com.zxzx74147.devlib.umeng.UmengAgent;
 import com.zxzx74147.devlib.utils.RecyclerViewUtil;
 import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
@@ -43,7 +45,7 @@ public class MessageCenterActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        UmengAgent.onEvent(UmengAction.ALUmengPageMsgCenterList);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_message_center);
         mBinding.setNum(0);
         initView();

@@ -1,5 +1,6 @@
 package com.zxzx74147.stock.activity;
 
+import android.annotation.SuppressLint;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import com.zxzx74147.devlib.base.BaseBindingViewHolder;
 import com.zxzx74147.devlib.data.BaseListData;
 import com.zxzx74147.devlib.interfaces.CommonListRequestCallback;
 import com.zxzx74147.devlib.network.RetrofitClient;
+import com.zxzx74147.devlib.umeng.UmengAction;
+import com.zxzx74147.devlib.umeng.UmengAgent;
 import com.zxzx74147.devlib.utils.RecyclerViewUtil;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.devlib.widget.CommonRecyclerViewAdapter;
@@ -28,7 +31,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import io.reactivex.Observable;
-
+@SuppressLint("CheckResult")
 public class TradeListActivity extends BaseActivity {
 
     private ActivityTradeBinding mBinding = null;
@@ -41,6 +44,7 @@ public class TradeListActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        UmengAgent.onEvent(UmengAction.ALUmengPageTradeHistory);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_trade);
 
         mTradeStorage = RetrofitClient.getClient().create(TradesStorage.class);
@@ -51,6 +55,7 @@ public class TradeListActivity extends BaseActivity {
 //        CommonNoItemBinding mNoDatabinding = DataBindingUtil.inflate()
 
         mAdapter = new CommonRecyclerViewAdapter<Position>(mData){
+
             @Override
             protected void convert(BaseBindingViewHolder helper, Position item) {
                 ItemTradeBinding itemCommonBinding = (ItemTradeBinding) helper.mBinding;

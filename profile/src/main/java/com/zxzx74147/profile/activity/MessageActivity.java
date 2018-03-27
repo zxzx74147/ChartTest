@@ -9,6 +9,8 @@ import com.zxzx74147.devlib.base.BaseActivity;
 import com.zxzx74147.devlib.data.BaseListData;
 import com.zxzx74147.devlib.interfaces.CommonListRequestCallback;
 import com.zxzx74147.devlib.network.RetrofitClient;
+import com.zxzx74147.devlib.umeng.UmengAction;
+import com.zxzx74147.devlib.umeng.UmengAgent;
 import com.zxzx74147.devlib.utils.RecyclerViewUtil;
 import com.zxzx74147.devlib.widget.CommonMultiTypeDelegate;
 import com.zxzx74147.devlib.widget.CommonRecyclerViewAdapter;
@@ -36,6 +38,7 @@ public class MessageActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        UmengAgent.onEvent(UmengAction.ALUmengPageMsgCenterDetail);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_message);
         initView();
     }

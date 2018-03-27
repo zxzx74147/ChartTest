@@ -6,6 +6,8 @@
     <application>
         <activity android:name=".activity.FeedReplyActivity"
             android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.ImagePreviewActivity"
+            android:screenOrientation="portrait"></activity>
 
     </application>
 

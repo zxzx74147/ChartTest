@@ -1,5 +1,6 @@
 package com.zxzx74147.profile.activity;
 
+import android.annotation.SuppressLint;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -9,6 +10,8 @@ import com.zxzx74147.devlib.base.BaseActivity;
 import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
+import com.zxzx74147.devlib.umeng.UmengAction;
+import com.zxzx74147.devlib.umeng.UmengAgent;
 import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.profile.R;
 import com.zxzx74147.profile.data.AuthApplyData;
@@ -16,7 +19,7 @@ import com.zxzx74147.profile.databinding.ActivityAuthBinding;
 import com.zxzx74147.profile.storage.AccountStorage;
 
 import io.reactivex.functions.Consumer;
-
+@SuppressLint("CheckResult")
 public class AuthActivity extends BaseActivity {
     private static final String TAG = AuthActivity.class.getSimpleName();
 
@@ -26,9 +29,11 @@ public class AuthActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        UmengAgent.onEvent(UmengAction.ALUmengPageRealName);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_auth);
         init();
     }
+
 
     private void init() {
         mBinding.setAuth(AccountManager.sharedInstance().getUserUni().auth);
