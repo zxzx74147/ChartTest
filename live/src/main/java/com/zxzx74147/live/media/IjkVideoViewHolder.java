@@ -164,6 +164,10 @@ public class IjkVideoViewHolder implements MediaController.MediaPlayerControl {
         setRenderView(renderView);
     }
 
+    public IRenderView getRenderView(){
+        return mRenderView;
+    }
+
     public void clearRender(){
         if(mMediaPlayer!=null){
             mMediaPlayer.setDisplay(null);

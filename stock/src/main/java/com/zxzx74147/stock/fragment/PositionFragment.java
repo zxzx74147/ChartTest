@@ -118,6 +118,8 @@ public class PositionFragment extends BaseDialogFragment {
         if(mBinding.tabLayout2.getTabAt(0).isSelected()){
             mPositionAdapter.setNewData(userdata.positionList.getListItems());
             mBinding.refreshLayout.setRefreshing(false);
+            mPositionAdapter.loadMoreComplete();
+            mPositionAdapter.setEnableLoadMore(false);
         }
     }
 
@@ -135,6 +137,7 @@ public class PositionFragment extends BaseDialogFragment {
                 }
             }
         };
+        mPositionAdapter.setEnableLoadMore(false);
         mPositionAdapter.setHeaderFooterEmpty(true,false);
         mMachAdapter = new CommonRecyclerViewAdapter(new LinkedList<>()) {
             @Override

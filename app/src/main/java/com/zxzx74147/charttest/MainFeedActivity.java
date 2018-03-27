@@ -39,6 +39,9 @@ import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.devlib.utils.ZXFragmentJumpHelper;
 import com.zxzx74147.live.data.HomeData;
 import com.zxzx74147.live.data.Live;
+import com.zxzx74147.live.data.Rtmp;
+import com.zxzx74147.live.data.RtmpList;
+import com.zxzx74147.live.data.TeacherList;
 import com.zxzx74147.live.stroage.LiveStorage;
 import com.zxzx74147.profile.data.ComVoucher;
 import com.zxzx74147.profile.data.UnReadManager;
@@ -48,6 +51,7 @@ import com.zxzx74147.stock.fragment.StockFragment;
 import com.zxzx74147.stock.fragment.TradeFragment;
 
 import java.util.HashSet;
+import java.util.LinkedList;
 
 import io.reactivex.functions.Consumer;
 
@@ -222,6 +226,7 @@ public class MainFeedActivity extends BaseActivity {
 
 
     public static void checkLive(Context context) {
+
         LiveStorage mStorage = RetrofitClient.getClient().create(LiveStorage.class);
         NetworkApi.ApiSubscribe(mStorage.roomGetList(), new Consumer<HomeData>() {
             @Override
@@ -241,6 +246,24 @@ public class MainFeedActivity extends BaseActivity {
                 MainBusStation.toLive(context);
             }
         });
+    }
+
+    private void startLiveTest(){
+        Live live = new Live();
+        live.liveId=1;
+        live.rtmpList = new RtmpList();
+        live.rtmpList.num = 2;
+        live.rtmpList.rtmp = new LinkedList<>();
+        Rtmp rtmp1 = new Rtmp();
+        Rtmp rtmp2 = new Rtmp();
+        rtmp1.url="rtmp://116.213.200.53/tslsChannelLive/PCG0DuD/live";
+        rtmp2.url="rtmp://live.hkstv.hk.lxdns.com/live/hks";
+        live.rtmpList.rtmp.add(rtmp1);
+        live.rtmpList.rtmp.add(rtmp2);
+        live.teacherList = new TeacherList();
+        live.status = 2;
+
+        LiveBusStation.startLive(this, live);
     }
 
 

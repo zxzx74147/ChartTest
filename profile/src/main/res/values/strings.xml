@@ -26,7 +26,7 @@
     <string name="ok">确定</string>
 
 
-    <string name="hint_set_password">设置6-12位登录密码</string>
+    <string name="hint_set_password">设置6位登录密码</string>
 
     <string name="hint_set_password_repeat">请重复以上密码</string>
     <string name="zhongjin_login">长江国际交易登录</string>

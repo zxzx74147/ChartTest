@@ -15,6 +15,7 @@ import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.devlib.utils.ToastUtil;
+import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.profile.R;
 import com.zxzx74147.profile.data.UserUniData;
 import com.zxzx74147.profile.databinding.LayoutSetPasswordBinding;
@@ -45,19 +46,20 @@ public class PasswordSetFragment extends BaseDialogFragment {
     private void initView() {
         RxCompoundButton.checkedChanges(mBinding.checkPassword).subscribe(aBoolean -> {
             if (aBoolean) {
-                mBinding.password.setInputType(InputType.TYPE_CLASS_NUMBER);
+                mBinding.password.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
             } else {
-                mBinding.password.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+                mBinding.password.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
             }
-
+            ViewUtil.locateEditCursor(mBinding.password);
         });
 //
         RxCompoundButton.checkedChanges(mBinding.checkPassword2).subscribe(aBoolean -> {
             if (aBoolean) {
-                mBinding.password2.setInputType(InputType.TYPE_CLASS_NUMBER);
+                mBinding.password2.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
             } else {
-                mBinding.password2.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+                mBinding.password2.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
             }
+            ViewUtil.locateEditCursor(mBinding.password2);
         });
 
         RxView.clicks(mBinding.cancel).subscribe(a -> {

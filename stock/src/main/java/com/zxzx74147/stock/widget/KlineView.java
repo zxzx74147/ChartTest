@@ -199,6 +199,9 @@ public class KlineView extends LinearLayout {
             xAxis.setValueFormatter(ChartUtil.getAxisValueFormatter1m(mDataParse.getCandleEntries(),mBinding.kline));
         }
         mBinding.kline.setAxisValueFormatter(ChartUtil.getAxisValueFormatterShowDay(mDataParse.getCandleEntries()));
+        set.calcMinMax();
+        mBinding.kline.getXAxis().setAxisMaximum(set.getXMax()+0.5f);
+        mBinding.kline2.getXAxis().setAxisMaximum(set.getXMax()+0.5f);
     }
 
     private void setSMA() {

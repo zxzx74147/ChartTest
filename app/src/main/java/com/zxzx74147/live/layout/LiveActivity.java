@@ -1,14 +1,15 @@
 package com.zxzx74147.live.layout;
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
-import android.graphics.Matrix;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.view.ViewGroup;
 
+import com.jakewharton.rxbinding2.support.design.widget.RxTabLayout;
+import com.jakewharton.rxbinding2.support.design.widget.TabLayoutSelectionEvent;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.zxzx74147.charttest.R;
 import com.zxzx74147.charttest.databinding.ActivityLiveBinding;
@@ -17,13 +18,13 @@ import com.zxzx74147.devlib.data.UniApiData;
 import com.zxzx74147.devlib.modules.account.UserViewModel;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
-import com.zxzx74147.devlib.utils.DisplayUtil;
 import com.zxzx74147.devlib.utils.ToastUtil;
 import com.zxzx74147.live.data.Live;
 import com.zxzx74147.live.media.IjkVideoViewHolder;
 import com.zxzx74147.live.stroage.LiveStorage;
 import com.zxzx74147.live.viewmodel.LiveMsgViewModel;
 
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 public class LiveActivity extends BaseActivity {
@@ -82,22 +83,49 @@ public class LiveActivity extends BaseActivity {
 //                mBinding.video1.setTransform(matrix);
 //            }
 //        });
+
+        RxTabLayout.selectionEvents(mBinding.tabLayout).subscribe(tabLayoutSelectionEvent -> {
+            if(tabLayoutSelectionEvent.tab().getPosition()==1){
+                finish();
+            }
+        });
+
         switch (this.getResources().getConfiguration().orientation) {
             case Configuration.ORIENTATION_PORTRAIT:
-                RxView.clicks(mBinding.video2).subscribe(v -> {
-                    prepareToRotate();
-                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                });
+
+                initClick(mBinding.video1Layout);
                 break;
             case Configuration.ORIENTATION_LANDSCAPE:
                 RxView.clicks(mBinding.video2).subscribe(v -> {
-                    prepareToRotate();
-                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+//                    prepareToRotate();
+//                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                 });
                 break;
 
         }
     }
+
+    private Disposable mClickDisposable = null;
+    private void initClick(View v){
+        mClickDisposable = RxView.clicks(v).subscribe(mClickConsumer);
+        RxView.clicks(mBinding.video2Layout).subscribe(mClickConsumer);
+    }
+
+    private Consumer<Object> mClickConsumer = obj -> {
+        ViewGroup.LayoutParams lp1 = mBinding.video1Layout.getLayoutParams();
+        ViewGroup.LayoutParams lp2 = mBinding.video2Layout.getLayoutParams();
+        mBinding.video1Layout.setLayoutParams(lp2);
+        mBinding.video2Layout.setLayoutParams(lp1);
+        mBinding.video1Layout.invalidate();
+        mBinding.video2Layout.invalidate();
+        mClickDisposable.dispose();
+        mClickDisposable = null;
+        if(obj==mBinding.video1Layout){
+            initClick(mBinding.video2Layout);
+        }else{
+            initClick(mBinding.video1Layout);
+        }
+    };
 
     public void prepareToRotate() {
         mIsRequestRotate = true;
@@ -130,7 +158,7 @@ public class LiveActivity extends BaseActivity {
             mVideoHolder2.setVideoPath(mLive.rtmpList.rtmp.get(1).url);
 //            mVideoHolder2.setVideoPath(RTMP_HKS);
             mVideoHolder2.start();
-        }else{
+        } else {
             mBinding.video2.setVisibility(View.GONE);
         }
     }

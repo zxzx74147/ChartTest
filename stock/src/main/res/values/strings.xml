@@ -77,6 +77,7 @@
     <string name="format_buy_open_charge">手续费: %.1f元</string>
     <string name="format_buy_deferred_free">过夜费: 用券不过夜</string>
     <string name="format_buy_deferred">过夜费: %.1f元/天</string>
+    <string name="format_buy_deferred_all">过夜费: %.1f元</string>
     <string name="format_float_num_up">浮动点: 上升%.1f点</string>
     <string name="format_float_num_down">浮动点: 下跌%.1f点</string>
     <string name="format_num_up">上升%.0f点</string>
@@ -148,7 +149,8 @@
     <string name="close">收盘</string>
     <string name="low">最低</string>
     <string name="high">最高</string>
-    <string name="no_deffer">过夜费：用券不过夜</string>
+    <string name="no_deffer_voucher">过夜费：用券不过夜</string>
+    <string name="no_deffer">过夜费：不过夜</string>
 
 
 </resources>

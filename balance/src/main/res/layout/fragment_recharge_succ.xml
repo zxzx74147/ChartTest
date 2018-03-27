@@ -48,36 +48,41 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/text_black"
-        android:textSize="@dimen/default_size_22"
+        android:textSize="@dimen/default_size_28"
         android:layout_marginTop="@dimen/default_gap_120"
         android:text="@string/yuan_sign"
+        android:paddingBottom="@dimen/default_gap_10"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/textView12"
         app:layout_constraintStart_toStartOf="@+id/recharge"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+         />
 
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@{String.valueOf(amount/100)}"
+        android:layout_alignBaseline="@+id/textView11"
+        android:layout_marginTop="@dimen/default_gap_80"
         android:textColor="@color/text_black"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
         android:textSize="@dimen/default_size_70"
-        app:layout_constraintBottom_toBottomOf="@+id/textView11"
+
         app:layout_constraintStart_toEndOf="@+id/textView11" />
 
 
     <Button
         android:id="@+id/recharge"
         android:layout_width="0dp"
-        android:layout_marginTop="@dimen/default_gap_122"
         android:layout_height="wrap_content"
         android:background="@drawable/rect_round_gold"
         android:text="@string/go_balance"
         android:textColor="@color/white"
+        android:layout_marginTop="@dimen/default_gap_80"
         android:textSize="@dimen/default_size_34"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="@dimen/default_gap_84"
+        android:layout_marginBottom="@dimen/default_gap_104"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 </android.support.constraint.ConstraintLayout>

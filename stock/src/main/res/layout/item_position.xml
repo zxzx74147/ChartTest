@@ -137,7 +137,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="@{()->{StockBusStation.viewPositionDeffer(context,data)}}"
-                android:text="@{data.isDeferred==0? @string/no_deffer:@string/format_buy_deferred(data.deferred)}"
+                android:text="@{data.isDeferred==0? (data.isVoucher!=0? @string/no_deffer_voucher:@string/no_deffer):@string/format_buy_deferred_all(data.deferred)}"
                 android:textColor="@color/text_dark_grey"
                 app:font="@{`din`}"
                 android:textSize="@dimen/default_size_26"

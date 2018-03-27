@@ -10,20 +10,29 @@
 
         <variable
             name="unRead"
-            type="Integer"/>
+            type="Integer" />
+
         <variable
             name="userUni"
             type="com.zxzx74147.profile.data.UserUniData" />
-        <import type="com.zxzx74147.profile.data.UnReadManager"/>
+
+        <import type="com.zxzx74147.profile.data.UnReadManager" />
 
         <import type="com.zxzx74147.devlib.modules.busstation.StockBusStation" />
-        <import type="com.zxzx74147.devlib.modules.busstation.MainBusStation"/>
-        <import type="com.zxzx74147.devlib.modules.busstation.ProfileBusStation"/>
-        <import type="com.zxzx74147.devlib.modules.sys.SysInitManager"/>
-        <import type="com.zxzx74147.charttest.MainFeedActivity"/>
-        <import type="com.zxzx74147.devlib.utils.WebviewUtil"/>
-        <import type="android.view.View"/>
-        <import type="android.text.TextUtils"/>
+
+        <import type="com.zxzx74147.devlib.modules.busstation.MainBusStation" />
+
+        <import type="com.zxzx74147.devlib.modules.busstation.ProfileBusStation" />
+
+        <import type="com.zxzx74147.devlib.modules.sys.SysInitManager" />
+
+        <import type="com.zxzx74147.charttest.MainFeedActivity" />
+
+        <import type="com.zxzx74147.devlib.utils.WebviewUtil" />
+
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
 
     </data>
 
@@ -39,33 +48,56 @@
             android:layout_height="@dimen/default_title">
 
             <ImageButton
-                android:visibility="@{SysInitManager.sharedInstance().getSysInitData().swich.liveOpen==0? View.GONE:View.VISIBLE}"
                 android:id="@+id/to_live"
                 android:layout_width="wrap_content"
-                android:onClick="@{v->{MainFeedActivity.checkLive(context)}}"
                 android:layout_height="match_parent"
                 android:background="@null"
-                app:imageAnim="@{userUni.isLiving==0? @drawable/selector_home_live_normal:@drawable/home_live}"
-                android:paddingLeft="@dimen/default_gap_44" />
+                android:onClick="@{v->{MainFeedActivity.checkLive(context)}}"
+                android:paddingLeft="@dimen/default_gap_44"
+                android:visibility="@{SysInitManager.sharedInstance().getSysInitData().swich.liveOpen==0? View.GONE:View.VISIBLE}"
+                app:imageAnim="@{userUni.isLiving==0? @drawable/selector_home_live_normal:@drawable/home_live}" />
+
+            <com.zxzx74147.devlib.widget.CommonTabLayout
+                android:id="@+id/tabLayout"
+                style="@style/TitleTabLayout"
+                app:selectBold="true"
+                app:tabMode="fixed"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:singleLine="true">
+
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tab_live" />
+
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tab_feed" />
+            </com.zxzx74147.devlib.widget.CommonTabLayout>
 
             <TextView
+                android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:gravity="center"
                 android:text="@string/feed_title"
-                android:textStyle="bold"
                 android:textColor="@color/text_black"
-                android:textSize="@dimen/default_size_34" />
+                android:textSize="@dimen/default_size_34"
+                android:textStyle="bold"
+                android:visibility="gone" />
 
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/default_gap_56"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:onClick="@{()->ProfileBusStation.startProfile(context)}"
                 android:layout_marginRight="@dimen/default_gap_44"
-                android:background="@drawable/rect_round_grey_head">
+                android:background="@drawable/rect_round_grey_head"
+                android:onClick="@{()->ProfileBusStation.startProfile(context)}">
 
                 <com.zxzx74147.devlib.widget.ZXImageView
                     android:id="@+id/portrait"
@@ -79,25 +111,25 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/default_gap_2"
                     android:layout_gravity="center_vertical"
-                    android:paddingLeft="@dimen/default_gap_20"
-                    app:font="@{`din_bold`}"
                     android:layout_marginRight="@dimen/default_gap_66"
+                    android:layout_marginTop="@dimen/default_gap_2"
+                    android:paddingLeft="@dimen/default_gap_20"
                     android:text="@{@string/yuan_sign+@string/format_0(user.total)}"
                     android:textColor="@color/text_black"
-                    android:textSize="@dimen/default_size_34" />
+                    android:textSize="@dimen/default_size_34"
+                    app:font="@{`din_bold`}" />
 
                 <ImageView
-                    android:visibility="@{unRead>0? View.VISIBLE:View.GONE}"
                     android:layout_width="@dimen/default_gap_10"
                     android:layout_height="@dimen/default_gap_10"
                     android:layout_gravity="right|top"
                     android:layout_marginRight="@dimen/default_gap_4"
+                    android:layout_marginTop="@dimen/default_gap_4"
+                    android:background="@drawable/rect_round_white"
                     android:padding="@dimen/default_gap_1"
                     android:src="@drawable/rect_round_red_point"
-                    android:layout_marginTop="@dimen/default_gap_4"
-                    android:background="@drawable/rect_round_white" />
+                    android:visibility="@{unRead>0? View.VISIBLE:View.GONE}" />
             </FrameLayout>
 
         </RelativeLayout>
@@ -123,8 +155,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:paddingBottom="@dimen/default_gap_16"
             android:background="#F2F2F8"
+            android:paddingBottom="@dimen/default_gap_16"
             android:paddingTop="@dimen/default_gap_16"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -148,13 +180,11 @@
             android:layout_marginBottom="@dimen/default_gap_50"
             android:layout_marginEnd="@dimen/default_gap_44"
             android:background="@null"
-            android:visibility="gone"
             android:onClick="@{v->{ProfileBusStation.startProfileVoucherList(context)}}"
             android:src="@drawable/home_icon_coupons_normal"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/send_feed"
             app:layout_constraintEnd_toEndOf="parent" />
-
-
 
 
         <com.zxzx74147.devlib.widget.ZXImageView
@@ -163,10 +193,10 @@
             android:layout_height="@dimen/default_gap_72"
             android:layout_marginBottom="@dimen/default_gap_50"
             android:layout_marginEnd="@dimen/default_gap_44"
-            android:onClick="@{v->WebviewUtil.showWebActivity(context,SysInitManager.sharedInstance().getSysInitData().config.activityJumpUrl)}"
-            app:imageUrl="@{SysInitManager.sharedInstance().getSysInitData().config.activityIconUrl}"
             android:background="@null"
+            android:onClick="@{v->WebviewUtil.showWebActivity(context,SysInitManager.sharedInstance().getSysInitData().config.activityJumpUrl)}"
             android:visibility="@{TextUtils.isEmpty(SysInitManager.sharedInstance().getSysInitData().config.activityJumpUrl)? View.GONE:View.VISIBLE}"
+            app:imageUrl="@{SysInitManager.sharedInstance().getSysInitData().config.activityIconUrl}"
             app:layout_constraintBottom_toTopOf="@+id/coupons"
             app:layout_constraintEnd_toEndOf="parent" />
     </android.support.constraint.ConstraintLayout>

@@ -25,12 +25,33 @@
         android:background="@drawable/bg">
 
 
+        <com.zxzx74147.devlib.widget.CommonTabLayout
+            android:id="@+id/tabLayout"
+            style="@style/WhiteTitleTabLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/default_title"
+            app:selectBold="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:singleLine="true">
 
+            <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_live" />
+
+            <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_feed" />
+        </com.zxzx74147.devlib.widget.CommonTabLayout>
 
 
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:id="@+id/video1Layout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintDimensionRatio="9:16"
@@ -48,6 +69,7 @@
             android:layout_width="@dimen/default_gap_180"
             android:layout_height="0dp"
             android:layout_marginRight="@dimen/default_gap_80"
+            android:id="@+id/video2Layout"
             android:layout_marginTop="@dimen/default_gap_150"
             app:layout_constraintDimensionRatio="9:16"
             app:layout_constraintEnd_toEndOf="parent"

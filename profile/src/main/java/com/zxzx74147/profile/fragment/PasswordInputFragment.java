@@ -15,9 +15,9 @@ import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.network.NetworkApi;
 import com.zxzx74147.devlib.network.RetrofitClient;
 import com.zxzx74147.devlib.utils.ToastUtil;
+import com.zxzx74147.devlib.utils.ViewUtil;
 import com.zxzx74147.profile.R;
 import com.zxzx74147.profile.databinding.LayoutInputPassBinding;
-import com.zxzx74147.profile.databinding.LayoutSetPasswordBinding;
 import com.zxzx74147.profile.storage.AccountStorage;
 
 /**
@@ -43,10 +43,11 @@ public class PasswordInputFragment extends BaseDialogFragment {
     private void initView() {
         RxCompoundButton.checkedChanges(mBinding.checkPassword).subscribe(aBoolean -> {
             if (aBoolean) {
-                mBinding.password.setInputType(InputType.TYPE_CLASS_NUMBER);
+                mBinding.password.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
             } else {
-                mBinding.password.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+                mBinding.password.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
             }
+            ViewUtil.locateEditCursor(mBinding.password);
 
         });
 //
@@ -65,8 +66,8 @@ public class PasswordInputFragment extends BaseDialogFragment {
             }
 
             NetworkApi.ApiSubscribe(mStorage.tradeLogin(p1), userUniData -> {
-                if(userUniData.hasError()){
-                    ToastUtil.showToast(getActivity(),userUniData.error.usermsg);
+                if (userUniData.hasError()) {
+                    ToastUtil.showToast(getActivity(), userUniData.error.usermsg);
                     return;
                 }
                 AccountManager.sharedInstance().saveUser(userUniData.user);
