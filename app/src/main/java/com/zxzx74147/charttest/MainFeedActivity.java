@@ -21,6 +21,7 @@ import com.zxzx74147.devlib.callback.CommonCallback;
 import com.zxzx74147.devlib.data.DialogItem;
 import com.zxzx74147.devlib.data.IntentData;
 import com.zxzx74147.devlib.fragment.CommonFragmentDialog;
+import com.zxzx74147.devlib.json.JsonHelper;
 import com.zxzx74147.devlib.kvstore.KVStore;
 import com.zxzx74147.devlib.modules.account.AccountManager;
 import com.zxzx74147.devlib.modules.account.UserViewModel;
@@ -45,10 +46,16 @@ import com.zxzx74147.live.stroage.LiveStorage;
 import com.zxzx74147.profile.data.ComVoucher;
 import com.zxzx74147.profile.data.UnReadManager;
 import com.zxzx74147.profile.databinding.LayoutComVoucherBinding;
+import com.zxzx74147.profile.util.ComVoucherUtil;
 import com.zxzx74147.stock.data.GoodType;
 import com.zxzx74147.stock.fragment.StockFragment;
 import com.zxzx74147.stock.fragment.TradeFragment;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.security.interfaces.RSAPublicKey;
 import java.util.HashSet;
 import java.util.LinkedList;
 
@@ -187,64 +194,14 @@ public class MainFeedActivity extends BaseActivity {
             mBinding.setUser(userUniData.user);
             mBinding.setUnRead(UnReadManager.sharedInstance().getUnReadNum());
             if(userUniData.userComVoucherInfo!=null){
-                showComVoucher(MainFeedActivity.this,userUniData.userComVoucherInfo);
+                ComVoucherUtil.showComVoucher(MainFeedActivity.this,userUniData.userComVoucherInfo);
             }
         });
     }
 
-    private static HashSet<String> mReadTable = new HashSet<>();
-    private static final String KEY_COM_VOUCHER = "KEY_COM_VOUCHER3";
-    static{
-        mReadTable = KVStore.get(KEY_COM_VOUCHER,HashSet.class);
-        if(mReadTable==null){
-            mReadTable = new HashSet<>();
-        }
-    }
 
-    public static boolean isRead(String id){
-        if(mReadTable.contains(id)){
-            return true;
-        }
-        return false;
-    }
 
-    public static void markRead(String id){
-        mReadTable.add(id);
-        KVStore.put(KEY_COM_VOUCHER,mReadTable);
-    }
 
-    private static boolean useVoucher = false;
-
-    public static void showComVoucher(Context context, ComVoucher voucher){
-        if(isRead(voucher.voucherId)){
-            return;
-        }
-        useVoucher = false;
-        UmengAgent.onEvent(UmengAction.ALUmengPageCommonVoucher);
-        markRead(voucher.voucherId);
-        Dialog dialog = new Dialog(context, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
-        LayoutComVoucherBinding binding = DataBindingUtil.inflate(LayoutInflater.from(DevLib.getApp()), R.layout.layout_com_voucher, null, false);
-        dialog.setContentView(binding.getRoot());
-        RxView.clicks(binding.close).subscribe(v -> {
-            dialog.dismiss();
-        });
-        RxView.clicks(binding.justUse).subscribe(v -> {
-            useVoucher = true;
-            dialog.dismiss();
-            UmengAgent.onEvent(UmengAction.ALUmengPageVoucherUse);
-            StockBusStation.startStockTrade(context,AccountManager.sharedInstance().getUserUni().goodsTypeList.goodType.get(0), TradeFragment.TYPE_POSITION_BUY_UP);
-        });
-        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                if(!useVoucher){
-                    UmengAgent.onEvent(UmengAction.ALUmengPageVoucherClose);
-                }
-            }
-        });
-        binding.setVoucher(voucher);
-        dialog.show();
-    }
 
 
     public static void checkLive(Context context) {
@@ -276,23 +233,47 @@ public class MainFeedActivity extends BaseActivity {
         mBinding.tabLayout.getTabAt(1).select();
     }
 
-    private void startLiveTest(){
-        Live live = new Live();
-        live.liveId=1;
-        live.rtmpList = new RtmpList();
-        live.rtmpList.num = 2;
-        live.rtmpList.rtmp = new LinkedList<>();
-        Rtmp rtmp1 = new Rtmp();
-        Rtmp rtmp2 = new Rtmp();
-        rtmp1.url="rtmp://116.213.200.53/tslsChannelLive/PCG0DuD/live";
-        rtmp2.url="rtmp://live.hkstv.hk.lxdns.com/live/hks";
-        live.rtmpList.rtmp.add(rtmp1);
-        live.rtmpList.rtmp.add(rtmp2);
-        live.teacherList = new TeacherList();
-        live.status = 2;
+    public static String  loadString(InputStream in){
+        try {
+            BufferedReader br= new BufferedReader(new InputStreamReader(in));
+            String readLine= null;
+            StringBuilder sb= new StringBuilder();
+            while((readLine= br.readLine())!=null){
+                if(readLine.charAt(0)=='-'){
+                    continue;
+                }else{
+                    sb.append(readLine);
+                    sb.append('\r');
+                }
+            }
+            return sb.toString();
+        } catch (IOException e) {
 
-        LiveBusStation.startLive(this, live);
+        } catch (NullPointerException e) {
+
+        }
+        return null;
     }
+//    private void startLiveTest(){
+//        InputStream stream = DevLib.getApp().getResources().openRawResource(R.raw.live);
+//        String str = loadString(stream);
+//        HomeData home = JsonHelper.convertJson(str,HomeData.class);
+//        Live live = home.liveList.live.get(0);
+//        live.liveId=1;
+//        live.rtmpList = new RtmpList();
+//        live.rtmpList.num = 2;
+//        live.rtmpList.rtmp = new LinkedList<>();
+//        Rtmp rtmp1 = new Rtmp();
+//        Rtmp rtmp2 = new Rtmp();
+//        rtmp1.url="rtmp://116.213.200.53/tslsChannelLive/PCG0DuD/live";
+//        rtmp2.url="rtmp://live.hkstv.hk.lxdns.com/live/hks";
+//        live.rtmpList.rtmp.add(rtmp1);
+//        live.rtmpList.rtmp.add(rtmp2);
+////        live.teacherList = new TeacherList();
+//        live.status = 2;
+//
+//        LiveBusStation.startLive(this, live);
+//    }
 
 
 }

@@ -60,7 +60,6 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="@dimen/default_gap_66"
-                android:layout_marginTop="@dimen/default_gap_2"
                 android:paddingLeft="@dimen/default_gap_20"
                 android:gravity="center_vertical"
                 android:text="@{@string/yuan_sign+@string/format_0(user.total)}"

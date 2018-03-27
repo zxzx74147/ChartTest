@@ -1,12 +1,25 @@
 
 package com.zxzx74147.profile.data;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.databinding.DataBindingUtil;
+import android.view.LayoutInflater;
+
+import com.jakewharton.rxbinding2.view.RxView;
 import com.zxzx74147.devlib.DevLib;
 import com.zxzx74147.devlib.R;
+import com.zxzx74147.devlib.kvstore.KVStore;
+import com.zxzx74147.devlib.modules.account.AccountManager;
+import com.zxzx74147.devlib.modules.busstation.StockBusStation;
+import com.zxzx74147.devlib.umeng.UmengAction;
+import com.zxzx74147.devlib.umeng.UmengAgent;
 import com.zxzx74147.devlib.utils.TimeUtil;
 import com.zxzx74147.stock.data.GoodType;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
 
 public class ComVoucher implements Serializable {
@@ -30,6 +43,8 @@ public class ComVoucher implements Serializable {
 
         return "";
     }
+
+
 
 
 }

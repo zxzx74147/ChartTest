@@ -65,7 +65,6 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="@dimen/default_gap_66"
-                android:layout_marginTop="@dimen/default_gap_2"
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/default_gap_20"
                 android:text="@{@string/yuan_sign+@string/format_0(user.total)}"
@@ -98,7 +97,7 @@
                 android:id="@+id/header"
                 layout="@layout/layout_live_head"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/default_gap_112"
+                android:layout_height="@dimen/default_gap_100"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -157,11 +156,15 @@
             <com.zxzx74147.devlib.widget.ZXImageView
                 android:id="@+id/teacher1"
                 android:layout_width="@dimen/default_gap_64"
+                android:layout_marginBottom="@dimen/default_gap_44"
+                android:background="@drawable/home_current_teacher"
+                android:layout_height="@dimen/default_gap_64"
                 android:onClick='@{()->LiveBusStation.startTeacherProfile(context,live.teacherList.teacher[0])}'
                 android:padding="@dimen/default_gap_1"
                 app:imageUrl="@{live.teacherList.teacher[0].portraitUrl}"
-                app:layout_constraintBottom_toTopOf="@+id/comment"
-                app:layout_constraintEnd_toEndOf="@+id/like"
+                app:layout_constraintBottom_toTopOf="@+id/like"
+                android:layout_marginRight="@dimen/default_gap_36"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:riv_corner_radius="@dimen/default_gap_32" />
 
             <ImageButton

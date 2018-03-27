@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.jakewharton.rxbinding2.support.design.widget.RxTabLayout;
 import com.jakewharton.rxbinding2.support.design.widget.TabLayoutSelectionEvent;
 import com.jakewharton.rxbinding2.view.RxView;
+import com.zxzx74147.charttest.MainFeedActivity;
 import com.zxzx74147.charttest.R;
 import com.zxzx74147.charttest.databinding.ActivityLiveBinding;
 import com.zxzx74147.devlib.base.BaseActivity;
@@ -26,6 +27,7 @@ import com.zxzx74147.live.data.Live;
 import com.zxzx74147.live.media.IjkVideoViewHolder;
 import com.zxzx74147.live.stroage.LiveStorage;
 import com.zxzx74147.live.viewmodel.LiveMsgViewModel;
+import com.zxzx74147.profile.util.ComVoucherUtil;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -176,6 +178,9 @@ public class LiveActivity extends BaseActivity {
                 return;
             }
             mBinding.setUser(userUniData.user);
+            if(userUniData.userComVoucherInfo!=null){
+                ComVoucherUtil.showComVoucher(LiveActivity.this,userUniData.userComVoucherInfo);
+            }
         });
 
 
