@@ -57,6 +57,12 @@ public class MainActivity extends BaseActivity {
     private void initView() {
     }
 
+    @Override
+    public void finish(){
+        super.finish();
+        overridePendingTransition( R.anim.slide_in_hold,R.anim.slide_out_left);
+    }
+
     private void initData() {
         mUserViewModel = ViewModelProviders.of(MainActivity.this).get(UserViewModel.class);
 //        mBinding.setUser(mUserViewModel.getUserUniLiveData().getValue().user);

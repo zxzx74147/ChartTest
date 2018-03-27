@@ -10,9 +10,12 @@ import android.support.v4.view.GestureDetectorCompat;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
+import android.view.View;
 
 import com.allenliu.versionchecklib.v2.AllenVersionChecker;
 import com.allenliu.versionchecklib.v2.builder.UIData;
+import com.jakewharton.rxbinding2.support.design.widget.RxTabLayout;
+import com.jakewharton.rxbinding2.support.design.widget.TabLayoutSelectionEvent;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.zxzx74147.charttest.databinding.ActivityMainFeedBinding;
 import com.zxzx74147.charttest.databinding.LayoutUpgradeBinding;
@@ -97,7 +100,7 @@ public class MainFeedActivity extends BaseActivity {
             if(e1==null||e2==null){
                 return true;
             }
-            if (velocityX < 0&&Math.abs(e1.getX()-e2.getX())>2*Math.abs(e1.getY()-e2.getY())) {
+            if (velocityX > 0&&Math.abs(e1.getX()-e2.getX())>2*Math.abs(e1.getY()-e2.getY())) {
                 if (SysInitManager.sharedInstance().getSysInitData().swich.liveOpen != 0) {
                     checkLive(MainFeedActivity.this);
                 }
@@ -129,7 +132,7 @@ public class MainFeedActivity extends BaseActivity {
         mBinding.goodList.setProvider(ViewModelProviders.of(this));
         mBinding.goodList.setLifeCircle(this);
         mBinding.setUser(AccountManager.sharedInstance().getUser());
-        ViewUtil.startAnimition(mBinding.toLive);
+//        ViewUtil.startAnimition(mBinding.toLive);
         initView();
         initData();
 
@@ -145,7 +148,14 @@ public class MainFeedActivity extends BaseActivity {
     };
 
     private void initView() {
-
+        mBinding.tabLayout.getTabAt(1).select();
+        ViewUtil.disableTabLayout(mBinding.tabLayout);
+        RxView.clicks(mBinding.mask).subscribe(new Consumer<Object>() {
+            @Override
+            public void accept(Object o) throws Exception {
+                checkLive(MainFeedActivity.this);
+            }
+        });
 //        mHeaderBinding= mBinding.headLayout;
 //        mHeaderBinding =(LayoutLiveHeadBinding)mBinding.headLayout;
 //        RxView.clicks(mBinding.headLayout.assetTotal).subscribe(o -> ZXFragmentJumpHelper.startFragment(MainActivity.this, ProfileFragment.class,null));
@@ -246,6 +256,12 @@ public class MainFeedActivity extends BaseActivity {
                 MainBusStation.toLive(context);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mBinding.tabLayout.getTabAt(1).select();
     }
 
     private void startLiveTest(){

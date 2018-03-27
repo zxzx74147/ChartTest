@@ -1,5 +1,6 @@
 package com.zxzx74147.live.layout;
 
+import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
@@ -196,6 +197,12 @@ public class LiveActivity extends BaseActivity {
         });
 
 
+    }
+
+    @Override
+    public void finish(){
+        super.finish();
+        overridePendingTransition( R.anim.slide_in_hold,R.anim.slide_out_left);
     }
 
 

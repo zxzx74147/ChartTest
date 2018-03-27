@@ -72,21 +72,21 @@ public class ModuleMain {
             ZXActivityJumpHelper.startActivity(event.context,LauncherActivity.class);
             ((BaseActivity)event.context).finish();
         }else  if (event.id == LiveBusStation.BUS_ID_LIVE_VIEW){
-            ((Activity) event.context).overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_hold);
+
             ZXActivityJumpHelper.startActivity(event.context, LiveActivity.class,new IntentData((Serializable) event.data));
+            ((Activity) event.context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_hold);
 
         }else  if (event.id == MainBusStation.BUS_ID_PUSH_SUCC){
             updateToken((String) event.data);
         }else  if (event.id == MainBusStation.BUS_ID_MAIN_TO_LIVE){
+
             MainActivity.startMainActivity(event.context);
+            ((Activity) event.context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_hold);
         }else  if (event.id == MainBusStation.BUS_ID_MAIN_START_UNICORN){
             UniCornModule.startUnicorn(event.context);
         }else  if (event.id == MainBusStation.BUS_ID_MAIN_SHOW_ABOUT){
             ZXActivityJumpHelper.startActivity(event.context,AboutActivity.class);
         }
-
-
-
 
     }
 

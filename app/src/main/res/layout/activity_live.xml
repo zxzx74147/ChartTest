@@ -25,27 +25,7 @@
         android:background="@drawable/bg">
 
 
-        <com.zxzx74147.devlib.widget.CommonTabLayout
-            android:id="@+id/tabLayout"
-            style="@style/WhiteTitleTabLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/default_title"
-            app:selectBold="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:singleLine="true">
 
-            <android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tab_live" />
-
-            <android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tab_feed" />
-        </com.zxzx74147.devlib.widget.CommonTabLayout>
 
 
         <FrameLayout
@@ -95,6 +75,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.zxzx74147.devlib.widget.CommonTabLayout
+            android:id="@+id/tabLayout"
+            style="@style/WhiteTitleTabLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/default_title"
+            app:selectBold="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:singleLine="true">
+
+            <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_live" />
+
+            <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_feed" />
+        </com.zxzx74147.devlib.widget.CommonTabLayout>
 
     </android.support.constraint.ConstraintLayout>
 </layout>

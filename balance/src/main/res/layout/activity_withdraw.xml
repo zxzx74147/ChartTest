@@ -80,6 +80,7 @@
             android:layout_marginTop="@dimen/default_gap_60"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:maxLength="10"
             app:layout_constraintTop_toBottomOf="@+id/bank_current"
             app:user="@{user}" />
 

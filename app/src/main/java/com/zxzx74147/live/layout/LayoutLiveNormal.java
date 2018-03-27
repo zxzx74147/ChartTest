@@ -53,6 +53,9 @@ import com.zxzx74147.live.viewmodel.LiveMsgViewModel;
 import com.zxzx74147.stock.data.GoodType;
 import com.zxzx74147.stock.fragment.StockFragment;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 
@@ -62,6 +65,7 @@ import io.reactivex.functions.Consumer;
 
 public class LayoutLiveNormal extends FrameLayout {
     private static final String TAG = LayoutLiveNormal.class.getSimpleName();
+    private static final int MAX_MSG_NUM = 300;
 
     @BindingAdapter({"live"})
     public static void loadImage(LayoutLiveNormal view, Live live) {
@@ -88,6 +92,7 @@ public class LayoutLiveNormal extends FrameLayout {
     private KeyboardStatusDetector mDetector = new KeyboardStatusDetector();
     private GestureDetectorCompat mGestureDetector;
     private MotionEvent mLastOnDownEvent = null;
+    private List<Msg> mData = new LinkedList<>();
     private GestureDetector.OnGestureListener mOnGestureListener = new GestureDetector.OnGestureListener() {
         @Override
         public boolean onDown(MotionEvent e) {
@@ -123,7 +128,7 @@ public class LayoutLiveNormal extends FrameLayout {
             if(e2==null){
                 return true;
             }
-            if (velocityX > 0&&Math.abs(e1.getX()-e2.getX())>2*Math.abs(e1.getY()-e2.getY())) {
+            if (velocityX < 0&&Math.abs(e1.getX()-e2.getX())>2*Math.abs(e1.getY()-e2.getY())) {
                 if (SysInitManager.sharedInstance().getSysInitData().swich.liveOpen != 0) {
                     ((Activity)getContext()).finish();
                     return true;
@@ -222,7 +227,7 @@ public class LayoutLiveNormal extends FrameLayout {
         mMsgViewModel = ViewModelProviders.of((FragmentActivity) getContext()).get(LiveMsgViewModel.class);
         mBingding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.layout_live_normal, this, true);
 
-        mAdapter = new CommonRecyclerViewAdapter<>(null);
+        mAdapter = new CommonRecyclerViewAdapter<>(mData);
         mBingding.list.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter.setMultiTypeDelegate(new CommonMultiTypeDelegate());
         mBingding.list.setAdapter(mAdapter);
@@ -265,10 +270,15 @@ public class LayoutLiveNormal extends FrameLayout {
                 return;
             }
 
-            if( mAdapter.getData().size()==0) {
-                mAdapter.setNewData(liveMsgListData.msgList.msg);
+//            if( mAdapter.getData().size()==0) {
+//                mAdapter.setNewData(liveMsgListData.msgList.msg);
+//            }
+            while( mAdapter.getItemCount()>MAX_MSG_NUM){
+                mAdapter.remove(0);
             }
-            mAdapter.notifyDataSetChanged();
+            mAdapter.addData(liveMsgListData.msgList.msg);
+
+//            mAdapter.notifyDataSetChanged();
             mBingding.list.scrollToButtom();
             mBingding.bubble.startAnimation(mBingding.bubble.getWidth() / 2, mBingding.bubble.getHeight() - getResources().getDimensionPixelSize(R.dimen.default_gap_100), 2);
             if (mBingding.profitLayout.rootView.getVisibility() == View.GONE) {

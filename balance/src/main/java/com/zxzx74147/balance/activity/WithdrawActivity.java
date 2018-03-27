@@ -79,9 +79,9 @@ public class WithdrawActivity extends BaseActivity {
         });
     }
     private void initView() {
-        float balance = AccountManager.sharedInstance().getUser().balance;
-        int len = String.format("%.2f",balance).length();
-        mBinding.withdrawAmount.amount.setFilters(new InputFilter[] { new InputFilter.LengthFilter(len) });
+//        float balance = AccountManager.sharedInstance().getUser().balance;
+//        int len = String.format("%.2f",balance).length();
+//        mBinding.withdrawAmount.amount.setFilters(new InputFilter[] { new InputFilter.LengthFilter(len) });
         mBinding.withdrawBank.editText2.setFilters(new InputFilter[] { new ChineseFilter() });
         //binding amount
         mBinding.setUser(AccountManager.sharedInstance().getUser());

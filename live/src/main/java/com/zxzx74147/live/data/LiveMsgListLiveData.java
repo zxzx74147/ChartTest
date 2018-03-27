@@ -106,6 +106,7 @@ public class LiveMsgListLiveData extends LiveData<LiveMsgListData> implements Se
     }
 
     public void updateMsg(List<Msg> msgs){
+        mMsgData.clear();
         if(msgs==null){
             return;
         }
@@ -125,12 +126,12 @@ public class LiveMsgListLiveData extends LiveData<LiveMsgListData> implements Se
             }
 
         }
-        while(mMsgData.size()>MAX_MSG_NUM){
-            mMsgData.removeFirst();
-        }
-        while(mBullsetMsgData.size()>MAX_MSG_NUM){
-            mBullsetMsgData.removeFirst();
-        }
+//        while(mMsgData.size()>MAX_MSG_NUM){
+//            mMsgData.removeFirst();
+//        }
+//        while(mBullsetMsgData.size()>MAX_MSG_NUM){
+//            mBullsetMsgData.removeFirst();
+//        }
 
     }
 

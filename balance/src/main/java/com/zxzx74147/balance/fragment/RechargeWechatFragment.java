@@ -94,7 +94,7 @@ public class RechargeWechatFragment extends BaseDialogFragment {
                     break;
                 case PayResultData.RESULT_SUCC:
                     showSucc();
-                    dismiss();
+//                    dismiss();
                     break;
                 case PayResultData.RESULT_FAIL:
                     showFail();
@@ -152,6 +152,7 @@ public class RechargeWechatFragment extends BaseDialogFragment {
         RxView.clicks(binding.recharge).subscribe(v -> {
                     ProfileBusStation.startProfile(getActivity());
                     dialog.dismiss();
+                    dismiss();
                 }
         );
 

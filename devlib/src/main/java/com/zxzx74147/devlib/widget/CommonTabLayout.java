@@ -36,6 +36,26 @@ public class CommonTabLayout extends TabLayout{
         init(attrs);
     }
 
+    public View getViewAt(int i){
+        Tab tab = getTabAt(i);
+
+        Field privateStringField = null;
+        try {
+            privateStringField = Tab.class.
+                    getDeclaredField("mView");
+            privateStringField.setAccessible(true);//允许访问私有字段
+            View v = (View) privateStringField.get(tab);
+            return v;
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+
+    }
+
     private void init(AttributeSet attrs) {
         if(attrs==null){
             return;
