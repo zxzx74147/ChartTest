@@ -34,7 +34,7 @@ public class DevLib {
 
     public static void onCreate(Application application) {
         mApplication = application;
-        initLeakCanary();
+//        initLeakCanary();
         initFragmentation();
         initStetho();
         initSharedPreference();
